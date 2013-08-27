@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
-  <title>Clojure Cheat Sheet (Clojure 1.3 - 1.5, sheet v10)</title>
+  <title>Clojure Cheat Sheet (Clojure 1.3 - 1.5, sheet v11)</title>
   <link rel="stylesheet" href="cheatsheet_files/26467729A.css" type="text/css" />
 
   <style type="text/css">
@@ -189,11 +189,7 @@ data
               </tr>
               <tr class="even">
                 <td>Test</td>
-                <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/nil_q" title="clojure.core/nil?
-([x])
-  Returns true if x is nil, false otherwise.">nil?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/identical_q" title="clojure.core/identical?
-([x y])
-  Tests if 2 arguments are the same object">identical?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/zero_q" title="clojure.core/zero?
+                <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/zero_q" title="clojure.core/zero?
 ([x])
   Returns true if num is zero, else false">zero?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/pos_q" title="clojure.core/pos?
 ([x])
@@ -203,7 +199,19 @@ data
 ([n])
   Returns true if n is even, throws an exception if n is not an integer">even?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/odd_q" title="clojure.core/odd?
 ([n])
-  Returns true if n is odd, throws an exception if n is not an integer">odd?</a></code></td>
+  Returns true if n is odd, throws an exception if n is not an integer">odd?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/number_q" title="clojure.core/number?
+([x])
+  Returns true if x is a Number">number?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/rational_q" title="clojure.core/rational?
+([n])
+  Returns true if n is a rational number">rational?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/integer_q" title="clojure.core/integer?
+([n])
+  Returns true if n is an integer">integer?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/ratio_q" title="clojure.core/ratio?
+([n])
+  Returns true if n is a Ratio">ratio?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/decimal_q" title="clojure.core/decimal?
+([n])
+  Returns true if n is a BigDecimal">decimal?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/float_q" title="clojure.core/float?
+([n])
+  Returns true if n is a floating point number">float?</a></code></td>
               </tr>
               <tr class="odd">
                 <td>Random</td>
@@ -2118,7 +2126,7 @@ Macro
           </table>
         </div><!-- /section -->
         <div class="section">
-          <h2>Abstractions</h2>
+          <h2>Abstractions (<a href="https://github.com/cemerick/clojure-type-selection-flowchart">Clojure type selection flowchart</a>)</h2>
           <h3>Protocols (<a href="http://clojure.org/protocols">clojure.org/protocols</a>)</h3>
           <table>
             <tbody>
@@ -3194,7 +3202,17 @@ Macro
   Atomically alters the root binding of var v by applying f to its
   current value plus any args">alter-var-root</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/var_q" title="clojure.core/var?
 ([v])
-  Returns true if v is of type clojure.lang.Var">var?</a></code></td>
+  Returns true if v is of type clojure.lang.Var">var?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/bound_q" title="clojure.core/bound?
+([& vars])
+  Returns true if all of the vars provided as arguments have any bound value,
+root or thread-local.
+   Implies that deref'ing the provided vars will succeed. Returns true if no
+vars are provided.">bound?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/thread-bound_q" title="clojure.core/thread-bound?
+([& vars])
+  Returns true if all of the vars provided as arguments have thread-local
+bindings.
+   Implies that set!'ing the provided vars will succeed.  Returns true if no
+vars are provided.">thread-bound?</a></code></td>
               </tr>
               <tr class="even">
                 <td>Var validators</td>
@@ -4139,7 +4157,7 @@ Macro
               </tr>
             </tbody>
           </table>
-          <h3>Proxy</h3>
+          <h3>Proxy (<a href="https://github.com/cemerick/clojure-type-selection-flowchart">Clojure type selection flowchart</a>)</h3>
           <table>
             <tbody>
               <tr class="odd">
