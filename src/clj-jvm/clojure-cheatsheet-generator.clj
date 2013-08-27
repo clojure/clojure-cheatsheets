@@ -117,8 +117,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.5, sheet v10)"
-              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.5, sheet v10)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.5, sheet v11)"
+              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.5, sheet v11)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -158,8 +158,11 @@
                                           and-not clear test]]]
                       ["Cast" :cmds '[byte short int long float double
                                       bigdec bigint num rationalize biginteger]]
-                      ["Test" :cmds-with-frenchspacing '[nil? identical? zero?
-                                                         pos? neg? even? odd?]]
+                      ["Test" :cmds-with-frenchspacing '[zero? pos? neg?
+                                                         even? odd?
+                                                         number? rational?
+                                                         integer? ratio?
+                                                         decimal? float?]]
                       ["Random" :cmds '[rand rand-int]]
                       ["BigDecimal" :cmds '[with-precision]]
                       ["Unchecked" :cmds '[*unchecked-math*
@@ -502,7 +505,8 @@
                       ["Test" :cmds '[fn? ifn?]]]
               ]
              [:box "orange"
-              :section "Abstractions"
+              :section {:latex "Abstractions (\\href{https://github.com/cemerick/clojure-type-selection-flowchart}{Clojure type selection flowchart})"
+                        :html "Abstractions (<a href=\"https://github.com/cemerick/clojure-type-selection-flowchart\">Clojure type selection flowchart</a>)"}
               :subsection {:latex "Protocols (\\href{http://clojure.org/protocols}{clojure.org/protocols})"
                            :html "Protocols (<a href=\"http://clojure.org/protocols\">clojure.org/protocols</a>)"}
               :table [
@@ -763,7 +767,8 @@
                       ["Interned vars" :cmds '[declare intern binding
                                                find-var var]]
                       ["Var objects" :cmds '[with-local-vars var-get var-set
-                                             alter-var-root var?]]
+                                             alter-var-root var? bound?
+                                             thread-bound?]]
                       ["Var validators" :cmds '[set-validator! get-validator]]
                       ;; Now covered in Metadata section
 ;;                      ["Var metadata" :cmds '[meta clojure.repl/doc
@@ -867,7 +872,8 @@
                       ["Cast" :cmds '[booleans bytes shorts chars
                                       ints longs floats doubles]]
                       ]
-              :subsection "Proxy"
+              :subsection {:latex "Proxy (\\href{https://github.com/cemerick/clojure-type-selection-flowchart}{Clojure type selection flowchart})"
+                           :html "Proxy (<a href=\"https://github.com/cemerick/clojure-type-selection-flowchart\">Clojure type selection flowchart</a>)"}
               :table [["Create" :cmds '[proxy get-proxy-class
                                         [:common-suffix -proxy
                                          construct init]]]

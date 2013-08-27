@@ -201,7 +201,6 @@ add-classpath
 agent-errors
 await1
 bases
-bound?
 chunk
 chunk-append
 chunk-buffer
@@ -303,7 +302,6 @@ clojure.xml/startparse-sax
 clojure.xml/tag
 create-struct
 dec'
-decimal?
 definterface
 defstruct
 delay?
@@ -315,14 +313,11 @@ extenders
 extends?
 find-protocol-impl
 find-protocol-method
-float?
 hash-combine
 inc'
-integer?
 method-sig
 munge
 namespace-munge
-number?
 numerator
 primitives-classnames
 print-ctor
@@ -331,8 +326,6 @@ print-method
 print-simple
 proxy-call-with-super
 proxy-name
-ratio?
-rational?
 read
 read-string
 reduced

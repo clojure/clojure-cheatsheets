@@ -1,4 +1,19 @@
 ----------------------------------------------------------------------
+Aug 27, 2013 - Clojure 1.3 - 1.5, sheet v11
+
+Added link to Chas Emerick's handy Clojure type selection flowchart
+after the headings of the Abstrations and Proxy sections:
+    https://github.com/cemerick/clojure-type-selection-flowchart
+
+Removed from Numbers/Test section: nil? and identical? did not really
+belong there.
+
+Added to Numbers/Test section: number? rational? integer? ratio?
+decimal? float?
+
+Added to Vars/Var objects section: bound? thread-bound?
+
+----------------------------------------------------------------------
 Mar 1, 2013 - Clojure 1.3 - 1.5, sheet v10
 
 Added letfn to Special forms section
