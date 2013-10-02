@@ -117,8 +117,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.5, sheet v11)"
-              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.5, sheet v11)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.5, sheet v12)"
+              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.5, sheet v12)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -351,7 +351,7 @@
                                              take-nth for]]
                       ["Get longer" :cmds '[cons conj concat lazy-cat mapcat
                                             cycle interleave interpose]]
-                      ["Tail-items" :cmds '[rest nthrest fnext nnext
+                      ["Tail-items" :cmds '[rest nthrest next fnext nnext
                                             drop drop-while take-last for]]
                       ["Head-items" :cmds '[take take-while butlast
                                             drop-last for]]
