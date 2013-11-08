@@ -1,15 +1,8 @@
 #! /bin/bash
 
+CMD="lein run"
+
 set -x
-# TBD: This is a hack, depending on a particular version of
-# tools.reader to have already been downloaded and copied into your
-# local Maven repository.  Should use Leiningen instead.
-TOOLS_READER_JAR="${HOME}/.m2/repository/org/clojure/tools.reader/0.7.3/tools.reader-0.7.3.jar"
-JSR166Y_JAR="${HOME}/.m2/repository/org/codehaus/jsr166-mirror/jsr166y/1.7.0/jsr166y-1.7.0.jar"
-#JAR_DIR="$HOME/lein/clojure-1.4.0/lib"
-#CLASSPATH="${JAR_DIR}/clojure-1.4.0.jar:${TOOLS_READER_JAR}"
-JAR_DIR="$HOME/lein/clojure-1.5.1/lib"
-CLASSPATH="${JAR_DIR}/clojure-1.5.1.jar:${TOOLS_READER_JAR}:${JSR166Y_JAR}"
 
 # 3 choices for links: none, to clojure.github.org, or to
 # clojuredocs.org:
@@ -35,12 +28,12 @@ PRODUCE_PDF="no"
 # Make embeddable version for clojure.org/cheatsheet
 ######################################################################
 echo "Generating embeddable version for clojure.org/cheatsheet ..."
-java -cp ${CLASSPATH} clojure.main clojure-cheatsheet-generator.clj ${LINK_TARGET} ${TOOLTIPS} ${CLOJUREDOCS_SNAPSHOT}
+${CMD} ${LINK_TARGET} ${TOOLTIPS} ${CLOJUREDOCS_SNAPSHOT}
 EXIT_STATUS=$?
 
 if [ ${EXIT_STATUS} != 0 ]
 then
-    echo "Exit status ${EXIT_STATUS} from java"
+    echo "Exit status ${EXIT_STATUS} from ${CMD}"
     exit ${EXIT_STATUS}
 fi
 /bin/mv cheatsheet-embeddable.html cheatsheet-embeddable-for-clojure.org.html
@@ -61,12 +54,12 @@ do
 	esac
 	TARGET="cheatsheet-${TOOLTIPS}-${CDOCS_SUMMARY}.html"
 	echo "Generating ${TARGET} ..."
-	java -cp ${CLASSPATH} clojure.main clojure-cheatsheet-generator.clj ${LINK_TARGET} ${TOOLTIPS} ${CLOJUREDOCS_SNAPSHOT}
+	${CMD} ${LINK_TARGET} ${TOOLTIPS} ${CLOJUREDOCS_SNAPSHOT}
 	EXIT_STATUS=$?
 
 	if [ ${EXIT_STATUS} != 0 ]
 	then
-	    echo "Exit status ${EXIT_STATUS} from java"
+	    echo "Exit status ${EXIT_STATUS} from ${CMD}"
 	    exit ${EXIT_STATUS}
 	fi
 	/bin/mv cheatsheet-full.html cheatsheet-${TOOLTIPS}-${CDOCS_SUMMARY}.html

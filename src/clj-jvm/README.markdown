@@ -1,14 +1,13 @@
 # Clojure/Java cheat sheet generator
 
-The program `clojure-cheatsheet-generator.clj` and accompanying shell
-script `run.sh` can generate HTML and LaTeX versions of the
-Clojure/Java cheat sheet.  A suitable LaTeX installation on your
-computer can then be used to generate PDF files as well.  They are all
-generated with structure and symbols specified in the value of
-`cheatsheet-structure` in the Clojure source file.  They contain
-clickable links to the documentation on either
-[clojure.github.com][clojure github] or [clojuredocs.org][clojuredocs]
-(or no links at all).
+The program `src/generator/core.clj` and accompanying shell script
+`run.sh` can generate HTML and LaTeX versions of the Clojure/Java
+cheat sheet.  A suitable LaTeX installation on your computer can then
+be used to generate PDF files as well.  They are all generated with
+structure and symbols specified in the value of `cheatsheet-structure`
+in the Clojure source file.  They contain clickable links to the
+documentation on either [clojure.github.com][clojure github] or
+[clojuredocs.org][clojuredocs] (or no links at all).
 
 [clojure github]: http://clojure.github.com
 [clojuredocs]: http://clojuredocs.org
@@ -22,11 +21,10 @@ cheatsheets for too many Clojure versions.
 
 # Generating cheat sheet files
 
-Edit `run.sh` to specify the location of your Clojure JAR file in the
-`CLASSPATH` variable.  Also change the values of `LINK_TARGET` and
-`PRODUCE_PDF` variables to your liking.  If you want to produce PDF
-files, you must have a suitable LaTeX installation on your computer.
-See "LaTeX installation notes" below for what is needed.
+Edit `run.sh` to specify the values of `LINK_TARGET` and `PRODUCE_PDF`
+variables to your liking.  If you want to produce PDF files, you must
+have a suitable LaTeX installation on your computer.  See "LaTeX
+installation notes" below for what is needed.
 
 Run this command:
 
