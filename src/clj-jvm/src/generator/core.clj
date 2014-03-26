@@ -117,8 +117,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.5, sheet v12)"
-              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.5, sheet v12)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v13)"
+              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v13)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -155,7 +155,8 @@
                       ["Compare" :cmds '[= == not= < > <= >= compare]]
                       ["Bitwise" :cmds '[[:common-prefix bit- and or xor not
                                           flip set shift-right shift-left
-                                          and-not clear test]]]
+                                          and-not clear test]
+                                         "(1.6)" unsigned-bit-shift-right]]
                       ["Cast" :cmds '[byte short int long float double
                                       bigdec bigint num rationalize biginteger]]
                       ["Test" :cmds-with-frenchspacing '[zero? pos? neg?
@@ -247,14 +248,14 @@
                       ["Capabilities" :cmds '[sequential? associative? sorted?
                                               counted? reversible?]]
                       ["Type tests" :cmds '[coll? list? vector? set? map?
-                                            seq?]]]
+                                            seq? "(1.6)" record?]]]
               :subsection "Lists"
               :table [["Create" :cmds '["'()" list list*]]
                       ["Examine" :cmds-with-frenchspacing '[first nth peek
-                                                            {:latex "\\href{http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Vector.html\\#indexOf\\%28java.lang.Object\\%29}{.indexOf}"
-                                                             :html "<a href=\"http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Vector.html#indexOf%28java.lang.Object%29\">.indexOf</a>"}
-                                                            {:latex "\\href{http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Vector.html\\#lastIndexOf\\%28java.lang.Object\\%29}{.lastIndexOf}"
-                                                             :html "<a href=\"http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Vector.html#lastIndexOf%28java.lang.Object%29\">.lastIndexOf</a>"}
+                                                            {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/util/Vector.html\\#indexOf\\%28java.lang.Object\\%29}{.indexOf}"
+                                                             :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/util/Vector.html#indexOf%28java.lang.Object%29\">.indexOf</a>"}
+                                                            {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/util/Vector.html\\#lastIndexOf\\%28java.lang.Object\\%29}{.lastIndexOf}"
+                                                             :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/util/Vector.html#lastIndexOf%28java.lang.Object%29\">.lastIndexOf</a>"}
                                                             ]]
                       [{:html "'Change'", :latex "`Change'"}
                        :cmds '[cons conj rest pop]]
@@ -267,10 +268,10 @@
                                          {:latex " \\cmd{my-vec idx)}",
                                           :html " my-vec idx)</code>"}
                                          get peek
-                                         {:latex "\\href{http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Vector.html\\#indexOf\\%28java.lang.Object\\%29}{.indexOf}"
-                                          :html "<a href=\"http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Vector.html#indexOf%28java.lang.Object%29\">.indexOf</a>"}
-                                         {:latex "\\href{http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Vector.html\\#lastIndexOf\\%28java.lang.Object\\%29}{.lastIndexOf}"
-                                          :html "<a href=\"http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Vector.html#lastIndexOf%28java.lang.Object%29\">.lastIndexOf</a>"}
+                                         {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/util/Vector.html\\#indexOf\\%28java.lang.Object\\%29}{.indexOf}"
+                                          :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/util/Vector.html#indexOf%28java.lang.Object%29\">.indexOf</a>"}
+                                         {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/util/Vector.html\\#lastIndexOf\\%28java.lang.Object\\%29}{.lastIndexOf}"
+                                          :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/util/Vector.html#lastIndexOf%28java.lang.Object%29\">.lastIndexOf</a>"}
                                          ]]
                       [{:html "'Change'", :latex "`Change'"}
                        :cmds '[assoc pop subvec replace conj rseq]]
@@ -333,7 +334,8 @@
               :subsection "Misc"
               :table [["Compare" :cmds '[= == identical? not= not compare
                                          clojure.data/diff]]
-                      ["Test" :cmds '[true? false? nil? instance?]]]
+                      ["Test" :cmds '[true? false? instance? nil?
+                                      "(1.6)" some?]]]
               ]
              [:box "orange"
               :section "Sequences"
@@ -613,7 +615,7 @@
                                        clojure.walk/macroexpand-all]]
                       ["Branch" :cmds '[and or when when-not when-let
                                         when-first if-not if-let cond condp
-                                        case]]
+                                        case "(1.6)" when-some if-some]]
                       ["Loop" :cmds '[for doseq dotimes while]]
                       ["Arrange" :cmds '[.. doto -> ->>
                                          "(1.5)" as-> cond-> cond->>
@@ -755,7 +757,8 @@
                                {:latex "(\\href{http://clojure.org/special\\_forms\\#binding-forms}{examples})"
                                 :html "(<a href=\"http://clojure.org/special_forms#binding-forms\">examples</a>)"}
                                let fn defn defmacro
-                               loop for doseq if-let when-let]]
+                               loop for doseq if-let when-let
+                               "(1.6)" if-some when-some]]
                       ]
               ]
              [:box "blue2"
@@ -1069,7 +1072,7 @@
          [])
 
    ;; Manually specify links to clojure.org API documentation for
-   ;; symbols that are new in Clojure 1.4 and 1.5, because
+   ;; symbols that are new in Clojure 1.4 through 1.6, because
    ;; ClojureDocs.org doesn't have those symbols yet.
    (map (fn [sym-str]
           [sym-str
@@ -1095,6 +1098,16 @@
          "send-via"
          "set-agent-send-executor!"
          "set-agent-send-off-executor!"
+
+         ;; New in Clojure 1.6
+         "unsigned-bit-shift-right"
+         "record?"
+         "some?"
+         "if-some"
+         "when-some"
+         "hash-ordered-coll"
+         "hash-unordered-coll"
+         "mix-collection-hash"
          ])
 
    (map (fn [sym-str]

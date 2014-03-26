@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
-  <title>Clojure Cheat Sheet (Clojure 1.3 - 1.5, sheet v12)</title>
+  <title>Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v13)</title>
   <link rel="stylesheet" href="cheatsheet_files/26467729A.css" type="text/css" />
 
   <style type="text/css">
@@ -159,7 +159,9 @@ data
 ([x n])
   Clear bit at index n</pre>">clear</a>, <a href="http://clojuredocs.org/clojure_core/clojure.core/bit-test" class="tooltip" title="<pre>clojure.core/bit-test
 ([x n])
-  Test bit at index n</pre>">test</a>}</code></td>
+  Test bit at index n</pre>">test</a>} (1.6) <a href="http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/unsigned-bit-shift-right" class="tooltip" title="<pre>clojure.core/unsigned-bit-shift-right
+([x n])
+  Bitwise shift right, without sign-extension.</pre>">unsigned-bit-shift-right</a></code></td>
               </tr>
               <tr class="odd">
                 <td>Cast</td>
@@ -628,7 +630,9 @@ format
 ([x])
   Return true if x implements IPersistentMap</pre>">map?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/seq_q" class="tooltip" title="<pre>clojure.core/seq?
 ([x])
-  Return true if x implements ISeq</pre>">seq?</a></code></td>
+  Return true if x implements ISeq</pre>">seq?</a> (1.6) <a href="http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/record?" class="tooltip" title="<pre>clojure.core/record?
+([x])
+  Returns true if x is a record</pre>">record?</a></code></td>
               </tr>
             </tbody>
           </table>
@@ -657,7 +661,7 @@ format
   in O(n) time, for sequences.</pre>">nth</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/peek" class="tooltip" title="<pre>clojure.core/peek
 ([coll])
   For a list or queue, same as first, for a vector, same as, but much
-  more efficient than, last. If the collection is empty, returns nil.</pre>">peek</a> <a href="http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Vector.html#indexOf%28java.lang.Object%29">.indexOf</a> <a href="http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Vector.html#lastIndexOf%28java.lang.Object%29">.lastIndexOf</a></code></td>
+  more efficient than, last. If the collection is empty, returns nil.</pre>">peek</a> <a href="http://docs.oracle.com/javase/6/docs/api/java/util/Vector.html#indexOf%28java.lang.Object%29">.indexOf</a> <a href="http://docs.oracle.com/javase/6/docs/api/java/util/Vector.html#lastIndexOf%28java.lang.Object%29">.lastIndexOf</a></code></td>
               </tr>
               <tr class="odd">
                 <td>'Change'</td>
@@ -711,7 +715,7 @@ format
   Returns the value mapped to key, not-found or nil if key not present.</pre>">get</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/peek" class="tooltip" title="<pre>clojure.core/peek
 ([coll])
   For a list or queue, same as first, for a vector, same as, but much
-  more efficient than, last. If the collection is empty, returns nil.</pre>">peek</a> <a href="http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Vector.html#indexOf%28java.lang.Object%29">.indexOf</a> <a href="http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Vector.html#lastIndexOf%28java.lang.Object%29">.lastIndexOf</a></code></td>
+  more efficient than, last. If the collection is empty, returns nil.</pre>">peek</a> <a href="http://docs.oracle.com/javase/6/docs/api/java/util/Vector.html#indexOf%28java.lang.Object%29">.indexOf</a> <a href="http://docs.oracle.com/javase/6/docs/api/java/util/Vector.html#lastIndexOf%28java.lang.Object%29">.lastIndexOf</a></code></td>
               </tr>
               <tr class="odd">
                 <td>'Change'</td>
@@ -903,9 +907,9 @@ kmap</pre>">rename</a> <a href="http://clojuredocs.org/clojure_core/clojure.set/
 ([map key])
   Returns the map entry for key, or nil if key not present.</pre>">find</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/keys" class="tooltip" title="<pre>clojure.core/keys
 ([map])
-  Returns a sequence of the map's keys.</pre>">keys</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/vals" class="tooltip" title="<pre>clojure.core/vals
+  Returns a sequence of the map's keys, in the same order as (seq map).</pre>">keys</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/vals" class="tooltip" title="<pre>clojure.core/vals
 ([map])
-  Returns a sequence of the map's values.</pre>">vals</a></code></td>
+  Returns a sequence of the map's values, in the same order as (seq map).</pre>">vals</a></code></td>
               </tr>
               <tr class="odd">
                 <td>'Change'</td>
@@ -976,10 +980,8 @@ kmap</pre>">rename</a> <a href="http://clojuredocs.org/clojure_core/clojure.set/
                 <td>Create</td>
                 <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/transient" class="tooltip" title="<pre>clojure.core/transient
 ([coll])
-  Alpha - subject to change.
   Returns a new, transient version of the collection, in constant time.</pre>">transient</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/persistent!" class="tooltip" title="<pre>clojure.core/persistent!
 ([coll])
-  Alpha - subject to change.
   Returns a new, persistent version of the transient collection, in
   constant time. The transient collection cannot be used after this
   call, any such use will throw an exception.</pre>">persistent!</a></code></td>
@@ -988,23 +990,18 @@ kmap</pre>">rename</a> <a href="http://clojuredocs.org/clojure_core/clojure.set/
                 <td>Change</td>
                 <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/conj!" class="tooltip" title="<pre>clojure.core/conj!
 ([coll x])
-  Alpha - subject to change.
   Adds x to the transient collection, and return coll. The 'addition'
   may happen at different 'places' depending on the concrete type.</pre>">conj!</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/pop!" class="tooltip" title="<pre>clojure.core/pop!
 ([coll])
-  Alpha - subject to change.
   Removes the last item from a transient vector. If
   the collection is empty, throws an exception. Returns coll</pre>">pop!</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/assoc!" class="tooltip" title="<pre>clojure.core/assoc!
 ([coll key val] [coll key val & kvs])
-  Alpha - subject to change.
   When applied to a transient map, adds mapping of key(s) to
   val(s). When applied to a transient vector, sets the val at index.
   Note - index must be <= (count vector). Returns coll.</pre>">assoc!</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/dissoc!" class="tooltip" title="<pre>clojure.core/dissoc!
 ([map key] [map key & ks])
-  Alpha - subject to change.
   Returns a transient map that doesn't contain a mapping for key(s).</pre>">dissoc!</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/disj!" class="tooltip" title="<pre>clojure.core/disj!
 ([set] [set key] [set key & ks])
-  Alpha - subject to change.
   disj[oin]. Returns a transient set of the same (hashed/sorted) type, that
   does not contain key(s).</pre>">disj!</a> Note: always use return value for later changes, never original!</code></td>
               </tr>
@@ -1057,12 +1054,14 @@ data
 ([x])
   Returns true if x is the value true, false otherwise.</pre>">true?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/false_q" class="tooltip" title="<pre>clojure.core/false?
 ([x])
-  Returns true if x is the value false, false otherwise.</pre>">false?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/nil_q" class="tooltip" title="<pre>clojure.core/nil?
-([x])
-  Returns true if x is nil, false otherwise.</pre>">nil?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/instance_q" class="tooltip" title="<pre>clojure.core/instance?
+  Returns true if x is the value false, false otherwise.</pre>">false?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/instance_q" class="tooltip" title="<pre>clojure.core/instance?
 ([c x])
   Evaluates x and tests if it is an instance of the class
-    c. Returns true or false</pre>">instance?</a></code></td>
+    c. Returns true or false</pre>">instance?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/nil_q" class="tooltip" title="<pre>clojure.core/nil?
+([x])
+  Returns true if x is nil, false otherwise.</pre>">nil?</a> (1.6) <a href="http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/some?" class="tooltip" title="<pre>clojure.core/some?
+([x])
+  Returns true if x is not nil, false otherwise.</pre>">some?</a></code></td>
               </tr>
             </tbody>
           </table>
@@ -1081,9 +1080,9 @@ data
     Strings, native Java arrays (of reference types) and any objects
     that implement Iterable.</pre>">seq</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/vals" class="tooltip" title="<pre>clojure.core/vals
 ([map])
-  Returns a sequence of the map's values.</pre>">vals</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/keys" class="tooltip" title="<pre>clojure.core/keys
+  Returns a sequence of the map's values, in the same order as (seq map).</pre>">vals</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/keys" class="tooltip" title="<pre>clojure.core/keys
 ([map])
-  Returns a sequence of the map's keys.</pre>">keys</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/rseq" class="tooltip" title="<pre>clojure.core/rseq
+  Returns a sequence of the map's keys, in the same order as (seq map).</pre>">keys</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/rseq" class="tooltip" title="<pre>clojure.core/rseq
 ([rev])
   Returns, in constant time, a seq of the items in rev (which
   can be a vector or sorted-map), in reverse order. If rev is empty returns nil</pre>">rseq</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/subseq" class="tooltip" title="<pre>clojure.core/subseq
@@ -1120,8 +1119,9 @@ side-effects</pre>">iterate</a></code></td>
   Returns a lazy (infinite!, or length n if supplied) sequence of xs.</pre>">repeat</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/range" class="tooltip" title="<pre>clojure.core/range
 ([] [end] [start end] [start end step])
   Returns a lazy seq of nums from start (inclusive) to end
-  (exclusive), by step, where start defaults to 0, step to 1, and end
-  to infinity.</pre>">range</a></code></td>
+  (exclusive), by step, where start defaults to 0, step to 1, and end to
+  infinity. When step is equal to 0, returns an infinite sequence of
+  start. When start is equal to end, returns empty list.</pre>">range</a></code></td>
               </tr>
               <tr class="even">
                 <td>From other</td>
@@ -1220,7 +1220,7 @@ Macro
   to f and colls.  Thus function f should return a collection.</pre>">mapcat</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/cycle" class="tooltip" title="<pre>clojure.core/cycle
 ([coll])
   Returns a lazy (infinite!) sequence of repetitions of the items in coll.</pre>">cycle</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/interleave" class="tooltip" title="<pre>clojure.core/interleave
-([c1 c2] [c1 c2 & colls])
+([] [c1] [c1 c2] [c1 c2 & colls])
   Returns a lazy seq of the first item in each coll, then the second etc.</pre>">interleave</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/interpose" class="tooltip" title="<pre>clojure.core/interpose
 ([sep coll])
   Returns a lazy seq of the elements of coll separated by sep</pre>">interpose</a></code></td>
@@ -1686,8 +1686,7 @@ sequence.</pre>">realized?</a></code></td>
 ([])
   Writes a platform-specific newline to *out*</pre>">newline</a> (clojure.pprint/) <a href="http://clojuredocs.org/clojure_core/clojure.pprint/print-table" class="tooltip" title="<pre>clojure.pprint/print-table
 ([ks rows] [rows])
-  Alpha - subject to change.
-   Prints a collection of maps in a textual table. Prints table headings
+  Prints a collection of maps in a textual table. Prints table headings
    ks, and then a line of output for each row, corresponding to the keys
    in ks. If ks are not specified, use the keys of the first item in rows.</pre>">print-table</a></code></td>
               </tr>
@@ -2077,13 +2076,13 @@ on the first
 ([f args] [f x args] [f x y args] [f x y z args] [f a b c d & args])
   Applies fn f to the argument list formed by prepending intervening arguments
 to args.</pre>">apply</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/->" class="tooltip" title="<pre>clojure.core/->
-([x] [x form] [x form & more])
+([x & forms])
 Macro
   Threads the expr through the forms. Inserts x as the
   second item in the first form, making a list of it if it is not a
   list already. If there are more forms, inserts the first form as the
   second item in second form, etc.</pre>">-&gt;</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/->>" class="tooltip" title="<pre>clojure.core/->>
-([x form] [x form & more])
+([x & forms])
 Macro
   Threads the expr through the forms. Inserts x as the
   last item in the first form, making a list of it if it is not a
@@ -2255,8 +2254,6 @@ Macro
                 <td><code><code>(</code> <a href="http://clojuredocs.org/clojure_core/clojure.core/defrecord" class="tooltip" title="<pre>clojure.core/defrecord
 ([name [& fields] & opts+specs])
 Macro
-  Alpha - subject to change
-
   (defrecord name [fields*]  options* specs*)
 
   Currently there are no options.
@@ -2277,6 +2274,7 @@ Macro
   are optional. The only methods that can be supplied are those
   declared in the protocols/interfaces.  Note that method bodies are
   not closures, the local environment includes only the named fields,
+  and those fields can be accessed directly.
 
 [ documentation truncated.  Click link for the rest. ]</pre>">defrecord</a> <code>Pair [h t])</code></code></td>
               </tr>
@@ -2298,8 +2296,6 @@ Macro
                 <td><code><code>(</code> <a href="http://clojuredocs.org/clojure_core/clojure.core/deftype" class="tooltip" title="<pre>clojure.core/deftype
 ([name [& fields] & opts+specs])
 Macro
-  Alpha - subject to change
-
   (deftype name [fields*]  options* specs*)
 
   Currently there are no options.
@@ -2320,6 +2316,8 @@ Macro
   are optional. The only methods that can be supplied are those
   declared in the protocols/interfaces.  Note that method bodies are
   not closures, the local environment includes only the named fields,
+  and those fields can be accessed directy. Fields can be qualified
+  with the metadata :volatile-mutable true or :unsynchronized-mutable
 
 [ documentation truncated.  Click link for the rest. ]</pre>">deftype</a> <code>Pair [h t])</code></code></td>
               </tr>
@@ -2336,8 +2334,6 @@ Macro
                 <td><code><code>(</code> <a href="http://clojuredocs.org/clojure_core/clojure.core/deftype" class="tooltip" title="<pre>clojure.core/deftype
 ([name [& fields] & opts+specs])
 Macro
-  Alpha - subject to change
-
   (deftype name [fields*]  options* specs*)
 
   Currently there are no options.
@@ -2358,6 +2354,8 @@ Macro
   are optional. The only methods that can be supplied are those
   declared in the protocols/interfaces.  Note that method bodies are
   not closures, the local environment includes only the named fields,
+  and those fields can be accessed directy. Fields can be qualified
+  with the metadata :volatile-mutable true or :unsynchronized-mutable
 
 [ documentation truncated.  Click link for the rest. ]</pre>">deftype</a> <code>Pair [h t]<br>&nbsp;&nbsp;Object<br>&nbsp;&nbsp;(toString [this] (str "<" h "," t ">")))</code></code></td>
               </tr>
@@ -2375,9 +2373,24 @@ Macro
   The docstring and attribute-map are optional.
 
   Options are key-value pairs and may be one of:
-    :default    the default dispatch value, defaults to :default
-    :hierarchy  the isa? hierarchy to use for dispatching
-                defaults to the global hierarchy</pre>">defmulti</a> <code>my-mm dispatch-fn)</code></code></td>
+
+  :default
+
+  The default dispatch value, defaults to :default
+
+  :hierarchy
+
+  The value used for hierarchical dispatch (e.g. ::square is-a ::shape)
+
+  Hierarchies are type-like relationships that do not depend upon type
+  inheritance. By default Clojure's multimethods dispatch off of a
+  global hierarchy map.  However, a hierarchy relationship can be
+  created with the derive function used to augment the root ancestor
+  created with make-hierarchy.
+
+  Multimethods expect the value of the hierarchy option to be supplied as
+  a reference type e.g. a var (i.e. via the Var-quote dispatch macro #'
+  or the var special form).</pre>">defmulti</a> <code>my-mm dispatch-fn)</code></code></td>
               </tr>
               <tr class="even">
                 <td>Method define</td>
@@ -2574,7 +2587,19 @@ Macro
   symbols, keywords, and (Clojure) composites thereof. Note that since
   lists are used to group multiple constants that map to the same
   expression, a vector can be used to match a list if needed. The
-  test-constants need not be all of the same type.</pre>">case</a></code></td>
+  test-constants need not be all of the same type.</pre>">case</a> (1.6) <a href="http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/when-some" class="tooltip" title="<pre>clojure.core/when-some
+([bindings & body])
+Macro
+  bindings => binding-form test
+
+   When test is not nil, evaluates body with binding-form bound to the
+   value of test</pre>">when-some</a> <a href="http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/if-some" class="tooltip" title="<pre>clojure.core/if-some
+([bindings then] [bindings then else & oldform])
+Macro
+  bindings => binding-form test
+
+   If test is not nil, evaluates then with binding-form bound to the
+   value of test, if not, yields else</pre>">if-some</a></code></td>
               </tr>
               <tr class="even">
                 <td>Loop</td>
@@ -2631,13 +2656,13 @@ Macro
   are evaluated in order.  Returns x.
 
   (doto (new java.util.HashMap) (.put &quot;a&quot; 1) (.put &quot;b&quot; 2))</pre>">doto</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/->" class="tooltip" title="<pre>clojure.core/->
-([x] [x form] [x form & more])
+([x & forms])
 Macro
   Threads the expr through the forms. Inserts x as the
   second item in the first form, making a list of it if it is not a
   list already. If there are more forms, inserts the first form as the
   second item in second form, etc.</pre>">-&gt;</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/->>" class="tooltip" title="<pre>clojure.core/->>
-([x form] [x form & more])
+([x & forms])
 Macro
   Threads the expr through the forms. Inserts x as the
   last item in the first form, making a list of it if it is not a
@@ -3067,7 +3092,19 @@ Macro
 Macro
   bindings => binding-form test
 
-  When test is true, evaluates body with binding-form bound to the value of test</pre>">when-let</a></code></td>
+  When test is true, evaluates body with binding-form bound to the value of test</pre>">when-let</a> (1.6) <a href="http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/if-some" class="tooltip" title="<pre>clojure.core/if-some
+([bindings then] [bindings then else & oldform])
+Macro
+  bindings => binding-form test
+
+   If test is not nil, evaluates then with binding-form bound to the
+   value of test, if not, yields else</pre>">if-some</a> <a href="http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/when-some" class="tooltip" title="<pre>clojure.core/when-some
+([bindings & body])
+Macro
+  bindings => binding-form test
+
+   When test is not nil, evaluates body with binding-form bound to the
+   value of test</pre>">when-some</a></code></td>
               </tr>
             </tbody>
           </table>
@@ -3119,9 +3156,24 @@ Macro
   The docstring and attribute-map are optional.
 
   Options are key-value pairs and may be one of:
-    :default    the default dispatch value, defaults to :default
-    :hierarchy  the isa? hierarchy to use for dispatching
-                defaults to the global hierarchy</pre>">defmulti</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/defonce" class="tooltip" title="<pre>clojure.core/defonce
+
+  :default
+
+  The default dispatch value, defaults to :default
+
+  :hierarchy
+
+  The value used for hierarchical dispatch (e.g. ::square is-a ::shape)
+
+  Hierarchies are type-like relationships that do not depend upon type
+  inheritance. By default Clojure's multimethods dispatch off of a
+  global hierarchy map.  However, a hierarchy relationship can be
+  created with the derive function used to augment the root ancestor
+  created with make-hierarchy.
+
+  Multimethods expect the value of the hierarchy option to be supplied as
+  a reference type e.g. a var (i.e. via the Var-quote dispatch macro #'
+  or the var special form).</pre>">defmulti</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/defonce" class="tooltip" title="<pre>clojure.core/defonce
 ([name expr])
 Macro
   defs name to have the root value of the expr iff the named var has no root
@@ -3129,8 +3181,6 @@ value,
   else expr is unevaluated</pre>">defonce</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/defrecord" class="tooltip" title="<pre>clojure.core/defrecord
 ([name [& fields] & opts+specs])
 Macro
-  Alpha - subject to change
-
   (defrecord name [fields*]  options* specs*)
 
   Currently there are no options.
@@ -3151,6 +3201,7 @@ Macro
   are optional. The only methods that can be supplied are those
   declared in the protocols/interfaces.  Note that method bodies are
   not closures, the local environment includes only the named fields,
+  and those fields can be accessed directly.
 
 [ documentation truncated.  Click link for the rest. ]</pre>">defrecord</a></code></td>
               </tr>
@@ -3259,7 +3310,7 @@ Macro
   supported. The :gen-class directive is ignored when not
   compiling. If :gen-class is not supplied, when compiled only an
   nsname__init.class will be generated. If :refer-clojure is not used, a
-  default (refer 'clojure) is used.  Use of ns is preferred to
+  default (refer 'clojure.core) is used.  Use of ns is preferred to
   individual calls to in-ns/require/use/import:
 
   (ns foo.bar
@@ -3587,14 +3638,12 @@ Macro
   that reading from a seque can block if the reader gets ahead of the
   producer.</pre>">seque</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/promise" class="tooltip" title="<pre>clojure.core/promise
 ([])
-  Alpha - subject to change.
   Returns a promise object that can be read with deref/@, and set,
   once only, with deliver. Calls to deref/@ prior to delivery will
   block, unless the variant of deref with timeout is used. All
   subsequent derefs will return the same delivered value without
   blocking. See also - realized?.</pre>">promise</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/deliver" class="tooltip" title="<pre>clojure.core/deliver
 ([promise val])
-  Alpha - subject to change.
   Delivers the supplied value to the promise, releasing any pending
   derefs. A subsequent call to deliver on a promise will have no effect.</pre>">deliver</a></code></td>
               </tr>
@@ -3836,7 +3885,6 @@ Macro
                 <td>Watchers</td>
                 <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/add-watch" class="tooltip" title="<pre>clojure.core/add-watch
 ([reference key fn])
-  Alpha - subject to change.
   Adds a watch function to an agent/atom/var/ref reference. The watch
   fn must be a fn of 4 args: a key, the reference, its old-state, its
   new-state. Whenever the reference's state might have been changed,
@@ -3851,7 +3899,6 @@ Macro
   the watch with remove-watch, but are otherwise considered opaque by
   the watch mechanism.</pre>">add-watch</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/remove-watch" class="tooltip" title="<pre>clojure.core/remove-watch
 ([reference key])
-  Alpha - subject to change.
   Removes a watch (set by add-watch) from a reference</pre>">remove-watch</a></code></td>
               </tr>
               <tr class="odd">
@@ -4041,12 +4088,10 @@ Special Form
 supplied, uses the root cause of the
   most recent repl exception (*e), and a depth of 12.</pre>">pst</a> (1.4) <a href="http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/ex-info" class="tooltip" title="<pre>clojure.core/ex-info
 ([msg map] [msg map cause])
-  Alpha - subject to change.
-   Create an instance of ExceptionInfo, a RuntimeException subclass
+  Create an instance of ExceptionInfo, a RuntimeException subclass
    that carries a map of additional data.</pre>">ex-info</a> <a href="http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/ex-data" class="tooltip" title="<pre>clojure.core/ex-data
 ([ex])
-  Alpha - subject to change.
-   Returns exception data (a map) if ex is an IExceptionInfo.
+  Returns exception data (a map) if ex is an IExceptionInfo.
    Otherwise returns nil.</pre>">ex-data</a></code></td>
               </tr>
             </tbody>
@@ -4294,7 +4339,7 @@ Macro
   Defaults to &quot;classes&quot;</pre>">*compile-path*</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/*file*" class="tooltip" title="<pre>clojure.core/*file*
   The path of the file being evaluated, as a String.
 
-  Evaluates to nil when there is no file, eg. in the REPL.</pre>">*file*</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/*warn-on-reflection*" class="tooltip" title="<pre>clojure.core/*warn-on-reflection*
+  When there is no file, e.g. in the REPL, the value is not defined.</pre>">*file*</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/*warn-on-reflection*" class="tooltip" title="<pre>clojure.core/*warn-on-reflection*
   When set to true, the compiler will emit warnings when reflection is
   needed to resolve Java method calls or field accesses.
 
