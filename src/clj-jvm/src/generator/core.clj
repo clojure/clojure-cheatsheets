@@ -1768,7 +1768,7 @@ characters (\") with &quot;"
     ;; better way.
     (with-local-vars [first-pg true
                       spacing-hack-between-pgs
-                      (apply str (repeat 4 "    <p>&nbsp;\n"))]
+                      (apply str (repeat 6 "    <p>&nbsp;\n"))]
       (doseq [[k pg] (partition 2 pages)]
         (verify (= k :page))
         (if @first-pg
