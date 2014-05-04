@@ -1263,7 +1263,7 @@
       css)))
 
 (def html-header-after-title (format "
-  <link rel=\"stylesheet\" href=\"cheatsheet_files/26467729A.css\" type=\"text/css\" />
+  <link rel=\"stylesheet\" href=\"cheatsheet_files/style.css\" type=\"text/css\" />
   <style type=\"text/css\">
   %s
   </style>
