@@ -1268,16 +1268,51 @@
   %s
   </style>
   <link href=\"cheatsheet_files/tipTip.css\" rel=\"stylesheet\">
+  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
   <script src=\"cheatsheet_files/jquery.js\"></script>
   <script src=\"cheatsheet_files/jquery.tipTip.js\"></script>
   <script>
   $(function(){
       $(\".tooltip\").tipTip();
   });
+
+  $(function(){
+    var $links = $('a');
+    $('#search').keyup(function() {
+       var val = $(this).val(),
+       regstr = '^(?=.*\\\\b' + $.trim(val).split(/\\s+/).join('\\\\b)(?=.*\\\\b') + ').*$',
+       reg = RegExp(regstr, 'i');
+       console.log(val, reg);
+
+       var matched = $links.filter(function() {
+          var text = $(this).text().replace(/\\s+/g, ' ');
+          if ($.trim(val)) {return reg.test(text)};
+       });
+
+       if (matched.length > 0) {
+        $('table').hide();
+        $('table').prev('h3').hide();
+        $('.section').hide();
+        $('a').removeClass('highlight');
+
+        matched.closest('table').prev('h3').show();
+        matched.closest('table').show();
+        matched.closest('.section').show();
+        matched.addClass('highlight');
+       }
+       else {
+        $('table').show();
+        $('table').prev('h3').show();
+        $('.section').show();
+        $('a').removeClass('highlight');
+       };
+     });
+  })
   </script>
 </head>
 
 <body id=\"cheatsheet\">
+  <nav class=\"search\"><input type='text' id='search' placeholder='Type to search...' autofocus='autofocus'></nav>
   <div class=\"wiki wikiPage\" id=\"content_view\">
 " (inline-css)))
 

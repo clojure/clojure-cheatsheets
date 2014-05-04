@@ -83,6 +83,34 @@ body {margin: 0;padding:0;}
 .WikiCustomNav ol, .WikiCustomNav ul { padding-left: 0; }
 
 
+/* Search styles */
+
+.search {
+	padding: 0.3em 0.3em 0;
+}
+
+#search {
+	margin: 0;
+	display: block;
+	border-radius: 5px;
+	border: 1px solid #ddd;
+	background: #ebebeb;
+	padding: 5px;
+	font-size: 1.5em;
+	font-weight: bold;
+	outline: none;
+	box-sizing: border-box;
+	width: 100%;
+}
+
+#search:focus {
+	border: 1px solid #999;
+}
+
+.highlight {
+	background: yellow;
+}
+
 /* Responsive styles */
 
 .page {
@@ -96,6 +124,10 @@ body {margin: 0;padding:0;}
 @media only screen and (min-width: 801px) {
 	.page {
 		max-width: 73em;
+	}
+
+	.search {
+		max-width: 29em;
 	}
 }
 
