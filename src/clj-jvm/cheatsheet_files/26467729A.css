@@ -1,6 +1,4 @@
-
 body {margin: 0;padding:0;}
-#content_view {max-width: 70em; min-width: 400px;}
 
 .wiki ol.includeWikiList { list-style: none; margin-left: 6px; padding: 0; text-indent: -6px; }
 /* Wiki Rendered Styles */
@@ -11,7 +9,7 @@ body {margin: 0;padding:0;}
 .wiki h4 { font-weight: normal; padding: 5px 0 0 0; margin: 0; font-size: 1.066em; }
 .wiki h5 { font-weight: normal; padding: 5px 0 0 0; margin: 0; font-size: 1.033em; }
 .wiki h6 { font-weight: normal; padding: 5px 0 0 0; margin: 0; font-size: 1.0em; }
-.wiki table { border-collapse: collapse; margin: 10px 0; font-size: small; }
+.wiki table { border-collapse: collapse; margin: 10px 0; font-size: 1em; }
 .wiki p { margin: 0; padding: 0; padding: 5px 0; }
 .wiki td { border: 1px solid #DDD; }
 .wiki #toc { border: 1px solid #AAA; background: #fff; padding: 5px; margin: 0 0 10px 10px; width: 25%; float: right; clear: right;}
@@ -83,3 +81,33 @@ body {margin: 0;padding:0;}
 
 /* Adjust custom nav list padding */
 .WikiCustomNav ol, .WikiCustomNav ul { padding-left: 0; }
+
+
+/* Responsive styles */
+
+.page {
+	float: left;
+}
+
+.column {
+	min-width: 30em;
+}
+
+@media only screen and (min-width: 801px) {
+	.page {
+		max-width: 73em;
+	}
+}
+
+
+@media only screen and (max-width: 800px) {
+	.wiki {
+		font-size: 10px; 
+	}
+}
+
+@media only screen and (max-width: 620px) {
+	.page .column {
+		width: 100%;
+	}
+}
