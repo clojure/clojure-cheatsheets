@@ -1244,7 +1244,7 @@
 ")
 
 
-(def html-header-after-title "  <link rel=\"stylesheet\" href=\"cheatsheet_files/26467729A.css\" type=\"text/css\" />
+(def html-header-after-title "  <link rel=\"stylesheet\" href=\"cheatsheet_files/style.css\" type=\"text/css\" />
 
   <style type=\"text/css\">
   @media screen {      .page {        width: 600px; display: inline;      }  .gap {clear: both;}    }    code {      font-family: monospace;    }    .page {      clear: both;      page-break-after: always;      page-break-inside: avoid;    }    .column {      float: left;      width: 50%;    }    .header {      text-align: center;    }    .header h2 {      font-style: italic;    }    h1 {      font-size: 1.8em;    }    h2 {      font-size: 1.4em;    }    h3 {      font-size: 1.2em;    }    .section {      margin: 0.5em;      padding: 0.5em;      padding-top: 0;      background-color: #ebebeb;    }    table {      width: 100%;      }    td, .single_row {      padding: 0 0.5em;      vertical-align: top;    }    tr.odd, .single_row {      background-color: #f5f5f5;    }    tr.even {      background-color: #fafafa;    }    .footer {      float: right;      text-align: right;      border-top: 1px solid gray;    } #foot {clear: both;}  

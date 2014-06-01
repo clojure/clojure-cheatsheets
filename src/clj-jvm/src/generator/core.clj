@@ -1167,7 +1167,7 @@
 \\usepackage{tabularx}
 \\usepackage[colorlinks=false,breaklinks=true,pdfborder={0 0 0},dvipdfm]{hyperref}
 \\usepackage{lmodern}
-\\renewcommand*\\familydefault{\\sfdefault} 
+\\renewcommand*\\familydefault{\\sfdefault}
 
 
 \\usepackage[table]{xcolor}
@@ -1231,7 +1231,7 @@
 (def latex-header-after-title "")
 
 (def latex-footer
-     " 
+     "
 \\end{document}
 ")
 
@@ -1256,25 +1256,65 @@
   <meta http-equiv=\"Content-Type\" content=\"text/html; charset=us-ascii\" />
 ")
 
+(defn inline-css [& {:keys [js?]}]
+  (let [css (slurp (io/resource "inline.css"))]
+    (if js?
+      (str/replace css  #"\n" "\\\\n")
+      css)))
 
-(def html-header-after-title "  <link rel=\"stylesheet\" href=\"cheatsheet_files/26467729A.css\" type=\"text/css\" />
-
+(def html-header-after-title (format "
+  <link rel=\"stylesheet\" href=\"cheatsheet_files/style.css\" type=\"text/css\" />
   <style type=\"text/css\">
-  @media screen {      .page {        width: 600px; display: inline;      }  .gap {clear: both;}    }    code {      font-family: monospace;    }    .page {      clear: both;      page-break-after: always;      page-break-inside: avoid;    }    .column {      float: left;      width: 50%;    }    .header {      text-align: center;    }    .header h2 {      font-style: italic;    }    h1 {      font-size: 1.8em;    }    h2 {      font-size: 1.4em;    }    h3 {      font-size: 1.2em;    }    .section {      margin: 0.5em;      padding: 0.5em;      padding-top: 0;      background-color: #ebebeb;    }    table {      width: 100%;      }    td, .single_row {      padding: 0 0.5em;      vertical-align: top;    }    tr.odd, .single_row {      background-color: #f5f5f5;    }    tr.even {      background-color: #fafafa;    }    .footer {      float: right;      text-align: right;      border-top: 1px solid gray;    } #foot {clear: both;}  
+  %s
   </style>
   <link href=\"cheatsheet_files/tipTip.css\" rel=\"stylesheet\">
+  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
   <script src=\"cheatsheet_files/jquery.js\"></script>
   <script src=\"cheatsheet_files/jquery.tipTip.js\"></script>
   <script>
   $(function(){
       $(\".tooltip\").tipTip();
   });
+
+  $(function(){
+    var $links = $('a');
+    $('#search').keyup(function() {
+       var val = $(this).val(),
+       regstr = '^(?=.*\\\\b' + $.trim(val).split(/\\s+/).join('\\\\b)(?=.*\\\\b') + ').*$',
+       reg = RegExp(regstr, 'i');
+       console.log(val, reg);
+
+       var matched = $links.filter(function() {
+          var text = $(this).text().replace(/\\s+/g, ' ');
+          if ($.trim(val)) {return reg.test(text)};
+       });
+
+       if (matched.length > 0) {
+        $('table').hide();
+        $('table').prev('h3').hide();
+        $('.section').hide();
+        $('a').removeClass('highlight');
+
+        matched.closest('table').prev('h3').show();
+        matched.closest('table').show();
+        matched.closest('.section').show();
+        matched.addClass('highlight');
+       }
+       else {
+        $('table').show();
+        $('table').prev('h3').show();
+        $('.section').show();
+        $('a').removeClass('highlight');
+       };
+     });
+  })
   </script>
 </head>
 
 <body id=\"cheatsheet\">
+  <nav class=\"search\"><input type='text' id='search' placeholder='Type to search...' autofocus='autofocus'></nav>
   <div class=\"wiki wikiPage\" id=\"content_view\">
-")
+" (inline-css)))
 
 
 (def html-footer "  </div>
@@ -1284,12 +1324,13 @@
 
 
 (def embeddable-html-fragment-header-before-title "")
-(def embeddable-html-fragment-header-after-title "<script language=\"JavaScript\" type=\"text/javascript\">
+(def embeddable-html-fragment-header-after-title (format "
+<script language=\"JavaScript\" type=\"text/javascript\">
 //<![CDATA[
-document.write('<style type=\"text/css\">  @media screen {      .page { width: 600px; display: inline;      }  .gap {clear: both;}    } code {      font-family: monospace;    }    .page {      clear: both;      page-break-after: always;      page-break-inside: avoid; }    .column {      float: left;      width: 50%;    }    .header { text-align: center;    }    .header h2 {      font-style: italic; }    h1 {      font-size: 1.8em;    }    h2 {      font-size: 1.4em; }    h3 {      font-size: 1.2em;    }    .section {      margin: 0.5em;      padding: 0.5em;      padding-top: 0; background-color: #ebebeb;    }    table {      width: 100%; border-collapse: collapse;    }    td, .single_row {      padding: 0 0.5em;      vertical-align: top;    }    tr.odd, .single_row { background-color: #f5f5f5;    }    tr.even {      background-color: #fafafa;    }    .footer {      float: right;      text-align: right; border-top: 1px solid gray;    } #foot {clear: both;}  <\\/style>')
+document.write('<style type=\"text/css\">%s<\\/style>')
 //]]>
 </script>
-")
+" (inline-css :js? true)))
 (def embeddable-html-fragment-footer "")
 
 
@@ -1680,7 +1721,7 @@ characters (\") with &quot;"
         key-val-pairs (partition 2 (nnext box))]
     (iprintf "%s" (case (:fmt fmt)
                     :latex (format "\\colouredbox{%s}{\n" box-color)
-                    :html "        <div class=\"section\">\n"
+                    :html (format "        <div class=\"section%s\">\n" (if box-color (str " " box-color) ""))
                     :verify-only ""))
     (doseq [[k v] key-val-pairs]
       (case k
@@ -1756,29 +1797,9 @@ characters (\") with &quot;"
                     :html html-header-after-title
                     :embeddable-html embeddable-html-fragment-header-after-title
                     :verify-only ""))
-    ;; I don't know why, but if the right column on the first page is
-    ;; enough shorter than the left column on the first page, then the
-    ;; first column on the second page is displayed on the right half
-    ;; instead of the left, and the second column on the second page
-    ;; is displayed on the left instead of the right.  As a
-    ;; workaround, force the second column on the first page to be a
-    ;; bit longer by adding some vertical whitespace, in the form of
-    ;; paragraphs containing nothing but a non-blocking space.  I'm
-    ;; sure a real HTML guru would laugh (or cry) at this, and know a
-    ;; better way.
-    (with-local-vars [first-pg true
-                      spacing-hack-between-pgs
-                      (apply str (repeat 6 "    <p>&nbsp;\n"))]
-      (doseq [[k pg] (partition 2 pages)]
-        (verify (= k :page))
-        (if @first-pg
-          (var-set first-pg false)
-          (iprintf "%s" (case (:fmt fmt)
-                          :latex ""
-                          :html @spacing-hack-between-pgs
-                          :embeddable-html @spacing-hack-between-pgs
-                          :verify-only "")))
-        (output-page fmt-passed-down pg))))
+    (doseq [[k pg] (partition 2 pages)]
+      (verify (= k :page))
+      (output-page fmt-passed-down pg)))
   (iprintf "%s" (case (:fmt fmt)
                   :latex latex-footer
                   :html html-footer
@@ -1852,7 +1873,7 @@ characters (\") with &quot;"
       (binding [*out* (io/writer "cheatsheet-full.html")
                 *err* (io/writer "warnings.log")
                 *warn-about-unknown-symbols* true]
-        (output-cheatsheet {:fmt :html} cheatsheet-structure)
+        (output-cheatsheet {:fmt :html :colors :color} cheatsheet-structure)
         ;; Print out a list of all symbols in our symbol-name-to-url
         ;; table that we never looked up.
         (let [never-used (set/difference
