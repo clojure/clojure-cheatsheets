@@ -1294,6 +1294,7 @@
         $('table').prev('h3').hide();
         $('.section').hide();
         $('a').removeClass('highlight');
+        $('#search').removeClass('highlight');
 
         matched.closest('table').prev('h3').show();
         matched.closest('table').show();
@@ -1305,6 +1306,7 @@
         $('table').prev('h3').show();
         $('.section').show();
         $('a').removeClass('highlight');
+        $('#search').addClass('highlight');
        };
      });
   })
