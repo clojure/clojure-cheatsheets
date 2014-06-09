@@ -1280,7 +1280,7 @@
     var $links = $('a');
     $('#search').keyup(function() {
        var val = $(this).val(),
-       regstr = '^(?=.*\\\\b' + $.trim(val).split(/\\s+/).join('\\\\b)(?=.*\\\\b') + ').*$',
+       regstr = '^.*' + $.trim(val).split(/\\s+/).join('.*') + '.*$',
        reg = RegExp(regstr, 'i');
        console.log(val, reg);
 
