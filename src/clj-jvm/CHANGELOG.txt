@@ -1,5 +1,16 @@
 ----------------------------------------------------------------------
-Mar 26, 2013 - Clojure 1.3 - 1.6, sheet v13
+Jun 15, 2014 - Clojure 1.3 - 1.6, sheet v14
+
+Added vars that were not in the cheat sheet before:
+
+    trampoline added to Functions/Call
+    satisfies? added to Abstractions/Protocols/Test
+    record? added to Abstractions/Records/Test
+    the-ns added to Namespace/From symbol
+    class added to Java Interoperation/General
+
+----------------------------------------------------------------------
+Mar 26, 2014 - Clojure 1.3 - 1.6, sheet v13
 
 Added new vars for Clojure 1.6.0:
 

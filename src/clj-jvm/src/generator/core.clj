@@ -117,8 +117,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v13)"
-              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v13)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v14)"
+              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v14)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -501,7 +501,7 @@
                                         constantly memfn comp complement
                                         partial juxt memoize fnil every-pred
                                         some-fn]]
-                      ["Call" :cmds '[apply -> ->>
+                      ["Call" :cmds '[apply -> ->> trampoline
                                       "(1.5)" as-> cond-> cond->>
                                       some-> some->>]]
                       ["Test" :cmds '[fn? ifn?]]]
@@ -540,6 +540,7 @@
                                        {:latex "\\cmd{Slicey (slice [at] ...))}"
                                         :html "<code>Slicey (slice [at] ...))</code>"}
                                        ]]
+                      ["Test" :cmds '[satisfies?]]
                       ]
               :subsection {:latex "Records (\\href{http://clojure.org/datatypes}{clojure.org/datatypes})"
                            :html "Records (<a href=\"http://clojure.org/datatypes\">clojure.org/datatypes</a>)"}
@@ -558,6 +559,7 @@
                       ["Create" :cmds '[
                                         Pair. ->Pair map->Pair
                                         ]]
+                      ["Test" :cmds '[record?]]
                       ]
               :subsection {:latex "Types (\\href{http://clojure.org/datatypes}{clojure.org/datatypes})"
                            :html "Types (<a href=\"http://clojure.org/datatypes\">clojure.org/datatypes</a>)"}
@@ -792,7 +794,8 @@
                       ["Examine" :cmds '[[:common-prefix ns-
                                           name aliases map interns publics
                                           refers imports]]]
-                      ["From symbol" :cmds '[resolve ns-resolve namespace]]
+                      ["From symbol" :cmds '[resolve ns-resolve namespace
+                                             the-ns]]
                       ["Remove" :cmds '[ns-unalias ns-unmap remove-ns]]]
               ]
              [:box "green"
@@ -851,7 +854,7 @@
                         :html "Java Interoperation (<a href=\"http://clojure.org/java_interop\">clojure.org/java_interop</a>)"}
               :table [["General" :cmds '[.. doto "Classname/" "Classname."
                                          new bean comparator enumeration-seq
-                                         import iterator-seq memfn set!]]
+                                         import iterator-seq memfn set! class]]
                       ["Cast" :cmds '[boolean byte short char int long
                                       float double bigdec bigint num cast
                                       biginteger]]
@@ -1243,7 +1246,7 @@
 ;; US letter is a little shorter, so formatting gets completely messed
 ;; up unless we use a slightly smaller font size.
 (def latex-usletter-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.6pt,letterpaper]{scrreprt}\n"
+     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.5pt,letterpaper]{scrreprt}\n"
           latex-header-except-documentclass))
 
 
