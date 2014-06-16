@@ -4,27 +4,137 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
-  <title>Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v13)</title>
-  <link rel="stylesheet" href="cheatsheet_files/26467729A.css" type="text/css" />
+  <title>Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v14)</title>
 
+  <link rel="stylesheet" href="cheatsheet_files/style.css" type="text/css" />
   <style type="text/css">
-  @media screen {      .page {        width: 600px; display: inline;      }  .gap {clear: both;}    }    code {      font-family: monospace;    }    .page {      clear: both;      page-break-after: always;      page-break-inside: avoid;    }    .column {      float: left;      width: 50%;    }    .header {      text-align: center;    }    .header h2 {      font-style: italic;    }    h1 {      font-size: 1.8em;    }    h2 {      font-size: 1.4em;    }    h3 {      font-size: 1.2em;    }    .section {      margin: 0.5em;      padding: 0.5em;      padding-top: 0;      background-color: #ebebeb;    }    table {      width: 100%;      }    td, .single_row {      padding: 0 0.5em;      vertical-align: top;    }    tr.odd, .single_row {      background-color: #f5f5f5;    }    tr.even {      background-color: #fafafa;    }    .footer {      float: right;      text-align: right;      border-top: 1px solid gray;    } #foot {clear: both;}  
+  code {
+	font-family: monospace;
+}
+
+.page {
+	page-break-after: always;
+	page-break-inside: avoid;
+}
+
+.column {
+	float: left;
+	padding: 0;
+	margin: 0;
+	width: 50%;
+}
+
+.column:first-child {
+	clear: both;
+}
+
+.header {
+	text-align: center;
+}
+
+.header h2 {
+	font-style: italic;
+}
+
+h1 {
+	font-size: 1.8em;
+}
+
+h2 {
+	font-size: 1.4em;
+}
+
+h3 {
+	font-size: 1.2em;
+}
+
+.section {
+	background-color: #ebebeb;
+	margin: 0.5em;
+	padding: 0 0.5em 0.5em;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+td, .single_row {
+	vertical-align: top;
+	padding: 0 0.5em;
+}
+
+tr.odd, .single_row {
+	background-color: #f5f5f5;
+}
+
+tr.even {
+	background-color: #fafafa;
+}
+
+.footer {
+	float: right;
+	text-align: right;
+	border-top: 1px solid gray;
+}
+
+#foot {
+	clear: both;
+}
+
   </style>
   <link href="cheatsheet_files/tipTip.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="cheatsheet_files/jquery.js"></script>
   <script src="cheatsheet_files/jquery.tipTip.js"></script>
   <script>
   $(function(){
       $(".tooltip").tipTip();
   });
+
+  $(function(){
+    var $links = $('a');
+    $('#search').keyup(function() {
+       var val = $(this).val(),
+       regstr = '^.*' + $.trim(val).split(/\s+/).join('.*') + '.*$',
+       reg = RegExp(regstr, 'i');
+       console.log(val, reg);
+
+       var matched = $links.filter(function() {
+          var text = $(this).text().replace(/\s+/g, ' ');
+          if ($.trim(val)) {return reg.test(text)};
+       });
+
+       if (matched.length > 0) {
+        $('table').hide();
+        $('table').prev('h3').hide();
+        $('.section').hide();
+        $('a').removeClass('highlight');
+        $('#search').removeClass('highlight');
+
+        matched.closest('table').prev('h3').show();
+        matched.closest('table').show();
+        matched.closest('.section').show();
+        matched.addClass('highlight');
+       }
+       else {
+        $('table').show();
+        $('table').prev('h3').show();
+        $('.section').show();
+        $('a').removeClass('highlight');
+        $('#search').addClass('highlight');
+       };
+     });
+  })
   </script>
 </head>
 
 <body id="cheatsheet">
+  <nav class="search"><input type='text' id='search' placeholder='Type to search...' autofocus='autofocus'></nav>
   <div class="wiki wikiPage" id="content_view">
     <div class="page">
       <div class="column">
-        <div class="section">
+        <div class="section green">
           <h2>Documentation</h2>
           <table>
             <tbody>
@@ -35,7 +145,7 @@
             </tbody>
           </table>
         </div><!-- /section -->
-        <div class="section">
+        <div class="section blue">
           <h2>Primitives</h2>
           <h3>Numbers</h3>
           <table>
@@ -125,7 +235,7 @@
             </tbody>
           </table>
         </div><!-- /section -->
-        <div class="section">
+        <div class="section yellow">
           <h2>Collections</h2>
           <h3>Collections</h3>
           <table>
@@ -243,7 +353,7 @@
         </div><!-- /section -->
       </div><!-- /column -->
       <div class="column">
-        <div class="section">
+        <div class="section yellow">
           <h3>Transients (<a href="http://clojure.org/transients">clojure.org/transients</a>)</h3>
           <table>
             <tbody>
@@ -271,7 +381,7 @@
             </tbody>
           </table>
         </div><!-- /section -->
-        <div class="section">
+        <div class="section orange">
           <h2>Sequences</h2>
           <h3>Creating a Lazy Seq</h3>
           <table>
@@ -361,7 +471,7 @@
             </tbody>
           </table>
         </div><!-- /section -->
-        <div class="section">
+        <div class="section green">
           <h3>Zippers (clojure.zip/)</h3>
           <table>
             <tbody>
@@ -392,7 +502,7 @@
             </tbody>
           </table>
         </div><!-- /section -->
-        <div class="section">
+        <div class="section magenta">
           <h2>IO</h2>
           <table>
             <tbody>
@@ -445,15 +555,9 @@
         </div><!-- /section -->
       </div><!-- /column -->
     </div><!-- /page -->
-    <p>&nbsp;
-    <p>&nbsp;
-    <p>&nbsp;
-    <p>&nbsp;
-    <p>&nbsp;
-    <p>&nbsp;
     <div class="page">
       <div class="column">
-        <div class="section">
+        <div class="section blue">
           <h2>Functions</h2>
           <table>
             <tbody>
@@ -463,7 +567,7 @@
               </tr>
               <tr class="even">
                 <td>Call</td>
-                <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/apply">apply</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/->">-&gt;</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/->>">-&gt;&gt;</a> (1.5) <a href="http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/as->">as-&gt;</a> <a href="http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/cond->">cond-&gt;</a> <a href="http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/cond->>">cond-&gt;&gt;</a> <a href="http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/some->">some-&gt;</a> <a href="http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/some->>">some-&gt;&gt;</a></code></td>
+                <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/apply">apply</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/->">-&gt;</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/->>">-&gt;&gt;</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/trampoline">trampoline</a> (1.5) <a href="http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/as->">as-&gt;</a> <a href="http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/cond->">cond-&gt;</a> <a href="http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/cond->>">cond-&gt;&gt;</a> <a href="http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/some->">some-&gt;</a> <a href="http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/some->>">some-&gt;&gt;</a></code></td>
               </tr>
               <tr class="odd">
                 <td>Test</td>
@@ -472,7 +576,7 @@
             </tbody>
           </table>
         </div><!-- /section -->
-        <div class="section">
+        <div class="section orange">
           <h2>Abstractions (<a href="https://github.com/cemerick/clojure-type-selection-flowchart">Clojure type selection flowchart</a>)</h2>
           <h3>Protocols (<a href="http://clojure.org/protocols">clojure.org/protocols</a>)</h3>
           <table>
@@ -493,6 +597,10 @@
                 <td>Reify</td>
                 <td><code><code>(</code> <a href="http://clojuredocs.org/clojure_core/clojure.core/reify">reify</a> <code>Slicey (slice [at] ...))</code></code></td>
               </tr>
+              <tr class="odd">
+                <td>Test</td>
+                <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/satisfies_q">satisfies?</a></code></td>
+              </tr>
             </tbody>
           </table>
           <h3>Records (<a href="http://clojure.org/datatypes">clojure.org/datatypes</a>)</h3>
@@ -509,6 +617,10 @@
               <tr class="odd">
                 <td>Create</td>
                 <td><code>Pair. -&gt;Pair map-&gt;Pair</code></td>
+              </tr>
+              <tr class="even">
+                <td>Test</td>
+                <td><code><a href="http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/record?">record?</a></code></td>
               </tr>
             </tbody>
           </table>
@@ -563,7 +675,7 @@
             </tbody>
           </table>
         </div><!-- /section -->
-        <div class="section">
+        <div class="section green">
           <h2>Macros</h2>
           <table>
             <tbody>
@@ -602,7 +714,7 @@
             </tbody>
           </table>
         </div><!-- /section -->
-        <div class="section">
+        <div class="section yellow">
           <h2>Reader Macros</h2>
           <table>
             <tbody>
@@ -657,7 +769,7 @@
             </tbody>
           </table>
         </div><!-- /section -->
-        <div class="section">
+        <div class="section red">
           <h2>Metadata (<a href="http://clojure.org/special_forms">clojure.org/special_forms</a>)</h2>
           <table>
             <tbody>
@@ -687,7 +799,7 @@
         </div><!-- /section -->
       </div><!-- /column -->
       <div class="column">
-        <div class="section">
+        <div class="section red">
           <h2>Special Forms (<a href="http://clojure.org/special_forms">clojure.org/special_forms</a>)</h2>
           <div class="single_row">
             <code><a href="http://clojuredocs.org/clojure_core/clojure.core/def">def</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/if">if</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/do">do</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/let">let</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/letfn">letfn</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/quote">quote</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/var">var</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/fn">fn</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/loop">loop</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/recur">recur</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/throw">throw</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/try">try</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/monitor-enter">monitor-enter</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/monitor-exit">monitor-exit</a></code>
@@ -701,7 +813,7 @@
             </tbody>
           </table>
         </div><!-- /section -->
-        <div class="section">
+        <div class="section blue2">
           <h2>Vars and global environment (<a href="http://clojure.org/vars">clojure.org/vars</a>)</h2>
           <table>
             <tbody>
@@ -724,7 +836,7 @@
             </tbody>
           </table>
         </div><!-- /section -->
-        <div class="section">
+        <div class="section yellow">
           <h2>Namespace</h2>
           <table>
             <tbody>
@@ -750,7 +862,7 @@
               </tr>
               <tr class="even">
                 <td>From symbol</td>
-                <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/resolve">resolve</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/ns-resolve">ns-resolve</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/namespace">namespace</a></code></td>
+                <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/resolve">resolve</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/ns-resolve">ns-resolve</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/namespace">namespace</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/the-ns">the-ns</a></code></td>
               </tr>
               <tr class="odd">
                 <td>Remove</td>
@@ -759,7 +871,7 @@
             </tbody>
           </table>
         </div><!-- /section -->
-        <div class="section">
+        <div class="section green">
           <h2>Loading</h2>
           <table>
             <tbody>
@@ -778,7 +890,7 @@
             </tbody>
           </table>
         </div><!-- /section -->
-        <div class="section">
+        <div class="section magenta">
           <h2>Concurrency</h2>
           <table>
             <tbody>
@@ -871,13 +983,13 @@
             </tbody>
           </table>
         </div><!-- /section -->
-        <div class="section">
+        <div class="section orange">
           <h2>Java Interoperation (<a href="http://clojure.org/java_interop">clojure.org/java_interop</a>)</h2>
           <table>
             <tbody>
               <tr class="odd">
                 <td>General</td>
-                <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/_dot_dot">..</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/doto">doto</a> Classname/ Classname. <a href="http://clojuredocs.org/clojure_core/clojure.core/new">new</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/bean">bean</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/comparator">comparator</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/enumeration-seq">enumeration-seq</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/import">import</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/iterator-seq">iterator-seq</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/memfn">memfn</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/set!">set!</a></code></td>
+                <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/_dot_dot">..</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/doto">doto</a> Classname/ Classname. <a href="http://clojuredocs.org/clojure_core/clojure.core/new">new</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/bean">bean</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/comparator">comparator</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/enumeration-seq">enumeration-seq</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/import">import</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/iterator-seq">iterator-seq</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/memfn">memfn</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/set!">set!</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/class">class</a></code></td>
               </tr>
               <tr class="even">
                 <td>Cast</td>
@@ -920,7 +1032,7 @@
             </tbody>
           </table>
         </div><!-- /section -->
-        <div class="section">
+        <div class="section green2">
           <h2>Other</h2>
           <table>
             <tbody>
