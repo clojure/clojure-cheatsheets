@@ -950,26 +950,48 @@
         s (str/replace s "." "_dot")]
     s))
 
+(defn grimoire-url-fixup [s]
+  (-> s
+      (str/replace "*" "_STAR_")
+      (str/replace "?" "_QMARK_")
+      (str/replace "." "_DOT_")
+      (str/replace "<" "_LT_")
+      (str/replace ">" "_GT_")
+      (str/replace "-" "_DASH_")
+      (str/replace "/" "_SLASH_")
+      (str/replace "!" "_BANG_")
+      (str/replace "=" "_EQ_")
+      (str/replace "+" "_PLUS_")
+      (str/replace "'" "_SQUOTE_")
+      (str/replace #"^_*" "")
+      (str/replace #"_*$" "")))
+
 
 (defn sym-to-pair [prefix sym link-dest base-url]
   [(str prefix sym)
    (str base-url
         (case link-dest
               (:nolinks :links-to-clojure) sym
-              :links-to-clojuredocs (clojuredocs-url-fixup (str sym))))])
+              :links-to-clojuredocs (clojuredocs-url-fixup (str sym))
+              :links-to-grimoire    (grimoire-url-fixup (str sym))))])
 
 
 (defn sym-to-url-list [link-target-site info]
   (let [{:keys [namespace-str symbol-list clojure-base-url
-                clojuredocs-base-url]} info
+                clojuredocs-base-url grimoire-base-url]} info
          namespace-str (if (= "" namespace-str) "" (str namespace-str "/"))]
     (map #(sym-to-pair
            namespace-str % link-target-site
            (case link-target-site
                  :links-to-clojure clojure-base-url
-                 :links-to-clojuredocs clojuredocs-base-url))
+                 :links-to-clojuredocs clojuredocs-base-url
+                 :links-to-grimoire grimoire-base-url))
          symbol-list)))
 
+
+(def grimoire-base-url
+  (str "http://grimoire.arrdem.com/"
+       (:major *clojure-version*) "." (:minor *clojure-version*) ".0/"))
 
 (defn symbol-url-pairs-for-whole-namespaces [link-target-site]
   (apply concat
@@ -979,66 +1001,81 @@
        :symbol-list '(def if do let quote var fn loop recur throw try
                           monitor-enter monitor-exit),
        :clojure-base-url "http://clojure.org/special_forms#",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.core/"}
+       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.core/"
+       :grimoire-base-url    (str grimoire-base-url "clojure.core/")}
       {:namespace-str "",
        :symbol-list (keys (ns-publics 'clojure.core)),
        :clojure-base-url "http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.core/"}
+       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.core/"
+       :grimoire-base-url (str grimoire-base-url "clojure.core/")}
       {:namespace-str "clojure.data"
        :symbol-list (keys (ns-publics 'clojure.data)),
        :clojure-base-url "http://clojure.github.com/clojure/clojure.data-api.html#clojure.data/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.data/"}
+       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.data/"
+       :grimoire-base-url (str grimoire-base-url "clojure.data/")}
       {:namespace-str "clojure.java.io"
        :symbol-list (keys (ns-publics 'clojure.java.io)),
        :clojure-base-url "http://clojure.github.com/clojure/clojure.java.io-api.html#clojure.java.io/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.io/"}
+       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.io/"
+       :grimoire-base-url (str grimoire-base-url "clojure.java.io/")}
       {:namespace-str "clojure.java.browse"
        :symbol-list (keys (ns-publics 'clojure.java.browse)),
        :clojure-base-url "http://clojure.github.com/clojure/clojure.java.browse-api.html#clojure.java.browse/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.browse/"}
+       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.browse/"
+       :grimoire-base-url (str grimoire-base-url "clojure.java.browse/")}
       {:namespace-str "clojure.java.javadoc"
        :symbol-list (keys (ns-publics 'clojure.java.javadoc)),
        :clojure-base-url "http://clojure.github.com/clojure/clojure.java.javadoc-api.html#clojure.java.javadoc/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.javadoc/"}
+       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.javadoc/"
+       :grimoire-base-url (str grimoire-base-url "clojure.java.javadoc/")}
       {:namespace-str "clojure.java.shell"
        :symbol-list (keys (ns-publics 'clojure.java.shell)),
        :clojure-base-url "http://clojure.github.com/clojure/clojure.java.shell-api.html#clojure.java.shell/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.shell/"}
+       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.shell/"
+       :grimoire-base-url (str grimoire-base-url "clojure.java.shell/")}
       {:namespace-str "clojure.pprint"
        :symbol-list (keys (ns-publics 'clojure.pprint)),
        :clojure-base-url "http://clojure.github.com/clojure/clojure.pprint-api.html#clojure.pprint/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.pprint/"}
+       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.pprint/"
+       :grimoire-base-url (str grimoire-base-url "clojure.pprint/")}
       {:namespace-str "clojure.repl"
        :symbol-list (keys (ns-publics 'clojure.repl)),
        :clojure-base-url "http://clojure.github.com/clojure/clojure.repl-api.html#clojure.repl/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.repl/"}
+       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.repl/"
+       :grimoire-base-url (str grimoire-base-url "clojure.repl/")}
       {:namespace-str "clojure.set"
        :symbol-list (keys (ns-publics 'clojure.set)),
        :clojure-base-url "http://clojure.github.com/clojure/clojure.set-api.html#clojure.set/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.set/"}
+       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.set/"
+       :grimoire-base-url (str grimoire-base-url "clojure.set/")}
       {:namespace-str "clojure.string"
        :symbol-list (keys (ns-publics 'clojure.string)),
        :clojure-base-url "http://clojure.github.com/clojure/clojure.string-api.html#clojure.string/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.string/"}
+       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.string/"
+       :grimoire-base-url (str grimoire-base-url "clojure.string/")}
       {:namespace-str "clojure.walk"
        :symbol-list (keys (ns-publics 'clojure.walk)),
        :clojure-base-url "http://clojure.github.com/clojure/clojure.walk-api.html#clojure.walk/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.walk/"}
+       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.walk/"
+       :grimoire-base-url (str grimoire-base-url "clojure.walk/")}
       {:namespace-str "clojure.xml"
        :symbol-list (keys (ns-publics 'clojure.xml)),
        :clojure-base-url "http://clojure.github.com/clojure/clojure.xml-api.html#clojure.xml/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.xml/"}
+       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.xml/"
+       :grimoire-base-url (str grimoire-base-url "clojure.xml/")}
       {:namespace-str "clojure.zip"
        :symbol-list (keys (ns-publics 'clojure.zip)),
        :clojure-base-url "http://clojure.github.com/clojure/clojure.zip-api.html#clojure.zip/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.zip/"}
+       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.zip/"
+       :grimoire-base-url (str grimoire-base-url "clojure.zip/")}
       {:namespace-str "clojure.core.reducers"
        :symbol-list (keys (ns-publics 'clojure.core.reducers)),
        :clojure-base-url "http://clojure.github.com/clojure/clojure.core-api.html#clojure.core.reducers/",
        ;; There is no documentation for clojure.core.reducers
        ;; namespace on ClojureDocs.org as of March 2013, so just use
        ;; the same URL as above for now.
-       :clojuredocs-base-url "http://clojure.github.com/clojure/clojure.core-api.html#clojure.core.reducers/"}
+       :clojuredocs-base-url "http://clojure.github.com/clojure/clojure.core-api.html#clojure.core.reducers/"
+       :grimoire-base-url "http://clojure.github.com/clojure/clojure.core-api.html#clojure.core.reducers/"}
       ])))
 
 
@@ -1049,22 +1086,30 @@
                  :links-to-clojure
                  "http://clojure.org/java_interop#new"
                  :links-to-clojuredocs
-                 "http://clojuredocs.org/clojure_core/clojure.core/new")]
+                 "http://clojuredocs.org/clojure_core/clojure.core/new"
+                 :links-to-grimoire
+                 (str grimoire-base-url "clojure.core/new"))]
     ["set!" (case link-target-site
                   :links-to-clojure
                   "http://clojure.org/java_interop#Java%20Interop-The%20Dot%20special%20form-%28set!%20%28.%20Classname-symbol%20staticFieldName-symbol%29%20expr%29"
                   :links-to-clojuredocs
-                  "http://clojuredocs.org/clojure_core/clojure.core/set!")]
+                  "http://clojuredocs.org/clojure_core/clojure.core/set!"
+                  :links-to-grimoire
+                  (str grimoire-base-url "clojure.core/setBANG"))]
     ["catch" (case link-target-site
                    :links-to-clojure
                    "http://clojure.org/special_forms#try"
                    :links-to-clojuredocs
-                   "http://clojuredocs.org/clojure_core/clojure.core/catch")]
+                   "http://clojuredocs.org/clojure_core/clojure.core/catch"
+                   :links-to-grimoire
+                   (str grimoire-base-url "clojure.core/catch"))]
     ["finally" (case link-target-site
                      :links-to-clojure
                      "http://clojure.org/special_forms#try"
                      :links-to-clojuredocs
-                     "http://clojuredocs.org/clojure_core/clojure.core/finally")]]
+                     "http://clojuredocs.org/clojure_core/clojure.core/finally"
+                     :links-to-grimoire
+                     (str grimoire-base-url "clojure.core/finally"))]]
    (case link-target-site
          :links-to-clojure
          [["Classname." "http://clojure.org/java_interop#Java%20Interop-The%20Dot%20special%20form-%28new%20Classname%20args*%29"]
@@ -1072,6 +1117,8 @@
          :links-to-clojuredocs
          ;; I don't have a good idea where on clojuredocs.org these
          ;; should link to, if anywhere.
+         []
+         :links-to-grimoire
          [])
 
    ;; Manually specify links to clojure.org API documentation for
@@ -1836,13 +1883,16 @@ characters (\") with &quot;"
 ;; links-to-clojuredocs: Generate HTML and LaTeX files with links from
 ;; the symbols to clojuredocs.org URLs where they are documented.
 
+;; links-to-grimoire: Generate HTML and LaTeX files with links from
+;; the symbols to grimoire.arrdem.com URLs where they are documented.
+
 ;; nolinks: Do not include any links in the output files.  Except for
 ;; that and the likely difference in appearance in HTML of anchor text
 ;; from text with no links, there should be no difference in the
 ;; appearance of the output files compared to the choices above.
 
 (defn -main [& args]
-  (let [supported-link-targets #{"nolinks" "links-to-clojure" "links-to-clojuredocs"}
+  (let [supported-link-targets #{"nolinks" "links-to-clojure" "links-to-clojuredocs" "links-to-grimoire"}
         supported-tooltips #{"no-tooltips" "use-title-attribute" "tiptip"}
         link-target-site (if (< (count args) 1)
                            :links-to-clojure
