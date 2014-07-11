@@ -209,7 +209,6 @@ chunk-first
 chunk-next
 chunk-rest
 chunked-seq?
-class
 class?
 clear-agent-errors
 clojure.core.reducers/->Cat
@@ -314,8 +313,11 @@ extends?
 find-protocol-impl
 find-protocol-method
 hash-combine
+hash-ordered-coll
+hash-unordered-coll
 inc'
 method-sig
+mix-collection-hash
 munge
 namespace-munge
 numerator
@@ -332,14 +334,11 @@ reduced
 reduced?
 refer-clojure
 replicate
-satisfies?
 sequence
 special-symbol?
 struct
 struct-map
 supers
-the-ns
-trampoline
 type
 unchecked-add
 unchecked-byte
