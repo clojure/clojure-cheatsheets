@@ -1075,7 +1075,7 @@
        ;; namespace on ClojureDocs.org as of March 2013, so just use
        ;; the same URL as above for now.
        :clojuredocs-base-url "http://clojure.github.com/clojure/clojure.core-api.html#clojure.core.reducers/"
-       :grimoire-base-url "http://clojure.github.com/clojure/clojure.core-api.html#clojure.core.reducers/"}
+       :grimoire-base-url (str grimoire-base-url "clojure.core.reducers/")}
       ])))
 
 
@@ -1088,28 +1088,38 @@
                  :links-to-clojuredocs
                  "http://clojuredocs.org/clojure_core/clojure.core/new"
                  :links-to-grimoire
-                 (str grimoire-base-url "clojure.core/new"))]
+                 ;; Grimoire doesn't have anything for some of these
+                 ;; symbols yet.
+                 ;(str grimoire-base-url "clojure.core/new")
+                 "http://clojure.org/java_interop#new"
+                 )]
     ["set!" (case link-target-site
                   :links-to-clojure
                   "http://clojure.org/java_interop#Java%20Interop-The%20Dot%20special%20form-%28set!%20%28.%20Classname-symbol%20staticFieldName-symbol%29%20expr%29"
                   :links-to-clojuredocs
                   "http://clojuredocs.org/clojure_core/clojure.core/set!"
                   :links-to-grimoire
-                  (str grimoire-base-url "clojure.core/setBANG"))]
+                  ;(str grimoire-base-url "clojure.core/setBANG")
+                  "http://clojure.org/java_interop#Java%20Interop-The%20Dot%20special%20form-%28set!%20%28.%20Classname-symbol%20staticFieldName-symbol%29%20expr%29"
+                  )]
     ["catch" (case link-target-site
                    :links-to-clojure
                    "http://clojure.org/special_forms#try"
                    :links-to-clojuredocs
                    "http://clojuredocs.org/clojure_core/clojure.core/catch"
                    :links-to-grimoire
-                   (str grimoire-base-url "clojure.core/catch"))]
+                   ;(str grimoire-base-url "clojure.core/catch")
+                   "http://clojure.org/special_forms#try"
+                   )]
     ["finally" (case link-target-site
                      :links-to-clojure
                      "http://clojure.org/special_forms#try"
                      :links-to-clojuredocs
                      "http://clojuredocs.org/clojure_core/clojure.core/finally"
                      :links-to-grimoire
-                     (str grimoire-base-url "clojure.core/finally"))]]
+                     ;(str grimoire-base-url "clojure.core/finally")
+                     "http://clojure.org/special_forms#try"
+                     )]]
    (case link-target-site
          :links-to-clojure
          [["Classname." "http://clojure.org/java_interop#Java%20Interop-The%20Dot%20special%20form-%28new%20Classname%20args*%29"]
@@ -1122,52 +1132,55 @@
          [])
 
    ;; Manually specify links to clojure.org API documentation for
-   ;; symbols that are new in Clojure 1.4 through 1.6, because
-   ;; ClojureDocs.org doesn't have those symbols yet.
-   (map (fn [sym-str]
-          [sym-str
-           (str "http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/"
-                sym-str)])
-        [
-         ;; New in Clojure 1.4
-         "*data-readers*"
-         "default-data-readers"
-         "mapv"
-         "filterv"
-         "reduce-kv"
-         "ex-info"
-         "ex-data"
+   ;; symbols that are new in Clojure 1.4 through 1.6 if the
+   ;; link-target-site is ClojureDocs, because ClojureDocs.org doesn't
+   ;; have those symbols yet.
+   (if (= link-target-site :links-to-clojuredocs)
+     (map (fn [sym-str]
+            [sym-str
+             (str "http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/"
+                  sym-str)])
+          [
+           ;; New in Clojure 1.4
+           "*data-readers*"
+           "default-data-readers"
+           "mapv"
+           "filterv"
+           "reduce-kv"
+           "ex-info"
+           "ex-data"
+           
+           ;; New in Clojure 1.5
+           "*default-data-reader-fn*"
+           "as->"
+           "cond->"
+           "cond->>"
+           "some->"
+           "some->>"
+           "send-via"
+           "set-agent-send-executor!"
+           "set-agent-send-off-executor!"
+           
+           ;; New in Clojure 1.6
+           "unsigned-bit-shift-right"
+           "record?"
+           "some?"
+           "if-some"
+           "when-some"
+           "hash-ordered-coll"
+           "hash-unordered-coll"
+           "mix-collection-hash"
+           ]))
 
-         ;; New in Clojure 1.5
-         "*default-data-reader-fn*"
-         "as->"
-         "cond->"
-         "cond->>"
-         "some->"
-         "some->>"
-         "send-via"
-         "set-agent-send-executor!"
-         "set-agent-send-off-executor!"
-
-         ;; New in Clojure 1.6
-         "unsigned-bit-shift-right"
-         "record?"
-         "some?"
-         "if-some"
-         "when-some"
-         "hash-ordered-coll"
-         "hash-unordered-coll"
-         "mix-collection-hash"
-         ])
-
-   (map (fn [sym-str]
-          [sym-str
-           (str "http://clojure.github.com/clojure/clojure.string-api.html#"
-                sym-str)])
-        [
-         ;; New in Clojure 1.5
-         "clojure.string/re-quote-replacement"
-         ])
+   (if (= link-target-site :links-to-clojuredocs)
+     (map (fn [sym-str]
+            [sym-str
+             (str "http://clojure.github.com/clojure/clojure.string-api.html#"
+                  sym-str)])
+          [
+           ;; New in Clojure 1.5
+           "clojure.string/re-quote-replacement"
+           ]))
 
    ;; These symbols do not have API docs anywhere that I can find,
    ;; yet.  Point at the github page for tools.reader for now.

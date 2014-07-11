@@ -9,7 +9,8 @@ set -x
 
 #LINK_TARGET=nolinks
 #LINK_TARGET=links-to-clojure
-LINK_TARGET=links-to-clojuredocs
+#LINK_TARGET=links-to-clojuredocs
+LINK_TARGET=links-to-grimoire
 
 TOOLTIPS=no-tooltips
 #TOOLTIPS=use-title-attribute
