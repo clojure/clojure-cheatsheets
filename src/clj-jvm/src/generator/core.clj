@@ -1661,38 +1661,27 @@ characters (\") with &quot;"
 
 (defn table-cmds-to-str [fmt cmds]
   (if (vector? cmds)
-    (let [[keyw pre-or-suf & cmds] cmds
-          s (cond-str fmt pre-or-suf)
-          both-pre-and-suf (= keyw :common-prefix-suffix)
-          [suff cmds] (if both-pre-and-suf
-                        [(first cmds) (rest cmds)]
-                        [nil cmds])
-          s2 (if suff (cond-str fmt suff))
-          ;; s-to-show has < converted to HTML &lt; etc., if fmt is
-          ;; :html
-          s-to-show (cond-str fmt pre-or-suf fmt)
-          s2-to-show (if suff (cond-str fmt suff fmt))
+    (let [[keyw & cmds] cmds
+          [pre suff cmds] (case keyw
+                            :common-prefix [(first cmds) nil (rest cmds)]
+                            :common-suffix [nil (first cmds) (rest cmds)]
+                            :common-prefix-suffix [(first cmds) (second cmds) (nnext cmds)])
           [before between after] (case (:fmt fmt)
                                    :latex ["\\{" ", " "\\}"]
                                    :html  [  "{" ", "   "}"]
                                    :verify-only ["" "" ""])
-          str-list (case keyw
-                     :common-prefix
-                     (map #(table-one-cmd-to-str fmt % s "")
-                          cmds)
-                     :common-suffix
-                     (map #(table-one-cmd-to-str fmt % "" s)
-                          cmds)
-                     :common-prefix-suffix
-                     (map #(table-one-cmd-to-str fmt % s s2)
-                          cmds))
+          pre-str (if pre (cond-str fmt pre) "")
+          suff-str (if suff (cond-str fmt suff) "")
+          str-list (map #(table-one-cmd-to-str fmt % pre-str suff-str)
+                        cmds)
           most-str (str before
                         (str/join between str-list)
-                        after)]
-      (case keyw
-        :common-prefix (str s-to-show most-str)
-        :common-suffix (str most-str s-to-show)
-        :common-prefix-suffix (str s-to-show most-str s2-to-show)))
+                        after)
+          ;; pre-to-show has < converted to HTML &lt; etc., if fmt is
+          ;; :html
+          pre-to-show (if pre (cond-str fmt pre fmt) "")
+          suff-to-show (if suff (cond-str fmt suff fmt) "")]
+      (str pre-to-show most-str suff-to-show))
     ;; handle the one thing, with no prefix or suffix
     (table-one-cmd-to-str fmt cmds "" "")))
 
