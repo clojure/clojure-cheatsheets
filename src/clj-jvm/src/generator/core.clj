@@ -1659,28 +1659,49 @@ characters (\") with &quot;"
       cmd-str-to-show)))
 
 
+;; When expand? is true, we expand prefixes and suffixes.
+;; Disadvantage: longer output, which is especially bad for the PDF
+;; cheatsheet.  Advantage: can search for the complete names of the
+;; vars.
+
+;; When expand? is false, don't expand prefixes or suffixes -- leave
+;; them 'compressed'.
+
 (defn table-cmds-to-str [fmt cmds]
   (if (vector? cmds)
-    (let [[keyw & cmds] cmds
+    (let [expand? (:expand-common-prefixes-or-suffixes fmt)
+          [keyw & cmds] cmds
           [pre suff cmds] (case keyw
                             :common-prefix [(first cmds) nil (rest cmds)]
                             :common-suffix [nil (first cmds) (rest cmds)]
                             :common-prefix-suffix [(first cmds) (second cmds) (nnext cmds)])
-          [before between after] (case (:fmt fmt)
-                                   :latex ["\\{" ", " "\\}"]
-                                   :html  [  "{" ", "   "}"]
-                                   :verify-only ["" "" ""])
+          [before between after] (if expand?
+                                   ["" " " ""]
+                                   (case (:fmt fmt)
+                                     :latex ["\\{" ", " "\\}"]
+                                     :html  [  "{" ", "   "}"]
+                                     :verify-only ["" "" ""]))
           pre-str (if pre (cond-str fmt pre) "")
           suff-str (if suff (cond-str fmt suff) "")
-          str-list (map #(table-one-cmd-to-str fmt % pre-str suff-str)
-                        cmds)
+          str-list (if expand?
+                     (map #(table-one-cmd-to-str fmt (str pre-str
+                                                          (cond-str fmt %)
+                                                          suff-str)
+                                                 "" "")
+                          cmds)
+                     (map #(table-one-cmd-to-str fmt % pre-str suff-str)
+                          cmds))
           most-str (str before
                         (str/join between str-list)
                         after)
           ;; pre-to-show has < converted to HTML &lt; etc., if fmt is
           ;; :html
-          pre-to-show (if pre (cond-str fmt pre fmt) "")
-          suff-to-show (if suff (cond-str fmt suff fmt) "")]
+          pre-to-show (if (and pre (not expand?))
+                        (cond-str fmt pre fmt)
+                        "")
+          suff-to-show (if (and suff (not expand?))
+                         (cond-str fmt suff fmt)
+                         "")]
       (str pre-to-show most-str suff-to-show))
     ;; handle the one thing, with no prefix or suffix
     (table-one-cmd-to-str fmt cmds "" "")))
