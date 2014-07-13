@@ -117,8 +117,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v14)"
-              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v14)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v15)"
+              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v15)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -166,11 +166,15 @@
                                                          decimal? float?]]
                       ["Random" :cmds '[rand rand-int]]
                       ["BigDecimal" :cmds '[with-precision]]
+                      ;; TBD: Why do these not exist in Clojure?
+                      ;; There are -int versions, but not long
+                      ;; versions.  unchecked-divide
+                      ;; unchecked-remainder
                       ["Unchecked" :cmds '[*unchecked-math*
-                                           [:common-prefix-suffix
-                                            unchecked- -int
-                                            add dec divide inc multiply negate
-                                            remainder subtract]]]]
+                                           [:common-prefix
+                                            unchecked-
+                                            add dec inc multiply negate
+                                            subtract]]]]
               :subsection "Strings"
               :table [["Create" :cmds '[str format
                                         {:latex "\\textmd{\\textsf{See also IO/to string}}",

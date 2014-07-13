@@ -1,4 +1,17 @@
 ----------------------------------------------------------------------
+Jul 13, 2014 - Clojure 1.3 - 1.6, sheet v15
+
+Expanded out the abbreviated common prefixes/suffixes.  This makes it
+possible to search for all of those vars by their normal names, at the
+cost of making the cheatsheet only slightly longer.
+
+Removed unchecked-add-int, etc. in favor of the long versions, since
+longs are more commonly used in Clojure than ints.  Note that there
+are unchecked-divide-int and unchecked-remainder-int, but Clojure has
+never had unchecked-divide nor unchecked-remainder, at least as of
+Clojure 1.6.
+
+----------------------------------------------------------------------
 Jun 15, 2014 - Clojure 1.3 - 1.6, sheet v14
 
 Added vars that were not in the cheat sheet before:
