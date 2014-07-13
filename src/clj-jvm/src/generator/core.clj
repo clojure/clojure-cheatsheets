@@ -1300,13 +1300,13 @@
 
 
 (def latex-a4-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.8pt]{scrreprt}\n"
+     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.6pt]{scrreprt}\n"
           latex-header-except-documentclass))
 
 ;; US letter is a little shorter, so formatting gets completely messed
 ;; up unless we use a slightly smaller font size.
 (def latex-usletter-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.5pt,letterpaper]{scrreprt}\n"
+     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.4pt,letterpaper]{scrreprt}\n"
           latex-header-except-documentclass))
 
 
@@ -1942,7 +1942,8 @@ characters (\") with &quot;"
         symbol-name-to-url (hash-from-pairs (symbol-url-pairs link-target-site))]
     (let [opts {:symbol-name-to-url symbol-name-to-url
                 :tooltips tooltips
-                :clojuredocs-snapshot clojuredocs-snapshot}]
+                :clojuredocs-snapshot clojuredocs-snapshot
+                :expand-common-prefixes-or-suffixes true}]
       (binding [*out* (io/writer "cheatsheet-full.html")
                 *err* (io/writer "warnings.log")]
         (output-cheatsheet (merge opts {:fmt :html, :colors :color,
