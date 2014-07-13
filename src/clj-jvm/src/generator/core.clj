@@ -1478,22 +1478,17 @@ document.write('<style type=\"text/css\">%s<\\/style>')
                 (verify (or (string? cstr) (symbol? cstr) (map? cstr))))))
 
 
-(def ^:dynamic *symbol-name-to-url*)
-(def ^:dynamic *tooltips*)
-(def ^:dynamic *clojuredocs-snapshot*)
-(def ^:dynamic *warn-about-unknown-symbols* false)
-
 (def symbols-looked-up (ref #{}))
 
 
-(defn url-for-cmd-doc [cmd-str]
-  (when *warn-about-unknown-symbols*
+(defn url-for-cmd-doc [opts cmd-str]
+  (when (:warn-about-unknown-symbols opts)
     ;; This is a bit of a hack, but it ought to do the job.
     (dosync (alter symbols-looked-up conj cmd-str)))
-  (if-let [url-str (*symbol-name-to-url* cmd-str)]
+  (if-let [url-str (get (:symbol-name-to-url opts) cmd-str)]
     url-str
     (do
-      (when *warn-about-unknown-symbols*
+      (when (:warn-about-unknown-symbols opts)
         (iprintf *err* "No URL known for symbol with name: '%s'\n" cmd-str))
       nil)))
 
@@ -1618,7 +1613,7 @@ characters (\") with &quot;"
 (defn table-one-cmd-to-str [fmt cmd prefix suffix]
   (let [cmd-str (cond-str fmt cmd)
         whole-cmd (str prefix cmd-str suffix)
-        url-str (url-for-cmd-doc whole-cmd)
+        url-str (url-for-cmd-doc fmt whole-cmd)
         ;; cmd-str-to-show has < converted to HTML &lt; among other
         ;; things, if (:fmt fmt) is :html
         cmd-str-to-show (remove-common-ns-prefix (cond-str fmt cmd fmt))
@@ -1627,22 +1622,23 @@ characters (\") with &quot;"
         orig-doc-str (doc-for-symbol-str whole-cmd)
         cleaned-doc-str (if orig-doc-str
                           (cleanup-doc-str-tooltip orig-doc-str))
+        clojuredocs-snapshot (:clojuredocs-snapshot fmt)
         cleaned-doc-str (if cleaned-doc-str
                           (do
 ;;                            (iprintf *err* "whole-cmd='%s' sym-info='%s'\n"
 ;;                                     whole-cmd
-;;                                     (get-in *clojuredocs-snapshot*
+;;                                     (get-in clojuredocs-snapshot
 ;;                                             [:snapshot-info whole-cmd]))
                             (if-let [sym-info
-                                     (or (get-in *clojuredocs-snapshot*
+                                     (or (get-in clojuredocs-snapshot
                                                  [:snapshot-info whole-cmd])
-                                         (get-in *clojuredocs-snapshot*
+                                         (get-in clojuredocs-snapshot
                                                  [:snapshot-info
                                                   (str "clojure.core/"
                                                        whole-cmd)]))]
                               (str cleaned-doc-str "\n\n"
                                    (clojuredocs-content-summary
-                                    (get *clojuredocs-snapshot* :snapshot-time)
+                                    (get clojuredocs-snapshot :snapshot-time)
                                     sym-info))
                               cleaned-doc-str)))]
     (if url-str
@@ -1651,7 +1647,7 @@ characters (\") with &quot;"
                     "}{" (escape-latex-hyperref-target cmd-str-to-show) "}")
         :html (str "<a href=\"" url-str "\""
                    (if cleaned-doc-str
-                     (case *tooltips*
+                     (case (:tooltips fmt)
                        :no-tooltips ""
                        :tiptip (str " class=\"tooltip\" title=\"<pre>"
                                     cleaned-doc-str "</pre>\"")
@@ -1935,13 +1931,14 @@ characters (\") with &quot;"
                      (:snapshot-time clojuredocs-snapshot))
             (iprintf *err* "No clojuredocs snapshot file specified.\n"))
         symbol-name-to-url (hash-from-pairs (symbol-url-pairs link-target-site))]
-    (binding [*symbol-name-to-url* symbol-name-to-url
-              *tooltips* tooltips
-              *clojuredocs-snapshot* clojuredocs-snapshot]
+    (let [opts {:symbol-name-to-url symbol-name-to-url
+                :tooltips tooltips
+                :clojuredocs-snapshot clojuredocs-snapshot}]
       (binding [*out* (io/writer "cheatsheet-full.html")
-                *err* (io/writer "warnings.log")
-                *warn-about-unknown-symbols* true]
-        (output-cheatsheet {:fmt :html :colors :color} cheatsheet-structure)
+                *err* (io/writer "warnings.log")]
+        (output-cheatsheet (merge opts {:fmt :html, :colors :color,
+                                        :warn-about-unknown-symbols true})
+                           cheatsheet-structure)
         ;; Print out a list of all symbols in our symbol-name-to-url
         ;; table that we never looked up.
         (let [never-used (set/difference
@@ -1975,5 +1972,6 @@ characters (\") with &quot;"
                    :format {:fmt :latex, :paper :usletter, :colors :bw}}
                   ]]
         (binding [*out* (io/writer (:filename x))]
-          (output-cheatsheet (:format x) cheatsheet-structure)
+          (output-cheatsheet (merge opts (:format x))
+                             cheatsheet-structure)
           (.close *out*))))))
