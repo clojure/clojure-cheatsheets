@@ -1478,13 +1478,12 @@ document.write('<style type=\"text/css\">%s<\\/style>')
                 (verify (or (string? cstr) (symbol? cstr) (map? cstr))))))
 
 
-(def symbols-looked-up (ref #{}))
+(def symbols-looked-up (atom #{}))
 
 
 (defn url-for-cmd-doc [opts cmd-str]
   (when (:warn-about-unknown-symbols opts)
-    ;; This is a bit of a hack, but it ought to do the job.
-    (dosync (alter symbols-looked-up conj cmd-str)))
+    (swap! symbols-looked-up conj cmd-str))
   (if-let [url-str (get (:symbol-name-to-url opts) cmd-str)]
     url-str
     (do
