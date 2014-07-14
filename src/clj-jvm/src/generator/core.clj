@@ -1343,11 +1343,16 @@
       $(\".tooltip\").tipTip();
   });
 
+  escape_re=function(s) {
+    return s.replace(/[-\\/\\\\^$*+?.()|[\\]{}]/g, '\\\\$&');
+  };
   $(function(){
     var $links = $('a');
     $('#search').keyup(function() {
        var val = $(this).val(),
-       regstr = '^.*' + $.trim(val).split(/\\s+/).join('.*') + '.*$',
+       strs = $.trim(val).split(/\\s+/);
+       strs = $.map(strs,escape_re);
+       regstr = '^.*' + strs.join('.*') + '.*$',
        reg = RegExp(regstr, 'i');
        console.log(val, reg);
 
