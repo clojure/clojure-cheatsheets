@@ -1378,8 +1378,13 @@
         $('table').prev('h3').show();
         $('.section').show();
         $('a').removeClass('highlight');
-        $('#search').addClass('highlight');
+        if ($.trim(val) == '') {
+         $('#search').removeClass('highlight');
+       }
+       else {
+         $('#search').addClass('highlight');
        };
+      };
      });
   })
   </script>
