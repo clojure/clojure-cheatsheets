@@ -952,11 +952,11 @@
 
 (defn grimoire-url-fixup [s]
   (-> s
-      (replace "?" "_QMARK_")
-      (replace "." "_DOT_")
-      (replace "/" "_SLASH_")
-      (replace #"^_*" "")
-      (replace #"_*$" "")))
+      (str/replace "?" "_QMARK_")
+      (str/replace "." "_DOT_")
+      (str/replace "/" "_SLASH_")
+      (str/replace #"^_*" "")
+      (str/replace #"_*$" "")))
 
 (defn sym-to-pair [prefix sym link-dest base-url]
   [(str prefix sym)
