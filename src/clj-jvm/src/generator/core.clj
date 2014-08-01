@@ -151,7 +151,7 @@
                                           "4.2M"
                                           ]]
                       ["Arithmetic" :cmds '[+ - * / quot rem mod inc dec
-                                            max min]]
+                                            max min +' -' *' inc' dec']]
                       ["Compare" :cmds '[= == not= < > <= >= compare]]
                       ["Bitwise" :cmds '[[:common-prefix bit- and or xor not
                                           flip set shift-right shift-left
