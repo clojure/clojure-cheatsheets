@@ -952,20 +952,11 @@
 
 (defn grimoire-url-fixup [s]
   (-> s
-      (str/replace "*" "_STAR_")
-      (str/replace "?" "_QMARK_")
-      (str/replace "." "_DOT_")
-      (str/replace "<" "_LT_")
-      (str/replace ">" "_GT_")
-      (str/replace "-" "_DASH_")
-      (str/replace "/" "_SLASH_")
-      (str/replace "!" "_BANG_")
-      (str/replace "=" "_EQ_")
-      (str/replace "+" "_PLUS_")
-      (str/replace "'" "_SQUOTE_")
-      (str/replace #"^_*" "")
-      (str/replace #"_*$" "")))
-
+      (replace "?" "_QMARK_")
+      (replace "." "_DOT_")
+      (replace "/" "_SLASH_")
+      (replace #"^_*" "")
+      (replace #"_*$" "")))
 
 (defn sym-to-pair [prefix sym link-dest base-url]
   [(str prefix sym)
