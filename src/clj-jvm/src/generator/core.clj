@@ -1144,7 +1144,7 @@
            "reduce-kv"
            "ex-info"
            "ex-data"
-           
+
            ;; New in Clojure 1.5
            "*default-data-reader-fn*"
            "as->"
@@ -1155,7 +1155,7 @@
            "send-via"
            "set-agent-send-executor!"
            "set-agent-send-off-executor!"
-           
+
            ;; New in Clojure 1.6
            "unsigned-bit-shift-right"
            "record?"
@@ -1339,6 +1339,17 @@
   };
   $(function(){
     var $links = $('a');
+    $(window).on('keyup', function(e) {
+      if (e.keyCode == 27) {
+        $('#search').focus();
+      }
+    });
+    $('#search').keydown(function(e) {
+      var val = $(this).val();
+      if (!val && e.key && (e.key == \"'\" || e.key == \"/\")) {
+        this.blur();
+      }
+    });
     $('#search').keyup(function() {
        var val = $(this).val(),
        strs = $.trim(val).split(/\\s+/);
