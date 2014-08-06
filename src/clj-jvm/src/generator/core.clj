@@ -956,7 +956,8 @@
       (str/replace "." "_DOT_")
       (str/replace "/" "_SLASH_")
       (str/replace #"^_*" "")
-      (str/replace #"_*$" "")))
+      (str/replace #"_*$" "")
+      (str "/")))
 
 (defn sym-to-pair [prefix sym link-dest base-url]
   [(str prefix sym)
