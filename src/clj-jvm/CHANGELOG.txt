@@ -1,4 +1,30 @@
 ----------------------------------------------------------------------
+Aug 29, 2014 - Clojure 1.3 - 1.6, sheet v16
+
+Reorganized some operations on sets, maps, and relations.
+
+Moved Rel algebra operations out of Set and into its own section
+Relations, after Maps.
+
+Added Sets/Set Ops section in place of Sets/Rel algebra.  It includes
+only those operations that are for sets, but not specifically for
+relations (e.g. union, intersection).  Added see also to Relations
+section.
+
+Removed section Sets/Get map and moved the operations that were there
+to more appropriate places:
+
+    clojure.set/map-invert - Now in Maps/'Change'
+    clojure.set/rename-keys - Now in Maps/'Change'
+    clojure.set/index - Now in Maps/Create and Relations/Rel algebra
+    clojure.set/rename - Now in Relations/Rel algebra
+
+Added link to Medley library in Maps/'Change' section.  I know that
+Medley is not limited to functions in that category, but it definitely
+contains several useful functions in that category, e.g. map-keys,
+map-vals, filter-keys, filter-vals.
+
+----------------------------------------------------------------------
 Jul 13, 2014 - Clojure 1.3 - 1.6, sheet v15
 
 Expanded out the abbreviated common prefixes/suffixes.  This makes it

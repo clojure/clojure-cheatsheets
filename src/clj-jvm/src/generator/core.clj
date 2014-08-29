@@ -117,8 +117,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v15)"
-              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v15)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v16)"
+              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v16)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -291,43 +291,67 @@
                                          contains?]]
                       [{:html "'Change'", :latex "`Change'"}
                        :cmds '[conj disj]]
-                      ["Rel algebra"
-                       :cmds '[
-                               {:latex "\\textmd{\\textsf{(clojure.set/)}}",
-                                :html "(clojure.set/)"}
-                               clojure.set/join clojure.set/select
-                               clojure.set/project clojure.set/union
-                               clojure.set/difference clojure.set/intersection]]
-                      ["Get map"
+                      ["Set ops"
                        :cmds '[{:latex "\\textmd{\\textsf{(clojure.set/)}}",
                                 :html "(clojure.set/)"}
-                               clojure.set/index clojure.set/rename-keys
-                               clojure.set/rename clojure.set/map-invert]]
+                               clojure.set/union clojure.set/difference
+                               clojure.set/intersection clojure.set/select
+                               {:latex "\\textmd{\\textsf{See also Relations}}",
+                                :html "See also Relations"}
+                               ]]
                       ["Test"
                        :cmds '[{:latex "\\textmd{\\textsf{(clojure.set/)}}",
                                 :html "(clojure.set/)"}
                                clojure.set/subset? clojure.set/superset?]]
                       ]
               :subsection "Maps"
-              :table [["Create" :cmds '[{:latex "\\{\\}", :html "{}"}
-                                        hash-map array-map zipmap
-                                        sorted-map sorted-map-by bean
-                                        frequencies group-by]]
-                      ["Examine" :cmds '[
-                                         {:latex "\\cmd{(:key my-map)} $\\to$ \\cmd{(}",
-                                          :html "<code>(:key my-map)</code> &rarr; <code>("}
-                                         get
-                                         {:latex " \\cmd{my-map :key)}",
-                                          :html " my-map :key)</code>"}
-                                         get-in contains? find keys vals]]
+              :table [["Create"
+                       :cmds '[{:latex "\\{\\}", :html "{}"}
+                               hash-map array-map zipmap
+                               sorted-map sorted-map-by bean
+                               frequencies group-by
+                               {:latex "\\textmd{\\textsf{(clojure.set/)}}",
+                                :html "(clojure.set/)"}
+                               clojure.set/index
+                               ]]
+                      ["Examine"
+                       :cmds '[
+                               {:latex "\\cmd{(:key my-map)} $\\to$ \\cmd{(}",
+                                :html "<code>(:key my-map)</code> &rarr; <code>("}
+                               get
+                               {:latex " \\cmd{my-map :key)}",
+                                :html " my-map :key)</code>"}
+                               get-in contains? find keys vals
+                               ]]
                       [{:html "'Change'", :latex "`Change'"}
                        :cmds '[assoc assoc-in dissoc merge
-                               merge-with select-keys update-in]]
+                               merge-with select-keys update-in
+                               {:latex "\\textmd{\\textsf{(clojure.set/)}}",
+                                :html "(clojure.set/)"}
+                               clojure.set/rename-keys
+                               clojure.set/map-invert
+                               {:latex "\\textmd{\\textsf{GitHub:}}",
+                                :html "GitHub:"}
+                               {:latex "\\href{http://github.com/weavejester/medley}{Medley}"
+                                :html "<a href=\"http://github.com/weavejester/medley\">Medley</a>"}
+                               ]]
                       ["Entry" :cmds '[key val]]
                       ["Sorted maps" :cmds '[rseq subseq rsubseq]]]
               ]
              :column
              [:box "yellow"
+              :subsection "Relations (set of maps, each with same keys, aka rels)"
+              :table [["Rel algebra"
+                       :cmds '[
+                               {:latex "\\textmd{\\textsf{(clojure.set/)}}",
+                                :html "(clojure.set/)"}
+                               clojure.set/join clojure.set/select
+                               clojure.set/project clojure.set/union
+                               clojure.set/difference clojure.set/intersection
+
+                               clojure.set/index
+                               clojure.set/rename
+                               ]]]
               :subsection {:latex "Transients (\\href{http://clojure.org/transients}{clojure.org/transients})"
                            :html "Transients (<a href=\"http://clojure.org/transients\">clojure.org/transients</a>)"}
               :table [["Create" :cmds '[transient persistent!]]
@@ -1209,8 +1233,8 @@
 
 (def latex-header-except-documentclass
      "
-% Author: Steve Tayon
-% Comments, errors, suggestions: steve.tayon(at)googlemail.com
+% Authors: Steve Tayon, Andy Fingerhut
+% Comments, errors, suggestions: andy.fingerhut(at)gmail.com
 
 % Most of the content is based on the clojure wiki, api and source code by Rich Hickey on http://clojure.org/.
 
@@ -1296,13 +1320,13 @@
 
 
 (def latex-a4-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.6pt]{scrreprt}\n"
+     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.5pt]{scrreprt}\n"
           latex-header-except-documentclass))
 
 ;; US letter is a little shorter, so formatting gets completely messed
 ;; up unless we use a slightly smaller font size.
 (def latex-usletter-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.4pt,letterpaper]{scrreprt}\n"
+     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.2pt,letterpaper]{scrreprt}\n"
           latex-header-except-documentclass))
 
 
