@@ -1136,8 +1136,8 @@
                   :links-to-clojuredocs
                   "http://clojuredocs.org/clojure_core/clojure.core/set!"
                   :links-to-grimoire
-                  ;(str grimoire-base-url "clojure.core/setBANG")
-                  "http://clojure.org/java_interop#Java%20Interop-The%20Dot%20special%20form-%28set!%20%28.%20Classname-symbol%20staticFieldName-symbol%29%20expr%29"
+                  (str grimoire-base-url "clojure.core/set!")
+                  ;"http://clojure.org/java_interop#Java%20Interop-The%20Dot%20special%20form-%28set!%20%28.%20Classname-symbol%20staticFieldName-symbol%29%20expr%29"
                   )]
     ["catch" (case link-target-site
                    :links-to-clojure
