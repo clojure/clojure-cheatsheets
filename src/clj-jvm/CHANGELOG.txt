@@ -1,4 +1,23 @@
 ----------------------------------------------------------------------
+Sep 14, 2014 - Clojure 1.3 - 1.6, sheet v17
+
+Added some functions previously not in cheatsheet:
+
+    extends? - Now in Protocols/Test
+    extend extend-protocol extenders - New section Protocols/Other
+    class? bases supers type - Now in Java Interoperation/General
+
+Also some Java String methods:
+
+    .startsWith .endsWith .contains - Now in Strings/Test
+
+Add link to Java API for BigInteger in Numbers/Bitwise section, since
+Clojure bitwise functions only work on Longs and smaller.
+
+Update Java API links to Java 7.  Java API links were to Java 6 docs
+in earlier cheatsheet versions.
+
+----------------------------------------------------------------------
 Aug 29, 2014 - Clojure 1.3 - 1.6, sheet v16
 
 Reorganized some operations on sets, maps, and relations.

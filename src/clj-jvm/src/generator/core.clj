@@ -117,8 +117,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v16)"
-              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v16)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v17)"
+              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v17)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -131,8 +131,8 @@
              [:box "blue"
               :section "Primitives"
               :subsection "Numbers"
-              :table [["Literals" :cmds '[{:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/lang/Long.html}{Long}:"
-                                           :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/lang/Long.html\">Long</a>:"}
+              :table [["Literals" :cmds '[{:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/lang/Long.html}{Long}:"
+                                           :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/lang/Long.html\">Long</a>:"}
                                           "7,"
                                           "hex" "0xff,"
                                           "oct" "017,"
@@ -142,12 +142,12 @@
                                           "7N"
                                           "Ratio:"
                                           "-22/7"
-                                          {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/lang/Double.html}{Double}:"
-                                           :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/lang/Double.html\">Double</a>:"}
+                                          {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/lang/Double.html}{Double}:"
+                                           :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/lang/Double.html\">Double</a>:"}
                                           "2.78"
                                           "-1.2e-5"
-                                          {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/math/BigDecimal.html}{BigDecimal}:"
-                                           :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/math/BigDecimal.html\">BigDecimal</a>:"}
+                                          {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/math/BigDecimal.html}{BigDecimal}:"
+                                           :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/math/BigDecimal.html\">BigDecimal</a>:"}
                                           "4.2M"
                                           ]]
                       ["Arithmetic" :cmds '[+ - * / quot rem mod inc dec
@@ -156,7 +156,12 @@
                       ["Bitwise" :cmds '[[:common-prefix bit- and or xor not
                                           flip set shift-right shift-left
                                           and-not clear test]
-                                         "(1.6)" unsigned-bit-shift-right]]
+                                         "(1.6)" unsigned-bit-shift-right
+                                         "(see"
+                                          {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/math/BigInteger.html}{BigInteger}"
+                                           :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/math/BigInteger.html\">BigInteger</a>"}
+                                          " for integers larger than Long)"
+                                         ]]
                       ["Cast" :cmds '[byte short int long float double
                                       bigdec bigint num rationalize biginteger]]
                       ["Test" :cmds-with-frenchspacing '[zero? pos? neg?
@@ -188,12 +193,12 @@
                                      clojure.string/replace-first
                                      clojure.string/reverse
                                      "(1.5)" clojure.string/re-quote-replacement
-                                     {:latex "(\\href{http://docs.oracle.com/javase/6/docs/api/java/lang/String.html}{String})"
-                                      :html "(<a href=\"http://docs.oracle.com/javase/6/docs/api/java/lang/String.html\">java.lang.String</a>)"}
-                                     {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/lang/String.html\\#indexOf\\%28java.lang.String\\%29}{.indexOf}"
-                                      :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/lang/String.html#indexOf%28java.lang.String%29\">.indexOf</a>"}
-                                     {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/lang/String.html\\#lastIndexOf\\%28java.lang.String\\%29}{.lastIndexOf}"
-                                      :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/lang/String.html#lastIndexOf%28java.lang.String%29\">.lastIndexOf</a>"}
+                                     {:latex "(\\href{http://docs.oracle.com/javase/7/docs/api/java/lang/String.html}{String})"
+                                      :html "(<a href=\"http://docs.oracle.com/javase/7/docs/api/java/lang/String.html\">java.lang.String</a>)"}
+                                     {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/lang/String.html\\#indexOf\\%28java.lang.String\\%29}{.indexOf}"
+                                      :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/lang/String.html#indexOf%28java.lang.String%29\">.indexOf</a>"}
+                                     {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/lang/String.html\\#lastIndexOf\\%28java.lang.String\\%29}{.lastIndexOf}"
+                                      :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/lang/String.html#lastIndexOf%28java.lang.String%29\">.lastIndexOf</a>"}
                                      ]]
                       [
 ;;                       "Regex"
@@ -202,8 +207,8 @@
                                :cmds '[
 ;;                                       {:latex "\\#\"pattern\"",
 ;;                                        :html "#\"<var>pattern</var>\""}
-                                       {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html}{\\#\"pattern\"}",
-                                        :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html\">#\"<var>pattern</var>\"</a>"}
+                                       {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html}{\\#\"pattern\"}",
+                                        :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html\">#\"<var>pattern</var>\"</a>"}
                                        re-find re-seq re-matches
                                        re-pattern re-matcher re-groups
                                        {:latex "\\textmd{\\textsf{(clojure.string/)}}",
@@ -224,7 +229,17 @@
                       ["Test" :cmds '[char char? string?
                                       {:latex "\\textmd{\\textsf{(clojure.string/)}}",
                                        :html "(clojure.string/)"}
-                                      clojure.string/blank?]]
+                                      clojure.string/blank?
+
+                                      {:latex "(\\href{http://docs.oracle.com/javase/7/docs/api/java/lang/String.html}{String})"
+                                       :html "(<a href=\"http://docs.oracle.com/javase/7/docs/api/java/lang/String.html\">java.lang.String</a>)"}
+                                      {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/lang/String.html\\#startsWith\\%28java.lang.String\\%29}{.startsWith}"
+                                       :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/lang/String.html#startsWith%28java.lang.String%29\">.startsWith</a>"}
+                                      {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/lang/String.html\\#endsWith\\%28java.lang.String\\%29}{.endsWith}"
+                                       :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/lang/String.html#endsWith%28java.lang.String%29\">.endsWith</a>"}
+                                      {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/lang/String.html\\#contains\\%28java.lang.CharSequence\\%29}{.contains}"
+                                       :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/lang/String.html#contains%28java.lang.CharSequence%29\">.contains</a>"}
+                                      ]]
                       ]
               :subsection "Other"
               :table [["Characters" :cmds '[char char-name-string
@@ -256,10 +271,10 @@
               :subsection "Lists"
               :table [["Create" :cmds '["'()" list list*]]
                       ["Examine" :cmds-with-frenchspacing '[first nth peek
-                                                            {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/util/Vector.html\\#indexOf\\%28java.lang.Object\\%29}{.indexOf}"
-                                                             :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/util/Vector.html#indexOf%28java.lang.Object%29\">.indexOf</a>"}
-                                                            {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/util/Vector.html\\#lastIndexOf\\%28java.lang.Object\\%29}{.lastIndexOf}"
-                                                             :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/util/Vector.html#lastIndexOf%28java.lang.Object%29\">.lastIndexOf</a>"}
+                                                            {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/util/Vector.html\\#indexOf\\%28java.lang.Object\\%29}{.indexOf}"
+                                                             :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/util/Vector.html#indexOf%28java.lang.Object%29\">.indexOf</a>"}
+                                                            {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/util/Vector.html\\#lastIndexOf\\%28java.lang.Object\\%29}{.lastIndexOf}"
+                                                             :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/util/Vector.html#lastIndexOf%28java.lang.Object%29\">.lastIndexOf</a>"}
                                                             ]]
                       [{:html "'Change'", :latex "`Change'"}
                        :cmds '[cons conj rest pop]]
@@ -272,10 +287,10 @@
                                          {:latex " \\cmd{my-vec idx)}",
                                           :html " my-vec idx)</code>"}
                                          get peek
-                                         {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/util/Vector.html\\#indexOf\\%28java.lang.Object\\%29}{.indexOf}"
-                                          :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/util/Vector.html#indexOf%28java.lang.Object%29\">.indexOf</a>"}
-                                         {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/util/Vector.html\\#lastIndexOf\\%28java.lang.Object\\%29}{.lastIndexOf}"
-                                          :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/util/Vector.html#lastIndexOf%28java.lang.Object%29\">.lastIndexOf</a>"}
+                                         {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/util/Vector.html\\#indexOf\\%28java.lang.Object\\%29}{.indexOf}"
+                                          :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/util/Vector.html#indexOf%28java.lang.Object%29\">.indexOf</a>"}
+                                         {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/util/Vector.html\\#lastIndexOf\\%28java.lang.Object\\%29}{.lastIndexOf}"
+                                          :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/util/Vector.html#lastIndexOf%28java.lang.Object%29\">.lastIndexOf</a>"}
                                          ]]
                       [{:html "'Change'", :latex "`Change'"}
                        :cmds '[assoc pop subvec replace conj rseq]]
@@ -463,8 +478,8 @@
                                              {:latex "\\textmd{\\textsf{also:}}",
                                               :html "also:"}
                                              "(binding [*in* reader] ...)"
-                                             {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/io/Reader.html}{java.io.Reader}"
-                                              :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/io/Reader.html\">java.io.Reader</a>"}
+                                             {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/io/Reader.html}{java.io.Reader}"
+                                              :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/io/Reader.html\">java.io.Reader</a>"}
                                              ]]
                       ["from string" :cmds '[
                                              with-in-str
@@ -488,11 +503,11 @@
                       ["Binary" :cmds '["(.write ostream byte-arr)"
                                         "(.read istream byte-arr)"
 ;                                        "(javadoc java.io.OutputStream)"
-                                        {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/io/OutputStream.html}{java.io.OutputStream}"
-                                         :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/io/OutputStream.html\">java.io.OutputStream</a>"}
+                                        {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/io/OutputStream.html}{java.io.OutputStream}"
+                                         :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/io/OutputStream.html\">java.io.OutputStream</a>"}
 ;                                        "java.io.InputStream"
-                                        {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html}{java.io.InputStream}"
-                                         :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html\">java.io.InputStream</a>"}
+                                        {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/io/InputStream.html}{java.io.InputStream}"
+                                         :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/io/InputStream.html\">java.io.InputStream</a>"}
                                         {:latex "\\textmd{\\textsf{GitHub:}}",
                                          :html "GitHub:"}
                                         {:latex "\\href{http://github.com/ztellman/gloss}{gloss}"
@@ -568,7 +583,8 @@
                                        {:latex "\\cmd{Slicey (slice [at] ...))}"
                                         :html "<code>Slicey (slice [at] ...))</code>"}
                                        ]]
-                      ["Test" :cmds '[satisfies?]]
+                      ["Test" :cmds '[satisfies? extends?]]
+                      ["Other" :cmds '[extend extend-protocol extenders]]
                       ]
               :subsection {:latex "Records (\\href{http://clojure.org/datatypes}{clojure.org/datatypes})"
                            :html "Records (<a href=\"http://clojure.org/datatypes\">clojure.org/datatypes</a>)"}
@@ -882,7 +898,8 @@
                         :html "Java Interoperation (<a href=\"http://clojure.org/java_interop\">clojure.org/java_interop</a>)"}
               :table [["General" :cmds '[.. doto "Classname/" "Classname."
                                          new bean comparator enumeration-seq
-                                         import iterator-seq memfn set! class]]
+                                         import iterator-seq memfn set! class
+                                         class? bases supers type]]
                       ["Cast" :cmds '[boolean byte short char int long
                                       float double bigdec bigint num cast
                                       biginteger]]
