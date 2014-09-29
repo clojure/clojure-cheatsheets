@@ -1168,57 +1168,6 @@
          :links-to-grimoire
          [])
 
-   ;; Manually specify links to clojure.org API documentation for
-   ;; symbols that are new in Clojure 1.4 through 1.6 if the
-   ;; link-target-site is ClojureDocs, because ClojureDocs.org doesn't
-   ;; have those symbols yet.
-   (if (= link-target-site :links-to-clojuredocs)
-     (map (fn [sym-str]
-            [sym-str
-             (str "http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/"
-                  sym-str)])
-          [
-           ;; New in Clojure 1.4
-           "*data-readers*"
-           "default-data-readers"
-           "mapv"
-           "filterv"
-           "reduce-kv"
-           "ex-info"
-           "ex-data"
-
-           ;; New in Clojure 1.5
-           "*default-data-reader-fn*"
-           "as->"
-           "cond->"
-           "cond->>"
-           "some->"
-           "some->>"
-           "send-via"
-           "set-agent-send-executor!"
-           "set-agent-send-off-executor!"
-
-           ;; New in Clojure 1.6
-           "unsigned-bit-shift-right"
-           "record?"
-           "some?"
-           "if-some"
-           "when-some"
-           "hash-ordered-coll"
-           "hash-unordered-coll"
-           "mix-collection-hash"
-           ]))
-
-   (if (= link-target-site :links-to-clojuredocs)
-     (map (fn [sym-str]
-            [sym-str
-             (str "http://clojure.github.com/clojure/clojure.string-api.html#"
-                  sym-str)])
-          [
-           ;; New in Clojure 1.5
-           "clojure.string/re-quote-replacement"
-           ]))
-
    ;; These symbols do not have API docs anywhere that I can find,
    ;; yet.  Point at the github page for tools.reader for now.
    (map (fn [sym-str]
