@@ -1379,6 +1379,7 @@
        };
       };
      });
+     $('#search').keyup();
   })
   </script>
 </head>
