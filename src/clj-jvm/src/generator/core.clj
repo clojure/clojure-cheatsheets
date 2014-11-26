@@ -117,8 +117,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v17)"
-              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v17)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v18)"
+              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v18)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -174,7 +174,8 @@
                       ;; TBD: Why do these not exist in Clojure?
                       ;; There are -int versions, but not long
                       ;; versions.  unchecked-divide
-                      ;; unchecked-remainder
+                      ;; unchecked-remainder.  Filed ticket CLJ-1545
+                      ;; to add them.
                       ["Unchecked" :cmds '[*unchecked-math*
                                            [:common-prefix
                                             unchecked-
@@ -674,15 +675,15 @@
                       ["Doc." :cmds '[assert comment clojure.repl/doc]]]
               ]
              [:box "yellow"
-              :section "Reader Macros"
-              ;; TBD: Should probably think of a good place for all of
-              ;; the reader macro descriptions to link to.  A few
-              ;; suggestions are given in comments below.
+              :section {:latex "Reader Macros (\\href{http://clojure.org/reader\\#The\\%20Reader--Macro\\%20characters}{clojure.org/reader})"
+                        :html "Reader Macros (<a href=\"http://clojure.org/reader#The%20Reader--Macro%20characters\">clojure.org/reader</a>)"}
               :table [[{:latex "\\cmd{'}",
                         :html "<code>'</code>"}
-                       ;; TBD: This should point to same URL that 'quote' does
-                       :str {:latex "Quote 'form $\\to$ (quote form)",
-                             :html "Quote: <code>'<var>form</var></code> &rarr; <code>(quote <var>form</var>)</code>"}]
+                       :cmds '[{:latex "\\href{http://clojure.org/special\\_forms\\#quote}{quote}: 'form $\\to$ (",
+                                :html "<a href=\"http://clojure.org/special_forms#quote\">quote</a>: <code>'<var>form</var></code> &rarr; <code>(</code>"}
+                               quote
+                               {:latex "form)",
+                                :html "<code><var>form</var>)</code>"}]]
                       [{:latex "\\cmd{\\textbackslash}",
                         :html "<code>\\</code>"}
                        :str "Character literal"]
@@ -694,39 +695,48 @@
                        :str "Metadata (see Metadata section)"]
                       [{:latex "\\cmd{@}",
                         :html "<code>@</code>"}
-                       ;; TBD: This should point to same URL that 'deref' does
-                       :str {:latex "Deref @form $\\to$ (deref form)",
-                             :html "Deref: <code>@<var>form</var></code> &rarr; <code>(deref <var>form</var>)</code>"}]
+                       :cmds '[{:latex "Deref: @form $\\to$ (",
+                                :html "Deref: <code>@<var>form</var></code> &rarr; <code>(</code>"}
+                               deref
+                               {:latex "form)",
+                                :html "<code><var>form</var>)</code>"}]]
                       [{:latex "\\cmd{`}",
                         :html "<code>`</code>"}
-                       :str "Syntax-quote"]
+                       :cmds '[{:latex "\\href{http://clojure.org/reader\\#syntax-quote}{Syntax-quote}"
+                                :html "<a href=\"http://clojure.org/reader#syntax-quote\">Syntax-quote</a>"}]]
                       [{:latex "\\cmd{\\textasciitilde}",
                         :html "<code>~</code>"}
-                       :str "Unquote"]
+                       :cmds '[{:latex "\\href{http://clojure.org/reader\\#syntax-quote}{Unquote}"
+                                :html "<a href=\"http://clojure.org/reader#syntax-quote\">Unquote</a>"}]]
                       [{:latex "\\cmd{\\textasciitilde@}",
                         :html "<code>~@</code>"}
-                       :str "Unquote-splicing"]
+                       :cmds '[{:latex "\\href{http://clojure.org/reader\\#syntax-quote}{Unquote-splicing}"
+                                :html "<a href=\"http://clojure.org/reader#syntax-quote\">Unquote-splicing</a>"}]]
                       [{:latex "\\cmd{\\#\"}\\textit{p}\\cmd{\"}",
                         :html "<code>#\"<var>p</var>\"</code>"}
-                       :str {:latex "Regex Pattern \\textit{p}",
-                             :html "Regex Pattern <var>p</var>"}]
+                       :str {:latex "Regex Pattern \\textit{p}  (see Strings/Regex section)",
+                             :html "Regex Pattern <var>p</var>  (see Strings/Regex section)"}]
                       [{:latex "\\cmd{\\#$'$}",
                         :html "<code>#'</code>"}
-                       ;; TBD: This should point to same URL that 'var' does
-                       :str {:latex "Var quote \\#$'$x $\\to$ (var x)",
-                             :html "Var quote: <code>#'<var>x</var></code> &rarr; <code>(var <var>x</var>)</code>"}]
+                       :cmds '[{:latex "Var-quote \\#$'$x $\\to$ (",
+                                :html "Var-quote: <code>#'<var>x</var></code> &rarr; <code>(</code>"}
+                               var
+                               {:latex "x)",
+                                :html "<code><var>x</var>)</code>"}]]
                       [{:latex "\\cmd{\\#()}",
                         :html "<code>#()</code>"}
-                       ;; TBD: This should point to same URL that 'fn' does
-                       :str {:latex "\\#(...) $\\to$ (fn [args] (...))",
-                             :html "<code>#(...)</code> &rarr; <code>(fn [args] (...))</code>"}]
+                       :cmds [
+                              {:latex "\\href{http://clojure.org/reader\\#The\\%20Reader--Macro\\%20characters}{Anonymous function literal}:"
+                               :html "<a href=\"http://clojure.org/reader#The%20Reader--Macro%20characters\">Anonymous function literal</a>:"}
+                              {:latex "\\#(...) $\\to$ (fn [args] (...))",
+                               :html "<code>#(...)</code> &rarr; <code>(fn [args] (...))</code>"}]]
                       [{:latex "\\cmd{\\#\\_}",
                         :html "<code>#_</code>"}
                        :str "Ignore next form"]]
               ]
              [:box "red"
-              :section {:latex "Metadata (\\href{http://clojure.org/special\\_forms}{clojure.org/special\\_forms})"
-                        :html "Metadata (<a href=\"http://clojure.org/special_forms\">clojure.org/special_forms</a>)"}
+              :section {:latex "Metadata (\\href{http://clojure.org/reader\\#The\\%20Reader--Macro\\%20characters}{clojure.org/reader}, \\href{http://clojure.org/special\\_forms}{special\\_forms})"
+                        :html "Metadata (<a href=\"http://clojure.org/reader#The%20Reader--Macro%20characters\">clojure.org/reader</a>, <a href=\"http://clojure.org/special_forms\">special_forms</a>)"}
               :table [
                       ["General" :cmds [{:latex "\\cmd{\\^{}\\{:key1 val1 :key2 val2 ...\\}}"
                                          :html "<code>^{:key1 val1 :key2 val2 ...}</code>"}

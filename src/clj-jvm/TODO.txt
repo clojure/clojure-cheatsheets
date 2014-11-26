@@ -1,3 +1,33 @@
+Add string literal and character literal examples to strings section,
+preferably with common escape sequences like \n \t and hex and octal,
+with link to a complete list.  Fiddly bit is figuring out how to
+escape these properly when generating LaTeX.
+
+Possibly useful Java doc link for escape sequences inside strings:
+    http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.10.6
+
+start at a diff that doesn't work for LaTeX:
+
+-                                         :html "See also IO/to string"}]]
++                                         :html "See also IO/to string"}
++                                        "Literals:"
++                                        "\"foo\""
++                                        "\"newline \\n tab \\t\""
++                                        "\"quote \\\" backslash \\\\\""
++;;                                        {:latex " \\href{http://en.wikipedia.org/wiki/UTF-16}{UTF-16}:"
++;;                                         :html "<a href=\"http://en.wikipedia.org/wiki/UTF-16\">UTF-16</a>:"}
++;;                                        "\"\\ua028 octal \\177\\""
++                                        
++                                        ]]
+
+
+Other links within Clojure docs that might be linked to directly at
+appropriate places:
+
+    http://clojure.org/reader#The%20Reader--extensible%20data%20notation%20%28edn%29
+    http://clojure.org/reader#The%20Reader--Tagged%20Literals
+
+
 Links to tutorial-style articles for these topics:
     parsing/generating XML
 
