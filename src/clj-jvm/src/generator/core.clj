@@ -117,8 +117,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v18)"
-              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v18)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v19)"
+              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v19)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -298,7 +298,10 @@
                       ["Ops" :cmds '["(1.4)" mapv filterv reduce-kv]]]
               :subsection "Sets"
               :table [["Create" :cmds '[{:latex "\\#\\{\\}", :html "#{}"}
-                                        set hash-set sorted-set sorted-set-by]]
+                                        set hash-set sorted-set sorted-set-by
+                                        {:latex "\\textmd{\\textsf{(flatland.ordered.set/)}}",
+                                         :html "(flatland.ordered.set/)"}
+                                        flatland.ordered.set/ordered-set]]
                       ["Examine" :cmds '[{:latex "\\cmd{(my-set item)} $\\to$ \\cmd{(}",
                                           :html "<code>(my-set item)</code> &rarr; <code>("}
                                          get
@@ -329,6 +332,15 @@
                                {:latex "\\textmd{\\textsf{(clojure.set/)}}",
                                 :html "(clojure.set/)"}
                                clojure.set/index
+                               {:latex "\\textmd{\\textsf{(flatland.ordered.map/)}}",
+                                :html "(flatland.ordered.map/)"}
+                               flatland.ordered.map/ordered-map
+                               {:latex "\\textmd{\\textsf{(clojure.data.priority-map/)}}",
+                                :html "(clojure.data.priority-map/)"}
+                               clojure.data.priority-map/priority-map
+                               {:latex "\\textmd{\\textsf{(flatland.useful.map/)}}",
+                                :html "(flatland.useful.map/)"}
+                               flatland.useful.map/ordering-map
                                ]]
                       ["Examine"
                        :cmds '[
@@ -1184,6 +1196,17 @@
           [sym-str "http://github.com/clojure/tools.reader" ])
         [ "clojure.tools.reader.edn/read"
           "clojure.tools.reader.edn/read-string" ])
+
+   [[ "clojure.data.priority-map/priority-map"
+      "https://github.com/clojure/data.priority-map" ]]
+
+   (map (fn [sym-str]
+          [sym-str "https://github.com/amalloy/ordered" ])
+        [ "flatland.ordered.set/ordered-set"
+          "flatland.ordered.map/ordered-map" ])
+
+   [[ "flatland.useful.map/ordering-map"
+      "https://github.com/amalloy/useful/blob/master/src/flatland/useful/map.clj#L243-L245" ]]
    ))
 
 
@@ -1296,7 +1319,7 @@
 
 
 (def latex-a4-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.5pt]{scrreprt}\n"
+     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.4pt]{scrreprt}\n"
           latex-header-except-documentclass))
 
 ;; US letter is a little shorter, so formatting gets completely messed
@@ -1547,6 +1570,10 @@ document.write('<style type=\"text/css\">%s<\\/style>')
    "clojure.tools.reader.edn/"
    "clojure.walk/"
    "clojure.zip/"
+   "clojure.data.priority-map/"
+   "flatland.ordered.set/"
+   "flatland.ordered.map/"
+   "flatland.useful.map/"
    ])
 
 (defn remove-common-ns-prefix [s]

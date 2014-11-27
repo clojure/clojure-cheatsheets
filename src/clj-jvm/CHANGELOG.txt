@@ -1,4 +1,14 @@
 ----------------------------------------------------------------------
+Nov 26, 2014 - Clojure 1.3 - 1.6, sheet v19
+
+Added a few other kinds of sorted sets and sorted maps:
+
+    flatland.ordered.set/ordered-set
+    flatland.ordered.map/ordered-map
+    clojure.data.priority-map/priority-map
+    flatland.useful.map/ordering-map
+
+----------------------------------------------------------------------
 Nov 25, 2014 - Clojure 1.3 - 1.6, sheet v18
 
 Added many links to "Reader Macros" section, including to specific
