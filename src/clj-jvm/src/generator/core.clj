@@ -1027,8 +1027,7 @@
 
 
 (def grimoire-base-url
-  (str "http://grimoire.arrdem.com/store/org.clojure/clojure/"
-       (:major *clojure-version*) "." (:minor *clojure-version*) ".0/"))
+  (str "http://conj.io/store/org.clojure/clojure/latest/"))
 
 (defn symbol-url-pairs-for-whole-namespaces [link-target-site]
   (apply concat
