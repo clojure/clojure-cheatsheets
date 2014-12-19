@@ -5,7 +5,8 @@
   (:require [clojure.java.io :as io])
   (:require [clojure.tools.reader.edn])
   (:require [clojure data pprint repl set string xml zip])
-  (:require [clojure.core.reducers]))
+  (:require [clojure.core.reducers])
+  (:require [grimoire.util :as g.u]))
 
 ;; Andy Fingerhut
 ;; andy_fingerhut@alum.wustl.edu
@@ -996,13 +997,7 @@
     s))
 
 (defn grimoire-url-fixup [s]
-  (-> s
-      (str/replace "?" "_QMARK_")
-      (str/replace "." "_DOT_")
-      (str/replace "/" "_SLASH_")
-      (str/replace #"^_*" "")
-      (str/replace #"_*$" "")
-      (str "/")))
+  (-> s g.u/munge (str "/")))
 
 (defn sym-to-pair [prefix sym link-dest base-url]
   [(str prefix sym)

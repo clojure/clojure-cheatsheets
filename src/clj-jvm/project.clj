@@ -6,5 +6,6 @@
   :dependencies [;;[org.clojure/clojure "1.5.1"]
                  [org.clojure/clojure "1.6.0"]
                  [org.codehaus.jsr166-mirror/jsr166y "1.7.0"]
-                 [org.clojure/tools.reader "0.7.10"]]
+                 [org.clojure/tools.reader "0.7.10"]
+                 [org.clojure-grimoire/lib-grimoire "0.6.0"]]
   :main generator.core)
