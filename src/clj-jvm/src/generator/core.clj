@@ -5,7 +5,8 @@
   (:require [clojure.java.io :as io])
   (:require [clojure.tools.reader.edn])
   (:require [clojure data pprint repl set string xml zip])
-  (:require [clojure.core.reducers]))
+  (:require [clojure.core.reducers])
+  (:require [grimoire.util :as g.u]))
 
 ;; Andy Fingerhut
 ;; andy_fingerhut@alum.wustl.edu
@@ -1018,13 +1019,7 @@
     s))
 
 (defn grimoire-url-fixup [s]
-  (-> s
-      (str/replace "?" "_QMARK_")
-      (str/replace "." "_DOT_")
-      (str/replace "/" "_SLASH_")
-      (str/replace #"^_*" "")
-      (str/replace #"_*$" "")
-      (str "/")))
+  (-> s g.u/munge (str "/")))
 
 (defn sym-to-pair [prefix sym link-dest base-url]
   [(str prefix sym)
@@ -1049,8 +1044,7 @@
 
 
 (def grimoire-base-url
-  (str "http://grimoire.arrdem.com/"
-       (:major *clojure-version*) "." (:minor *clojure-version*) ".0/"))
+  (str "http://conj.io/store/org.clojure/clojure/latest/"))
 
 (defn symbol-url-pairs-for-whole-namespaces [link-target-site]
   (apply concat
@@ -1158,8 +1152,8 @@
                   :links-to-clojuredocs
                   "http://clojuredocs.org/clojure_core/clojure.core/set!"
                   :links-to-grimoire
-                  ;(str grimoire-base-url "clojure.core/setBANG")
-                  "http://clojure.org/java_interop#Java%20Interop-The%20Dot%20special%20form-%28set!%20%28.%20Classname-symbol%20staticFieldName-symbol%29%20expr%29"
+                  (str grimoire-base-url "clojure.core/set!")
+                  ;"http://clojure.org/java_interop#Java%20Interop-The%20Dot%20special%20form-%28set!%20%28.%20Classname-symbol%20staticFieldName-symbol%29%20expr%29"
                   )]
     ["catch" (case link-target-site
                    :links-to-clojure
@@ -1412,6 +1406,7 @@
        };
       };
      });
+     $('#search').keyup();
   })
   </script>
 </head>
