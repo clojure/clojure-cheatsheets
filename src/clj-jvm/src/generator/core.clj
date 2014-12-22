@@ -1578,14 +1578,13 @@ document.write('<style type=\"text/css\">%s<\\/style>')
   characters (\") with &quot;"
   [s]
   (let [max-line-width 80
-        lines (-> s (str/split-lines) (rest))
-        lines (mapcat #(wrap-line % max-line-width) lines)
-        max-to-keep 25
-        combined-lines
-        (if (> (count lines) max-to-keep)
-          (str (str/trim-newline (str/join "\n" (take max-to-keep lines)))
-               "\n\n[ documentation truncated.  Click link for the rest. ]")
-          (str/trim-newline (str/join "\n" lines)))]
+        lines          (-> s (str/split-lines) (rest))
+        lines          (mapcat #(wrap-line % max-line-width) lines)
+        max-to-keep    25
+        combined-lines (if (> (count lines) max-to-keep)
+                         (str (str/trim-newline (str/join "\n" (take max-to-keep lines)))
+                              "\n\n[ documentation truncated.  Click link for the rest. ]")
+                         (str/trim-newline (str/join "\n" lines)))]
     (str/escape combined-lines {\" "&quot;"})))
 
 
