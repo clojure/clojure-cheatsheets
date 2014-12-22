@@ -1141,10 +1141,7 @@
                  :links-to-clojuredocs
                  "http://clojuredocs.org/clojure_core/clojure.core/new"
                  :links-to-grimoire
-                 ;; Grimoire doesn't have anything for some of these
-                 ;; symbols yet.
-                 ;(str grimoire-base-url "clojure.core/new")
-                 "http://clojure.org/java_interop#new"
+                 (str grimoire-base-url "clojure.core/new")
                  )]
     ["set!" (case link-target-site
                   :links-to-clojure
@@ -1153,7 +1150,6 @@
                   "http://clojuredocs.org/clojure_core/clojure.core/set!"
                   :links-to-grimoire
                   (str grimoire-base-url "clojure.core/set!")
-                  ;"http://clojure.org/java_interop#Java%20Interop-The%20Dot%20special%20form-%28set!%20%28.%20Classname-symbol%20staticFieldName-symbol%29%20expr%29"
                   )]
     ["catch" (case link-target-site
                    :links-to-clojure
@@ -1161,8 +1157,7 @@
                    :links-to-clojuredocs
                    "http://clojuredocs.org/clojure_core/clojure.core/catch"
                    :links-to-grimoire
-                   ;(str grimoire-base-url "clojure.core/catch")
-                   "http://clojure.org/special_forms#try"
+                   (str grimoire-base-url "clojure.core/catch")
                    )]
     ["finally" (case link-target-site
                      :links-to-clojure
@@ -1170,8 +1165,7 @@
                      :links-to-clojuredocs
                      "http://clojuredocs.org/clojure_core/clojure.core/finally"
                      :links-to-grimoire
-                     ;(str grimoire-base-url "clojure.core/finally")
-                     "http://clojure.org/special_forms#try"
+                     (str grimoire-base-url "clojure.core/finally")
                      )]]
    (case link-target-site
          :links-to-clojure
@@ -1941,7 +1935,7 @@ characters (\") with &quot;"
 ;; the symbols to clojuredocs.org URLs where they are documented.
 
 ;; links-to-grimoire: Generate HTML and LaTeX files with links from
-;; the symbols to grimoire.arrdem.com URLs where they are documented.
+;; the symbols to conj.io URLs where they are documented.
 
 ;; nolinks: Do not include any links in the output files.  Except for
 ;; that and the likely difference in appearance in HTML of anchor text
