@@ -157,7 +157,6 @@
           :links-to-clojuredocs (clojuredocs-url-fixup (str sym))
           :links-to-grimoire    (grimoire-url-fixup (str sym))))])
 
-
 (defn sym-to-url-list [link-target-site info]
   (let [{:keys [namespace-str symbol-list clojure-base-url
                 clojuredocs-base-url grimoire-base-url]} info
@@ -1036,10 +1035,8 @@ document.write('<style type=\"text/css\">%s<\\/style>')
 
   (iprintf "%s" (write-footer fmt)))
 
-
 (defn hash-from-pairs [pairs]
   (zipmap (map first pairs) (map second pairs)))
-
 
 (defn simplify-snapshot-time [clojuredocs-snapshot]
   (if-let [snap-time (:snapshot-time clojuredocs-snapshot)]
@@ -1050,7 +1047,6 @@ document.write('<style type=\"text/css\">%s<\\/style>')
                              (str day-month-date " " year)
                              snap-time)})
     clojuredocs-snapshot))
-
 
 ;; Supported command line args:
 
