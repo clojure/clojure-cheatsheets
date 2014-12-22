@@ -119,23 +119,19 @@
 
 (def ^:dynamic *auto-flush* true)
 
-
 (defn printf-to-writer [w fmt-str & args]
   (binding [*out* w]
     (apply clojure.core/printf fmt-str args)
     (when *auto-flush* (flush))))
-
 
 (defn iprintf [fmt-str-or-writer & args]
   (if (instance? CharSequence fmt-str-or-writer)
     (apply printf-to-writer *out* fmt-str-or-writer args)
     (apply printf-to-writer fmt-str-or-writer args)))
 
-
 (defn die [fmt-str & args]
   (apply iprintf *err* fmt-str args)
   (System/exit 1))
-
 
 (defn read-safely [x & opts]
   (with-open [r (java.io.PushbackReader. (apply io/reader x opts))]
@@ -143,7 +139,6 @@
       ;; TBD: Change read to clojure.tools.reader.edn after it is
       ;; updated to work with java.io.PushbackReader instances.
       (read r))))
-
 
 (defn clojuredocs-url-fixup [s]
   (let [s (str/replace s "?" "_q")
@@ -174,7 +169,6 @@
              :links-to-clojuredocs clojuredocs-base-url
              :links-to-grimoire grimoire-base-url))
          symbol-list)))
-
 
 (def grimoire-base-url
   (str "http://conj.io/store/org.clojure/clojure/latest/"))
@@ -264,7 +258,6 @@
             :grimoire-base-url (str grimoire-base-url "clojure.core.reducers/")}
            ])))
 
-
 (defn symbol-url-pairs-specified-by-hand [link-target-site]
   (concat
    ;; Manually specify links for a few symbols in the cheatsheet.
@@ -325,14 +318,12 @@
           "clojure.tools.reader.edn/read-string" ])
    ))
 
-
 (defn symbol-url-pairs [link-target-site]
   (if (= link-target-site :nolinks)
     []
     (concat
      (symbol-url-pairs-for-whole-namespaces link-target-site)
      (symbol-url-pairs-specified-by-hand link-target-site))))
-
 
 ;; Use the following usepackage line if you want text with clickable
 ;; links in the PDF file to look no different from normal text:
@@ -344,7 +335,6 @@
 ;; might not be what you want long term.
 
 ;; \\usepackage[dvipdfm]{hyperref}
-
 
 (def latex-header-except-documentclass
   "
@@ -433,7 +423,6 @@
   \\end{document}
 ")
 
-
 (def latex-a4-header-before-title
   (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.5pt]{scrreprt}\n"
        latex-header-except-documentclass))
@@ -444,9 +433,7 @@
   (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.2pt,letterpaper]{scrreprt}\n"
        latex-header-except-documentclass))
 
-
-
-  (def html-header-before-title "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"
+(def html-header-before-title "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"
   \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
 
   <html xmlns=\"http://www.w3.org/1999/xhtml\">
@@ -538,12 +525,10 @@
   <div class=\"wiki wikiPage\" id=\"content_view\">
 " (inline-css)))
 
-
-  (def html-footer "  </div>
+(def html-footer "  </div>
   </body>
   </html>
 ")
-
 
 (def embeddable-html-fragment-header-before-title "")
 (def embeddable-html-fragment-header-after-title (format "
@@ -555,12 +540,10 @@ document.write('<style type=\"text/css\">%s<\\/style>')
 " (inline-css :js? true)))
 (def embeddable-html-fragment-footer "")
 
-
 (defmacro verify [cond]
   `(when (not ~cond)
      (iprintf "%s\n" (str "verify of this condition failed: " '~cond))
      (throw (Exception.))))
-
 
 (defn wrap-line
   "Given a string 'line' that is assumed not to contain line separators,
@@ -602,7 +585,6 @@ document.write('<style type=\"text/css\">%s<\\/style>')
           [ "" ]
           (conj finished-lines (apply str partial-line)))))))
 
-
 (defn output-title [fmt t]
   (let [t (if (map? t)
             (get t (:fmt fmt))
@@ -612,12 +594,10 @@ document.write('<style type=\"text/css\">%s<\\/style>')
                     :html (format "  <title>%s</title>\n" t)
                     :verify-only ""))))
 
-
 (defn htmlize-str [str]
   (let [str (str/replace str "<" "&lt;")
         str (str/replace str ">" "&gt;")]
     str))
-
 
 ;; Handle a thing that could be a string, symbol, or a 'conditional
 ;; string'
@@ -634,9 +614,7 @@ document.write('<style type=\"text/css\">%s<\\/style>')
                 (iprintf "%s\n" (str "cond-str: cstr=" cstr " is not a string, symbol, or map"))
                 (verify (or (string? cstr) (symbol? cstr) (map? cstr))))))
 
-
 (def symbols-looked-up (atom #{}))
-
 
 (defn url-for-cmd-doc [opts cmd-str]
   (when (:warn-about-unknown-symbols opts)
@@ -648,7 +626,6 @@ document.write('<style type=\"text/css\">%s<\\/style>')
         (iprintf *err* "No URL known for symbol with name: '%s'\n" cmd-str))
       nil)))
 
-
 (defn escape-latex-hyperref-url [url]
   (-> url
      (str/replace "#" "\\#")
@@ -657,7 +634,6 @@ document.write('<style type=\"text/css\">%s<\\/style>')
      (str/replace "=" "\\%3D")
      (str/replace ">" "\\%3E")))
 
-
 (defn escape-latex-hyperref-target [target]
   (-> target
      ;; -> doesn't seem to have a problem in LaTeX, but ->> looks
@@ -665,11 +641,9 @@ document.write('<style type=\"text/css\">%s<\\/style>')
      ;; -> combined, not two separate characters.
      (str/replace "->>" "-{>}{>}")))
 
-
 (defn has-prefix? [s pre]
   (and (>= (count s) (count pre))
      (= (subs s 0 (count pre)) pre)))
-
 
 ;; Only remove the namespaces that are very commonly used in the
 ;; cheatsheet.  For the ones that only have one or a few symbol there,
@@ -696,7 +670,6 @@ document.write('<style type=\"text/css\">%s<\\/style>')
     (subs s (count pre))
     s))
 
-
 (defn cleanup-doc-str-tooltip
   "Get rid of the first line of the doc string, which is always a line
   of dashes, and keep at most the first 25 lines of the doc string, to
@@ -713,7 +686,6 @@ document.write('<style type=\"text/css\">%s<\\/style>')
                          (str/trim-newline (str/join "\n" lines)))]
     (str/escape combined-lines {\" "&quot;"})))
 
-
 (defn doc-for-symbol-str [s]
   (let [sym (symbol s)]
     (if-let [special-sym ('{& fn catch try finally try} sym)]
@@ -726,7 +698,6 @@ document.write('<style type=\"text/css\">%s<\\/style>')
                      (resolve sym)
                      (catch Exception e nil))]
           (with-out-str (#'clojure.repl/print-doc (meta v))))))))
-
 
 (defn clojuredocs-content-summary [snap-time sym-info]
   (let [num-examples        (count (:examples sym-info))
@@ -769,7 +740,6 @@ document.write('<style type=\"text/css\">%s<\\/style>')
              (str "\nSee also: " v)
              (wrap-line v 72)
              (str/join "\n" v))))))
-
 
 (defn table-one-cmd-to-str [fmt cmd prefix suffix]
   (let [cmd-str (cond-str fmt cmd)
@@ -820,7 +790,6 @@ document.write('<style type=\"text/css\">%s<\\/style>')
         :verify-only "")
       cmd-str-to-show)))
 
-
 ;; When expand? is true, we expand prefixes and suffixes.
 ;; Disadvantage: longer output, which is especially bad for the PDF
 ;; cheatsheet.  Advantage: can search for the complete names of the
@@ -868,7 +837,6 @@ document.write('<style type=\"text/css\">%s<\\/style>')
     ;; handle the one thing, with no prefix or suffix
     (table-one-cmd-to-str fmt cmds "" "")))
 
-
 (defn output-table-cmd-list [fmt k cmds]
   (if (= k :str)
     (iprintf "%s" (cond-str fmt cmds))
@@ -886,7 +854,6 @@ document.write('<style type=\"text/css\">%s<\\/style>')
                       :latex "}"
                       :html "</code>"
                       :verify-only "")))))
-
 
 (defn output-table-row [fmt row row-num nrows]
   (verify (not= nil (#{:cmds :cmds-with-frenchspacing :str} (second row))))
@@ -907,7 +874,6 @@ document.write('<style type=\"text/css\">%s<\\/style>')
               </tr>\n"
                     :verify-only ""))))
 
-
 (defn output-table [fmt tbl]
   (iprintf "%s" (case (:fmt fmt)
                   :latex "\\begin{tabularx}{\\hsize}{lX}\n"
@@ -926,7 +892,6 @@ document.write('<style type=\"text/css\">%s<\\/style>')
 "
                   :verify-only "")))
 
-
 (defn output-cmds-one-line [fmt tbl]
   (iprintf "%s" (case (:fmt fmt)
                   :latex ""
@@ -939,7 +904,6 @@ document.write('<style type=\"text/css\">%s<\\/style>')
                   :html "
           </div>\n"
                   :verify-only "")))
-
 
 (defn output-box [fmt box]
   (verify (even? (count box)))
@@ -974,7 +938,6 @@ document.write('<style type=\"text/css\">%s<\\/style>')
                     :html "        </div><!-- /section -->\n"
                     :verify-only ""))))
 
-
 (defn output-col [fmt col]
   (iprintf "%s" (case (:fmt fmt)
                   :latex ""
@@ -987,7 +950,6 @@ document.write('<style type=\"text/css\">%s<\\/style>')
                   :latex "\n\n"
                   :html "      </div><!-- /column -->\n"
                   :verify-only "")))
-
 
 (defn output-page [fmt pg]
   (verify (= (first pg) :column))
