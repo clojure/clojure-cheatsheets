@@ -1565,8 +1565,9 @@ document.write('<style type=\"text/css\">%s<\\/style>')
    ])
 
 (defn remove-common-ns-prefix [s]
-  (if-let [pre (first (filter #(has-prefix? s %)
-                              +common-namespaces-to-remove-from-shown-symbols+))]
+  (if-let [pre (->> +common-namespaces-to-remove-from-shown-symbols+
+                  (filter #(has-prefix? s %))
+                  first)]
     (subs s (count pre))
     s))
 
@@ -1603,41 +1604,46 @@ document.write('<style type=\"text/css\">%s<\\/style>')
 
 
 (defn clojuredocs-content-summary [snap-time sym-info]
-  (let [num-examples (count (:examples sym-info))
+  (let [num-examples        (count (:examples sym-info))
         ;; remove lines containing nothing but <pre> or </pre> before
         ;; counting them, since clojuredocs.org doesn't show those as
         ;; separate lines.
-        total-example-lines (count
-                             (remove #(re-find #"(?i)^\s*<\s*/?\s*pre\s*>\s*$" %)
-                                     (mapcat str/split-lines
-                                             (map :body (:examples sym-info)))))
-        num-see-alsos (count (:see-alsos sym-info))
-        num-comments (count (:comments sym-info))
-        see-also-style :list-see-alsos]
+        total-example-lines (->> sym-info
+                               :examples
+                               (map :body)
+                               (mapcat str/split-lines)
+                               (remove #(re-find #"(?i)^\s*<\s*/?\s*pre\s*>\s*$" %))
+                               count)
+        num-see-alsos       (count (:see-alsos sym-info))
+        num-comments        (count (:comments sym-info))
+        see-also-style      :list-see-alsos]
     (str (case num-examples
            0 "0 examples"
            1 (format "1 example with %d lines"
                      total-example-lines)
            (format "%d examples totaling %d lines"
                    num-examples total-example-lines))
-         (if (and (= see-also-style :number-of-see-alsos)
-                (> num-see-alsos 0))
+
+         (when(and (= see-also-style :number-of-see-alsos)
+                 (> num-see-alsos 0))
            (format ", %d see also%s" num-see-alsos
-                   (if (== num-see-alsos 1) "" "s"))
-           "")
-         (if (zero? num-comments)
-           ""
+                   (if (== num-see-alsos 1) "" "s")))
+
+         (when-not (zero? num-comments)
            (format ", %d comment%s" num-comments
                    (if (== num-comments 1) "" "s")))
+         
          " on " snap-time
-         (if (and (= see-also-style :list-see-alsos)
-                (> num-see-alsos 0))
-           (str/join "\n"
-                     (wrap-line (str "\nSee also: "
-                                     (str/join ", " (map :name
-                                                         (:see-alsos sym-info))))
-                                72))
-           ""))))
+
+         (when (and (= see-also-style :list-see-alsos)
+                  (> num-see-alsos 0))
+           (as-> sym-info v
+             (:see-also v)
+             (map :name v)
+             (str/join ", " v)
+             (str "\nSee also: " v)
+             (wrap-line v 72)
+             (str/join "\n" v))))))
 
 
 (defn table-one-cmd-to-str [fmt cmd prefix suffix]
