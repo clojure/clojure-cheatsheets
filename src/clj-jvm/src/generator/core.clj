@@ -1033,21 +1033,21 @@
   [(str prefix sym)
    (str base-url
         (case link-dest
-              (:nolinks :links-to-clojure) sym
-              :links-to-clojuredocs (clojuredocs-url-fixup (str sym))
-              :links-to-grimoire    (grimoire-url-fixup (str sym))))])
+          (:nolinks :links-to-clojure) sym
+          :links-to-clojuredocs (clojuredocs-url-fixup (str sym))
+          :links-to-grimoire    (grimoire-url-fixup (str sym))))])
 
 
 (defn sym-to-url-list [link-target-site info]
   (let [{:keys [namespace-str symbol-list clojure-base-url
                 clojuredocs-base-url grimoire-base-url]} info
-         namespace-str (if (= "" namespace-str) "" (str namespace-str "/"))]
+                namespace-str (if (= "" namespace-str) "" (str namespace-str "/"))]
     (map #(sym-to-pair
            namespace-str % link-target-site
            (case link-target-site
-                 :links-to-clojure clojure-base-url
-                 :links-to-clojuredocs clojuredocs-base-url
-                 :links-to-grimoire grimoire-base-url))
+             :links-to-clojure clojure-base-url
+             :links-to-clojuredocs clojuredocs-base-url
+             :links-to-grimoire grimoire-base-url))
          symbol-list)))
 
 
@@ -1056,135 +1056,141 @@
 
 (defn symbol-url-pairs-for-whole-namespaces [link-target-site]
   (apply concat
-    (map
-     #(sym-to-url-list link-target-site %)
-     [{:namespace-str "",
-       :symbol-list '(def if do let quote var fn loop recur throw try
-                          monitor-enter monitor-exit),
-       :clojure-base-url "http://clojure.org/special_forms#",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.core/"
-       :grimoire-base-url    (str grimoire-base-url "clojure.core/")}
-      {:namespace-str "",
-       :symbol-list (keys (ns-publics 'clojure.core)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.core/"
-       :grimoire-base-url (str grimoire-base-url "clojure.core/")}
-      {:namespace-str "clojure.data"
-       :symbol-list (keys (ns-publics 'clojure.data)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.data-api.html#clojure.data/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.data/"
-       :grimoire-base-url (str grimoire-base-url "clojure.data/")}
-      {:namespace-str "clojure.java.io"
-       :symbol-list (keys (ns-publics 'clojure.java.io)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.java.io-api.html#clojure.java.io/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.io/"
-       :grimoire-base-url (str grimoire-base-url "clojure.java.io/")}
-      {:namespace-str "clojure.java.browse"
-       :symbol-list (keys (ns-publics 'clojure.java.browse)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.java.browse-api.html#clojure.java.browse/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.browse/"
-       :grimoire-base-url (str grimoire-base-url "clojure.java.browse/")}
-      {:namespace-str "clojure.java.javadoc"
-       :symbol-list (keys (ns-publics 'clojure.java.javadoc)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.java.javadoc-api.html#clojure.java.javadoc/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.javadoc/"
-       :grimoire-base-url (str grimoire-base-url "clojure.java.javadoc/")}
-      {:namespace-str "clojure.java.shell"
-       :symbol-list (keys (ns-publics 'clojure.java.shell)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.java.shell-api.html#clojure.java.shell/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.shell/"
-       :grimoire-base-url (str grimoire-base-url "clojure.java.shell/")}
-      {:namespace-str "clojure.pprint"
-       :symbol-list (keys (ns-publics 'clojure.pprint)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.pprint-api.html#clojure.pprint/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.pprint/"
-       :grimoire-base-url (str grimoire-base-url "clojure.pprint/")}
-      {:namespace-str "clojure.repl"
-       :symbol-list (keys (ns-publics 'clojure.repl)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.repl-api.html#clojure.repl/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.repl/"
-       :grimoire-base-url (str grimoire-base-url "clojure.repl/")}
-      {:namespace-str "clojure.set"
-       :symbol-list (keys (ns-publics 'clojure.set)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.set-api.html#clojure.set/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.set/"
-       :grimoire-base-url (str grimoire-base-url "clojure.set/")}
-      {:namespace-str "clojure.string"
-       :symbol-list (keys (ns-publics 'clojure.string)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.string-api.html#clojure.string/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.string/"
-       :grimoire-base-url (str grimoire-base-url "clojure.string/")}
-      {:namespace-str "clojure.walk"
-       :symbol-list (keys (ns-publics 'clojure.walk)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.walk-api.html#clojure.walk/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.walk/"
-       :grimoire-base-url (str grimoire-base-url "clojure.walk/")}
-      {:namespace-str "clojure.xml"
-       :symbol-list (keys (ns-publics 'clojure.xml)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.xml-api.html#clojure.xml/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.xml/"
-       :grimoire-base-url (str grimoire-base-url "clojure.xml/")}
-      {:namespace-str "clojure.zip"
-       :symbol-list (keys (ns-publics 'clojure.zip)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.zip-api.html#clojure.zip/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.zip/"
-       :grimoire-base-url (str grimoire-base-url "clojure.zip/")}
-      {:namespace-str "clojure.core.reducers"
-       :symbol-list (keys (ns-publics 'clojure.core.reducers)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.core-api.html#clojure.core.reducers/",
-       ;; There is no documentation for clojure.core.reducers
-       ;; namespace on ClojureDocs.org as of March 2013, so just use
-       ;; the same URL as above for now.
-       :clojuredocs-base-url "http://clojure.github.com/clojure/clojure.core-api.html#clojure.core.reducers/"
-       :grimoire-base-url (str grimoire-base-url "clojure.core.reducers/")}
-      ])))
+         (map
+          #(sym-to-url-list link-target-site %)
+          [{:namespace-str "",
+            :symbol-list '(def if do let quote var fn loop recur throw try
+                            monitor-enter monitor-exit),
+            :clojure-base-url "http://clojure.org/special_forms#",
+            :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.core/"
+            :grimoire-base-url    (str grimoire-base-url "clojure.core/")}
+           {:namespace-str "",
+            :symbol-list (keys (ns-publics 'clojure.core)),
+            :clojure-base-url "http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/",
+            :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.core/"
+            :grimoire-base-url (str grimoire-base-url "clojure.core/")}
+           {:namespace-str "clojure.data"
+            :symbol-list (keys (ns-publics 'clojure.data)),
+            :clojure-base-url "http://clojure.github.com/clojure/clojure.data-api.html#clojure.data/",
+            :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.data/"
+            :grimoire-base-url (str grimoire-base-url "clojure.data/")}
+           {:namespace-str "clojure.java.io"
+            :symbol-list (keys (ns-publics 'clojure.java.io)),
+            :clojure-base-url "http://clojure.github.com/clojure/clojure.java.io-api.html#clojure.java.io/",
+            :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.io/"
+            :grimoire-base-url (str grimoire-base-url "clojure.java.io/")}
+           {:namespace-str "clojure.java.browse"
+            :symbol-list (keys (ns-publics 'clojure.java.browse)),
+            :clojure-base-url "http://clojure.github.com/clojure/clojure.java.browse-api.html#clojure.java.browse/",
+            :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.browse/"
+            :grimoire-base-url (str grimoire-base-url "clojure.java.browse/")}
+           {:namespace-str "clojure.java.javadoc"
+            :symbol-list (keys (ns-publics 'clojure.java.javadoc)),
+            :clojure-base-url "http://clojure.github.com/clojure/clojure.java.javadoc-api.html#clojure.java.javadoc/",
+            :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.javadoc/"
+            :grimoire-base-url (str grimoire-base-url "clojure.java.javadoc/")}
+           {:namespace-str "clojure.java.shell"
+            :symbol-list (keys (ns-publics 'clojure.java.shell)),
+            :clojure-base-url "http://clojure.github.com/clojure/clojure.java.shell-api.html#clojure.java.shell/",
+            :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.shell/"
+            :grimoire-base-url (str grimoire-base-url "clojure.java.shell/")}
+           {:namespace-str "clojure.pprint"
+            :symbol-list (keys (ns-publics 'clojure.pprint)),
+            :clojure-base-url "http://clojure.github.com/clojure/clojure.pprint-api.html#clojure.pprint/",
+            :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.pprint/"
+            :grimoire-base-url (str grimoire-base-url "clojure.pprint/")}
+           {:namespace-str "clojure.repl"
+            :symbol-list (keys (ns-publics 'clojure.repl)),
+            :clojure-base-url "http://clojure.github.com/clojure/clojure.repl-api.html#clojure.repl/",
+            :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.repl/"
+            :grimoire-base-url (str grimoire-base-url "clojure.repl/")}
+           {:namespace-str "clojure.set"
+            :symbol-list (keys (ns-publics 'clojure.set)),
+            :clojure-base-url "http://clojure.github.com/clojure/clojure.set-api.html#clojure.set/",
+            :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.set/"
+            :grimoire-base-url (str grimoire-base-url "clojure.set/")}
+           {:namespace-str "clojure.string"
+            :symbol-list (keys (ns-publics 'clojure.string)),
+            :clojure-base-url "http://clojure.github.com/clojure/clojure.string-api.html#clojure.string/",
+            :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.string/"
+            :grimoire-base-url (str grimoire-base-url "clojure.string/")}
+           {:namespace-str "clojure.walk"
+            :symbol-list (keys (ns-publics 'clojure.walk)),
+            :clojure-base-url "http://clojure.github.com/clojure/clojure.walk-api.html#clojure.walk/",
+            :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.walk/"
+            :grimoire-base-url (str grimoire-base-url "clojure.walk/")}
+           {:namespace-str "clojure.xml"
+            :symbol-list (keys (ns-publics 'clojure.xml)),
+            :clojure-base-url "http://clojure.github.com/clojure/clojure.xml-api.html#clojure.xml/",
+            :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.xml/"
+            :grimoire-base-url (str grimoire-base-url "clojure.xml/")}
+           {:namespace-str "clojure.zip"
+            :symbol-list (keys (ns-publics 'clojure.zip)),
+            :clojure-base-url "http://clojure.github.com/clojure/clojure.zip-api.html#clojure.zip/",
+            :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.zip/"
+            :grimoire-base-url (str grimoire-base-url "clojure.zip/")}
+           {:namespace-str "clojure.core.reducers"
+            :symbol-list (keys (ns-publics 'clojure.core.reducers)),
+            :clojure-base-url "http://clojure.github.com/clojure/clojure.core-api.html#clojure.core.reducers/",
+            ;; There is no documentation for clojure.core.reducers
+            ;; namespace on ClojureDocs.org as of March 2013, so just use
+            ;; the same URL as above for now.
+            :clojuredocs-base-url "http://clojure.github.com/clojure/clojure.core-api.html#clojure.core.reducers/"
+            :grimoire-base-url (str grimoire-base-url "clojure.core.reducers/")}
+           ])))
 
 
 (defn symbol-url-pairs-specified-by-hand [link-target-site]
   (concat
    ;; Manually specify links for a few symbols in the cheatsheet.
    [["new" (case link-target-site
-                 :links-to-clojure
-                 "http://clojure.org/java_interop#new"
-                 :links-to-clojuredocs
-                 "http://clojuredocs.org/clojure_core/clojure.core/new"
-                 :links-to-grimoire
-                 (str grimoire-base-url "clojure.core/new")
-                 )]
+             :links-to-clojure
+             "http://clojure.org/java_interop#new"
+             :links-to-clojuredocs
+             "http://clojuredocs.org/clojure_core/clojure.core/new"
+             :links-to-grimoire
+             ;; Grimoire doesn't have anything for some of these
+             ;; symbols yet.
+                                        ;(str grimoire-base-url "clojure.core/new")
+             "http://clojure.org/java_interop#new"
+             )]
     ["set!" (case link-target-site
-                  :links-to-clojure
-                  "http://clojure.org/java_interop#Java%20Interop-The%20Dot%20special%20form-%28set!%20%28.%20Classname-symbol%20staticFieldName-symbol%29%20expr%29"
-                  :links-to-clojuredocs
-                  "http://clojuredocs.org/clojure_core/clojure.core/set!"
-                  :links-to-grimoire
-                  (str grimoire-base-url "clojure.core/set!")
-                  )]
+              :links-to-clojure
+              "http://clojure.org/java_interop#Java%20Interop-The%20Dot%20special%20form-%28set!%20%28.%20Classname-symbol%20staticFieldName-symbol%29%20expr%29"
+              :links-to-clojuredocs
+              "http://clojuredocs.org/clojure_core/clojure.core/set!"
+              :links-to-grimoire
+              (str grimoire-base-url "clojure.core/set!")
+                                        ;"http://clojure.org/java_interop#Java%20Interop-The%20Dot%20special%20form-%28set!%20%28.%20Classname-symbol%20staticFieldName-symbol%29%20expr%29"
+              )]
     ["catch" (case link-target-site
-                   :links-to-clojure
-                   "http://clojure.org/special_forms#try"
-                   :links-to-clojuredocs
-                   "http://clojuredocs.org/clojure_core/clojure.core/catch"
-                   :links-to-grimoire
-                   (str grimoire-base-url "clojure.core/catch")
-                   )]
+               :links-to-clojure
+               "http://clojure.org/special_forms#try"
+               :links-to-clojuredocs
+               "http://clojuredocs.org/clojure_core/clojure.core/catch"
+               :links-to-grimoire
+                                        ;(str grimoire-base-url "clojure.core/catch")
+               "http://clojure.org/special_forms#try"
+               )]
     ["finally" (case link-target-site
-                     :links-to-clojure
-                     "http://clojure.org/special_forms#try"
-                     :links-to-clojuredocs
-                     "http://clojuredocs.org/clojure_core/clojure.core/finally"
-                     :links-to-grimoire
-                     (str grimoire-base-url "clojure.core/finally")
-                     )]]
+                 :links-to-clojure
+                 "http://clojure.org/special_forms#try"
+                 :links-to-clojuredocs
+                 "http://clojuredocs.org/clojure_core/clojure.core/finally"
+                 :links-to-grimoire
+                                        ;(str grimoire-base-url "clojure.core/finally")
+                 "http://clojure.org/special_forms#try"
+                 )]]
    (case link-target-site
-         :links-to-clojure
-         [["Classname." "http://clojure.org/java_interop#Java%20Interop-The%20Dot%20special%20form-%28new%20Classname%20args*%29"]
-          ["Classname/" "http://clojure.org/java_interop#Java%20Interop-%28Classname/staticMethod%20args*%29"]]
-         :links-to-clojuredocs
-         ;; I don't have a good idea where on clojuredocs.org these
-         ;; should link to, if anywhere.
-         []
-         :links-to-grimoire
-         [])
+     :links-to-clojure
+     [["Classname." "http://clojure.org/java_interop#Java%20Interop-The%20Dot%20special%20form-%28new%20Classname%20args*%29"]
+      ["Classname/" "http://clojure.org/java_interop#Java%20Interop-%28Classname/staticMethod%20args*%29"]]
+     :links-to-clojuredocs
+     ;; I don't have a good idea where on clojuredocs.org these
+     ;; should link to, if anywhere.
+     []
+     :links-to-grimoire
+     [])
 
    ;; These symbols do not have API docs anywhere that I can find,
    ;; yet.  Point at the github page for tools.reader for now.
@@ -1216,110 +1222,110 @@
 
 
 (def latex-header-except-documentclass
-     "
-% Authors: Steve Tayon, Andy Fingerhut
-% Comments, errors, suggestions: andy.fingerhut(at)gmail.com
+  "
+  % Authors: Steve Tayon, Andy Fingerhut
+  % Comments, errors, suggestions: andy.fingerhut(at)gmail.com
 
-% Most of the content is based on the clojure wiki, api and source code by Rich Hickey on http://clojure.org/.
+  % Most of the content is based on the clojure wiki, api and source code by Rich Hickey on http://clojure.org/.
 
-% License
-% Eclipse Public License v1.0
-% http://opensource.org/licenses/eclipse-1.0.php
+  % License
+  % Eclipse Public License v1.0
+  % http://opensource.org/licenses/eclipse-1.0.php
 
-% Packages
-\\usepackage[utf8]{inputenc}
-\\usepackage[T1]{fontenc}
-\\usepackage{textcomp}
-\\usepackage[english]{babel}
-\\usepackage{tabularx}
-\\usepackage[colorlinks=false,breaklinks=true,pdfborder={0 0 0},dvipdfm]{hyperref}
-\\usepackage{lmodern}
-\\renewcommand*\\familydefault{\\sfdefault}
-
-
-\\usepackage[table]{xcolor}
-
-% Set column space
-\\setlength{\\columnsep}{0.25em}
-
-% Define colours
-\\definecolorset{hsb}{}{}{red,0,.4,0.95;orange,.1,.4,0.95;green,.25,.4,0.95;yellow,.15,.4,0.95}
-
-\\definecolorset{hsb}{}{}{blue,.55,.4,0.95;purple,.7,.4,0.95;pink,.8,.4,0.95;blue2,.58,.4,0.95}
-
-\\definecolorset{hsb}{}{}
-{magenta,.9,.4,0.95;green2,.29,.4,0.95}
-
-\\definecolor{grey}{hsb}{0.25,0,0.85}
-
-\\definecolor{white}{hsb}{0,0,1}
-
-% Redefine sections
-\\makeatletter
-\\renewcommand{\\section}{\\@startsection{section}{1}{0mm}
-	{-1.7ex}{0.7ex}{\\normalfont\\large\\bfseries}}
-\\renewcommand{\\subsection}{\\@startsection{subsection}{2}{0mm}
-	{-1.7ex}{0.5ex}{\\normalfont\\normalsize\\bfseries}}
-\\makeatother
-
-% No section numbers
-\\setcounter{secnumdepth}{0}
-
-% No indentation
-\\setlength{\\parindent}{0em}
-
-% No header and footer
-\\pagestyle{empty}
+  % Packages
+  \\usepackage[utf8]{inputenc}
+  \\usepackage[T1]{fontenc}
+  \\usepackage{textcomp}
+  \\usepackage[english]{babel}
+  \\usepackage{tabularx}
+  \\usepackage[colorlinks=false,breaklinks=true,pdfborder={0 0 0},dvipdfm]{hyperref}
+  \\usepackage{lmodern}
+  \\renewcommand*\\familydefault{\\sfdefault}
 
 
-% A few shortcuts
-\\newcommand{\\cmd}[1] {\\frenchspacing\\texttt{\\textbf{{#1}}}}
-\\newcommand{\\cmdline}[1] {
-	\\begin{tabularx}{\\hsize}{X}
-			\\texttt{\\textbf{{#1}}}
-	\\end{tabularx}
-}
+  \\usepackage[table]{xcolor}
 
-\\newcommand{\\colouredbox}[2] {
-	\\colorbox{#1!40}{
-		\\begin{minipage}{0.95\\linewidth}
-			{
-			\\rowcolors[]{1}{#1!20}{#1!10}
-			#2
-			}
-		\\end{minipage}
-	}
-}
+  % Set column space
+  \\setlength{\\columnsep}{0.25em}
 
-\\begin{document}
+  % Define colours
+  \\definecolorset{hsb}{}{}{red,0,.4,0.95;orange,.1,.4,0.95;green,.25,.4,0.95;yellow,.15,.4,0.95}
+
+  \\definecolorset{hsb}{}{}{blue,.55,.4,0.95;purple,.7,.4,0.95;pink,.8,.4,0.95;blue2,.58,.4,0.95}
+
+  \\definecolorset{hsb}{}{}
+  {magenta,.9,.4,0.95;green2,.29,.4,0.95}
+
+  \\definecolor{grey}{hsb}{0.25,0,0.85}
+
+  \\definecolor{white}{hsb}{0,0,1}
+
+  % Redefine sections
+  \\makeatletter
+  \\renewcommand{\\section}{\\@startsection{section}{1}{0mm}
+  {-1.7ex}{0.7ex}{\\normalfont\\large\\bfseries}}
+  \\renewcommand{\\subsection}{\\@startsection{subsection}{2}{0mm}
+  {-1.7ex}{0.5ex}{\\normalfont\\normalsize\\bfseries}}
+  \\makeatother
+
+  % No section numbers
+  \\setcounter{secnumdepth}{0}
+
+  % No indentation
+  \\setlength{\\parindent}{0em}
+
+  % No header and footer
+  \\pagestyle{empty}
+
+
+  % A few shortcuts
+  \\newcommand{\\cmd}[1] {\\frenchspacing\\texttt{\\textbf{{#1}}}}
+  \\newcommand{\\cmdline}[1] {
+  \\begin{tabularx}{\\hsize}{X}
+  \\texttt{\\textbf{{#1}}}
+  \\end{tabularx}
+  }
+
+  \\newcommand{\\colouredbox}[2] {
+  \\colorbox{#1!40}{
+  \\begin{minipage}{0.95\\linewidth}
+  {
+  \\rowcolors[]{1}{#1!20}{#1!10}
+  #2
+  }
+  \\end{minipage}
+  }
+  }
+
+  \\begin{document}
 
 ")
 
 (def latex-header-after-title "")
 
 (def latex-footer
-     "
-\\end{document}
+  "
+  \\end{document}
 ")
 
 
 (def latex-a4-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.5pt]{scrreprt}\n"
-          latex-header-except-documentclass))
+  (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.5pt]{scrreprt}\n"
+       latex-header-except-documentclass))
 
 ;; US letter is a little shorter, so formatting gets completely messed
 ;; up unless we use a slightly smaller font size.
 (def latex-usletter-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.2pt,letterpaper]{scrreprt}\n"
-          latex-header-except-documentclass))
+  (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.2pt,letterpaper]{scrreprt}\n"
+       latex-header-except-documentclass))
 
 
 
-(def html-header-before-title "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"
-    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
+  (def html-header-before-title "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"
+  \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
 
-<html xmlns=\"http://www.w3.org/1999/xhtml\">
-<head>
+  <html xmlns=\"http://www.w3.org/1999/xhtml\">
+  <head>
   <meta http-equiv=\"Content-Type\" content=\"text/html; charset=us-ascii\" />
 ")
 
@@ -1408,9 +1414,9 @@
 " (inline-css)))
 
 
-(def html-footer "  </div>
-</body>
-</html>
+  (def html-footer "  </div>
+  </body>
+  </html>
 ")
 
 
@@ -1520,24 +1526,24 @@ document.write('<style type=\"text/css\">%s<\\/style>')
 
 (defn escape-latex-hyperref-url [url]
   (-> url
-      (str/replace "#" "\\#")
-      (str/replace "%" "\\%")
-      (str/replace "<" "\\%3C")
-      (str/replace "=" "\\%3D")
-      (str/replace ">" "\\%3E")))
+     (str/replace "#" "\\#")
+     (str/replace "%" "\\%")
+     (str/replace "<" "\\%3C")
+     (str/replace "=" "\\%3D")
+     (str/replace ">" "\\%3E")))
 
 
 (defn escape-latex-hyperref-target [target]
   (-> target
-      ;; -> doesn't seem to have a problem in LaTeX, but ->> looks
-      ;; -> like - followed by a special symbol that is two >'s
-      ;; -> combined, not two separate characters.
-      (str/replace "->>" "-{>}{>}")))
+     ;; -> doesn't seem to have a problem in LaTeX, but ->> looks
+     ;; -> like - followed by a special symbol that is two >'s
+     ;; -> combined, not two separate characters.
+     (str/replace "->>" "-{>}{>}")))
 
 
 (defn has-prefix? [s pre]
   (and (>= (count s) (count pre))
-       (= (subs s 0 (count pre)) pre)))
+     (= (subs s 0 (count pre)) pre)))
 
 
 ;; Only remove the namespaces that are very commonly used in the
@@ -1567,9 +1573,9 @@ document.write('<style type=\"text/css\">%s<\\/style>')
 
 (defn cleanup-doc-str-tooltip
   "Get rid of the first line of the doc string, which is always a line
-of dashes, and keep at most the first 25 lines of the doc string, to
-keep the tooltip from being too large.  Also replace double quote
-characters (\") with &quot;"
+  of dashes, and keep at most the first 25 lines of the doc string, to
+  keep the tooltip from being too large.  Also replace double quote
+  characters (\") with &quot;"
   [s]
   (let [max-line-width 80
         lines (-> s (str/split-lines) (rest))
@@ -1616,7 +1622,7 @@ characters (\") with &quot;"
            (format "%d examples totaling %d lines"
                    num-examples total-example-lines))
          (if (and (= see-also-style :number-of-see-alsos)
-                  (> num-see-alsos 0))
+                (> num-see-alsos 0))
            (format ", %d see also%s" num-see-alsos
                    (if (== num-see-alsos 1) "" "s"))
            "")
@@ -1626,7 +1632,7 @@ characters (\") with &quot;"
                    (if (== num-comments 1) "" "s")))
          " on " snap-time
          (if (and (= see-also-style :list-see-alsos)
-                  (> num-see-alsos 0))
+                (> num-see-alsos 0))
            (str/join "\n"
                      (wrap-line (str "\nSee also: "
                                      (str/join ", " (map :name
@@ -1642,25 +1648,25 @@ characters (\") with &quot;"
         ;; cmd-str-to-show has < converted to HTML &lt; among other
         ;; things, if (:fmt fmt) is :html
         cmd-str-to-show (remove-common-ns-prefix (cond-str fmt cmd fmt))
-;;        _ (iprintf *err* "andy-debug: cmd='%s' prefix='%s' suffix='%s' (class whole-cmd)='%s' whole-cmd='%s'\n"
-;;                   cmd prefix suffix (class whole-cmd) whole-cmd)
+        ;;        _ (iprintf *err* "andy-debug: cmd='%s' prefix='%s' suffix='%s' (class whole-cmd)='%s' whole-cmd='%s'\n"
+        ;;                   cmd prefix suffix (class whole-cmd) whole-cmd)
         orig-doc-str (doc-for-symbol-str whole-cmd)
         cleaned-doc-str (if orig-doc-str
                           (cleanup-doc-str-tooltip orig-doc-str))
         clojuredocs-snapshot (:clojuredocs-snapshot fmt)
         cleaned-doc-str (if cleaned-doc-str
                           (do
-;;                            (iprintf *err* "whole-cmd='%s' sym-info='%s'\n"
-;;                                     whole-cmd
-;;                                     (get-in clojuredocs-snapshot
-;;                                             [:snapshot-info whole-cmd]))
+                            ;;                            (iprintf *err* "whole-cmd='%s' sym-info='%s'\n"
+                            ;;                                     whole-cmd
+                            ;;                                     (get-in clojuredocs-snapshot
+                            ;;                                             [:snapshot-info whole-cmd]))
                             (if-let [sym-info
                                      (or (get-in clojuredocs-snapshot
-                                                 [:snapshot-info whole-cmd])
-                                         (get-in clojuredocs-snapshot
-                                                 [:snapshot-info
-                                                  (str "clojure.core/"
-                                                       whole-cmd)]))]
+                                                [:snapshot-info whole-cmd])
+                                        (get-in clojuredocs-snapshot
+                                                [:snapshot-info
+                                                 (str "clojure.core/"
+                                                      whole-cmd)]))]
                               (str cleaned-doc-str "\n\n"
                                    (clojuredocs-content-summary
                                     (get clojuredocs-snapshot :snapshot-time)
@@ -1810,9 +1816,9 @@ characters (\") with &quot;"
   (verify (= :box (first box)))
   (let [box-color (if (:colors fmt)
                     (case (:colors fmt)
-                          :color (second box)
-                          :grey "grey"
-                          :bw "white")
+                      :color (second box)
+                      :grey "grey"
+                      :bw "white")
                     nil)
         key-val-pairs (partition 2 (nnext box))]
     (iprintf "%s" (case (:fmt fmt)
@@ -1821,18 +1827,18 @@ characters (\") with &quot;"
                     :verify-only ""))
     (doseq [[k v] key-val-pairs]
       (case k
-            :section
-            (case (:fmt fmt)
-                  :latex (iprintf "\\section{%s}\n" (cond-str fmt v))
-                  :html (iprintf "          <h2>%s</h2>\n" (cond-str fmt v)))
-            :subsection
-            (case (:fmt fmt)
-                  :latex (iprintf "\\subsection{%s}\n" (cond-str fmt v))
-                  :html (iprintf "          <h3>%s</h3>\n" (cond-str fmt v)))
-            :table
-            (output-table fmt v)
-            :cmds-one-line
-            (output-cmds-one-line fmt v)))
+        :section
+        (case (:fmt fmt)
+          :latex (iprintf "\\section{%s}\n" (cond-str fmt v))
+          :html (iprintf "          <h2>%s</h2>\n" (cond-str fmt v)))
+        :subsection
+        (case (:fmt fmt)
+          :latex (iprintf "\\subsection{%s}\n" (cond-str fmt v))
+          :html (iprintf "          <h3>%s</h3>\n" (cond-str fmt v)))
+        :table
+        (output-table fmt v)
+        :cmds-one-line
+        (output-cmds-one-line fmt v)))
     (iprintf "%s" (case (:fmt fmt)
                     :latex "}\n\n"
                     :html "        </div><!-- /section -->\n"
@@ -1870,37 +1876,73 @@ characters (\") with &quot;"
                   :html "    </div><!-- /page -->\n"
                   :verify-only "")))
 
+(defn write-pre-title [fmt]
+  (case (:fmt fmt)
+    :latex
+    ,,(case (:paper fmt)
+        :a4
+        ,,latex-a4-header-before-title
+
+        :usletter
+        ,,latex-usletter-header-before-title)
+
+    :html
+    ,,html-header-before-title
+
+    :embeddable-html
+    ,,embeddable-html-fragment-header-before-title
+
+    :verify-only
+    ,,""))
+
+(defn write-post-title [fmt]
+  (case (:fmt fmt)
+    :latex
+    ,,latex-header-after-title
+
+    :html
+    ,,html-header-after-title
+
+    :embeddable-html
+    ,,embeddable-html-fragment-header-after-title
+
+    :verify-only
+    ,,""))
+
+(defn write-footer [fmt]
+  (case (:fmt fmt)
+    :latex
+    ,,latex-footer
+
+    :html
+    ,,html-footer
+
+    :embeddable-html
+    ,,embeddable-html-fragment-footer
+
+    :verify-only
+    ,,""))
 
 (defn output-cheatsheet [fmt cs]
-  (verify (even? (count cs)))
-  (iprintf "%s" (case (:fmt fmt)
-                  :latex (case (:paper fmt)
-                           :a4 latex-a4-header-before-title
-                           :usletter latex-usletter-header-before-title)
-                  :html html-header-before-title
-                  :embeddable-html embeddable-html-fragment-header-before-title
-                  :verify-only ""))
-  (let [[k title & pages] cs
-        [show-title fmt-passed-down]
-        (if (= (:fmt fmt) :embeddable-html)
-          [false (assoc fmt :fmt :html)]
-          [true fmt])]
+  (let [[k title & pages]            cs
+        [show-title fmt-passed-down] (if (= (:fmt fmt) :embeddable-html)
+                                       [false (assoc fmt :fmt :html)]
+                                       [true fmt])]
     (verify (= k :title))
+    (verify (even? (count cs)))
+
+    (iprintf "%s" (write-pre-title fmt))
+
     (when show-title
       (output-title fmt-passed-down title))
-    (iprintf "%s" (case (:fmt fmt)
-                    :latex latex-header-after-title
-                    :html html-header-after-title
-                    :embeddable-html embeddable-html-fragment-header-after-title
-                    :verify-only ""))
+
+    (iprintf "%s" (write-post-title fmt))
+
     (doseq [[k pg] (partition 2 pages)]
       (verify (= k :page))
       (output-page fmt-passed-down pg)))
-  (iprintf "%s" (case (:fmt fmt)
-                  :latex latex-footer
-                  :html html-footer
-                  :embeddable-html embeddable-html-fragment-footer
-                  :verify-only "")))
+
+  (iprintf "%s" (write-footer fmt)))
 
 
 (defn hash-from-pairs [pairs]
@@ -1937,77 +1979,92 @@ characters (\") with &quot;"
 
 (defn -main [& args]
   (let [supported-link-targets #{"nolinks" "links-to-clojure" "links-to-clojuredocs" "links-to-grimoire"}
-        supported-tooltips #{"no-tooltips" "use-title-attribute" "tiptip"}
-        link-target-site (if (< (count args) 1)
-                           :links-to-clojure
-                           (let [arg (nth args 0)]
-                             (if (supported-link-targets arg)
-                               (keyword arg)
-                               (die "Unrecognized argument: %s\nSupported args are: %s\n"
-                                    arg
-                                    (str/join " " (seq supported-link-targets))))))
-        tooltips (if (< (count args) 2)
-                   :no-tooltips
-                   (let [arg (nth args 1)]
-                     (if (supported-tooltips arg)
-                       (keyword arg)
-                       (die "Unrecognized argument: %s\nSupported args are: %s\n"
-                            arg
-                            (str/join " " (seq supported-tooltips))))))
-        clojuredocs-snapshot (if (< (count args) 3)
-                               {}
-                               (let [snapshot-fname (nth args 2)]
-                                 (simplify-snapshot-time
-                                  (read-safely snapshot-fname))))
-        _ (if (not= clojuredocs-snapshot {})
-            (iprintf *err* "Read info for %d symbols from file '%s' with time %s\n"
-                     (count (get clojuredocs-snapshot :snapshot-info))
-                     (nth args 2)
-                     (:snapshot-time clojuredocs-snapshot))
-            (iprintf *err* "No clojuredocs snapshot file specified.\n"))
-        symbol-name-to-url (hash-from-pairs (symbol-url-pairs link-target-site))]
-    (let [opts {:symbol-name-to-url symbol-name-to-url
-                :tooltips tooltips
-                :clojuredocs-snapshot clojuredocs-snapshot
-                :expand-common-prefixes-or-suffixes true}]
-      (binding [*out* (io/writer "cheatsheet-full.html")
-                *err* (io/writer "warnings.log")]
-        (output-cheatsheet (merge opts {:fmt :html, :colors :color,
-                                        :warn-about-unknown-symbols true})
-                           cheatsheet-structure)
-        ;; Print out a list of all symbols in our symbol-name-to-url
-        ;; table that we never looked up.
-        (let [never-used (set/difference
-                          (set (keys symbol-name-to-url))
-                          @symbols-looked-up)]
-          (iprintf *err* "\n\n%d symbols successfully looked up.\n\n"
-                   (count @symbols-looked-up))
-          (iprintf *err* "\n\nSorted list of %d symbols in lookup table that were never used:\n\n"
-                   (count never-used))
-          (iprintf *err* "%s\n" (str/join "\n" (sort (seq never-used))))
-          (iprintf *err* "\n\nSorted list of links to documentation for symbols that were never used:\n\n\n")
-          (iprintf *err* "%s\n" (str/join "<br>"
-                                          (map #(format "<a href=\"%s\">%s</a>\n"
-                                                        (symbol-name-to-url %) %)
-                                               (sort (seq never-used))))))
-        (.close *out*)
-        (.close *err*))
-      (doseq [x [ {:filename "cheatsheet-embeddable.html",
-                   :format {:fmt :embeddable-html}}
-                  {:filename "cheatsheet-a4-color.tex",
-                   :format {:fmt :latex, :paper :a4, :colors :color}}
-                  {:filename "cheatsheet-a4-grey.tex",
-                   :format {:fmt :latex, :paper :a4, :colors :grey}}
-                  {:filename "cheatsheet-a4-bw.tex",
-                   :format {:fmt :latex, :paper :a4, :colors :bw}}
-                  {:filename "cheatsheet-usletter-color.tex",
-                   :format {:fmt :latex, :paper :usletter, :colors :color}}
-                  {:filename "cheatsheet-usletter-grey.tex",
-                   :format {:fmt :latex, :paper :usletter, :colors :grey}}
-                  {:filename "cheatsheet-usletter-bw.tex",
-                   :format {:fmt :latex, :paper :usletter, :colors :bw}}
-                  ]]
-        (binding [*out* (io/writer (:filename x))]
-          (output-cheatsheet (merge opts (:format x))
-                             cheatsheet-structure)
-          (.close *out*))))))
+
+        supported-tooltips     #{"no-tooltips" "use-title-attribute" "tiptip"}
+
+        link-target-site       (if (< (count args) 1)
+                                 :links-to-clojure
+                                 (let [arg (nth args 0)]
+                                   (if (supported-link-targets arg)
+                                     (keyword arg)
+                                     (die "Unrecognized argument: %s\nSupported args are: %s\n"
+                                          arg
+                                          (str/join " " (seq supported-link-targets))))))
+
+        tooltips               (if (< (count args) 2)
+                                 :no-tooltips
+                                 (let [arg (nth args 1)]
+                                   (if (supported-tooltips arg)
+                                     (keyword arg)
+                                     (die "Unrecognized argument: %s\nSupported args are: %s\n"
+                                          arg
+                                          (str/join " " (seq supported-tooltips))))))
+
+        clojuredocs-snapshot   (if (< (count args) 3)
+                                 {}
+                                 (let [snapshot-fname (nth args 2)]
+                                   (simplify-snapshot-time
+                                    (read-safely snapshot-fname))))
+
+        _                      (if (not= clojuredocs-snapshot {})
+                                 (iprintf *err* "Read info for %d symbols from file '%s' with time %s\n"
+                                          (count (get clojuredocs-snapshot :snapshot-info))
+                                          (nth args 2)
+                                          (:snapshot-time clojuredocs-snapshot))
+                                 (iprintf *err* "No clojuredocs snapshot file specified.\n"))
+
+        symbol-name-to-url     (hash-from-pairs (symbol-url-pairs link-target-site))
+
+        opts                   {:symbol-name-to-url symbol-name-to-url
+                                :tooltips tooltips
+                                :clojuredocs-snapshot clojuredocs-snapshot
+                                :expand-common-prefixes-or-suffixes true}]
+
+    (binding [*out* (io/writer "cheatsheet-full.html")
+              *err* (io/writer "warnings.log")]
+      (output-cheatsheet (merge opts {:fmt :html, :colors :color,
+                                      :warn-about-unknown-symbols true})
+                         cheatsheet-structure)
+      ;; Print out a list of all symbols in our symbol-name-to-url
+      ;; table that we never looked up.
+      (let [never-used (set/difference
+                        (set (keys symbol-name-to-url))
+                        @symbols-looked-up)]
+        (iprintf *err* "\n\n%d symbols successfully looked up.\n\n"
+                 (count @symbols-looked-up))
+        (iprintf *err* "\n\nSorted list of %d symbols in lookup table that were never used:\n\n"
+                 (count never-used))
+        (iprintf *err* "%s\n" (str/join "\n" (sort (seq never-used))))
+        (iprintf *err* "\n\nSorted list of links to documentation for symbols that were never used:\n\n\n")
+        (iprintf *err* "%s\n" (str/join "<br>"
+                                        (map #(format "<a href=\"%s\">%s</a>\n"
+                                                      (symbol-name-to-url %) %)
+                                             (sort (seq never-used))))))
+      (.close *out*)
+      (.close *err*))
+    
+    (doseq [x [{:filename  "cheatsheet-embeddable.html",
+                :structure cheatsheet-structure,
+                :format    {:fmt :embeddable-html}}
+               {:filename  "cheatsheet-a4-color.tex",
+                :structure cheatsheet-structure,
+                :format    {:fmt :latex, :paper :a4, :colors :color}}
+               {:filename  "cheatsheet-a4-grey.tex",
+                :structure cheatsheet-structure,
+                :format    {:fmt :latex, :paper :a4, :colors :grey}}
+               {:filename  "cheatsheet-a4-bw.tex",
+                :structure cheatsheet-structure,
+                :format    {:fmt :latex, :paper :a4, :colors :bw}}
+               {:filename  "cheatsheet-usletter-color.tex",
+                :structure cheatsheet-structure,
+                :format    {:fmt :latex, :paper :usletter, :colors :color}}
+               {:filename  "cheatsheet-usletter-grey.tex",
+                :structure cheatsheet-structure,
+                :format    {:fmt :latex, :paper :usletter, :colors :grey}}
+               {:filename  "cheatsheet-usletter-bw.tex",
+                :structure cheatsheet-structure,
+                :format    {:fmt :latex, :paper :usletter, :colors :bw}}]]
+      (binding [*out* (io/writer (:filename x))]
+        (output-cheatsheet (merge opts (:format x))
+                           (:structure x))
+        (.close *out*)))))
