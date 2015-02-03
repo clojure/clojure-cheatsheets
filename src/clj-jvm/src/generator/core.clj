@@ -324,6 +324,7 @@
                        :cmds '[{:latex "\\textmd{\\textsf{(clojure.set/)}}",
                                 :html "(clojure.set/)"}
                                clojure.set/subset? clojure.set/superset?]]
+                      ["Sorted sets" :cmds '[rseq subseq rsubseq]]
                       ]
               :subsection "Maps"
               :table [["Create"
