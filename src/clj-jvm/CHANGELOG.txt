@@ -8,8 +8,12 @@ them to Using a Seq/Construct coll.  They return a vector, but they
 can take any collection as an argument, so Vector/Ops wasn't really
 appropriate.
 
+Add reduce-kv to Maps/Ops.  Previously it was only mentioned under
+Vectors, but its primary use is likely for maps.
+
 Add Sets/Sorted sets section with same functions as in Maps/Sorted
 maps, since those functions work on sorted sets, too.
+
 
 ----------------------------------------------------------------------
 Dec 19, 2014 - Clojure 1.3 - 1.6, sheet v20

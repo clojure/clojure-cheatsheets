@@ -372,6 +372,7 @@
                                {:latex "\\href{http://github.com/weavejester/medley}{Medley}"
                                 :html "<a href=\"http://github.com/weavejester/medley\">Medley</a>"}
                                ]]
+                      ["Ops" :cmds '["(1.4)" reduce-kv]]
                       ["Entry" :cmds '[key val]]
                       ["Sorted maps" :cmds '[rseq subseq rsubseq]]]
               ]
@@ -1316,13 +1317,13 @@
 
 
 (def latex-a4-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.4pt]{scrreprt}\n"
+     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.2pt]{scrreprt}\n"
           latex-header-except-documentclass))
 
 ;; US letter is a little shorter, so formatting gets completely messed
 ;; up unless we use a slightly smaller font size.
 (def latex-usletter-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.2pt,letterpaper]{scrreprt}\n"
+     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.0pt,letterpaper]{scrreprt}\n"
           latex-header-except-documentclass))
 
 
