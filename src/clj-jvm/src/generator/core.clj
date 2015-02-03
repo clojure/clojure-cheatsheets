@@ -153,7 +153,7 @@
                                           ]]
                       ["Arithmetic" :cmds '[+ - * / quot rem mod inc dec
                                             max min +' -' *' inc' dec']]
-                      ["Compare" :cmds '[= == not= < > <= >= compare]]
+                      ["Compare" :cmds '[== < > <= >= compare]]
                       ["Bitwise" :cmds '[[:common-prefix bit- and or xor not
                                           flip set shift-right shift-left
                                           and-not clear test]
@@ -398,7 +398,7 @@
                          {:latex "\\textmd{\\textsf{Note: always use return value for later changes, never original!}}",
                           :html "Note: always use return value for later changes, never original!"}]]]
               :subsection "Misc"
-              :table [["Compare" :cmds '[= == identical? not= not compare
+              :table [["Compare" :cmds '[= identical? not= not compare
                                          clojure.data/diff]]
                       ["Test" :cmds '[true? false? instance? nil?
                                       "(1.6)" some?]]]
