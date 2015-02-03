@@ -282,7 +282,8 @@
                        :cmds '[cons conj rest pop]]
                       ]
               :subsection "Vectors"
-              :table [["Create" :cmds '["[]" vector vec vector-of]]
+              :table [["Create" :cmds '["[]" vector vec vector-of
+                                        "(1.4)" mapv filterv]]
                       ["Examine" :cmds '[{:latex "\\cmd{(my-vec idx)} $\\to$ \\cmd{(}",
                                           :html "<code>(my-vec idx)</code> &rarr; <code>("}
                                          nth
@@ -296,7 +297,7 @@
                                          ]]
                       [{:html "'Change'", :latex "`Change'"}
                        :cmds '[assoc pop subvec replace conj rseq]]
-                      ["Ops" :cmds '["(1.4)" mapv filterv reduce-kv]]]
+                      ["Ops" :cmds '["(1.4)" reduce-kv]]]
               :subsection "Sets"
               :table [["Create" :cmds '[{:latex "\\#\\{\\}", :html "#{}"}
                                         set hash-set sorted-set sorted-set-by
@@ -434,7 +435,8 @@
                                               nnext nth nthnext rand-nth
                                               when-first max-key min-key]]
                       ["Construct coll" :cmds '[zipmap into reduce reductions
-                                                set vec into-array to-array-2d]]
+                                                set vec into-array to-array-2d
+                                                "(1.4)" mapv filterv]]
                       ["Pass to fn" :cmds '[apply]]
                       ["Search" :cmds '[some filter]]
                       ["Force evaluation" :cmds '[doseq dorun doall]]
