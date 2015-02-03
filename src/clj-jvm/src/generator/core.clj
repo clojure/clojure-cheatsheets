@@ -118,8 +118,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v20)"
-              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v20)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v21)"
+              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v21)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -345,6 +345,12 @@
                                ]]
                       ["Examine"
                        :cmds '[
+                               {:latex "\\cmd{(my-map k)} $\\to$ \\cmd{(}",
+                                :html "<code>(my-map k)</code> &rarr; <code>("}
+                               get
+                               {:latex " \\cmd{my-map k)}",
+                                :html " my-map k)</code>"}
+                               "also"
                                {:latex "\\cmd{(:key my-map)} $\\to$ \\cmd{(}",
                                 :html "<code>(:key my-map)</code> &rarr; <code>("}
                                get
