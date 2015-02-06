@@ -39,6 +39,27 @@ then
 fi
 /bin/mv cheatsheet-embeddable.html cheatsheet-embeddable-for-clojure.org.html
 
+if [ ${PRODUCE_PDF} == "yes" ]
+then
+    for PAPER in a4 usletter
+    do
+	for COLOR in color grey bw
+	do
+	    BASENAME="cheatsheet-${PAPER}-${COLOR}"
+	    latex ${BASENAME}
+	    dvipdfm ${BASENAME}
+	    
+            # Clean up some files created by latex
+	    /bin/rm -f ${BASENAME}.aux ${BASENAME}.dvi ${BASENAME}.log ${BASENAME}.out
+	done
+    done
+    /bin/mv *.pdf ../../pdf
+fi
+
+# Useful to uncomment this, to generate LaTeX and PDF only, for faster
+# iteration on problems with LaTeX files.
+#exit 0
+
 ######################################################################
 # Make multiple full versions for those who prefer something else,
 # e.g. no tooltips.
@@ -69,24 +90,3 @@ do
 	#exit 0
     done
 done
-
-# The command above will produce some warnings in a file called
-# warnings.log about "No URL known for symbol with name: ''()'", etc.
-# Those are harmless.
-
-if [ ${PRODUCE_PDF} == "yes" ]
-then
-    for PAPER in a4 usletter
-    do
-	for COLOR in color grey bw
-	do
-	    BASENAME="cheatsheet-${PAPER}-${COLOR}"
-	    latex ${BASENAME}
-	    dvipdfm ${BASENAME}
-	    
-            # Clean up some files created by latex
-	    /bin/rm -f ${BASENAME}.aux ${BASENAME}.dvi ${BASENAME}.log ${BASENAME}.out
-	done
-    done
-    /bin/mv *.pdf ../../pdf
-fi

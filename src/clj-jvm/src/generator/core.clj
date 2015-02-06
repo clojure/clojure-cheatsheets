@@ -118,8 +118,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v21)"
-              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v21)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v22)"
+              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v22)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -184,6 +184,10 @@
                                             subtract]]]]
               :subsection "Strings"
               :table [["Create" :cmds '[str format
+                                        {:latex "\\href{http://clojure.org/reader\\#The\\%20Reader--Reader\\%20forms}{\"a string\"} \\",
+                                         :html "<a href=\"http://clojure.org/reader#The%20Reader--Reader%20forms\">\"a string\"</a>"}
+                                        {:latex "\"escapes \\textbackslash b\\textbackslash f\\textbackslash n\\textbackslash t\\textbackslash r\\textbackslash \" octal \\textbackslash 377 hex \\textbackslash ucafe\"",
+                                         :html "\"escapes \\b\\f\\n\\t\\r\\\" octal \\377 hex \\ucafe\"",}
                                         {:latex "\\textmd{\\textsf{See also IO/to string}}",
                                          :html "See also IO/to string"}]]
                       ["Use" :cmds '[count get subs compare
@@ -245,9 +249,25 @@
                       ]
               :subsection "Other"
               :table [["Characters" :cmds '[char char-name-string
-                                            char-escape-string]]
-                      ["Keywords" :cmds '[keyword keyword? find-keyword]]
-                      ["Symbols" :cmds '[symbol symbol? gensym]]
+                                            char-escape-string
+                                            {:latex "\\href{http://clojure.org/reader\\#The\\%20Reader--Reader\\%20forms}{literals}:",
+                                             :html "<a href=\"http://clojure.org/reader#The%20Reader--Reader%20forms\">literals</a>:"}
+                                            {:latex "\\textbackslash a",
+                                             :html "\\a",}
+                                            {:latex "\\textbackslash newline",
+                                             :html "\\newline",}
+                                            "(more at link)"]]
+                      ["Keywords" :cmds '[keyword keyword? find-keyword
+                                          {:latex "\\href{http://clojure.org/reader\\#The\\%20Reader--Reader\\%20forms}{literals}:",
+                                           :html "<a href=\"http://clojure.org/reader#The%20Reader--Reader%20forms\">literals</a>:"}
+                                          ":kw" ":my.ns/kw" "::in-cur-ns"]]
+                      ["Symbols" :cmds '[symbol symbol? gensym
+                                         {:latex "\\href{http://clojure.org/reader\\#The\\%20Reader--Reader\\%20forms}{literals}:",
+                                          :html "<a href=\"http://clojure.org/reader#The%20Reader--Reader%20forms\">literals</a>:"}
+                                         "my-sym" "my.ns/foo"]]
+                      ["Misc" :cmds '[{:latex "\\href{http://clojure.org/reader\\#The\\%20Reader--Reader\\%20forms}{literals}:",
+                                       :html "<a href=\"http://clojure.org/reader#The%20Reader--Reader%20forms\">literals</a>:"}
+                                      "true" "false" "nil"]]
                       ]
               ]
              [:box "yellow"
@@ -1317,13 +1337,13 @@
 
 
 (def latex-a4-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.2pt]{scrreprt}\n"
+     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.0pt]{scrreprt}\n"
           latex-header-except-documentclass))
 
 ;; US letter is a little shorter, so formatting gets completely messed
 ;; up unless we use a slightly smaller font size.
 (def latex-usletter-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.0pt,letterpaper]{scrreprt}\n"
+     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=6.8pt,letterpaper]{scrreprt}\n"
           latex-header-except-documentclass))
 
 
