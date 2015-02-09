@@ -1044,7 +1044,7 @@
 
 (defn clojuredocs-url-fixup [s]
   (let [s (str/replace s "?" "_q")
-        s (str/replace s "/" "_")
+        s (str/replace s "/" "_fs")
         s (str/replace s "." "_dot")]
     s))
 
