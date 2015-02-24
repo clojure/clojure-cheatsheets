@@ -3,6 +3,7 @@
   (:require [clojure.set :as set])
   (:require [clojure.java.javadoc])
   (:require [clojure.java.io :as io])
+  (:require [clojure.data.avl])
   (:require [clojure.tools.reader.edn])
   (:require [clojure data pprint repl set string xml zip])
   (:require [clojure.core.reducers])
@@ -118,8 +119,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v22)"
-              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v22)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v23)"
+              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v23)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -321,6 +322,10 @@
               :subsection "Sets"
               :table [["Create" :cmds '[{:latex "\\#\\{\\}", :html "#{}"}
                                         set hash-set sorted-set sorted-set-by
+                                        {:latex "\\textmd{\\textsf{(clojure.data.avl/)}}",
+                                         :html "(clojure.data.avl/)"}
+                                        clojure.data.avl/sorted-set
+                                        clojure.data.avl/sorted-set-by
                                         {:latex "\\textmd{\\textsf{(flatland.ordered.set/)}}",
                                          :html "(flatland.ordered.set/)"}
                                         flatland.ordered.set/ordered-set]]
@@ -355,6 +360,10 @@
                                {:latex "\\textmd{\\textsf{(clojure.set/)}}",
                                 :html "(clojure.set/)"}
                                clojure.set/index
+                               {:latex "\\textmd{\\textsf{(clojure.data.avl/)}}",
+                                :html "(clojure.data.avl/)"}
+                               clojure.data.avl/sorted-map
+                               clojure.data.avl/sorted-map-by
                                {:latex "\\textmd{\\textsf{(flatland.ordered.map/)}}",
                                 :html "(flatland.ordered.map/)"}
                                flatland.ordered.map/ordered-map
@@ -1219,6 +1228,13 @@
       "https://github.com/clojure/data.priority-map" ]]
 
    (map (fn [sym-str]
+          [sym-str "http://github.com/clojure/data.avl" ])
+        [ "clojure.data.avl/sorted-set"
+          "clojure.data.avl/sorted-set-by"
+          "clojure.data.avl/sorted-map"
+          "clojure.data.avl/sorted-map-by" ])
+
+   (map (fn [sym-str]
           [sym-str "https://github.com/amalloy/ordered" ])
         [ "flatland.ordered.set/ordered-set"
           "flatland.ordered.map/ordered-map" ])
@@ -1337,13 +1353,13 @@
 
 
 (def latex-a4-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.0pt]{scrreprt}\n"
+     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=6.9pt]{scrreprt}\n"
           latex-header-except-documentclass))
 
 ;; US letter is a little shorter, so formatting gets completely messed
 ;; up unless we use a slightly smaller font size.
 (def latex-usletter-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=6.8pt,letterpaper]{scrreprt}\n"
+     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=6.7pt,letterpaper]{scrreprt}\n"
           latex-header-except-documentclass))
 
 
@@ -1587,6 +1603,7 @@ document.write('<style type=\"text/css\">%s<\\/style>')
    "clojure.set/"
    "clojure.string/"
    "clojure.tools.reader.edn/"
+   "clojure.data.avl/"
    "clojure.walk/"
    "clojure.zip/"
    "clojure.data.priority-map/"
