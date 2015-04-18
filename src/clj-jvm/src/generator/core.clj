@@ -119,8 +119,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v23)"
-              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v23)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v24)"
+              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v24)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -291,8 +291,9 @@
                                               counted? reversible?]]
                       ["Type tests" :cmds '[coll? list? vector? set? map?
                                             seq? "(1.6)" record?]]]
-              :subsection "Lists"
-              :table [["Create" :cmds '["'()" list list*]]
+              :subsection {:latex "Lists (conj, pop, \\& peek at beginning)"
+                           :html "Lists (conj, pop, &amp; peek at beginning)"}
+              :table [["Create" :cmds '["()" list list*]]
                       ["Examine" :cmds-with-frenchspacing '[first nth peek
                                                             {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/util/Vector.html\\#indexOf\\%28java.lang.Object\\%29}{.indexOf}"
                                                              :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/util/Vector.html#indexOf%28java.lang.Object%29\">.indexOf</a>"}
@@ -302,7 +303,8 @@
                       [{:html "'Change'", :latex "`Change'"}
                        :cmds '[cons conj rest pop]]
                       ]
-              :subsection "Vectors"
+              :subsection {:latex "Vectors (conj, pop, \\& peek at end)"
+                           :html "Vectors (conj, pop, &amp; peek at end)"}
               :table [["Create" :cmds '["[]" vector vec vector-of
                                         "(1.4)" mapv filterv]]
                       ["Examine" :cmds '[{:latex "\\cmd{(my-vec idx)} $\\to$ \\cmd{(}",
@@ -407,6 +409,13 @@
               ]
              :column
              [:box "yellow"
+              :subsection {:latex "Queues (conj at end, peek \\& pop from beginning)"
+                           :html "Queues (conj at end, peek &amp; pop from beginning)"}
+              :table [["Create"
+                       :cmds '[ "clojure.lang.PersistentQueue/EMPTY"
+                                "(no literal syntax or constructor fn)" ]]
+                       ["Examine" :cmds '[ peek ]]
+                       ["'Change'" :cmds '[ conj pop ]]]
               :subsection "Relations (set of maps, each with same keys, aka rels)"
               :table [["Rel algebra"
                        :cmds '[

@@ -1,4 +1,15 @@
 ----------------------------------------------------------------------
+Mar 22, 2015 - Clojure 1.3 - 1.6, sheet v24
+
+Added new section Collections/Queues for Clojure's persistent queues.
+
+Changed literal example of list in Collections/List/Create from '() to
+().  The quote is unnecessary for an empty list.  Reason it was
+probably there: quoting is more commonly used for lists with one or
+more values in them than for other collections, to avoid treatment of
+the list as a function call or macro invocation.
+
+----------------------------------------------------------------------
 Feb 24, 2015 - Clojure 1.3 - 1.6, sheet v23
 
 Added data.avl constructors for sorted sets and sorted maps:
