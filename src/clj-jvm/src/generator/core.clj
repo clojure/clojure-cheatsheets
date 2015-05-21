@@ -119,14 +119,15 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v24)"
-              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v24)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v25)"
+              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v25)"}
       :page [:column
              [:box "green"
               :section "Documentation"
               :table [["clojure.repl/"
                        :cmds '[clojure.repl/doc clojure.repl/find-doc
-                               clojure.repl/apropos clojure.repl/source
+                               clojure.repl/apropos clojure.repl/dir
+                               clojure.repl/source
                                clojure.repl/pst clojure.java.javadoc/javadoc
                                "(foo.bar/ is namespace for later syms)"]]]
               ]
@@ -445,7 +446,7 @@
               :section "Sequences"
               :subsection "Creating a Lazy Seq"
               :table [["From collection" :cmds '[seq vals keys rseq
-                                                 subseq rsubseq]]
+                                                 subseq rsubseq sequence]]
                       ["From producer fn" :cmds '[lazy-seq repeatedly iterate]]
                       ["From constant" :cmds '[repeat range]]
                       ["From other" :cmds '[file-seq line-seq resultset-seq
@@ -970,7 +971,8 @@
               :table [["General" :cmds '[.. doto "Classname/" "Classname."
                                          new bean comparator enumeration-seq
                                          import iterator-seq memfn set! class
-                                         class? bases supers type]]
+                                         class? bases supers type
+                                         gen-class gen-interface definterface]]
                       ["Cast" :cmds '[boolean byte short char int long
                                       float double bigdec bigint num cast
                                       biginteger]]
@@ -1008,8 +1010,8 @@
                                       *print-level* *print-meta*
                                       *print-readably*]]
                       ["Code" :cmds '[*compile-files* *compile-path* *file*
-                                      *warn-on-reflection* compile gen-class
-                                      gen-interface loaded-libs test]]
+                                      *warn-on-reflection* compile
+                                      loaded-libs test]]
                       ["Misc" :cmds '[eval force hash name *clojure-version*
                                       clojure-version *command-line-args*]]
                       [{:latex "\\begin{tabular}[t]{@{}l@{}} Browser \\\\ / Shell \\end{tabular}"
