@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------
+May 22, 2015 - Clojure 1.3 - 1.6, sheet v26
+
+Add underive to section Multimethods/Relation
+
+---------------------------------------------------------------------
 May 21, 2015 - Clojure 1.3 - 1.6, sheet v25
 
 Added definterface to section Java Interoperation/General.  Moved
