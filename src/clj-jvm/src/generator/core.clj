@@ -712,7 +712,7 @@
                       ["Dispatch" :cmds '[get-method methods]]
                       ["Remove" :cmds '[remove-method remove-all-methods]]
                       ["Prefer" :cmds '[prefer-method prefers]]
-                      ["Relation" :cmds '[derive isa? parents ancestors
+                      ["Relation" :cmds '[derive underive isa? parents ancestors
                                           descendants make-hierarchy]]]
               ]
              [:box "green"
