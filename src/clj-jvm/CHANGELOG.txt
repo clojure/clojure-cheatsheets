@@ -1,4 +1,26 @@
 ---------------------------------------------------------------------
+May 23, 2015 - Clojure 1.4 - 1.7, sheet v27
+
+Made 'minimum version' Clojure 1.4, removing all (1.4) tags marking
+things as new in 1.4.  Tags for things new in (1.5) (1.6) are still
+present, as are tags (1.7) for things new in Clojure 1.7.0.
+
+New things for Clojure 1.7:
+
+Added reader conditionals #? and #?@ to section Reader Macros.
+
+Added update to Maps/'Change'.  Added update and update-in to
+Vectors/'Change'.
+
+Added new category Concurrency/Volatiles for volatile! vreset! vswap!
+volatile?
+
+Added run! to section Using a Seq/Force evaluation
+
+Added new top level section Transducers, containing sections Off the
+shelf, Create your own, Use, Early Termination.
+
+---------------------------------------------------------------------
 May 22, 2015 - Clojure 1.3 - 1.6, sheet v26
 
 Add underive to section Multimethods/Relation

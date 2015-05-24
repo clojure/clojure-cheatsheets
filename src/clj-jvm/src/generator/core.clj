@@ -119,8 +119,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v26)"
-              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v26)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.4 - 1.7, sheet v27)"
+              :html "Clojure Cheat Sheet (Clojure 1.7 - 1.7, sheet v27)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -190,8 +190,8 @@
                                          :html "<a href=\"http://clojure.org/reader#The%20Reader--Reader%20forms\">\"a string\"</a>"}
                                         {:latex "\"escapes \\textbackslash b\\textbackslash f\\textbackslash n\\textbackslash t\\textbackslash r\\textbackslash \" octal \\textbackslash 377 hex \\textbackslash ucafe\"",
                                          :html "\"escapes \\b\\f\\n\\t\\r\\\" octal \\377 hex \\ucafe\"",}
-                                        {:latex "\\textmd{\\textsf{See also IO/to string}}",
-                                         :html "See also IO/to string"}]]
+                                        {:latex "\\textmd{\\textsf{See also section IO/to string}}",
+                                         :html "See also section IO/to string"}]]
                       ["Use" :cmds '[count get subs compare
                                      {:latex "\\textmd{\\textsf{(clojure.string/)}}",
                                       :html "(clojure.string/)"}
@@ -307,7 +307,7 @@
               :subsection {:latex "Vectors (conj, pop, \\& peek at end)"
                            :html "Vectors (conj, pop, &amp; peek at end)"}
               :table [["Create" :cmds '["[]" vector vec vector-of
-                                        "(1.4)" mapv filterv]]
+                                        mapv filterv]]
                       ["Examine" :cmds '[{:latex "\\cmd{(my-vec idx)} $\\to$ \\cmd{(}",
                                           :html "<code>(my-vec idx)</code> &rarr; <code>("}
                                          nth
@@ -320,8 +320,9 @@
                                           :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/util/Vector.html#lastIndexOf%28java.lang.Object%29\">.lastIndexOf</a>"}
                                          ]]
                       [{:html "'Change'", :latex "`Change'"}
-                       :cmds '[assoc pop subvec replace conj rseq]]
-                      ["Ops" :cmds '["(1.4)" reduce-kv]]]
+                       :cmds '[assoc pop subvec replace conj rseq update-in
+                               "(1.7)" update]]
+                      ["Ops" :cmds '[reduce-kv]]]
               :subsection "Sets"
               :table [["Create" :cmds '[{:latex "\\#\\{\\}", :html "#{}"}
                                         set hash-set sorted-set sorted-set-by
@@ -345,8 +346,8 @@
                                 :html "(clojure.set/)"}
                                clojure.set/union clojure.set/difference
                                clojure.set/intersection clojure.set/select
-                               {:latex "\\textmd{\\textsf{See also Relations}}",
-                                :html "See also Relations"}
+                               {:latex "\\textmd{\\textsf{See also section Relations}}",
+                                :html "See also section Relations"}
                                ]]
                       ["Test"
                        :cmds '[{:latex "\\textmd{\\textsf{(clojure.set/)}}",
@@ -395,6 +396,7 @@
                       [{:html "'Change'", :latex "`Change'"}
                        :cmds '[assoc assoc-in dissoc merge
                                merge-with select-keys update-in
+                               "(1.7)" update
                                {:latex "\\textmd{\\textsf{(clojure.set/)}}",
                                 :html "(clojure.set/)"}
                                clojure.set/rename-keys
@@ -404,7 +406,7 @@
                                {:latex "\\href{http://github.com/weavejester/medley}{Medley}"
                                 :html "<a href=\"http://github.com/weavejester/medley\">Medley</a>"}
                                ]]
-                      ["Ops" :cmds '["(1.4)" reduce-kv]]
+                      ["Ops" :cmds '[reduce-kv]]
                       ["Entry" :cmds '[key val]]
                       ["Sorted maps" :cmds '[rseq subseq rsubseq]]]
               ]
@@ -477,11 +479,30 @@
                                               when-first max-key min-key]]
                       ["Construct coll" :cmds '[zipmap into reduce reductions
                                                 set vec into-array to-array-2d
-                                                "(1.4)" mapv filterv]]
+                                                mapv filterv]]
                       ["Pass to fn" :cmds '[apply]]
                       ["Search" :cmds '[some filter]]
-                      ["Force evaluation" :cmds '[doseq dorun doall]]
+                      ["Force evaluation" :cmds '[doseq dorun doall
+                                                  "(1.7)" run!]]
                       ["Check for forced" :cmds '[realized?]]]
+              ]
+             [:box "blue"
+              :section {:latex "Transducers (\\href{http://clojure.org/transducers}{clojure.org/transducers})"
+                        :html "Transducers (<a href=\"http://clojure.org/transducers\">clojure.org/transducers</a>)"}
+              :table [["Off the shelf"
+                       :cmds '[map mapcat filter remove take
+                               take-while take-nth drop drop-while
+                               replace partition-by partition-all
+                               keep keep-indexed map-indexed distinct
+                               interpose
+                               "(1.7)" cat dedupe random-sample]]
+                      ["Create your own"
+                       :cmds '["(1.7)" completing ensure-reduced unreduced
+                               {:latex "\\textmd{\\textsf{See also section Concurrency/Volatiles}}",
+                                :html "See also section Concurrency/Volatiles"}]]
+                      ["Use" :cmds '[into sequence
+                                     "(1.7)" transduce eduction]]
+                      ["Early termination" :cmds '[reduced reduced? deref]]]
               ]
              [:box "green"
               :subsection "Zippers (clojure.zip/)"
@@ -594,7 +615,7 @@
                                       {:latex "\\href{http://github.com/Raynes/fs}{fs}"
                                        :html "<a href=\"http://github.com/Raynes/fs\">fs</a>"}
                                       ]]
-                      ["Data readers" :cmds '["(1.4)" *data-readers*
+                      ["Data readers" :cmds '[*data-readers*
                                               default-data-readers
                                               "(1.5)" *default-data-reader-fn*]]
                       ]
@@ -794,7 +815,24 @@
                                :html "<code>#(...)</code> &rarr; <code>(fn [args] (...))</code>"}]]
                       [{:latex "\\cmd{\\#\\_}",
                         :html "<code>#_</code>"}
-                       :str "Ignore next form"]]
+                       :str "Ignore next form"]
+                      [{:latex "\\cmd{\\#?}",
+                        :html "<code>#?</code>"}
+                       :cmds ["(1.7)"
+                              {:latex "\\href{http://clojure.org/reader\\#The\\%20Reader--Reader\\%20Conditionals}{Reader conditional}:"
+                               :html "<a href=\"http://clojure.org/reader#The%20Reader--Reader%20Conditionals\">Reader conditional</a>:"}
+                              {:latex "\\#?(:clj x :cljs y) reads as x on JVM, y in ClojureScript, nothing elsewhere.  Other keys: :cljr :default",
+                               :html "<code>#?(:clj x :cljs y)</code> reads as <code>x</code> on JVM, <code>y</code> in ClojureScript, nothing elsewhere.  Other keys: <code>:cljr :default</code>"}
+                              ]]
+                      [{:latex "\\cmd{\\#?@}",
+                        :html "<code>#?@</code>"}
+                       :cmds ["(1.7)"
+                              {:latex "\\href{http://clojure.org/reader\\#The\\%20Reader--Reader\\%20Conditionals}{Splicing reader conditional}:"
+                               :html "<a href=\"http://clojure.org/reader#The%20Reader--Reader%20Conditionals\">Splicing reader conditional</a>:"}
+                              {:latex "[1 \\#?@(:clj [x y] :cljs [w z]) 3] reads as [1 x y 3] on JVM, [1 w z 3] in ClojureScript, [1 3] elsewhere.",
+                               :html "<code>[1 #?(:clj [x y] :cljs [w z]) 3]</code> reads as <code>[1 x y 3]</code> on JVM, <code>[1 w z 3]</code> in ClojureScript, <code>[1 3]</code> elsewhere."}
+                              ]]
+                      ]
               ]
              [:box "red"
               :section {:latex "Metadata (\\href{http://clojure.org/reader\\#The\\%20Reader--Macro\\%20characters}{clojure.org/reader}, \\href{http://clojure.org/special\\_forms}{special\\_forms})"
@@ -934,6 +972,8 @@
                                          [:common-suffix -thread-bindings
                                           get push pop]
                                          thread-bound?]]
+                      ["Volatiles" :cmds '["(1.7)" volatile! vreset! vswap!
+                                           volatile?]]
                       ["Misc" :cmds '[locking pcalls pvalues pmap seque
                                       promise deliver]]]
               :subsection {:latex "Refs and Transactions (\\href{http://clojure.org/refs}{clojure.org/refs})"
@@ -978,7 +1018,7 @@
                                       biginteger]]
                       ["Exceptions" :cmds '[throw try catch finally
                                             clojure.repl/pst
-                                            "(1.4)" ex-info ex-data]]]
+                                            ex-info ex-data]]]
               :subsection "Arrays"
               :table [["Create" :cmds '[make-array
                                         [:common-suffix -array object
@@ -1370,7 +1410,7 @@
 ;; US letter is a little shorter, so formatting gets completely messed
 ;; up unless we use a slightly smaller font size.
 (def latex-usletter-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=6.7pt,letterpaper]{scrreprt}\n"
+     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=6.6pt,letterpaper]{scrreprt}\n"
           latex-header-except-documentclass))
 
 
