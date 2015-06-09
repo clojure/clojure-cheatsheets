@@ -124,8 +124,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v27)"
-              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v27)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v28)"
+              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v28)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -753,8 +753,8 @@
                       ["Doc." :cmds '[assert comment clojure.repl/doc]]]
               ]
              [:box "yellow"
-              :section {:latex "Reader Macros (\\href{http://clojure.org/reader\\#The\\%20Reader--Macro\\%20characters}{clojure.org/reader})"
-                        :html "Reader Macros (<a href=\"http://clojure.org/reader#The%20Reader--Macro%20characters\">clojure.org/reader</a>)"}
+              :section {:latex "Special Characters (\\href{http://clojure.org/reader\\#The\\%20Reader--Macro\\%20characters}{clojure.org/reader}, \\href{https://yobriefca.se/blog/2014/05/19/the-weird-and-wonderful-characters-of-clojure/}{tutorial})"
+                        :html "Special Characters (<a href=\"http://clojure.org/reader#The%20Reader--Macro%20characters\">clojure.org/reader</a>, <a href=\"https://yobriefca.se/blog/2014/05/19/the-weird-and-wonderful-characters-of-clojure/\">tutorial</a>)"}
               :table [[{:latex "\\cmd{'}",
                         :html "<code>'</code>"}
                        :cmds '[{:latex "\\href{http://clojure.org/special\\_forms\\#quote}{quote}: 'form $\\to$ (",
@@ -762,15 +762,25 @@
                                quote
                                {:latex "form)",
                                 :html "<code><var>form</var>)</code>"}]]
+                      [{:latex "\\cmd{/}",
+                        :html "<code>/</code>"}
+                       :str "Namespace separator (see Primitives/Other section)"]
                       [{:latex "\\cmd{\\textbackslash}",
                         :html "<code>\\</code>"}
-                       :str "Character literal"]
+                       :str "Character literal (see Primitives/Other section)"]
+                      [{:latex "\\cmd{:}",
+                        :html "<code>:</code>"}
+                       :str "Keyword (see Primitives/Other section)"]
                       [{:latex "\\cmd{;}",
                         :html "<code>;</code>"}
                        :str "Single line comment"]
                       [{:latex "\\cmd{\\^{}}",
                         :html "<code>^</code>"}
                        :str "Metadata (see Metadata section)"]
+                      [{:latex "\\cmd{*foo*}",
+                        :html "<code>*foo*</code>"}
+                       :cmds '[{:latex "'earmuffs' - convention to indicate \\href{http://clojure.org/vars}{dynamic vars}, compiler warns if not dynamic",
+                                :html "'earmuffs' - convention to indicate <a href=\"http://clojure.org/vars\">dynamic vars</a>, compiler warns if not dynamic"}]]
                       [{:latex "\\cmd{@}",
                         :html "<code>@</code>"}
                        :cmds '[{:latex "Deref: @form $\\to$ (",
@@ -790,10 +800,20 @@
                         :html "<code>~@</code>"}
                        :cmds '[{:latex "\\href{http://clojure.org/reader\\#syntax-quote}{Unquote-splicing}"
                                 :html "<a href=\"http://clojure.org/reader#syntax-quote\">Unquote-splicing</a>"}]]
+                      [{:latex "\\cmd{->}",
+                        :html "<code>-></code>"}
+                       :cmds '[ "'thread first' macro" -> ]]
+                      [{:latex "\\cmd{->{>}}",
+                        :html "<code>->></code>"}
+                       :cmds '[ "'thread last' macro" ->> ]]
                       [{:latex "\\cmd{\\#\"}\\textit{p}\\cmd{\"}",
                         :html "<code>#\"<var>p</var>\"</code>"}
                        :str {:latex "Regex Pattern \\textit{p}  (see Strings/Regex section)",
                              :html "Regex Pattern <var>p</var>  (see Strings/Regex section)"}]
+                      [{:latex "\\cmd{\\#\\{}",
+                        :html "<code>#{</code>"}
+                       :str {:latex "Set literal (see Collections/Sets section)",
+                             :html "Set literal (see Collections/Sets section)"}]
                       [{:latex "\\cmd{\\#$'$}",
                         :html "<code>#'</code>"}
                        :cmds '[{:latex "Var-quote \\#$'$x $\\to$ (",
@@ -808,6 +828,26 @@
                                :html "<a href=\"http://clojure.org/reader#The%20Reader--Macro%20characters\">Anonymous function literal</a>:"}
                               {:latex "\\#(...) $\\to$ (fn [args] (...))",
                                :html "<code>#(...)</code> &rarr; <code>(fn [args] (...))</code>"}]]
+                      [{:latex "\\cmd{\\%}",
+                        :html "<code>%</code>"}
+                       :cmds '[{:latex "\\href{http://clojure.org/reader\\#The\\%20Reader--Macro\\%20characters}{Anonymous function argument}: \\cmd{\\%N} is value of anonymous function arg \\cmd{N}.  \\cmd{\\%} short for \\cmd{\\%{1}}.  \\cmd{\\%\\&} for rest args."
+                                :html "<a href=\"http://clojure.org/reader#The%20Reader--Macro%20characters\">Anonymous function argument</a>: <code>%N</code> is value of anonymous function arg <code>N</code>.  <code>%</code> short for <code>%1</code>.  <code>%&</code> for rest args."}
+                               ]]
+                      [{:latex "\\cmd{\\$}",
+                        :html "<code>$</code>"}
+                       :cmds '[{:latex "\\cmd{JavaContainerClass\\$InnerClass}",
+                                :html "<code>JavaContainerClass$InnerClass</code>"} ]]
+                      [{:latex "\\cmd{foo?}",
+                        :html "<code>foo?</code>"}
+                       :cmds '["conventional ending for a predicate, e.g.:"
+                               zero? vector? instance? "(unenforced)"]]
+                      [{:latex "\\cmd{foo!}",
+                        :html "<code>foo!</code>"}
+                       :cmds '["conventional ending for an unsafe operation, e.g.:"
+                               set! swap! alter-meta! "(unenforced)"]]
+                      [{:latex "\\cmd{\\_}",
+                        :html "<code>_</code>"}
+                       :cmds '["conventional name for an unused value (unenforced)"]]
                       [{:latex "\\cmd{\\#\\_}",
                         :html "<code>#_</code>"}
                        :str "Ignore next form"]]
