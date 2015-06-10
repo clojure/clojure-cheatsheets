@@ -1,4 +1,26 @@
 ---------------------------------------------------------------------
+June 9, 2015 - Clojure 1.3 - 1.6, sheet v29
+
+In Strings/Regex section, mention that \ characters inside #"" are not
+escape characters, but represent themselves.
+
+In Special Characters section, added entries for these:
+
+    , read as white space
+    ( list literal
+    [ vector literal
+    { map literal
+
+Also change entries in left column to only show the beginning of the
+sequence, with more full example in the right column.
+
+    Replace #() with #( in left column
+    Replace #"p" with #" in left column
+
+Tweaked ' character in var-quote to look like single quote in LaTeX /
+PDF versions, not like mathematics prime.
+
+---------------------------------------------------------------------
 June 8, 2015 - Clojure 1.3 - 1.6, sheet v28
 
 Renamed section "Reader Macros" to "Special Characters", and added
