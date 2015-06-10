@@ -5,6 +5,7 @@
             [clojure.java.io :as io]
             [clojure.data.priority-map]
             [clojure.data.avl]
+            [clojure.core.rrb-vector]
             [clojure.data.int-map]
             [clojure.tools.reader.edn]
             [flatland.ordered.set]
@@ -124,8 +125,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v29)"
-              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v29)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v30)"
+              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v30)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -314,7 +315,12 @@
               :subsection {:latex "Vectors (conj, pop, \\& peek at end)"
                            :html "Vectors (conj, pop, &amp; peek at end)"}
               :table [["Create" :cmds '["[]" vector vec vector-of
-                                        "(1.4)" mapv filterv]]
+                                        "(1.4)" mapv filterv
+                                        {:latex "\\textmd{\\textsf{(clojure.core.rrb-vector/)}}",
+                                         :html "(clojure.core.rrb-vector/)"}
+                                        clojure.core.rrb-vector/vector
+                                        clojure.core.rrb-vector/vec
+                                        clojure.core.rrb-vector/vector-of]]
                       ["Examine" :cmds '[{:latex "\\cmd{(my-vec idx)} $\\to$ \\cmd{(}",
                                           :html "<code>(my-vec idx)</code> &rarr; <code>("}
                                          nth
@@ -1316,6 +1322,12 @@
           "clojure.data.avl/sorted-map-by" ])
 
    (map (fn [sym-str]
+          [sym-str "http://github.com/clojure/core.rrb-vector" ])
+        [ "clojure.core.rrb-vector/vector"
+          "clojure.core.rrb-vector/vec"
+          "clojure.core.rrb-vector/vector-of" ])
+
+   (map (fn [sym-str]
           [sym-str "http://github.com/clojure/data.int-map" ])
         [ "clojure.data.int-map/int-set"
           "clojure.data.int-map/dense-int-set"
@@ -1440,13 +1452,13 @@
 
 
 (def latex-a4-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=6.7pt]{scrreprt}\n"
+     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=6.6pt]{scrreprt}\n"
           latex-header-except-documentclass))
 
 ;; US letter is a little shorter, so formatting gets completely messed
 ;; up unless we use a slightly smaller font size.
 (def latex-usletter-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=6.5pt,letterpaper]{scrreprt}\n"
+     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=6.4pt,letterpaper]{scrreprt}\n"
           latex-header-except-documentclass))
 
 
@@ -1691,6 +1703,7 @@ document.write('<style type=\"text/css\">%s<\\/style>')
    "clojure.string/"
    "clojure.tools.reader.edn/"
    "clojure.data.avl/"
+   "clojure.core.rrb-vector/"
    "clojure.data.int-map/"
    "clojure.walk/"
    "clojure.zip/"
