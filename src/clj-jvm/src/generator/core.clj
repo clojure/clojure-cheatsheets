@@ -125,8 +125,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v30)"
-              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v30)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v31)"
+              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.6, sheet v31)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -804,6 +804,10 @@
                         :html "<code>`</code>"}
                        :cmds '[{:latex "\\href{http://clojure.org/reader\\#syntax-quote}{Syntax-quote}"
                                 :html "<a href=\"http://clojure.org/reader#syntax-quote\">Syntax-quote</a>"}]]
+                      [{:latex "\\cmd{foo\\#}"
+                        :html "<code>foo#</code>"}
+                       :cmds '[{:latex "\\href{http://clojure.org/reader\\#syntax-quote}{'auto-gensym'}, consistently replaced with same auto-generated symbol everywhere inside same \\cmd{`( ... )}"
+                                :html "<a href=\"http://clojure.org/reader#syntax-quote\">'auto-gensym'</a>, consistently replaced with same auto-generated symbol everywhere inside same <code>`( ... )</code>"}]]
                       [{:latex "\\cmd{\\textasciitilde}",
                         :html "<code>~</code>"}
                        :cmds '[{:latex "\\href{http://clojure.org/reader\\#syntax-quote}{Unquote}"
@@ -853,6 +857,10 @@
                        :cmds '[{:latex "\\href{http://clojure.org/reader\\#The\\%20Reader--Macro\\%20characters}{Anonymous function argument}: \\cmd{\\%N} is value of anonymous function arg \\cmd{N}.  \\cmd{\\%} short for \\cmd{\\%{1}}.  \\cmd{\\%\\&} for rest args."
                                 :html "<a href=\"http://clojure.org/reader#The%20Reader--Macro%20characters\">Anonymous function argument</a>: <code>%N</code> is value of anonymous function arg <code>N</code>.  <code>%</code> short for <code>%1</code>.  <code>%&</code> for rest args."}
                                ]]
+                      [{:latex "\\cmd{\\#foo}",
+                        :html "<code>#foo</code>"}
+                       :cmds [{:latex "\\href{http://clojure.org/reader\\#The\\%20Reader--Tagged\\%20Literals}{tagged literal} e.g. \\cmd{\\#inst} \\cmd{\\#uuid}"
+                               :html "<a href=\"http://clojure.org/reader#The%20Reader--Tagged%20Literals\">tagged literal</a> e.g. <code>#inst</code> <code>#uuid</code>"}]]
                       [{:latex "\\cmd{\\$}",
                         :html "<code>$</code>"}
                        :cmds '[{:latex "\\cmd{JavaContainerClass\\$InnerClass}",
