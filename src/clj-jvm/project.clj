@@ -13,5 +13,6 @@
                  [org.clojure/tools.reader "0.7.10"]
                  [org.flatland/ordered "1.5.3"]
                  [org.flatland/useful "0.11.3"]
+                 [org.clojure/core.rrb-vector "0.0.11"]
                  [org.clojure-grimoire/lib-grimoire "0.6.0"]]
   :main generator.core)

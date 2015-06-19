@@ -5,6 +5,7 @@
             [clojure.java.io :as io]
             [clojure.data.priority-map]
             [clojure.data.avl]
+            [clojure.core.rrb-vector]
             [clojure.data.int-map]
             [clojure.tools.reader.edn]
             [flatland.ordered.set]
@@ -124,8 +125,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.4 - 1.7, sheet v28)"
-              :html "Clojure Cheat Sheet (Clojure 1.7 - 1.7, sheet v28)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.4 - 1.7, sheet v32)"
+              :html "Clojure Cheat Sheet (Clojure 1.4 - 1.7, sheet v32)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -229,7 +230,9 @@
                                        clojure.string/replace
                                        clojure.string/replace-first
                                        "(1.5)"
-                                       clojure.string/re-quote-replacement]]
+                                       clojure.string/re-quote-replacement
+                                       {:latex "Note: \\textbackslash{} in \\cmd{\\#\"\"} is not escape char. \\cmd{(re-pattern \"{\\textbackslash}{\\textbackslash}s*{\\textbackslash}{\\textbackslash}d+\")} can be written \\cmd{\\#\"{\\textbackslash}s*{\\textbackslash}d+\"}",
+                                        :html "Note: \\ in <code>#\"\"</code> is not escape char. <code>(re-pattern \"\\\\s*\\\\d+\")</code> can be written <code>#\"\\s*\\d+\"</code>"}]]
                       ["Letters" :cmds '[{:latex "\\textmd{\\textsf{(clojure.string/)}}",
                                           :html "(clojure.string/)"}
                                          clojure.string/capitalize
@@ -312,7 +315,12 @@
               :subsection {:latex "Vectors (conj, pop, \\& peek at end)"
                            :html "Vectors (conj, pop, &amp; peek at end)"}
               :table [["Create" :cmds '["[]" vector vec vector-of
-                                        mapv filterv]]
+                                        mapv filterv
+                                        {:latex "\\textmd{\\textsf{(clojure.core.rrb-vector/)}}",
+                                         :html "(clojure.core.rrb-vector/)"}
+                                        clojure.core.rrb-vector/vector
+                                        clojure.core.rrb-vector/vec
+                                        clojure.core.rrb-vector/vector-of]]
                       ["Examine" :cmds '[{:latex "\\cmd{(my-vec idx)} $\\to$ \\cmd{(}",
                                           :html "<code>(my-vec idx)</code> &rarr; <code>("}
                                          nth
@@ -774,24 +782,38 @@
                       ["Doc." :cmds '[assert comment clojure.repl/doc]]]
               ]
              [:box "yellow"
-              :section {:latex "Reader Macros (\\href{http://clojure.org/reader\\#The\\%20Reader--Macro\\%20characters}{clojure.org/reader})"
-                        :html "Reader Macros (<a href=\"http://clojure.org/reader#The%20Reader--Macro%20characters\">clojure.org/reader</a>)"}
-              :table [[{:latex "\\cmd{'}",
+              :section {:latex "Special Characters (\\href{http://clojure.org/reader\\#The\\%20Reader--Macro\\%20characters}{clojure.org/reader}, \\href{https://yobriefca.se/blog/2014/05/19/the-weird-and-wonderful-characters-of-clojure/}{tutorial})"
+                        :html "Special Characters (<a href=\"http://clojure.org/reader#The%20Reader--Macro%20characters\">clojure.org/reader</a>, <a href=\"https://yobriefca.se/blog/2014/05/19/the-weird-and-wonderful-characters-of-clojure/\">tutorial</a>)"}
+              :table [
+                      [{:latex "\\cmd{,}",
+                        :html "<code>,</code>"}
+                       :str "Comma reads as white space.  Often used between map key/value pairs for readability."]
+                      [{:latex "\\cmd{'}",
                         :html "<code>'</code>"}
                        :cmds '[{:latex "\\href{http://clojure.org/special\\_forms\\#quote}{quote}: 'form $\\to$ (",
                                 :html "<a href=\"http://clojure.org/special_forms#quote\">quote</a>: <code>'<var>form</var></code> &rarr; <code>(</code>"}
                                quote
                                {:latex "form)",
                                 :html "<code><var>form</var>)</code>"}]]
+                      [{:latex "\\cmd{/}",
+                        :html "<code>/</code>"}
+                       :str "Namespace separator (see Primitives/Other section)"]
                       [{:latex "\\cmd{\\textbackslash}",
                         :html "<code>\\</code>"}
-                       :str "Character literal"]
+                       :str "Character literal (see Primitives/Other section)"]
+                      [{:latex "\\cmd{:}",
+                        :html "<code>:</code>"}
+                       :str "Keyword (see Primitives/Other section)"]
                       [{:latex "\\cmd{;}",
                         :html "<code>;</code>"}
                        :str "Single line comment"]
                       [{:latex "\\cmd{\\^{}}",
                         :html "<code>^</code>"}
                        :str "Metadata (see Metadata section)"]
+                      [{:latex "\\cmd{*foo*}",
+                        :html "<code>*foo*</code>"}
+                       :cmds '[{:latex "'earmuffs' - convention to indicate \\href{http://clojure.org/vars}{dynamic vars}, compiler warns if not dynamic",
+                                :html "'earmuffs' - convention to indicate <a href=\"http://clojure.org/vars\">dynamic vars</a>, compiler warns if not dynamic"}]]
                       [{:latex "\\cmd{@}",
                         :html "<code>@</code>"}
                        :cmds '[{:latex "Deref: @form $\\to$ (",
@@ -803,6 +825,10 @@
                         :html "<code>`</code>"}
                        :cmds '[{:latex "\\href{http://clojure.org/reader\\#syntax-quote}{Syntax-quote}"
                                 :html "<a href=\"http://clojure.org/reader#syntax-quote\">Syntax-quote</a>"}]]
+                      [{:latex "\\cmd{foo\\#}"
+                        :html "<code>foo#</code>"}
+                       :cmds '[{:latex "\\href{http://clojure.org/reader\\#syntax-quote}{'auto-gensym'}, consistently replaced with same auto-generated symbol everywhere inside same \\cmd{`( ... )}"
+                                :html "<a href=\"http://clojure.org/reader#syntax-quote\">'auto-gensym'</a>, consistently replaced with same auto-generated symbol everywhere inside same <code>`( ... )</code>"}]]
                       [{:latex "\\cmd{\\textasciitilde}",
                         :html "<code>~</code>"}
                        :cmds '[{:latex "\\href{http://clojure.org/reader\\#syntax-quote}{Unquote}"
@@ -811,27 +837,47 @@
                         :html "<code>~@</code>"}
                        :cmds '[{:latex "\\href{http://clojure.org/reader\\#syntax-quote}{Unquote-splicing}"
                                 :html "<a href=\"http://clojure.org/reader#syntax-quote\">Unquote-splicing</a>"}]]
-                      [{:latex "\\cmd{\\#\"}\\textit{p}\\cmd{\"}",
-                        :html "<code>#\"<var>p</var>\"</code>"}
-                       :str {:latex "Regex Pattern \\textit{p}  (see Strings/Regex section)",
-                             :html "Regex Pattern <var>p</var>  (see Strings/Regex section)"}]
-                      [{:latex "\\cmd{\\#$'$}",
+                      [{:latex "\\cmd{->}",
+                        :html "<code>-></code>"}
+                       :cmds '[ "'thread first' macro" -> ]]
+                      [{:latex "\\cmd{->{>}}",
+                        :html "<code>->></code>"}
+                       :cmds '[ "'thread last' macro" ->> ]]
+                      [{:latex "\\cmd{(}",
+                        :html "<code>(</code>"}
+                       :str "List literal (see Collections/Lists section)"]
+                      [{:latex "\\cmd{[}",
+                        :html "<code>[</code>"}
+                       :str "Vector literal (see Collections/Vectors section)"]
+                      [{:latex "\\cmd{\\{}",
+                        :html "<code>{</code>"}
+                       :str "Map literal (see Collections/Maps section)"]
+                      [{:latex "\\cmd{\\#'}",
                         :html "<code>#'</code>"}
-                       :cmds '[{:latex "Var-quote \\#$'$x $\\to$ (",
+                       :cmds '[{:latex "Var-quote \\#'x $\\to$ (",
                                 :html "Var-quote: <code>#'<var>x</var></code> &rarr; <code>(</code>"}
                                var
                                {:latex "x)",
                                 :html "<code><var>x</var>)</code>"}]]
-                      [{:latex "\\cmd{\\#()}",
-                        :html "<code>#()</code>"}
+                      [{:latex "\\cmd{\\#\"}",
+                        :html "<code>#\""}
+                       :str {:latex "\\cmd{\\#\"}\\textit{p}\\cmd{\"} reads as regex pattern \\textit{p} (see Strings/Regex section)",
+                             :html "<code>#\"<var>p</var>\"</code> reads as regex pattern <var>p</var> (see Strings/Regex section)"}]
+                      [{:latex "\\cmd{\\#\\{}",
+                        :html "<code>#{</code>"}
+                       :str "Set literal (see Collections/Sets section)"]
+                      [{:latex "\\cmd{\\#(}",
+                        :html "<code>#(</code>"}
                        :cmds [
                               {:latex "\\href{http://clojure.org/reader\\#The\\%20Reader--Macro\\%20characters}{Anonymous function literal}:"
                                :html "<a href=\"http://clojure.org/reader#The%20Reader--Macro%20characters\">Anonymous function literal</a>:"}
                               {:latex "\\#(...) $\\to$ (fn [args] (...))",
                                :html "<code>#(...)</code> &rarr; <code>(fn [args] (...))</code>"}]]
-                      [{:latex "\\cmd{\\#\\_}",
-                        :html "<code>#_</code>"}
-                       :str "Ignore next form"]
+                      [{:latex "\\cmd{\\%}",
+                        :html "<code>%</code>"}
+                       :cmds '[{:latex "\\href{http://clojure.org/reader\\#The\\%20Reader--Macro\\%20characters}{Anonymous function argument}: \\cmd{\\%N} is value of anonymous function arg \\cmd{N}.  \\cmd{\\%} short for \\cmd{\\%{1}}.  \\cmd{\\%\\&} for rest args."
+                                :html "<a href=\"http://clojure.org/reader#The%20Reader--Macro%20characters\">Anonymous function argument</a>: <code>%N</code> is value of anonymous function arg <code>N</code>.  <code>%</code> short for <code>%1</code>.  <code>%&</code> for rest args."}
+                               ]]
                       [{:latex "\\cmd{\\#?}",
                         :html "<code>#?</code>"}
                        :cmds ["(1.7)"
@@ -848,6 +894,28 @@
                               {:latex "[1 \\#?@(:clj [x y] :cljs [w z]) 3] reads as [1 x y 3] on JVM, [1 w z 3] in ClojureScript, [1 3] elsewhere.",
                                :html "<code>[1 #?(:clj [x y] :cljs [w z]) 3]</code> reads as <code>[1 x y 3]</code> on JVM, <code>[1 w z 3]</code> in ClojureScript, <code>[1 3]</code> elsewhere."}
                               ]]
+                      [{:latex "\\cmd{\\#foo}",
+                        :html "<code>#foo</code>"}
+                       :cmds [{:latex "\\href{http://clojure.org/reader\\#The\\%20Reader--Tagged\\%20Literals}{tagged literal} e.g. \\cmd{\\#inst} \\cmd{\\#uuid}"
+                               :html "<a href=\"http://clojure.org/reader#The%20Reader--Tagged%20Literals\">tagged literal</a> e.g. <code>#inst</code> <code>#uuid</code>"}]]
+                      [{:latex "\\cmd{\\$}",
+                        :html "<code>$</code>"}
+                       :cmds '[{:latex "\\cmd{JavaContainerClass\\$InnerClass}",
+                                :html "<code>JavaContainerClass$InnerClass</code>"} ]]
+                      [{:latex "\\cmd{foo?}",
+                        :html "<code>foo?</code>"}
+                       :cmds '["conventional ending for a predicate, e.g.:"
+                               zero? vector? instance? "(unenforced)"]]
+                      [{:latex "\\cmd{foo!}",
+                        :html "<code>foo!</code>"}
+                       :cmds '["conventional ending for an unsafe operation, e.g.:"
+                               set! swap! alter-meta! "(unenforced)"]]
+                      [{:latex "\\cmd{\\_}",
+                        :html "<code>_</code>"}
+                       :cmds '["conventional name for an unused value (unenforced)"]]
+                      [{:latex "\\cmd{\\#\\_}",
+                        :html "<code>#_</code>"}
+                       :str "Ignore next form"]
                       ]
               ]
              [:box "red"
@@ -1302,6 +1370,12 @@
           "clojure.data.avl/sorted-map-by" ])
 
    (map (fn [sym-str]
+          [sym-str "http://github.com/clojure/core.rrb-vector" ])
+        [ "clojure.core.rrb-vector/vector"
+          "clojure.core.rrb-vector/vec"
+          "clojure.core.rrb-vector/vector-of" ])
+
+   (map (fn [sym-str]
           [sym-str "http://github.com/clojure/data.int-map" ])
         [ "clojure.data.int-map/int-set"
           "clojure.data.int-map/dense-int-set"
@@ -1426,13 +1500,13 @@
 
 
 (def latex-a4-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=6.7pt]{scrreprt}\n"
+     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=6.5pt]{scrreprt}\n"
           latex-header-except-documentclass))
 
 ;; US letter is a little shorter, so formatting gets completely messed
 ;; up unless we use a slightly smaller font size.
 (def latex-usletter-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=6.5pt,letterpaper]{scrreprt}\n"
+     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=6.3pt,letterpaper]{scrreprt}\n"
           latex-header-except-documentclass))
 
 
@@ -1677,6 +1751,7 @@ document.write('<style type=\"text/css\">%s<\\/style>')
    "clojure.string/"
    "clojure.tools.reader.edn/"
    "clojure.data.avl/"
+   "clojure.core.rrb-vector/"
    "clojure.data.int-map/"
    "clojure.walk/"
    "clojure.zip/"
