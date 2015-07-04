@@ -1195,6 +1195,9 @@
 (defn grimoire-url-fixup [s]
   (-> s g.u/munge (str "/")))
 
+(def grimoire-base-url
+  (str "http://conj.io/store/v0/org.clojure/clojure/latest/clj/"))
+
 (defn sym-to-pair [prefix sym link-dest base-url]
   [(str prefix sym)
    (str base-url
@@ -1202,7 +1205,6 @@
               (:nolinks :links-to-clojure) sym
               :links-to-clojuredocs (clojuredocs-url-fixup (str sym))
               :links-to-grimoire    (grimoire-url-fixup (str sym))))])
-
 
 (defn sym-to-url-list [link-target-site info]
   (let [{:keys [namespace-str symbol-list clojure-base-url
@@ -1216,9 +1218,6 @@
                  :links-to-grimoire grimoire-base-url))
          symbol-list)))
 
-
-(def grimoire-base-url
-  (str "http://conj.io/store/v0/org.clojure/clojure/latest/clj/"))
 
 (defn symbol-url-pairs-for-whole-namespaces [link-target-site]
   (apply concat
