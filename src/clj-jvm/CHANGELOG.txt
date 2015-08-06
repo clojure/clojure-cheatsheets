@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------
+August 6, 2015 - Clojure 1.4 - 1.7, sheet v33
+
+Add assoc-in to section Vectors/'Change'.
+
+---------------------------------------------------------------------
 June 18, 2015 - Clojure 1.4 - 1.7, sheet v32
 
 Made 'minimum version' Clojure 1.4, removing all (1.4) tags marking

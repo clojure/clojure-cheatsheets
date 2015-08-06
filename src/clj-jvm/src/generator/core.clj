@@ -125,8 +125,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.4 - 1.7, sheet v32)"
-              :html "Clojure Cheat Sheet (Clojure 1.4 - 1.7, sheet v32)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.4 - 1.7, sheet v33)"
+              :html "Clojure Cheat Sheet (Clojure 1.4 - 1.7, sheet v33)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -333,8 +333,8 @@
                                           :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/util/Vector.html#lastIndexOf%28java.lang.Object%29\">.lastIndexOf</a>"}
                                          ]]
                       [{:html "'Change'", :latex "`Change'"}
-                       :cmds '[assoc pop subvec replace conj rseq update-in
-                               "(1.7)" update]]
+                       :cmds '[assoc assoc-in pop subvec replace conj rseq
+                               update-in "(1.7)" update]]
                       ["Ops" :cmds '[reduce-kv]]]
               :subsection "Sets"
               :table [["Create unsorted"
