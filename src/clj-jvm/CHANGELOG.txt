@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------
+August 7, 2015 - Clojure 1.4 - 1.7, sheet v34
+
+Now that data.int-map 0.2.1 is released, and it guarantees that the
+seq order of its set and map collections have elements/keys in sorted
+order, move its collections from "Create unsorted" sections to the
+corresponding "Create sorted" sections of the cheatsheet.
+
+---------------------------------------------------------------------
 August 6, 2015 - Clojure 1.4 - 1.7, sheet v33
 
 Add assoc-in to section Vectors/'Change'.

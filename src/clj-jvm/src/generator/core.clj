@@ -125,8 +125,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.4 - 1.7, sheet v33)"
-              :html "Clojure Cheat Sheet (Clojure 1.4 - 1.7, sheet v33)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.4 - 1.7, sheet v34)"
+              :html "Clojure Cheat Sheet (Clojure 1.4 - 1.7, sheet v34)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -339,11 +339,7 @@
               :subsection "Sets"
               :table [["Create unsorted"
                        :cmds '[{:latex "\\#\\{\\}", :html "#{}"}
-                               set hash-set
-                               {:latex "\\textmd{\\textsf{(clojure.data.int-map/)}}",
-                                :html "(clojure.data.int-map/)"}
-                               clojure.data.int-map/int-set
-                               clojure.data.int-map/dense-int-set]]
+                               set hash-set]]
                       ["Create sorted"
                        :cmds '[sorted-set sorted-set-by
                                {:latex "\\textmd{\\textsf{(clojure.data.avl/)}}",
@@ -352,7 +348,11 @@
                                clojure.data.avl/sorted-set-by
                                {:latex "\\textmd{\\textsf{(flatland.ordered.set/)}}",
                                 :html "(flatland.ordered.set/)"}
-                               flatland.ordered.set/ordered-set]]
+                               flatland.ordered.set/ordered-set
+                               {:latex "\\textmd{\\textsf{(clojure.data.int-map/)}}",
+                                :html "(clojure.data.int-map/)"}
+                               clojure.data.int-map/int-set
+                               clojure.data.int-map/dense-int-set]]
                       ["Examine" :cmds '[{:latex "\\cmd{(my-set item)} $\\to$ \\cmd{(}",
                                           :html "<code>(my-set item)</code> &rarr; <code>("}
                                          get
@@ -382,10 +382,7 @@
                                bean frequencies group-by
                                {:latex "\\textmd{\\textsf{(clojure.set/)}}",
                                 :html "(clojure.set/)"}
-                               clojure.set/index
-                               {:latex "\\textmd{\\textsf{(clojure.data.int-map/)}}",
-                                :html "(clojure.data.int-map/)"}
-                               clojure.data.int-map/int-map]]
+                               clojure.set/index]]
                       ["Create sorted"
                        :cmds '[sorted-map sorted-map-by
                                {:latex "\\textmd{\\textsf{(clojure.data.avl/)}}",
@@ -401,6 +398,9 @@
                                {:latex "\\textmd{\\textsf{(flatland.useful.map/)}}",
                                 :html "(flatland.useful.map/)"}
                                flatland.useful.map/ordering-map
+                               {:latex "\\textmd{\\textsf{(clojure.data.int-map/)}}",
+                                :html "(clojure.data.int-map/)"}
+                               clojure.data.int-map/int-map
                                ]]
                       ["Examine"
                        :cmds '[
