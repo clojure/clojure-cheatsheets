@@ -125,8 +125,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.4 - 1.7, sheet v34)"
-              :html "Clojure Cheat Sheet (Clojure 1.4 - 1.7, sheet v34)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v35)"
+              :html "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v35)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -206,13 +206,9 @@
                                      clojure.string/replace
                                      clojure.string/replace-first
                                      clojure.string/reverse
-                                     "(1.5)" clojure.string/re-quote-replacement
-                                     {:latex "(\\href{http://docs.oracle.com/javase/7/docs/api/java/lang/String.html}{String})"
-                                      :html "(<a href=\"http://docs.oracle.com/javase/7/docs/api/java/lang/String.html\">java.lang.String</a>)"}
-                                     {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/lang/String.html\\#indexOf\\%28java.lang.String\\%29}{.indexOf}"
-                                      :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/lang/String.html#indexOf%28java.lang.String%29\">.indexOf</a>"}
-                                     {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/lang/String.html\\#lastIndexOf\\%28java.lang.String\\%29}{.lastIndexOf}"
-                                      :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/lang/String.html#lastIndexOf%28java.lang.String%29\">.lastIndexOf</a>"}
+                                     "(1.8)" 
+                                     clojure.string/index-of
+                                     clojure.string/last-index-of
                                      ]]
                       [
 ;;                       "Regex"
@@ -229,7 +225,6 @@
                                         :html "(clojure.string/)"}
                                        clojure.string/replace
                                        clojure.string/replace-first
-                                       "(1.5)"
                                        clojure.string/re-quote-replacement
                                        {:latex "Note: \\textbackslash{} in \\cmd{\\#\"\"} is not escape char. \\cmd{(re-pattern \"{\\textbackslash}{\\textbackslash}s*{\\textbackslash}{\\textbackslash}d+\")} can be written \\cmd{\\#\"{\\textbackslash}s*{\\textbackslash}d+\"}",
                                         :html "Note: \\ in <code>#\"\"</code> is not escape char. <code>(re-pattern \"\\\\s*\\\\d+\")</code> can be written <code>#\"\\s*\\d+\"</code>"}]]
@@ -242,23 +237,18 @@
                                        :html "(clojure.string/)"}
                                       clojure.string/trim clojure.string/trim-newline
                                       clojure.string/triml clojure.string/trimr]]
-                      ["Test" :cmds '[char char? string?
+                      ["Test" :cmds '[string?
                                       {:latex "\\textmd{\\textsf{(clojure.string/)}}",
                                        :html "(clojure.string/)"}
                                       clojure.string/blank?
-
-                                      {:latex "(\\href{http://docs.oracle.com/javase/7/docs/api/java/lang/String.html}{String})"
-                                       :html "(<a href=\"http://docs.oracle.com/javase/7/docs/api/java/lang/String.html\">java.lang.String</a>)"}
-                                      {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/lang/String.html\\#startsWith\\%28java.lang.String\\%29}{.startsWith}"
-                                       :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/lang/String.html#startsWith%28java.lang.String%29\">.startsWith</a>"}
-                                      {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/lang/String.html\\#endsWith\\%28java.lang.String\\%29}{.endsWith}"
-                                       :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/lang/String.html#endsWith%28java.lang.String%29\">.endsWith</a>"}
-                                      {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/lang/String.html\\#contains\\%28java.lang.CharSequence\\%29}{.contains}"
-                                       :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/lang/String.html#contains%28java.lang.CharSequence%29\">.contains</a>"}
+                                      "(1.8)"
+                                      clojure.string/starts-with?
+                                      clojure.string/ends-with?
+                                      clojure.string/includes?
                                       ]]
                       ]
               :subsection "Other"
-              :table [["Characters" :cmds '[char char-name-string
+              :table [["Characters" :cmds '[char char? char-name-string
                                             char-escape-string
                                             {:latex "\\href{http://clojure.org/reader\\#The\\%20Reader--Reader\\%20forms}{literals}:",
                                              :html "<a href=\"http://clojure.org/reader#The%20Reader--Reader%20forms\">literals</a>:"}
@@ -299,7 +289,8 @@
                       ["Capabilities" :cmds '[sequential? associative? sorted?
                                               counted? reversible?]]
                       ["Type tests" :cmds '[coll? list? vector? set? map?
-                                            seq? "(1.6)" record?]]]
+                                            seq? "(1.6)" record?
+                                            "(1.8)" map-entry?]]]
               :subsection {:latex "Lists (conj, pop, \\& peek at beginning)"
                            :html "Lists (conj, pop, &amp; peek at beginning)"}
               :table [["Create" :cmds '["()" list list*]]
@@ -641,7 +632,7 @@
                                       ]]
                       ["Data readers" :cmds '[*data-readers*
                                               default-data-readers
-                                              "(1.5)" *default-data-reader-fn*]]
+                                              *default-data-reader-fn*]]
                       ]
               ]
              ]
@@ -653,8 +644,7 @@
                                         partial juxt memoize fnil every-pred
                                         some-fn]]
                       ["Call" :cmds '[apply -> ->> trampoline
-                                      "(1.5)" as-> cond-> cond->>
-                                      some-> some->>]]
+                                      as-> cond-> cond->> some-> some->>]]
                       ["Test" :cmds '[fn? ifn?]]]
               ]
              [:box "orange"
@@ -772,8 +762,7 @@
                                         case "(1.6)" when-some if-some]]
                       ["Loop" :cmds '[for doseq dotimes while]]
                       ["Arrange" :cmds '[.. doto -> ->>
-                                         "(1.5)" as-> cond-> cond->>
-                                         some-> some->>]]
+                                         as-> cond-> cond->> some-> some->>]]
                       ["Scope" :cmds '[binding locking time
                                        [:common-prefix with-
                                        in-str local-vars open out-str
@@ -1078,7 +1067,6 @@
               :table [["Create" :cmds '[agent]]
                       ["Examine" :cmds '[agent-error]]
                       ["Change state" :cmds '[send send-off restart-agent
-                                              "(1.5)"
                                               send-via set-agent-send-executor!
                                               set-agent-send-off-executor!]]
                       ["Block waiting" :cmds '[await await-for]]

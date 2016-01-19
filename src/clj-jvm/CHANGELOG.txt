@@ -1,4 +1,29 @@
 ---------------------------------------------------------------------
+November 16, 2015 - Clojure 1.5 - 1.8, sheet v35
+
+Made 'minimum version' Clojure 1.5, removing all (1.5) tags marking
+things as new in 1.5.  Tags for things new in (1.6) (1.7) are still
+present, as are tags (1.8) for things new in Clojure 1.8.0.
+
+New things for Clojure 1.8:
+
+Replaced Java method calls with new clojure.string functions: index-of
+last-index-of starts-with? ends-with? includes?
+
+Added map-entry? to Collections/Type tests section.
+
+Other changes:
+
+Removed clojure.string/re-quote-replacement from Strings/Use section.
+It is still in most appropriate (and immediately following)
+Strings/Regex section.
+
+Removed char from Strings/Test section, where it does not belong.  It
+is already in Others/Characters section.
+
+Moved char? from Strings/Test section to Other/Characters.
+
+---------------------------------------------------------------------
 August 7, 2015 - Clojure 1.4 - 1.7, sheet v34
 
 Now that data.int-map 0.2.1 is released, and it guarantees that the
