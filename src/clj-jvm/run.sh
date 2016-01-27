@@ -29,7 +29,7 @@ PRODUCE_PDF="no"
 # Make embeddable version for clojure.org/cheatsheet
 ######################################################################
 echo "Generating embeddable version for clojure.org/cheatsheet ..."
-${CMD} ${LINK_TARGET} ${TOOLTIPS} ${CLOJUREDOCS_SNAPSHOT}
+${CMD} links-to-clojuredocs use-title-attribute
 EXIT_STATUS=$?
 
 if [ ${EXIT_STATUS} != 0 ]
