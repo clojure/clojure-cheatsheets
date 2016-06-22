@@ -472,7 +472,8 @@
                       ["From seq" :cmds '[keep keep-indexed]]]
               :subsection "Seq in, Seq out"
               :table [["Get shorter" :cmds '[distinct filter remove
-                                             take-nth for]]
+                                             take-nth for
+                                             "(1.7)" dedupe random-sample]]
                       ["Get longer" :cmds '[cons conj concat lazy-cat mapcat
                                             cycle interleave interpose]]
                       ["Tail-items" :cmds '[rest nthrest next fnext nnext

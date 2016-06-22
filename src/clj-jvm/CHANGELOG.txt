@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------
+June 22, 2016 - Clojure 1.5 - 1.8, sheet v36
+
+Added dedupe and random-sample to section Sequences / Get shorter.
+
+---------------------------------------------------------------------
 January 19, 2016 - Clojure 1.5 - 1.8, sheet v35
 
 Made 'minimum version' Clojure 1.5, removing all (1.5) tags marking
