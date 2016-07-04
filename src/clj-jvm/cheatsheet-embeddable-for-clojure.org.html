@@ -3378,7 +3378,7 @@ itself (not its value) is returned. The reader macro #'x expands to (var x).
               </tr>
               <tr class="odd">
                 <td><code>#?@</code></td>
-                <td><code>(1.7) <a href="http://clojure.org/reference/reader#_reader_conditionals">Splicing reader conditional</a>: <code>[1 #?(:clj [x y] :cljs [w z]) 3]</code> reads as <code>[1 x y 3]</code> on JVM, <code>[1 w z 3]</code> in ClojureScript, <code>[1 3]</code> elsewhere.</code></td>
+                <td><code>(1.7) <a href="http://clojure.org/reference/reader#_reader_conditionals">Splicing reader conditional</a>: <code>[1 #?@(:clj [x y] :cljs [w z]) 3]</code> reads as <code>[1 x y 3]</code> on JVM, <code>[1 w z 3]</code> in ClojureScript, <code>[1 3]</code> elsewhere.</code></td>
               </tr>
               <tr class="even">
                 <td><code>#foo</code></td>

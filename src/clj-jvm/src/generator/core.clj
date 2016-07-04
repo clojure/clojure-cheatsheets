@@ -125,8 +125,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v35)"
-              :html "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v35)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v37)"
+              :html "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v37)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -882,7 +882,7 @@
                               {:latex "\\href{http://clojure.org/reference/reader\\#\\_reader\\_conditionals}{Splicing reader conditional}:"
                                :html "<a href=\"http://clojure.org/reference/reader#_reader_conditionals\">Splicing reader conditional</a>:"}
                               {:latex "[1 \\#?@(:clj [x y] :cljs [w z]) 3] reads as [1 x y 3] on JVM, [1 w z 3] in ClojureScript, [1 3] elsewhere.",
-                               :html "<code>[1 #?(:clj [x y] :cljs [w z]) 3]</code> reads as <code>[1 x y 3]</code> on JVM, <code>[1 w z 3]</code> in ClojureScript, <code>[1 3]</code> elsewhere."}
+                               :html "<code>[1 #?@(:clj [x y] :cljs [w z]) 3]</code> reads as <code>[1 x y 3]</code> on JVM, <code>[1 w z 3]</code> in ClojureScript, <code>[1 3]</code> elsewhere."}
                               ]]
                       [{:latex "\\cmd{\\#foo}",
                         :html "<code>#foo</code>"}

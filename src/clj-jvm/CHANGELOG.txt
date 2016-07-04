@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------
+July 4, 2016 - Clojure 1.5 - 1.8, sheet v37
+
+Corrected typo in example for #?@ reader conditional.  It was missing
+@ character after #?
+
+---------------------------------------------------------------------
 June 22, 2016 - Clojure 1.5 - 1.8, sheet v36
 
 Added dedupe and random-sample to section Sequences / Get shorter.
