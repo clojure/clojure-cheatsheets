@@ -851,7 +851,7 @@
                                {:latex "x)",
                                 :html "<code><var>x</var>)</code>"}]]
                       [{:latex "\\cmd{\\#\"}",
-                        :html "<code>#\""}
+                        :html "<code>#\"</code>"}
                        :str {:latex "\\cmd{\\#\"}\\textit{p}\\cmd{\"} reads as regex pattern \\textit{p} (see Strings/Regex section)",
                              :html "<code>#\"<var>p</var>\"</code> reads as regex pattern <var>p</var> (see Strings/Regex section)"}]
                       [{:latex "\\cmd{\\#\\{}",
