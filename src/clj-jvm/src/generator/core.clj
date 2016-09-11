@@ -13,6 +13,7 @@
             [flatland.useful.map]
             [clojure data pprint repl set string xml zip]
             [clojure.core.reducers]
+            [cemerick.url :as c.u]
             [grimoire.util :as g.u]))
 
 ;; Andy Fingerhut
@@ -1179,7 +1180,7 @@
   (let [s (str/replace s "?" "_q")
         s (str/replace s "/" "_fs")
         s (str/replace s "." "_dot")]
-    s))
+    (c.u/url-encode s)))
 
 (defn grimoire-url-fixup [s]
   (-> s g.u/munge (str "/")))
