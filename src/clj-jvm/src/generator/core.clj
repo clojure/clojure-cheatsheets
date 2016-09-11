@@ -725,7 +725,7 @@
                                                :html "<code>(</code>"}
                                               deftype
                                               {:latex "\\cmd{Pair [h t]} \\\\ \\ \\ \\cmd{Object} \\\\ \\ \\ \\cmd{(toString [this] (str \"<\" h \",\" t \">\")))}\\end{tabular}"
-                                               :html "<code>Pair [h t]<br>&nbsp;&nbsp;Object<br>&nbsp;&nbsp;(toString [this] (str \"<\" h \",\" t \">\")))</code>"}
+                                               :html "<code>Pair [h t]<br>&nbsp;&nbsp;Object<br>&nbsp;&nbsp;(toString [this] (str \"&lt;\" h \",\" t \"&gt;\")))</code>"}
                                               ]]
                       ]
               :subsection {:latex "Multimethods (\\href{http://clojure.org/reference/multimethods}{clojure.org/reference/multimethods})"
