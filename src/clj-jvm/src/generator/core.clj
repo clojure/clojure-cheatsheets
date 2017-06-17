@@ -5,6 +5,7 @@
             [clojure.java.io :as io]
             [clojure.data.priority-map]
             [clojure.data.avl]
+            [clojure.core.async]
             [clojure.core.rrb-vector]
             [clojure.data.int-map]
             [clojure.tools.reader.edn]
@@ -126,8 +127,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v37)"
-              :html "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v37)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v38)"
+              :html "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v38)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -773,8 +774,8 @@
                       ["Doc." :cmds '[assert comment clojure.repl/doc]]]
               ]
              [:box "yellow"
-              :section {:latex "Special Characters (\\href{http://clojure.org/reference/reader\\#macrochars}{clojure.org/reference/reader}, \\href{https://yobriefca.se/blog/2014/05/19/the-weird-and-wonderful-characters-of-clojure/}{tutorial})"
-                        :html "Special Characters (<a href=\"http://clojure.org/reference/reader#macrochars\">clojure.org/reference/reader</a>, <a href=\"https://yobriefca.se/blog/2014/05/19/the-weird-and-wonderful-characters-of-clojure/\">tutorial</a>)"}
+              :section {:latex "Special Characters (\\href{http://clojure.org/reference/reader\\#macrochars}{clojure.org/reference/reader}, \\href{https://clojure.org/guides/weird_characters}{guide})"
+                        :html "Special Characters (<a href=\"http://clojure.org/reference/reader#macrochars\">clojure.org/reference/reader</a>, <a href=\"https://clojure.org/guides/weird_characters\">guide</a>)"}
               :table [
                       [{:latex "\\cmd{,}",
                         :html "<code>,</code>"}
@@ -834,6 +835,12 @@
                       [{:latex "\\cmd{->{>}}",
                         :html "<code>->></code>"}
                        :cmds '[ "'thread last' macro" ->> ]]
+                      [{:latex "\\cmd{>!! <!! >! <!}",
+                        :html "<code>&gt;!! &lt;!! &gt;! &lt;!</code>"}
+                       :cmds '[{:latex "\\href{https://clojure.org/guides/weird\\_characters\\#\\_\\_code\\_code\\_code\\_code\\_code\\_code\\_and\\_code\\_code\\_core\\_async\\_channel\\_macros}{core.async channel macros}"
+                                :html "<a href=\"https://clojure.org/guides/weird_characters#__code_code_code_code_code_code_and_code_code_core_async_channel_macros\">core.async channel macros</a>"}
+                               clojure.core.async/>!! clojure.core.async/<!!
+                               clojure.core.async/>!  clojure.core.async/<! ]]
                       [{:latex "\\cmd{(}",
                         :html "<code>(</code>"}
                        :str "List literal (see Collections/Lists section)"]
@@ -1359,6 +1366,13 @@
           "clojure.data.avl/sorted-map-by" ])
 
    (map (fn [sym-str]
+          [sym-str "http://github.com/clojure/core.async" ])
+        [ "clojure.core.async/>!!"
+          "clojure.core.async/<!!"
+          "clojure.core.async/>!"
+          "clojure.core.async/<!" ])
+
+   (map (fn [sym-str]
           [sym-str "http://github.com/clojure/core.rrb-vector" ])
         [ "clojure.core.rrb-vector/vector"
           "clojure.core.rrb-vector/vec"
@@ -1665,10 +1679,11 @@ document.write('<style type=\"text/css\">%s<\\/style>')
                     :verify-only ""))))
 
 
-(defn htmlize-str [str]
-  (let [str (str/replace str "<" "&lt;")
-        str (str/replace str ">" "&gt;")]
-    str))
+(defn htmlize-str [s]
+  (str/escape s {\" "&quot;"
+                 \& "&amp;"
+                 \< "&lt;"
+                 \> "&gt;"}))
 
 
 ;; Handle a thing that could be a string, symbol, or a 'conditional
@@ -1738,6 +1753,7 @@ document.write('<style type=\"text/css\">%s<\\/style>')
    "clojure.string/"
    "clojure.tools.reader.edn/"
    "clojure.data.avl/"
+   "clojure.core.async/"
    "clojure.core.rrb-vector/"
    "clojure.data.int-map/"
    "clojure.walk/"
@@ -1770,7 +1786,7 @@ characters (\") with &quot;"
           (str (str/trim-newline (str/join "\n" (take max-to-keep lines)))
                "\n\n[ documentation truncated.  Click link for the rest. ]")
           (str/trim-newline (str/join "\n" lines)))]
-    (str/escape combined-lines {\" "&quot;"})))
+    (htmlize-str combined-lines)))
 
 
 (defn doc-for-symbol-str [s]
