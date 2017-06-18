@@ -1,4 +1,27 @@
 ---------------------------------------------------------------------
+June 17, 2017 - Clojure 1.5 - 1.8, sheet v39
+
+Update links from http to https, except for this one, which doesn't
+support https: http://www.regular-expressions.info
+
+Update Oracle documentation links from JDK7 to JDK8.  State of Clojure
+2016 survey indicates that over 90% of Clojure/Java users use JDK8.
+
+Fixed a couple of stale links to anchors within the page
+https://clojure.org/reference/reader
+
+---------------------------------------------------------------------
+June 17, 2017 - Clojure 1.5 - 1.8, sheet v38
+
+Replace link from blog article "Weird and Wonderful Characters of
+Clojure" to instead link link to the new "Reading Clojure Characters"
+Clojure guide that started from the blog article, then enhanced it:
+https://clojure.org/guides/weird_characters
+
+Add to "Special Characters" section the core.async macros >!! <!! >!
+<!
+
+---------------------------------------------------------------------
 July 4, 2016 - Clojure 1.5 - 1.8, sheet v37
 
 Corrected typo in example for #?@ reader conditional.  It was missing

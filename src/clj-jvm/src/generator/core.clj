@@ -127,8 +127,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v38)"
-              :html "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v38)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v39)"
+              :html "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v39)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -142,8 +142,8 @@
              [:box "blue"
               :section "Primitives"
               :subsection "Numbers"
-              :table [["Literals" :cmds '[{:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/lang/Long.html}{Long}:"
-                                           :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/lang/Long.html\">Long</a>:"}
+              :table [["Literals" :cmds '[{:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html}{Long}:"
+                                           :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html\">Long</a>:"}
                                           "7,"
                                           "hex" "0xff,"
                                           "oct" "017,"
@@ -153,12 +153,12 @@
                                           "7N"
                                           "Ratio:"
                                           "-22/7"
-                                          {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/lang/Double.html}{Double}:"
-                                           :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/lang/Double.html\">Double</a>:"}
+                                          {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/lang/Double.html}{Double}:"
+                                           :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/lang/Double.html\">Double</a>:"}
                                           "2.78"
                                           "-1.2e-5"
-                                          {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/math/BigDecimal.html}{BigDecimal}:"
-                                           :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/math/BigDecimal.html\">BigDecimal</a>:"}
+                                          {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/math/BigDecimal.html}{BigDecimal}:"
+                                           :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/math/BigDecimal.html\">BigDecimal</a>:"}
                                           "4.2M"
                                           ]]
                       ["Arithmetic" :cmds '[+ - * / quot rem mod inc dec
@@ -169,8 +169,8 @@
                                           and-not clear test]
                                          "(1.6)" unsigned-bit-shift-right
                                          "(see"
-                                          {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/math/BigInteger.html}{BigInteger}"
-                                           :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/math/BigInteger.html\">BigInteger</a>"}
+                                          {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html}{BigInteger}"
+                                           :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html\">BigInteger</a>"}
                                           " for integers larger than Long)"
                                          ]]
                       ["Cast" :cmds '[byte short int long float double
@@ -194,8 +194,8 @@
                                             subtract]]]]
               :subsection "Strings"
               :table [["Create" :cmds '[str format
-                                        {:latex "\\href{http://clojure.org/reference/reader\\#\\_literals}{\"a string\"} \\",
-                                         :html "<a href=\"http://clojure.org/reference/reader#_literals\">\"a string\"</a>"}
+                                        {:latex "\\href{https://clojure.org/reference/reader\\#\\_literals}{\"a string\"} \\",
+                                         :html "<a href=\"https://clojure.org/reference/reader#_literals\">\"a string\"</a>"}
                                         {:latex "\"escapes \\textbackslash b\\textbackslash f\\textbackslash n\\textbackslash t\\textbackslash r\\textbackslash \" octal \\textbackslash 377 hex \\textbackslash ucafe\"",
                                          :html "\"escapes \\b\\f\\n\\t\\r\\\" octal \\377 hex \\ucafe\"",}
                                         {:latex "\\textmd{\\textsf{See also section IO/to string}}",
@@ -219,8 +219,8 @@
                                :cmds '[
 ;;                                       {:latex "\\#\"pattern\"",
 ;;                                        :html "#\"<var>pattern</var>\""}
-                                       {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html}{\\#\"pattern\"}",
-                                        :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html\">#\"<var>pattern</var>\"</a>"}
+                                       {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html}{\\#\"pattern\"}",
+                                        :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html\">#\"<var>pattern</var>\"</a>"}
                                        re-find re-seq re-matches
                                        re-pattern re-matcher re-groups
                                        {:latex "\\textmd{\\textsf{(clojure.string/)}}",
@@ -252,23 +252,23 @@
               :subsection "Other"
               :table [["Characters" :cmds '[char char? char-name-string
                                             char-escape-string
-                                            {:latex "\\href{http://clojure.org/reference/reader\\#\\_literals}{literals}:",
-                                             :html "<a href=\"http://clojure.org/reference/reader#_literals\">literals</a>:"}
+                                            {:latex "\\href{https://clojure.org/reference/reader\\#\\_literals}{literals}:",
+                                             :html "<a href=\"https://clojure.org/reference/reader#_literals\">literals</a>:"}
                                             {:latex "\\textbackslash a",
                                              :html "\\a",}
                                             {:latex "\\textbackslash newline",
                                              :html "\\newline",}
                                             "(more at link)"]]
                       ["Keywords" :cmds '[keyword keyword? find-keyword
-                                          {:latex "\\href{http://clojure.org/reference/reader\\#\\_literals}{literals}:",
-                                           :html "<a href=\"http://clojure.org/reference/reader#_literals\">literals</a>:"}
+                                          {:latex "\\href{https://clojure.org/reference/reader\\#\\_literals}{literals}:",
+                                           :html "<a href=\"https://clojure.org/reference/reader#_literals\">literals</a>:"}
                                           ":kw" ":my.ns/kw" "::in-cur-ns"]]
                       ["Symbols" :cmds '[symbol symbol? gensym
-                                         {:latex "\\href{http://clojure.org/reference/reader\\#\\_literals}{literals}:",
-                                          :html "<a href=\"http://clojure.org/reference/reader#_literals\">literals</a>:"}
+                                         {:latex "\\href{https://clojure.org/reference/reader\\#\\_literals}{literals}:",
+                                          :html "<a href=\"https://clojure.org/reference/reader#_literals\">literals</a>:"}
                                          "my-sym" "my.ns/foo"]]
-                      ["Misc" :cmds '[{:latex "\\href{http://clojure.org/reference/reader\\#\\_literals}{literals}:",
-                                       :html "<a href=\"http://clojure.org/reference/reader#_literals\">literals</a>:"}
+                      ["Misc" :cmds '[{:latex "\\href{https://clojure.org/reference/reader\\#\\_literals}{literals}:",
+                                       :html "<a href=\"https://clojure.org/reference/reader#_literals\">literals</a>:"}
                                       "true" "false" "nil"]]
                       ]
               ]
@@ -297,10 +297,10 @@
                            :html "Lists (conj, pop, &amp; peek at beginning)"}
               :table [["Create" :cmds '["()" list list*]]
                       ["Examine" :cmds-with-frenchspacing '[first nth peek
-                                                            {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/util/Vector.html\\#indexOf\\%28java.lang.Object\\%29}{.indexOf}"
-                                                             :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/util/Vector.html#indexOf%28java.lang.Object%29\">.indexOf</a>"}
-                                                            {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/util/Vector.html\\#lastIndexOf\\%28java.lang.Object\\%29}{.lastIndexOf}"
-                                                             :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/util/Vector.html#lastIndexOf%28java.lang.Object%29\">.lastIndexOf</a>"}
+                                                            {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html\\#indexOf-java.lang.Object-}{.indexOf}"
+                                                             :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html#indexOf-java.lang.Object-\">.indexOf</a>"}
+                                                            {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html\\#lastIndexOf-java.lang.Object-}{.lastIndexOf}"
+                                                             :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html#lastIndexOf-java.lang.Object-\">.lastIndexOf</a>"}
                                                             ]]
                       [{:html "'Change'", :latex "`Change'"}
                        :cmds '[cons conj rest pop]]
@@ -320,10 +320,10 @@
                                          {:latex " \\cmd{my-vec idx)}",
                                           :html " my-vec idx)</code>"}
                                          get peek
-                                         {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/util/Vector.html\\#indexOf\\%28java.lang.Object\\%29}{.indexOf}"
-                                          :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/util/Vector.html#indexOf%28java.lang.Object%29\">.indexOf</a>"}
-                                         {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/util/Vector.html\\#lastIndexOf\\%28java.lang.Object\\%29}{.lastIndexOf}"
-                                          :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/util/Vector.html#lastIndexOf%28java.lang.Object%29\">.lastIndexOf</a>"}
+                                         {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html\\#indexOf-java.lang.Object-}{.indexOf}"
+                                          :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html#indexOf-java.lang.Object-\">.indexOf</a>"}
+                                         {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html\\#lastIndexOf-java.lang.Object-}{.lastIndexOf}"
+                                          :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html#lastIndexOf-java.lang.Object-\">.lastIndexOf</a>"}
                                          ]]
                       [{:html "'Change'", :latex "`Change'"}
                        :cmds '[assoc assoc-in pop subvec replace conj rseq
@@ -420,8 +420,8 @@
                                clojure.set/map-invert
                                {:latex "\\textmd{\\textsf{GitHub:}}",
                                 :html "GitHub:"}
-                               {:latex "\\href{http://github.com/weavejester/medley}{Medley}"
-                                :html "<a href=\"http://github.com/weavejester/medley\">Medley</a>"}
+                               {:latex "\\href{https://github.com/weavejester/medley}{Medley}"
+                                :html "<a href=\"https://github.com/weavejester/medley\">Medley</a>"}
                                ]]
                       ["Ops" :cmds '[reduce-kv]]
                       ["Entry" :cmds '[key val]]
@@ -448,8 +448,8 @@
                                clojure.set/index
                                clojure.set/rename
                                ]]]
-              :subsection {:latex "Transients (\\href{http://clojure.org/reference/transients}{clojure.org/reference/transients})"
-                           :html "Transients (<a href=\"http://clojure.org/reference/transients\">clojure.org/reference/transients</a>)"}
+              :subsection {:latex "Transients (\\href{https://clojure.org/reference/transients}{clojure.org/reference/transients})"
+                           :html "Transients (<a href=\"https://clojure.org/reference/transients\">clojure.org/reference/transients</a>)"}
               :table [["Create" :cmds '[transient persistent!]]
                       ["Change" :cmds-with-frenchspacing
                        '[conj! pop! assoc! dissoc! disj!
@@ -505,8 +505,8 @@
                       ["Check for forced" :cmds '[realized?]]]
               ]
              [:box "blue"
-              :section {:latex "Transducers (\\href{http://clojure.org/reference/transducers}{clojure.org/reference/transducers})"
-                        :html "Transducers (<a href=\"http://clojure.org/reference/transducers\">clojure.org/reference/transducers</a>)"}
+              :section {:latex "Transducers (\\href{https://clojure.org/reference/transducers}{clojure.org/reference/transducers})"
+                        :html "Transducers (<a href=\"https://clojure.org/reference/transducers\">clojure.org/reference/transducers</a>)"}
               :table [["Off the shelf"
                        :cmds '[map mapcat filter remove take
                                take-while take-nth drop drop-while
@@ -580,8 +580,8 @@
                                              {:latex "\\textmd{\\textsf{also:}}",
                                               :html "also:"}
                                              "(binding [*in* reader] ...)"
-                                             {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/io/Reader.html}{java.io.Reader}"
-                                              :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/io/Reader.html\">java.io.Reader</a>"}
+                                             {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/io/Reader.html}{java.io.Reader}"
+                                              :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/io/Reader.html\">java.io.Reader</a>"}
                                              ]]
                       ["from string" :cmds '[
                                              with-in-str
@@ -605,17 +605,17 @@
                       ["Binary" :cmds '["(.write ostream byte-arr)"
                                         "(.read istream byte-arr)"
 ;                                        "(javadoc java.io.OutputStream)"
-                                        {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/io/OutputStream.html}{java.io.OutputStream}"
-                                         :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/io/OutputStream.html\">java.io.OutputStream</a>"}
+                                        {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/io/OutputStream.html}{java.io.OutputStream}"
+                                         :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/io/OutputStream.html\">java.io.OutputStream</a>"}
 ;                                        "java.io.InputStream"
-                                        {:latex "\\href{http://docs.oracle.com/javase/7/docs/api/java/io/InputStream.html}{java.io.InputStream}"
-                                         :html "<a href=\"http://docs.oracle.com/javase/7/docs/api/java/io/InputStream.html\">java.io.InputStream</a>"}
+                                        {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/io/InputStream.html}{java.io.InputStream}"
+                                         :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/io/InputStream.html\">java.io.InputStream</a>"}
                                         {:latex "\\textmd{\\textsf{GitHub:}}",
                                          :html "GitHub:"}
-                                        {:latex "\\href{http://github.com/ztellman/gloss}{gloss}"
-                                         :html "<a href=\"http://github.com/ztellman/gloss\">gloss</a>"}
-                                        {:latex "\\href{http://github.com/rosejn/byte-spec}{byte-spec}"
-                                         :html "<a href=\"http://github.com/rosejn/byte-spec\">byte-spec</a>"}
+                                        {:latex "\\href{https://github.com/ztellman/gloss}{gloss}"
+                                         :html "<a href=\"https://github.com/ztellman/gloss\">gloss</a>"}
+                                        {:latex "\\href{https://github.com/rosejn/byte-spec}{byte-spec}"
+                                         :html "<a href=\"https://github.com/rosejn/byte-spec\">byte-spec</a>"}
                                         ]]
                       ["Misc" :cmds '[flush "(.close s)" file-seq
                                       *in* *out* *err*
@@ -630,8 +630,8 @@
                                       clojure.java.io/as-relative-path
                                       {:latex "\\textmd{\\textsf{GitHub:}}",
                                        :html "GitHub:"}
-                                      {:latex "\\href{http://github.com/Raynes/fs}{fs}"
-                                       :html "<a href=\"http://github.com/Raynes/fs\">fs</a>"}
+                                      {:latex "\\href{https://github.com/funcool/fs}{fs}"
+                                       :html "<a href=\"https://github.com/funcool/fs\">fs</a>"}
                                       ]]
                       ["Data readers" :cmds '[*data-readers*
                                               default-data-readers
@@ -653,8 +653,8 @@
              [:box "orange"
               :section {:latex "Abstractions (\\href{https://github.com/cemerick/clojure-type-selection-flowchart}{Clojure type selection flowchart})"
                         :html "Abstractions (<a href=\"https://github.com/cemerick/clojure-type-selection-flowchart\">Clojure type selection flowchart</a>)"}
-              :subsection {:latex "Protocols (\\href{http://clojure.org/reference/protocols}{clojure.org/reference/protocols})"
-                           :html "Protocols (<a href=\"http://clojure.org/reference/protocols\">clojure.org/reference/protocols</a>)"}
+              :subsection {:latex "Protocols (\\href{https://clojure.org/reference/protocols}{clojure.org/reference/protocols})"
+                           :html "Protocols (<a href=\"https://clojure.org/reference/protocols\">clojure.org/reference/protocols</a>)"}
               :table [
                       ["Define" :cmds '[
                                         {:latex "\\cmd{(}"
@@ -687,8 +687,8 @@
                       ["Test" :cmds '[satisfies? extends?]]
                       ["Other" :cmds '[extend extend-protocol extenders]]
                       ]
-              :subsection {:latex "Records (\\href{http://clojure.org/reference/datatypes}{clojure.org/reference/datatypes})"
-                           :html "Records (<a href=\"http://clojure.org/reference/datatypes\">clojure.org/reference/datatypes</a>)"}
+              :subsection {:latex "Records (\\href{https://clojure.org/reference/datatypes}{clojure.org/reference/datatypes})"
+                           :html "Records (<a href=\"https://clojure.org/reference/datatypes\">clojure.org/reference/datatypes</a>)"}
               :table [
                       ["Define" :cmds '[
                                         {:latex "\\cmd{(}"
@@ -706,8 +706,8 @@
                                         ]]
                       ["Test" :cmds '[record?]]
                       ]
-              :subsection {:latex "Types (\\href{http://clojure.org/reference/datatypes}{clojure.org/reference/datatypes})"
-                           :html "Types (<a href=\"http://clojure.org/reference/datatypes\">clojure.org/reference/datatypes</a>)"}
+              :subsection {:latex "Types (\\href{https://clojure.org/reference/datatypes}{clojure.org/reference/datatypes})"
+                           :html "Types (<a href=\"https://clojure.org/reference/datatypes\">clojure.org/reference/datatypes</a>)"}
               :table [
                       ["Define" :cmds '[
                                         {:latex "\\cmd{(}"
@@ -729,8 +729,8 @@
                                                :html "<code>Pair [h t]<br>&nbsp;&nbsp;Object<br>&nbsp;&nbsp;(toString [this] (str \"&lt;\" h \",\" t \"&gt;\")))</code>"}
                                               ]]
                       ]
-              :subsection {:latex "Multimethods (\\href{http://clojure.org/reference/multimethods}{clojure.org/reference/multimethods})"
-                           :html "Multimethods (<a href=\"http://clojure.org/reference/multimethods\">clojure.org/reference/multimethods</a>)"}
+              :subsection {:latex "Multimethods (\\href{https://clojure.org/reference/multimethods}{clojure.org/reference/multimethods})"
+                           :html "Multimethods (<a href=\"https://clojure.org/reference/multimethods\">clojure.org/reference/multimethods</a>)"}
               :table [
                       ["Define" :cmds '[
                                         {:latex "\\cmd{(}"
@@ -774,16 +774,16 @@
                       ["Doc." :cmds '[assert comment clojure.repl/doc]]]
               ]
              [:box "yellow"
-              :section {:latex "Special Characters (\\href{http://clojure.org/reference/reader\\#macrochars}{clojure.org/reference/reader}, \\href{https://clojure.org/guides/weird_characters}{guide})"
-                        :html "Special Characters (<a href=\"http://clojure.org/reference/reader#macrochars\">clojure.org/reference/reader</a>, <a href=\"https://clojure.org/guides/weird_characters\">guide</a>)"}
+              :section {:latex "Special Characters (\\href{https://clojure.org/reference/reader\\#macrochars}{clojure.org/reference/reader}, \\href{https://clojure.org/guides/weird_characters}{guide})"
+                        :html "Special Characters (<a href=\"https://clojure.org/reference/reader#macrochars\">clojure.org/reference/reader</a>, <a href=\"https://clojure.org/guides/weird_characters\">guide</a>)"}
               :table [
                       [{:latex "\\cmd{,}",
                         :html "<code>,</code>"}
                        :str "Comma reads as white space.  Often used between map key/value pairs for readability."]
                       [{:latex "\\cmd{'}",
                         :html "<code>'</code>"}
-                       :cmds '[{:latex "\\href{http://clojure.org/reference/reader\\#\\_quote}{quote}: 'form $\\to$ (",
-                                :html "<a href=\"http://clojure.org/reference/reader#_quote\">quote</a>: <code>'<var>form</var></code> &rarr; <code>(</code>"}
+                       :cmds '[{:latex "\\href{https://clojure.org/reference/reader\\#\\_quote}{quote}: 'form $\\to$ (",
+                                :html "<a href=\"https://clojure.org/reference/reader#_quote\">quote</a>: <code>'<var>form</var></code> &rarr; <code>(</code>"}
                                quote
                                {:latex "form)",
                                 :html "<code><var>form</var>)</code>"}]]
@@ -804,8 +804,8 @@
                        :str "Metadata (see Metadata section)"]
                       [{:latex "\\cmd{*foo*}",
                         :html "<code>*foo*</code>"}
-                       :cmds '[{:latex "'earmuffs' - convention to indicate \\href{http://clojure.org/reference/vars}{dynamic vars}, compiler warns if not dynamic",
-                                :html "'earmuffs' - convention to indicate <a href=\"http://clojure.org/reference/vars\">dynamic vars</a>, compiler warns if not dynamic"}]]
+                       :cmds '[{:latex "'earmuffs' - convention to indicate \\href{https://clojure.org/reference/vars}{dynamic vars}, compiler warns if not dynamic",
+                                :html "'earmuffs' - convention to indicate <a href=\"https://clojure.org/reference/vars\">dynamic vars</a>, compiler warns if not dynamic"}]]
                       [{:latex "\\cmd{@}",
                         :html "<code>@</code>"}
                        :cmds '[{:latex "Deref: @form $\\to$ (",
@@ -815,20 +815,20 @@
                                 :html "<code><var>form</var>)</code>"}]]
                       [{:latex "\\cmd{`}",
                         :html "<code>`</code>"}
-                       :cmds '[{:latex "\\href{http://clojure.org/reference/reader\\#\\_\\_a\\_id\\_syntax\\_quote\\_a\\_syntax\\_quote\\_note\\_the\\_backquote\\_character\\_unquote\\_and\\_unquote\\_splicing}{Syntax-quote}"
-                                :html "<a href=\"http://clojure.org/reference/reader#__a_id_syntax_quote_a_syntax_quote_note_the_backquote_character_unquote_and_unquote_splicing\">Syntax-quote</a>"}]]
+                       :cmds '[{:latex "\\href{https://clojure.org/reference/reader\\#syntax-quote}{Syntax-quote}"
+                                :html "<a href=\"https://clojure.org/reference/reader#syntax-quote\">Syntax-quote</a>"}]]
                       [{:latex "\\cmd{foo\\#}"
                         :html "<code>foo#</code>"}
-                       :cmds '[{:latex "\\href{http://clojure.org/reference/reader\\#\\_\\_a\\_id\\_syntax\\_quote\\_a\\_syntax\\_quote\\_note\\_the\\_backquote\\_character\\_unquote\\_and\\_unquote\\_splicing}{'auto-gensym'}, consistently replaced with same auto-generated symbol everywhere inside same \\cmd{`( ... )}"
-                                :html "<a href=\"http://clojure.org/reference/reader#__a_id_syntax_quote_a_syntax_quote_note_the_backquote_character_unquote_and_unquote_splicing\">'auto-gensym'</a>, consistently replaced with same auto-generated symbol everywhere inside same <code>`( ... )</code>"}]]
+                       :cmds '[{:latex "\\href{https://clojure.org/reference/reader\\#syntax-quote}{'auto-gensym'}, consistently replaced with same auto-generated symbol everywhere inside same \\cmd{`( ... )}"
+                                :html "<a href=\"https://clojure.org/reference/reader#syntax-quote\">'auto-gensym'</a>, consistently replaced with same auto-generated symbol everywhere inside same <code>`( ... )</code>"}]]
                       [{:latex "\\cmd{\\textasciitilde}",
                         :html "<code>~</code>"}
-                       :cmds '[{:latex "\\href{http://clojure.org/reference/reader\\#\\_\\_a\\_id\\_syntax\\_quote\\_a\\_syntax\\_quote\\_note\\_the\\_backquote\\_character\\_unquote\\_and\\_unquote\\_splicing}{Unquote}"
-                                :html "<a href=\"http://clojure.org/reference/reader#__a_id_syntax_quote_a_syntax_quote_note_the_backquote_character_unquote_and_unquote_splicing\">Unquote</a>"}]]
+                       :cmds '[{:latex "\\href{https://clojure.org/reference/reader\\#syntax-quote}{Unquote}"
+                                :html "<a href=\"https://clojure.org/reference/reader#syntax-quote\">Unquote</a>"}]]
                       [{:latex "\\cmd{\\textasciitilde@}",
                         :html "<code>~@</code>"}
-                       :cmds '[{:latex "\\href{http://clojure.org/reference/reader\\#\\_\\_a\\_id\\_syntax\\_quote\\_a\\_syntax\\_quote\\_note\\_the\\_backquote\\_character\\_unquote\\_and\\_unquote\\_splicing}{Unquote-splicing}"
-                                :html "<a href=\"http://clojure.org/reference/reader#__a_id_syntax_quote_a_syntax_quote_note_the_backquote_character_unquote_and_unquote_splicing\">Unquote-splicing</a>"}]]
+                       :cmds '[{:latex "\\href{https://clojure.org/reference/reader\\#syntax-quote}{Unquote-splicing}"
+                                :html "<a href=\"https://clojure.org/reference/reader#syntax-quote\">Unquote-splicing</a>"}]]
                       [{:latex "\\cmd{->}",
                         :html "<code>-></code>"}
                        :cmds '[ "'thread first' macro" -> ]]
@@ -867,35 +867,35 @@
                       [{:latex "\\cmd{\\#(}",
                         :html "<code>#(</code>"}
                        :cmds [
-                              {:latex "\\href{http://clojure.org/reference/reader\\#\\_dispatch}{Anonymous function literal}:"
-                               :html "<a href=\"http://clojure.org/reference/reader#_dispatch\">Anonymous function literal</a>:"}
+                              {:latex "\\href{https://clojure.org/reference/reader\\#\\_dispatch}{Anonymous function literal}:"
+                               :html "<a href=\"https://clojure.org/reference/reader#_dispatch\">Anonymous function literal</a>:"}
                               {:latex "\\#(...) $\\to$ (fn [args] (...))",
                                :html "<code>#(...)</code> &rarr; <code>(fn [args] (...))</code>"}]]
                       [{:latex "\\cmd{\\%}",
                         :html "<code>%</code>"}
-                       :cmds '[{:latex "\\href{http://clojure.org/reference/reader\\#\\_dispatch}{Anonymous function argument}: \\cmd{\\%N} is value of anonymous function arg \\cmd{N}.  \\cmd{\\%} short for \\cmd{\\%{1}}.  \\cmd{\\%\\&} for rest args."
-                                :html "<a href=\"http://clojure.org/reference/reader#_dispatch\">Anonymous function argument</a>: <code>%N</code> is value of anonymous function arg <code>N</code>.  <code>%</code> short for <code>%1</code>.  <code>%&</code> for rest args."}
+                       :cmds '[{:latex "\\href{https://clojure.org/reference/reader\\#\\_dispatch}{Anonymous function argument}: \\cmd{\\%N} is value of anonymous function arg \\cmd{N}.  \\cmd{\\%} short for \\cmd{\\%{1}}.  \\cmd{\\%\\&} for rest args."
+                                :html "<a href=\"https://clojure.org/reference/reader#_dispatch\">Anonymous function argument</a>: <code>%N</code> is value of anonymous function arg <code>N</code>.  <code>%</code> short for <code>%1</code>.  <code>%&</code> for rest args."}
                                ]]
                       [{:latex "\\cmd{\\#?}",
                         :html "<code>#?</code>"}
                        :cmds ["(1.7)"
-                              {:latex "\\href{http://clojure.org/reference/reader\\#\\_reader\\_conditionals}{Reader conditional}:"
-                               :html "<a href=\"http://clojure.org/reference/reader#_reader_conditionals\">Reader conditional</a>:"}
+                              {:latex "\\href{https://clojure.org/reference/reader\\#\\_reader\\_conditionals}{Reader conditional}:"
+                               :html "<a href=\"https://clojure.org/reference/reader#_reader_conditionals\">Reader conditional</a>:"}
                               {:latex "\\#?(:clj x :cljs y) reads as x on JVM, y in ClojureScript, nothing elsewhere.  Other keys: :cljr :default",
                                :html "<code>#?(:clj x :cljs y)</code> reads as <code>x</code> on JVM, <code>y</code> in ClojureScript, nothing elsewhere.  Other keys: <code>:cljr :default</code>"}
                               ]]
                       [{:latex "\\cmd{\\#?@}",
                         :html "<code>#?@</code>"}
                        :cmds ["(1.7)"
-                              {:latex "\\href{http://clojure.org/reference/reader\\#\\_reader\\_conditionals}{Splicing reader conditional}:"
-                               :html "<a href=\"http://clojure.org/reference/reader#_reader_conditionals\">Splicing reader conditional</a>:"}
+                              {:latex "\\href{https://clojure.org/reference/reader\\#\\_reader\\_conditionals}{Splicing reader conditional}:"
+                               :html "<a href=\"https://clojure.org/reference/reader#_reader_conditionals\">Splicing reader conditional</a>:"}
                               {:latex "[1 \\#?@(:clj [x y] :cljs [w z]) 3] reads as [1 x y 3] on JVM, [1 w z 3] in ClojureScript, [1 3] elsewhere.",
                                :html "<code>[1 #?@(:clj [x y] :cljs [w z]) 3]</code> reads as <code>[1 x y 3]</code> on JVM, <code>[1 w z 3]</code> in ClojureScript, <code>[1 3]</code> elsewhere."}
                               ]]
                       [{:latex "\\cmd{\\#foo}",
                         :html "<code>#foo</code>"}
-                       :cmds [{:latex "\\href{http://clojure.org/reference/reader\\#\\_tagged\\_literals}{tagged literal} e.g. \\cmd{\\#inst} \\cmd{\\#uuid}"
-                               :html "<a href=\"http://clojure.org/reference/reader#_tagged_literals\">tagged literal</a> e.g. <code>#inst</code> <code>#uuid</code>"}]]
+                       :cmds [{:latex "\\href{https://clojure.org/reference/reader\\#tagged\\_literals}{tagged literal} e.g. \\cmd{\\#inst} \\cmd{\\#uuid}"
+                               :html "<a href=\"https://clojure.org/reference/reader#tagged_literals\">tagged literal</a> e.g. <code>#inst</code> <code>#uuid</code>"}]]
                       [{:latex "\\cmd{\\$}",
                         :html "<code>$</code>"}
                        :cmds '[{:latex "\\cmd{JavaContainerClass\\$InnerClass}",
@@ -917,8 +917,8 @@
                       ]
               ]
              [:box "red"
-              :section {:latex "Metadata (\\href{http://clojure.org/reference/reader\\#\\_metadata}{clojure.org/reference/reader}, \\href{http://clojure.org/reference/special\\_forms}{special\\_forms})"
-                        :html "Metadata (<a href=\"http://clojure.org/reference/reader#_metadata\">clojure.org/reference/reader</a>, <a href=\"http://clojure.org/reference/special_forms\">special_forms</a>)"}
+              :section {:latex "Metadata (\\href{https://clojure.org/reference/reader\\#\\_metadata}{clojure.org/reference/reader}, \\href{https://clojure.org/reference/special\\_forms}{special\\_forms})"
+                        :html "Metadata (<a href=\"https://clojure.org/reference/reader#_metadata\">clojure.org/reference/reader</a>, <a href=\"https://clojure.org/reference/special_forms\">special_forms</a>)"}
               :table [
                       ["General" :cmds [{:latex "\\cmd{\\^{}\\{:key1 val1 :key2 val2 ...\\}}"
                                          :html "<code>^{:key1 val1 :key2 val2 ...}</code>"}
@@ -985,23 +985,23 @@
               ]
              :column
              [:box "red"
-              :section {:latex "Special Forms (\\href{http://clojure.org/reference/special\\_forms}{clojure.org/reference/special\\_forms})"
-                        :html "Special Forms (<a href=\"http://clojure.org/reference/special_forms\">clojure.org/reference/special_forms</a>)"}
+              :section {:latex "Special Forms (\\href{https://clojure.org/reference/special\\_forms}{clojure.org/reference/special\\_forms})"
+                        :html "Special Forms (<a href=\"https://clojure.org/reference/special_forms\">clojure.org/reference/special_forms</a>)"}
               :cmds-one-line '[def if do let letfn quote var fn loop
                                recur set! throw try monitor-enter monitor-exit]
               :table [[{:latex "\\begin{tabular}[t]{@{}l@{}} Binding Forms / \\\\ Destructuring \\end{tabular}"
                         :html "Binding Forms / Destructuring"}
                        :cmds '[
-                               {:latex "(\\href{http://clojure.org/reference/special\\_forms\\#binding-forms}{examples})"
-                                :html "(<a href=\"http://clojure.org/reference/special_forms#binding-forms\">examples</a>)"}
+                               {:latex "(\\href{https://clojure.org/reference/special\\_forms\\#binding-forms}{examples})"
+                                :html "(<a href=\"https://clojure.org/reference/special_forms#binding-forms\">examples</a>)"}
                                let fn defn defmacro
                                loop for doseq if-let when-let
                                "(1.6)" if-some when-some]]
                       ]
               ]
              [:box "blue2"
-              :section {:latex "Vars and global environment (\\href{http://clojure.org/reference/vars}{clojure.org/reference/vars})"
-                        :html "Vars and global environment (<a href=\"http://clojure.org/reference/vars\">clojure.org/reference/vars</a>)"}
+              :section {:latex "Vars and global environment (\\href{https://clojure.org/reference/vars}{clojure.org/reference/vars})"
+                        :html "Vars and global environment (<a href=\"https://clojure.org/reference/vars\">clojure.org/reference/vars</a>)"}
               :table [["Def variants" :cmds '[def defn defn- definline defmacro
                                               defmethod defmulti defonce
                                               defrecord]]
@@ -1019,8 +1019,8 @@
              [:box "yellow"
               :section "Namespace"
               :table [["Current" :cmds '[*ns*]]
-                      ["Create/Switch" :cmds '[{:latex "(\\href{http://blog.8thlight.com/colin-jones/2010/12/05/clojure-libs-and-namespaces-require-use-import-and-ns.html}{tutorial})"
-                                                :html "(<a href=\"http://blog.8thlight.com/colin-jones/2010/12/05/clojure-libs-and-namespaces-require-use-import-and-ns.html\">tutorial</a>)"}
+                      ["Create/Switch" :cmds '[{:latex "(\\href{https://blog.8thlight.com/colin-jones/2010/12/05/clojure-libs-and-namespaces-require-use-import-and-ns.html}{tutorial})"
+                                                :html "(<a href=\"https://blog.8thlight.com/colin-jones/2010/12/05/clojure-libs-and-namespaces-require-use-import-and-ns.html\">tutorial</a>)"}
                                                ns in-ns create-ns]]
                       ["Add" :cmds '[alias def import intern refer]]
                       ["Find" :cmds '[all-ns find-ns]]
@@ -1036,8 +1036,8 @@
               ]
              [:box "green"
               :section "Loading"
-              :table [["Load libs" :cmds '[{:latex "(\\href{http://blog.8thlight.com/colin-jones/2010/12/05/clojure-libs-and-namespaces-require-use-import-and-ns.html}{tutorial})"
-                                            :html "(<a href=\"http://blog.8thlight.com/colin-jones/2010/12/05/clojure-libs-and-namespaces-require-use-import-and-ns.html\">tutorial</a>)"}
+              :table [["Load libs" :cmds '[{:latex "(\\href{https://blog.8thlight.com/colin-jones/2010/12/05/clojure-libs-and-namespaces-require-use-import-and-ns.html}{tutorial})"
+                                            :html "(<a href=\"https://blog.8thlight.com/colin-jones/2010/12/05/clojure-libs-and-namespaces-require-use-import-and-ns.html\">tutorial</a>)"}
                                            require use import refer]]
                       ["List loaded" :cmds '[loaded-libs]]
                       ["Load misc" :cmds '[load load-file load-reader
@@ -1058,8 +1058,8 @@
                                            volatile?]]
                       ["Misc" :cmds '[locking pcalls pvalues pmap seque
                                       promise deliver]]]
-              :subsection {:latex "Refs and Transactions (\\href{http://clojure.org/reference/refs}{clojure.org/reference/refs})"
-                           :html "Refs and Transactions (<a href=\"http://clojure.org/reference/refs\">clojure.org/reference/refs</a>)"}
+              :subsection {:latex "Refs and Transactions (\\href{https://clojure.org/reference/refs}{clojure.org/reference/refs})"
+                           :html "Refs and Transactions (<a href=\"https://clojure.org/reference/refs\">clojure.org/reference/refs</a>)"}
               :table [["Create" :cmds '[ref]]
                       ["Examine"
                        :cmds '[deref "@"
@@ -1071,8 +1071,8 @@
                       ["History" :cmds '[ref-history-count
                                          [:common-prefix-suffix
                                           ref- -history min max]]]]
-              :subsection {:latex "Agents and Asynchronous Actions (\\href{http://clojure.org/reference/agents}{clojure.org/reference/agents})"
-                           :html "Agents and Asynchronous Actions (<a href=\"http://clojure.org/reference/agents\">clojure.org/reference/agents</a>)"}
+              :subsection {:latex "Agents and Asynchronous Actions (\\href{https://clojure.org/reference/agents}{clojure.org/reference/agents})"
+                           :html "Agents and Asynchronous Actions (<a href=\"https://clojure.org/reference/agents\">clojure.org/reference/agents</a>)"}
               :table [["Create" :cmds '[agent]]
                       ["Examine" :cmds '[agent-error]]
                       ["Change state" :cmds '[send send-off restart-agent
@@ -1087,8 +1087,8 @@
                       ["Misc" :cmds '[*agent* release-pending-sends]]]
               ]
              [:box "orange"
-              :section {:latex "Java Interoperation (\\href{http://clojure.org/reference/java\\_interop}{clojure.org/reference/java\\_interop})"
-                        :html "Java Interoperation (<a href=\"http://clojure.org/reference/java_interop\">clojure.org/reference/java_interop</a>)"}
+              :section {:latex "Java Interoperation (\\href{https://clojure.org/reference/java\\_interop}{clojure.org/reference/java\\_interop})"
+                        :html "Java Interoperation (<a href=\"https://clojure.org/reference/java_interop\">clojure.org/reference/java_interop</a>)"}
               :table [["General" :cmds '[.. doto "Classname/" "Classname."
                                          new bean comparator enumeration-seq
                                          import iterator-seq memfn set! class
@@ -1193,7 +1193,7 @@
   (-> s g.u/munge (str "/")))
 
 (def grimoire-base-url
-  (str "http://conj.io/store/v0/org.clojure/clojure/latest/clj/"))
+  (str "https://conj.io/store/v0/org.clojure/clojure/latest/clj/"))
 
 (defn sym-to-pair [prefix sym link-dest base-url]
   [(str prefix sym)
@@ -1223,81 +1223,81 @@
      [{:namespace-str "",
        :symbol-list '(def if do let quote var fn loop recur throw try
                           monitor-enter monitor-exit),
-       :clojure-base-url "http://clojure.org/reference/special_forms#",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.core/"
+       :clojure-base-url "https://clojure.org/reference/special_forms#",
+       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.core/"
        :grimoire-base-url    (str grimoire-base-url "clojure.core/")}
       {:namespace-str "",
        :symbol-list (keys (ns-publics 'clojure.core)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.core/"
+       :clojure-base-url "https://clojure.github.com/clojure/clojure.core-api.html#clojure.core/",
+       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.core/"
        :grimoire-base-url (str grimoire-base-url "clojure.core/")}
       {:namespace-str "clojure.data"
        :symbol-list (keys (ns-publics 'clojure.data)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.data-api.html#clojure.data/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.data/"
+       :clojure-base-url "https://clojure.github.com/clojure/clojure.data-api.html#clojure.data/",
+       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.data/"
        :grimoire-base-url (str grimoire-base-url "clojure.data/")}
       {:namespace-str "clojure.java.io"
        :symbol-list (keys (ns-publics 'clojure.java.io)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.java.io-api.html#clojure.java.io/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.io/"
+       :clojure-base-url "https://clojure.github.com/clojure/clojure.java.io-api.html#clojure.java.io/",
+       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.java.io/"
        :grimoire-base-url (str grimoire-base-url "clojure.java.io/")}
       {:namespace-str "clojure.java.browse"
        :symbol-list (keys (ns-publics 'clojure.java.browse)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.java.browse-api.html#clojure.java.browse/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.browse/"
+       :clojure-base-url "https://clojure.github.com/clojure/clojure.java.browse-api.html#clojure.java.browse/",
+       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.java.browse/"
        :grimoire-base-url (str grimoire-base-url "clojure.java.browse/")}
       {:namespace-str "clojure.java.javadoc"
        :symbol-list (keys (ns-publics 'clojure.java.javadoc)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.java.javadoc-api.html#clojure.java.javadoc/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.javadoc/"
+       :clojure-base-url "https://clojure.github.com/clojure/clojure.java.javadoc-api.html#clojure.java.javadoc/",
+       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.java.javadoc/"
        :grimoire-base-url (str grimoire-base-url "clojure.java.javadoc/")}
       {:namespace-str "clojure.java.shell"
        :symbol-list (keys (ns-publics 'clojure.java.shell)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.java.shell-api.html#clojure.java.shell/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.shell/"
+       :clojure-base-url "https://clojure.github.com/clojure/clojure.java.shell-api.html#clojure.java.shell/",
+       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.java.shell/"
        :grimoire-base-url (str grimoire-base-url "clojure.java.shell/")}
       {:namespace-str "clojure.pprint"
        :symbol-list (keys (ns-publics 'clojure.pprint)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.pprint-api.html#clojure.pprint/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.pprint/"
+       :clojure-base-url "https://clojure.github.com/clojure/clojure.pprint-api.html#clojure.pprint/",
+       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.pprint/"
        :grimoire-base-url (str grimoire-base-url "clojure.pprint/")}
       {:namespace-str "clojure.repl"
        :symbol-list (keys (ns-publics 'clojure.repl)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.repl-api.html#clojure.repl/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.repl/"
+       :clojure-base-url "https://clojure.github.com/clojure/clojure.repl-api.html#clojure.repl/",
+       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.repl/"
        :grimoire-base-url (str grimoire-base-url "clojure.repl/")}
       {:namespace-str "clojure.set"
        :symbol-list (keys (ns-publics 'clojure.set)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.set-api.html#clojure.set/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.set/"
+       :clojure-base-url "https://clojure.github.com/clojure/clojure.set-api.html#clojure.set/",
+       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.set/"
        :grimoire-base-url (str grimoire-base-url "clojure.set/")}
       {:namespace-str "clojure.string"
        :symbol-list (keys (ns-publics 'clojure.string)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.string-api.html#clojure.string/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.string/"
+       :clojure-base-url "https://clojure.github.com/clojure/clojure.string-api.html#clojure.string/",
+       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.string/"
        :grimoire-base-url (str grimoire-base-url "clojure.string/")}
       {:namespace-str "clojure.walk"
        :symbol-list (keys (ns-publics 'clojure.walk)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.walk-api.html#clojure.walk/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.walk/"
+       :clojure-base-url "https://clojure.github.com/clojure/clojure.walk-api.html#clojure.walk/",
+       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.walk/"
        :grimoire-base-url (str grimoire-base-url "clojure.walk/")}
       {:namespace-str "clojure.xml"
        :symbol-list (keys (ns-publics 'clojure.xml)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.xml-api.html#clojure.xml/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.xml/"
+       :clojure-base-url "https://clojure.github.com/clojure/clojure.xml-api.html#clojure.xml/",
+       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.xml/"
        :grimoire-base-url (str grimoire-base-url "clojure.xml/")}
       {:namespace-str "clojure.zip"
        :symbol-list (keys (ns-publics 'clojure.zip)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.zip-api.html#clojure.zip/",
-       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.zip/"
+       :clojure-base-url "https://clojure.github.com/clojure/clojure.zip-api.html#clojure.zip/",
+       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.zip/"
        :grimoire-base-url (str grimoire-base-url "clojure.zip/")}
       {:namespace-str "clojure.core.reducers"
        :symbol-list (keys (ns-publics 'clojure.core.reducers)),
-       :clojure-base-url "http://clojure.github.com/clojure/clojure.core-api.html#clojure.core.reducers/",
+       :clojure-base-url "https://clojure.github.com/clojure/clojure.core-api.html#clojure.core.reducers/",
        ;; There is no documentation for clojure.core.reducers
        ;; namespace on ClojureDocs.org as of March 2013, so just use
        ;; the same URL as above for now.
-       :clojuredocs-base-url "http://clojure.github.com/clojure/clojure.core-api.html#clojure.core.reducers/"
+       :clojuredocs-base-url "https://clojure.github.com/clojure/clojure.core-api.html#clojure.core.reducers/"
        :grimoire-base-url (str grimoire-base-url "clojure.core.reducers/")}
       ])))
 
@@ -1307,40 +1307,40 @@
    ;; Manually specify links for a few symbols in the cheatsheet.
    [["new" (case link-target-site
                  :links-to-clojure
-                 "http://clojure.org/reference/java_interop#new"
+                 "https://clojure.org/reference/java_interop#new"
                  :links-to-clojuredocs
-                 "http://clojuredocs.org/clojure_core/clojure.core/new"
+                 "https://clojuredocs.org/clojure_core/clojure.core/new"
                  :links-to-grimoire
                  (str grimoire-base-url "clojure.core/new")
                  )]
     ["set!" (case link-target-site
                   :links-to-clojure
-                  "http://clojure.org/reference/java_interop#Java%20Interop-The%20Dot%20special%20form-%28set!%20%28.%20Classname-symbol%20staticFieldName-symbol%29%20expr%29"
+                  "https://clojure.org/reference/java_interop#Java%20Interop-The%20Dot%20special%20form-%28set!%20%28.%20Classname-symbol%20staticFieldName-symbol%29%20expr%29"
                   :links-to-clojuredocs
-                  "http://clojuredocs.org/clojure_core/clojure.core/set!"
+                  "https://clojuredocs.org/clojure_core/clojure.core/set!"
                   :links-to-grimoire
                   (str grimoire-base-url "clojure.core/set!")
                   )]
     ["catch" (case link-target-site
                    :links-to-clojure
-                   "http://clojure.org/reference/special_forms#try"
+                   "https://clojure.org/reference/special_forms#try"
                    :links-to-clojuredocs
-                   "http://clojuredocs.org/clojure_core/clojure.core/catch"
+                   "https://clojuredocs.org/clojure_core/clojure.core/catch"
                    :links-to-grimoire
                    (str grimoire-base-url "clojure.core/catch")
                    )]
     ["finally" (case link-target-site
                      :links-to-clojure
-                     "http://clojure.org/reference/special_forms#try"
+                     "https://clojure.org/reference/special_forms#try"
                      :links-to-clojuredocs
-                     "http://clojuredocs.org/clojure_core/clojure.core/finally"
+                     "https://clojuredocs.org/clojure_core/clojure.core/finally"
                      :links-to-grimoire
                      (str grimoire-base-url "clojure.core/finally")
                      )]]
    (case link-target-site
          :links-to-clojure
-         [["Classname." "http://clojure.org/reference/java_interop#Java%20Interop-The%20Dot%20special%20form-%28new%20Classname%20args*%29"]
-          ["Classname/" "http://clojure.org/reference/java_interop#Java%20Interop-%28Classname/staticMethod%20args*%29"]]
+         [["Classname." "https://clojure.org/reference/java_interop#Java%20Interop-The%20Dot%20special%20form-%28new%20Classname%20args*%29"]
+          ["Classname/" "https://clojure.org/reference/java_interop#Java%20Interop-%28Classname/staticMethod%20args*%29"]]
          :links-to-clojuredocs
          ;; I don't have a good idea where on clojuredocs.org these
          ;; should link to, if anywhere.
@@ -1351,7 +1351,7 @@
    ;; These symbols do not have API docs anywhere that I can find,
    ;; yet.  Point at the github page for tools.reader for now.
    (map (fn [sym-str]
-          [sym-str "http://github.com/clojure/tools.reader" ])
+          [sym-str "https://github.com/clojure/tools.reader" ])
         [ "clojure.tools.reader.edn/read"
           "clojure.tools.reader.edn/read-string" ])
 
@@ -1359,27 +1359,27 @@
       "https://github.com/clojure/data.priority-map" ]]
 
    (map (fn [sym-str]
-          [sym-str "http://github.com/clojure/data.avl" ])
+          [sym-str "https://github.com/clojure/data.avl" ])
         [ "clojure.data.avl/sorted-set"
           "clojure.data.avl/sorted-set-by"
           "clojure.data.avl/sorted-map"
           "clojure.data.avl/sorted-map-by" ])
 
    (map (fn [sym-str]
-          [sym-str "http://github.com/clojure/core.async" ])
+          [sym-str "https://github.com/clojure/core.async" ])
         [ "clojure.core.async/>!!"
           "clojure.core.async/<!!"
           "clojure.core.async/>!"
           "clojure.core.async/<!" ])
 
    (map (fn [sym-str]
-          [sym-str "http://github.com/clojure/core.rrb-vector" ])
+          [sym-str "https://github.com/clojure/core.rrb-vector" ])
         [ "clojure.core.rrb-vector/vector"
           "clojure.core.rrb-vector/vec"
           "clojure.core.rrb-vector/vector-of" ])
 
    (map (fn [sym-str]
-          [sym-str "http://github.com/clojure/data.int-map" ])
+          [sym-str "https://github.com/clojure/data.int-map" ])
         [ "clojure.data.int-map/int-set"
           "clojure.data.int-map/dense-int-set"
           "clojure.data.int-map/int-map" ])
@@ -1419,11 +1419,11 @@
 % Authors: Steve Tayon, Andy Fingerhut
 % Comments, errors, suggestions: andy.fingerhut(at)gmail.com
 
-% Most of the content is based on the clojure wiki, api and source code by Rich Hickey on http://clojure.org/.
+% Most of the content is based on the clojure wiki, api and source code by Rich Hickey on https://clojure.org/.
 
 % License
 % Eclipse Public License v1.0
-% http://opensource.org/licenses/eclipse-1.0.php
+% https://opensource.org/licenses/eclipse-1.0.php
 
 % Packages
 \\usepackage[utf8]{inputenc}
