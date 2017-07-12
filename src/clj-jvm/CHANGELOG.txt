@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------
+July 12, 2017 - Clojure 1.5 - 1.8, sheet v40
+
+Update org.flatland/ordered dependency to newly released version
+1.5.5, which has updated doc strings for the ordered-set and
+ordered-map functions.  Better tooltips in the cheatsheet!
+
+---------------------------------------------------------------------
 June 17, 2017 - Clojure 1.5 - 1.8, sheet v39
 
 Update links from http to https, except for this one, which doesn't

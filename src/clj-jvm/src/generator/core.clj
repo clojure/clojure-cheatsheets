@@ -127,8 +127,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v39)"
-              :html "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v39)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v40)"
+              :html "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v40)"}
       :page [:column
              [:box "green"
               :section "Documentation"
