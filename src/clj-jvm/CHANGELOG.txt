@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------
+November 11, 2017 - Clojure 1.5 - 1.8, sheet v41
+
+Updated list of keyword literal examples in Primitives/Other section.
+Added the ::namespace-alias/kw case, which had not been mentioned
+before.  Replace "ns" abbreviations with "namespace".
+
+---------------------------------------------------------------------
 July 12, 2017 - Clojure 1.5 - 1.8, sheet v40
 
 Update org.flatland/ordered dependency to newly released version

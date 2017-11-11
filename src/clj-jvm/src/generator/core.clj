@@ -127,8 +127,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v40)"
-              :html "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v40)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v41)"
+              :html "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v41)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -262,7 +262,7 @@
                       ["Keywords" :cmds '[keyword keyword? find-keyword
                                           {:latex "\\href{https://clojure.org/reference/reader\\#\\_literals}{literals}:",
                                            :html "<a href=\"https://clojure.org/reference/reader#_literals\">literals</a>:"}
-                                          ":kw" ":my.ns/kw" "::in-cur-ns"]]
+                                          ":kw" ":my.name.space/kw" "::in-cur-namespace" "::namespace-alias/kw"]]
                       ["Symbols" :cmds '[symbol symbol? gensym
                                          {:latex "\\href{https://clojure.org/reference/reader\\#\\_literals}{literals}:",
                                           :html "<a href=\"https://clojure.org/reference/reader#_literals\">literals</a>:"}
