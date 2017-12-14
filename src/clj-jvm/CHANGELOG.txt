@@ -1,4 +1,101 @@
 ---------------------------------------------------------------------
+December 14, 2017 - Clojure 1.6 - 1.9, sheet v42
+
+Made 'minimum version' Clojure 1.6, removing all (1.6) tags marking
+things as new in 1.6.  Tags for things new in (1.7) (1.8) are still
+present, as are tags (1.9) for things new in Clojure 1.9.0.
+
+New things for Clojure 1.9 that have _not_ been added to the sheet at
+this time:
+
+    *print-namespace-maps* *reader-resolver* Inst inst-ms inst-ms*
+
+New things for Clojure 1.9 that have been added to the sheet in this
+version:
+
+    New in Concurrency / Atoms: reset-vals! swap-vals!
+    New in Collections / Collections / Generic Ops: bounded-count
+    New in Transducers / Off the shelf: halt-when
+    New in Java Interoperation / Exceptions: StackTraceElement->vec
+
+Predicate functions that all have generators defined for them in
+version 0.9.0 of test.check are listed below, divided into a few
+categories.  Many are new in Clojure 1.9, but many existed before.
+
+    numbers: (pre 1.9) number? rational? integer? ratio? decimal?
+    float? zero? (1.9) double? int? nat-int? neg-int? pos-int?
+
+    symbols, keywords: (pre 1.9) keyword? symbol?  (1.9) ident?
+    qualified-ident? qualified-keyword? qualified-symbol?
+    simple-ident? simple-keyword? simple-symbol?
+
+    other scalar types: (pre 1.9) string? true? false? nil? some?
+    (1.9) boolean? bytes? inst? uri? uuid?
+
+    collections: (pre 1.9) list? map? set? vector? associative? coll?
+    sequential? seq? empty?  (1.9) indexed? seqable?
+
+    other: (1.9) any?
+
+The functions below have no generator defined for them in version
+0.9.0 of test.check.  They are listed here solely because I was
+composing a list of all predicate functions in Clojure, to determine
+which ones had generators in test.check, vs. which did not.
+
+Those that take any type of argument, without throwing exceptions:
+
+    reduced? sorted? counted? reversible? record? map-entry? fn? ifn?
+    var? future? volatile? class?
+
+Those that throw exceptions for some types of arguments:
+
+    pos? neg? even? odd? realized? bound? thread-bound? future-done?
+    future-cancelled?
+
+Vars in clojure.spec.alpha and related namespaces documented in spec
+guide at: https://clojure.org/guides/spec
+
+I will try to categorize these and add them to the sheet in a future
+version.  I don't know enough to give them a good categorization yet.
+
+    (require '[clojure.spec.alpha :as s])
+    (require '[clojure.spec.gen.alpha :as gen])
+    (require '[clojure.spec.test.alpha :as stest])
+
+    s/conform s/valid? s/def s/explain s/explain-data s/keys s/keys* s/merge
+    s/and s/or s/nilable s/multi-spec s/coll-of s/tuple s/cat s/map-of
+    s/alt s/* s/+ s/? s/& s/spec
+    s/assert s/check-asserts s/fdef s/fspec
+    s/gen
+    gen/generate gen/sample
+    s/exercise s/exercise-fn
+    gen/fmap gen/such-that gen/string-alphanumeric gen/tuple
+    s/with-gen
+    s/int-in s/inst-in s/double-in
+
+    stest/instrument stest/check stest/abbrev-result
+    stest/enumerate-namespace stest/summarize-results
+    stest/unstrument
+
+Predicates from earlier versions of Clojure that can only take
+particular types as arguments, or else they throw an exception:
+
+    zero? pos? neg? even? odd? clojure.string/blank? realized?
+    clojure.zip/branch? clojure.zip/end? empty? bound? thread-bound?
+    future-done? future-cancelled?
+
+Predicates in earlier versions of Clojure that require more than one
+argument:
+
+    clojure.string/starts-with? clojure.string/ends-with?
+    clojure.string/includes? identical? instance? every? not-every?
+    not-any? contains? clojure.set/subseT? clojure.set/superset?
+    satisfies? extends? isa? distinct?
+
+distinct? doesn't require more than one argument, but is really meant
+for collections, not individual values.
+
+---------------------------------------------------------------------
 November 11, 2017 - Clojure 1.5 - 1.8, sheet v41
 
 Updated list of keyword literal examples in Primitives/Other section.

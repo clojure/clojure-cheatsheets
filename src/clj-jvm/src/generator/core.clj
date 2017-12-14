@@ -21,18 +21,6 @@
 ;; andy_fingerhut@alum.wustl.edu
 ;; Feb 21, 2011
 
-;; TBD: Fix the broken link for ->> in the generated PDF files.
-
-;; TBD: For commands specified via strings rather than symbols, "@",
-;; make a way to specify the desired target URL right in the
-;; structure.  Maybe Clojure metadata would be a good way to do this,
-;; since I expect it to be fairly uncommon?
-
-;; TBD: Make an option to use a local file:///... root directory for
-;; the URLs in links, in case someone wants to have a local copy on a
-;; machine that is not always connected to the Internet, similar to
-;; how the CLHS Hyperspec can be locally used?
-
 
 ;; Documentation describing the structure of the value of
 ;; cheatsheat-structure:
@@ -127,8 +115,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v41)"
-              :html "Clojure Cheat Sheet (Clojure 1.5 - 1.8, sheet v41)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.6 - 1.9, sheet v42)"
+              :html "Clojure Cheat Sheet (Clojure 1.6 - 1.9, sheet v42)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -167,7 +155,7 @@
                       ["Bitwise" :cmds '[[:common-prefix bit- and or xor not
                                           flip set shift-right shift-left
                                           and-not clear test]
-                                         "(1.6)" unsigned-bit-shift-right
+                                         unsigned-bit-shift-right
                                          "(see"
                                           {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html}{BigInteger}"
                                            :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html\">BigInteger</a>"}
@@ -285,13 +273,14 @@
                                              clojure.walk/postwalk
                                              clojure.walk/postwalk-demo
                                              clojure.walk/postwalk-replace
+                                             "(1.9)" bounded-count
                                              ]]
                       ["Content tests" :cmds '[distinct? empty?
                                                every? not-every? some not-any?]]
                       ["Capabilities" :cmds '[sequential? associative? sorted?
                                               counted? reversible?]]
                       ["Type tests" :cmds '[coll? list? vector? set? map?
-                                            seq? "(1.6)" record?
+                                            seq? record?
                                             "(1.8)" map-entry?]]]
               :subsection {:latex "Lists (conj, pop, \\& peek at beginning)"
                            :html "Lists (conj, pop, &amp; peek at beginning)"}
@@ -459,7 +448,7 @@
               :table [["Compare" :cmds '[= identical? not= not compare
                                          clojure.data/diff]]
                       ["Test" :cmds '[true? false? instance? nil?
-                                      "(1.6)" some?]]]
+                                      some?]]]
               ]
              [:box "orange"
               :section "Sequences"
@@ -513,7 +502,8 @@
                                replace partition-by partition-all
                                keep keep-indexed map-indexed distinct
                                interpose
-                               "(1.7)" cat dedupe random-sample]]
+                               "(1.7)" cat dedupe random-sample
+                               "(1.9)" halt-when]]
                       ["Create your own"
                        :cmds '["(1.7)" completing ensure-reduced unreduced
                                {:latex "\\textmd{\\textsf{See also section Concurrency/Volatiles}}",
@@ -523,31 +513,31 @@
                       ["Early termination" :cmds '[reduced reduced? deref]]]
               ]
              [:box "green"
-              :subsection "Zippers (clojure.zip/)"
-              :table [["Create" :cmds '[clojure.zip/zipper
-                                        clojure.zip/seq-zip
-                                        clojure.zip/vector-zip
-                                        clojure.zip/xml-zip]]
-                      ["Get loc" :cmds '[clojure.zip/up
-                                         clojure.zip/down clojure.zip/left
-                                         clojure.zip/right
-                                         clojure.zip/leftmost
-                                         clojure.zip/rightmost]]
-                      ["Get seq" :cmds '[clojure.zip/lefts clojure.zip/rights
-                                         clojure.zip/path clojure.zip/children]]
-                      [{:html "'Change'", :latex "`Change'"}
-                       :cmds '[clojure.zip/make-node clojure.zip/replace
-                               clojure.zip/edit clojure.zip/insert-child
-                               clojure.zip/insert-left clojure.zip/insert-right
-                               clojure.zip/append-child clojure.zip/remove]]
-                      ["Move" :cmds '[clojure.zip/next clojure.zip/prev]]
-                      ["Misc" :cmds '[clojure.zip/root clojure.zip/node
-                                      clojure.zip/branch? clojure.zip/end?]]]
+              :section "Spec"
+              :subsection "Predicates with test.check generators"
+              :table [
+                      ["Numbers"
+                       :cmds '[number? rational? integer? ratio? decimal?
+                               float? zero?
+                               "(1.9)" double? int? nat-int? neg-int? pos-int?]]
+                      [{:latex "\\begin{tabular}[t]{@{}l@{}} Symbols, \\\\ keywords \\end{tabular}"
+                        :html "Symbols, keywords"}
+                       :cmds '[keyword? symbol? "(1.9)" ident? qualified-ident?
+                               qualified-keyword? qualified-symbol?
+                               simple-ident? simple-keyword? simple-symbol?]]
+                      [{:latex "\\begin{tabular}[t]{@{}l@{}} Other \\\\ scalars \\end{tabular}"
+                        :html "Other scalars"}
+                       :cmds '[string? true? false? nil? some?
+                               "(1.9)" boolean? bytes? inst? uri? uuid?]]
+                      ["Collections"
+                       :cmds '[list? map? set? vector? associative? coll?
+                               sequential? seq? empty?
+                               "(1.9)" indexed? seqable?]]
+                      ["Other" :cmds '["(1.9)" any?]]]
               ]
              [:box "magenta"
               :section "IO"
               :table [
-;                      ["to/from ..."
                       [{:latex "\\begin{tabular}[t]{@{}l@{}} to/from \\\\ ... \\end{tabular}"
                         :html "to/from ..."}
                         :cmds '[spit slurp
@@ -762,7 +752,7 @@
                                        clojure.walk/macroexpand-all]]
                       ["Branch" :cmds '[and or when when-not when-let
                                         when-first if-not if-let cond condp
-                                        case "(1.6)" when-some if-some]]
+                                        case when-some if-some]]
                       ["Loop" :cmds '[for doseq dotimes while]]
                       ["Arrange" :cmds '[.. doto -> ->>
                                          as-> cond-> cond->> some-> some->>]]
@@ -996,7 +986,7 @@
                                 :html "(<a href=\"https://clojure.org/reference/special_forms#binding-forms\">examples</a>)"}
                                let fn defn defmacro
                                loop for doseq if-let when-let
-                               "(1.6)" if-some when-some]]
+                               if-some when-some]]
                       ]
               ]
              [:box "blue2"
@@ -1045,7 +1035,8 @@
               ]
              [:box "magenta"
               :section "Concurrency"
-              :table [["Atoms" :cmds '[atom swap! reset! compare-and-set!]]
+              :table [["Atoms" :cmds '[atom swap! reset! compare-and-set!
+                                       "(1.9)" swap-vals! reset-vals!]]
                       ["Futures" :cmds '[future
                                          [:common-prefix future-
                                           call done? cancel cancelled?]
@@ -1099,7 +1090,8 @@
                                       biginteger]]
                       ["Exceptions" :cmds '[throw try catch finally
                                             clojure.repl/pst
-                                            ex-info ex-data]]]
+                                            ex-info ex-data
+                                            "(1.9)" StackTraceElement->vec]]]
               :subsection "Arrays"
               :table [["Create" :cmds '[make-array
                                         [:common-suffix -array object
@@ -1123,6 +1115,28 @@
                                         [:common-suffix -proxy
                                          construct init]]]
                       ["Misc" :cmds '[proxy-mappings proxy-super update-proxy]]]
+              ]
+             [:box "blue"
+              :subsection "Zippers (clojure.zip/)"
+              :table [["Create" :cmds '[clojure.zip/zipper
+                                        clojure.zip/seq-zip
+                                        clojure.zip/vector-zip
+                                        clojure.zip/xml-zip]]
+                      ["Get loc" :cmds '[clojure.zip/up
+                                         clojure.zip/down clojure.zip/left
+                                         clojure.zip/right
+                                         clojure.zip/leftmost
+                                         clojure.zip/rightmost]]
+                      ["Get seq" :cmds '[clojure.zip/lefts clojure.zip/rights
+                                         clojure.zip/path clojure.zip/children]]
+                      [{:html "'Change'", :latex "`Change'"}
+                       :cmds '[clojure.zip/make-node clojure.zip/replace
+                               clojure.zip/edit clojure.zip/insert-child
+                               clojure.zip/insert-left clojure.zip/insert-right
+                               clojure.zip/append-child clojure.zip/remove]]
+                      ["Move" :cmds '[clojure.zip/next clojure.zip/prev]]
+                      ["Misc" :cmds '[clojure.zip/root clojure.zip/node
+                                      clojure.zip/branch? clojure.zip/end?]]]
               ]
              [:box "green2"
               :section "Other"
@@ -1417,7 +1431,8 @@
 (def latex-header-except-documentclass
      "
 % Authors: Steve Tayon, Andy Fingerhut
-% Comments, errors, suggestions: andy.fingerhut(at)gmail.com
+% Comments, errors, suggestions: Create an issue at
+% https://github.com/jafingerhut/clojure-cheatsheets
 
 % Most of the content is based on the clojure wiki, api and source code by Rich Hickey on https://clojure.org/.
 
@@ -1503,13 +1518,13 @@
 
 
 (def latex-a4-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=6.5pt]{scrreprt}\n"
+     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=6.3pt]{scrreprt}\n"
           latex-header-except-documentclass))
 
 ;; US letter is a little shorter, so formatting gets completely messed
 ;; up unless we use a slightly smaller font size.
 (def latex-usletter-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=6.3pt,letterpaper]{scrreprt}\n"
+     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=6.0pt,letterpaper]{scrreprt}\n"
           latex-header-except-documentclass))
 
 
