@@ -1,4 +1,52 @@
 ---------------------------------------------------------------------
+December 16, 2017 - Clojure 1.6 - 1.9, sheet v43
+
+Categorization of spec-related functions and macros from Alex Miller:
+
+Operations:
+  valid? conform unform
+  explain explain-data explain-str explain-out
+  form describe
+  assert check-asserts check-asserts?
+
+Generator operations:
+  gen
+  exercise exercise-fn
+
+Spec definitions and registry:
+  def fdef
+  registry
+  get-spec
+  spec?
+  spec with-gen
+
+Logical specs:
+  and, or
+
+Collection specs:
+  coll-of, map-of  - fully realizing coll specs
+  every, every-kv - sampling coll specs
+  keys - attribute maps
+  merge - combining map specs
+
+Regex specs:
+  cat alt * + ? & keys*
+
+Range specs:
+  int-in inst-in double-in
+  int-in-range? inst-in-range?
+
+Other spec functions:
+  nilable  (also nonconforming which is currently undocumented, but useful)
+  multi-spec - multimethod spec
+  fspec - anonymous function spec
+  conformer
+
+Custom explain printer:
+  explain-printer
+  *explain-out*
+
+---------------------------------------------------------------------
 December 14, 2017 - Clojure 1.6 - 1.9, sheet v42
 
 Made 'minimum version' Clojure 1.6, removing all (1.6) tags marking
@@ -546,14 +594,14 @@ Oct 8, 2012 - Clojure 1.3 & 1.4, sheet v1.6
 Added *unchecked-math* and the following symbols from Clojure 1.4, all
 marked with (1.4) on the sheet:
 
-Extensible data literals in reader: 
-*data-readers*, default-data-readers 
+Extensible data literals in reader:
+*data-readers*, default-data-readers
 
-New operations on vectors: 
-mapv, filterv, reduce-kv 
+New operations on vectors:
+mapv, filterv, reduce-kv
 
-Data-conveying exceptions: 
-ex-data, ex-info 
+Data-conveying exceptions:
+ex-data, ex-info
 
 Since ClojureDocs.org has no symbols new to Clojure 1.4 yet, all links
 for those symbols always go instead to the Clojure API documentation

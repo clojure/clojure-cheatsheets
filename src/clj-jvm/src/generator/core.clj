@@ -13,6 +13,10 @@
             [flatland.ordered.map]
             [flatland.useful.map]
             [clojure data pprint repl set string xml zip]
+            [clojure.spec.alpha]
+            [clojure.spec.test.alpha :as stest]
+            [clojure.spec.gen.alpha :as gen]
+            [clojure.test.check.generators :as tcgen]
             [clojure.core.reducers]
             [cemerick.url :as c.u]
             [grimoire.util :as g.u]))
@@ -115,8 +119,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.6 - 1.9, sheet v42)"
-              :html "Clojure Cheat Sheet (Clojure 1.6 - 1.9, sheet v42)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.6 - 1.9, sheet v43)"
+              :html "Clojure Cheat Sheet (Clojure 1.6 - 1.9, sheet v43)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -415,9 +419,6 @@
                       ["Ops" :cmds '[reduce-kv]]
                       ["Entry" :cmds '[key val]]
                       ["Sorted maps" :cmds '[rseq subseq rsubseq]]]
-              ]
-             :column
-             [:box "yellow"
               :subsection {:latex "Queues (conj at end, peek \\& pop from beginning)"
                            :html "Queues (conj at end, peek &amp; pop from beginning)"}
               :table [["Create"
@@ -425,6 +426,9 @@
                                 "(no literal syntax or constructor fn)" ]]
                        ["Examine" :cmds '[ peek ]]
                        ["'Change'" :cmds '[ conj pop ]]]
+              ]
+             :column
+             [:box "yellow"
               :subsection "Relations (set of maps, each with same keys, aka rels)"
               :table [["Rel algebra"
                        :cmds '[
@@ -513,7 +517,85 @@
                       ["Early termination" :cmds '[reduced reduced? deref]]]
               ]
              [:box "green"
-              :section "Spec"
+              :section {:latex "Spec (\\href{https://clojure.org/about/spec}{rationale}, \\href{https://clojure.org/guides/spec}{guide})"
+                        :html "Spec (<a href=\"https://clojure.org/about/spec\">rationale</a>, <a href=\"https://clojure.org/guidess/spec\">guide</a>)"}
+              :table [
+                      ["Operations"
+                       :cmds '[clojure.spec.alpha/valid?
+                               clojure.spec.alpha/conform
+                               clojure.spec.alpha/unform
+                               clojure.spec.alpha/explain
+                               clojure.spec.alpha/explain-data
+                               clojure.spec.alpha/explain-str
+                               clojure.spec.alpha/explain-out
+                               clojure.spec.alpha/form
+                               clojure.spec.alpha/describe
+                               clojure.spec.alpha/assert
+                               clojure.spec.alpha/check-asserts
+                               clojure.spec.alpha/check-asserts?
+                               ]]
+                      ["Generator ops"
+                       :cmds '[
+                               clojure.spec.alpha/gen
+                               clojure.spec.alpha/exercise
+                               clojure.spec.alpha/exercise-fn
+                               ]]
+                      [{:latex "Defn. \\& registry"
+                        :html "Defn. &amp; registry"}
+                       :cmds '[
+                               clojure.spec.alpha/def
+                               clojure.spec.alpha/fdef
+                               clojure.spec.alpha/registry
+                               clojure.spec.alpha/get-spec
+                               clojure.spec.alpha/spec?
+                               clojure.spec.alpha/spec
+                               clojure.spec.alpha/with-gen
+                               ]]
+                      ["Logical"
+                       :cmds '[
+                               clojure.spec.alpha/and
+                               clojure.spec.alpha/or
+                               ]]
+                      ["Collection"
+                       :cmds '[
+                               clojure.spec.alpha/coll-of
+                               clojure.spec.alpha/map-of
+                               clojure.spec.alpha/every
+                               clojure.spec.alpha/every-kv
+                               clojure.spec.alpha/keys
+                               clojure.spec.alpha/merge
+                               ]]
+                      ["Regex"
+                       :cmds '[
+                               clojure.spec.alpha/cat
+                               clojure.spec.alpha/alt
+                               clojure.spec.alpha/*
+                               clojure.spec.alpha/+
+                               clojure.spec.alpha/?
+                               clojure.spec.alpha/&
+                               clojure.spec.alpha/keys*
+                               ]]
+                      ["Range"
+                       :cmds '[
+                               clojure.spec.alpha/int-in
+                               clojure.spec.alpha/inst-in
+                               clojure.spec.alpha/double-in
+                               clojure.spec.alpha/int-in-range?
+                               clojure.spec.alpha/inst-in-range?
+                               ]]
+                      ["Other"
+                       :cmds '[
+                               clojure.spec.alpha/nilable
+                               clojure.spec.alpha/multi-spec
+                               clojure.spec.alpha/fspec
+                               clojure.spec.alpha/conformer
+                               ]]
+                      ["Custom explain"
+                       :cmds '[
+                               clojure.spec.alpha/explain-printer
+                               clojure.spec.alpha/*explain-out*
+                               ]]
+                      ]
               :subsection "Predicates with test.check generators"
               :table [
                       ["Numbers"
@@ -1313,6 +1395,11 @@
        ;; the same URL as above for now.
        :clojuredocs-base-url "https://clojure.github.com/clojure/clojure.core-api.html#clojure.core.reducers/"
        :grimoire-base-url (str grimoire-base-url "clojure.core.reducers/")}
+      {:namespace-str "clojure.spec.alpha"
+       :symbol-list (keys (ns-publics 'clojure.spec.alpha)),
+       :clojure-base-url "https://clojure.github.com/clojure/clojure.spec.alpha-api.html#clojure.spec.alpha/",
+       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.spec/"
+       :grimoire-base-url (str grimoire-base-url "clojure.spec.alpha/")}
       ])))
 
 
@@ -1518,7 +1605,7 @@
 
 
 (def latex-a4-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=6.3pt]{scrreprt}\n"
+     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=6.2pt]{scrreprt}\n"
           latex-header-except-documentclass))
 
 ;; US letter is a little shorter, so formatting gets completely messed
@@ -1737,15 +1824,17 @@ document.write('<style type=\"text/css\">%s<\\/style>')
       (str/replace "%" "\\%")
       (str/replace "<" "\\%3C")
       (str/replace "=" "\\%3D")
-      (str/replace ">" "\\%3E")))
+      (str/replace ">" "\\%3E")
+      (str/replace "&" "\\&")))
 
 
 (defn escape-latex-hyperref-target [target]
   (-> target
       ;; -> doesn't seem to have a problem in LaTeX, but ->> looks
-      ;; -> like - followed by a special symbol that is two >'s
-      ;; -> combined, not two separate characters.
-      (str/replace "->>" "-{>}{>}")))
+      ;; like - followed by a special symbol that is two >'s
+      ;; combined, not two separate characters.
+      (str/replace "->>" "-{>}{>}")
+      (str/replace "&" "\\&")))
 
 
 (defn has-prefix? [s pre]
@@ -1777,6 +1866,7 @@ document.write('<style type=\"text/css\">%s<\\/style>')
    "flatland.ordered.set/"
    "flatland.ordered.map/"
    "flatland.useful.map/"
+   "clojure.spec.alpha/"
    ])
 
 (defn remove-common-ns-prefix [s]

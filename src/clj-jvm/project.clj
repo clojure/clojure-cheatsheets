@@ -14,5 +14,6 @@
                  [org.flatland/useful "0.11.5"]
                  [org.clojure/core.rrb-vector "0.0.11"]
                  [org.clojure-grimoire/lib-grimoire "0.10.9"]
-                 [com.cemerick/url "0.1.1"]]
+                 [com.cemerick/url "0.1.1"]
+                 [org.clojure/test.check "0.9.0"]]
   :main generator.core)
