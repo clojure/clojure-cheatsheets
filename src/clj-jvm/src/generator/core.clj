@@ -518,7 +518,7 @@
               ]
              [:box "green"
               :section {:latex "Spec (\\href{https://clojure.org/about/spec}{rationale}, \\href{https://clojure.org/guides/spec}{guide})"
-                        :html "Spec (<a href=\"https://clojure.org/about/spec\">rationale</a>, <a href=\"https://clojure.org/guidess/spec\">guide</a>)"}
+                        :html "Spec (<a href=\"https://clojure.org/about/spec\">rationale</a>, <a href=\"https://clojure.org/guides/spec\">guide</a>)"}
               :table [
                       ["Operations"
                        :cmds '[clojure.spec.alpha/valid?
