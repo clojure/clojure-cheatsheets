@@ -119,8 +119,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.6 - 1.9, sheet v43)"
-              :html "Clojure Cheat Sheet (Clojure 1.6 - 1.9, sheet v43)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.6 - 1.9, sheet v44)"
+              :html "Clojure Cheat Sheet (Clojure 1.6 - 1.9, sheet v44)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -167,11 +167,10 @@
                                          ]]
                       ["Cast" :cmds '[byte short int long float double
                                       bigdec bigint num rationalize biginteger]]
-                      ["Test" :cmds-with-frenchspacing '[zero? pos? neg?
-                                                         even? odd?
-                                                         number? rational?
-                                                         integer? ratio?
-                                                         decimal? float?]]
+                      ["Test" :cmds-with-frenchspacing
+                       '[zero? pos? neg? even? odd? number? rational?
+                         integer? ratio? decimal? float?
+                         "(1.9)" double? int? nat-int? neg-int? pos-int?]]
                       ["Random" :cmds '[rand rand-int]]
                       ["BigDecimal" :cmds '[with-precision]]
                       ;; TBD: Why do these not exist in Clojure?

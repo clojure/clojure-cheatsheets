@@ -1,4 +1,19 @@
 ---------------------------------------------------------------------
+March 19, 2018 - Clojure 1.6 - 1.9, sheet v44
+
+Corrected link to Spec guide page on clojure.org
+
+Added these predicates for numbers, added in Clojure 1.9, to the
+section Primitives / Numbers / Test:
+
+  double? int? nat-int? neg-int? pos-int?
+
+They were added to the new "Spec" section of the cheatsheet earlier,
+but it seems reasonable to add them in Primitives / Numbers / Test,
+too.
+
+
+---------------------------------------------------------------------
 December 16, 2017 - Clojure 1.6 - 1.9, sheet v43
 
 Categorization of spec-related functions and macros from Alex Miller:
