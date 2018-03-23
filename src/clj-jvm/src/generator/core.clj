@@ -73,8 +73,6 @@
 ;;
 ;; ["string" :str <str-spec>]
 ;;
-;; You can optionally replace :cmds with :cmds-with-frenchspacing
-;;
 ;; Each <cmd> or <str-spec> (and "string" at the beginning) can be any
 ;; one of:
 ;;
@@ -167,10 +165,11 @@
                                          ]]
                       ["Cast" :cmds '[byte short int long float double
                                       bigdec bigint num rationalize biginteger]]
-                      ["Test" :cmds-with-frenchspacing
-                       '[zero? pos? neg? even? odd? number? rational?
-                         integer? ratio? decimal? float?
-                         "(1.9)" double? int? nat-int? neg-int? pos-int?]]
+                      ["Test" :cmds '[zero? pos? neg? even? odd? number?
+                                      rational? integer? ratio? decimal?
+                                      float?
+                                      "(1.9)" double? int? nat-int?
+                                      neg-int? pos-int?]]
                       ["Random" :cmds '[rand rand-int]]
                       ["BigDecimal" :cmds '[with-precision]]
                       ;; TBD: Why do these not exist in Clojure?
@@ -288,12 +287,12 @@
               :subsection {:latex "Lists (conj, pop, \\& peek at beginning)"
                            :html "Lists (conj, pop, &amp; peek at beginning)"}
               :table [["Create" :cmds '["()" list list*]]
-                      ["Examine" :cmds-with-frenchspacing '[first nth peek
-                                                            {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html\\#indexOf-java.lang.Object-}{.indexOf}"
-                                                             :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html#indexOf-java.lang.Object-\">.indexOf</a>"}
-                                                            {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html\\#lastIndexOf-java.lang.Object-}{.lastIndexOf}"
-                                                             :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html#lastIndexOf-java.lang.Object-\">.lastIndexOf</a>"}
-                                                            ]]
+                      ["Examine" :cmds '[first nth peek
+                                         {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html\\#indexOf-java.lang.Object-}{.indexOf}"
+                                          :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html#indexOf-java.lang.Object-\">.indexOf</a>"}
+                                         {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html\\#lastIndexOf-java.lang.Object-}{.lastIndexOf}"
+                                          :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html#lastIndexOf-java.lang.Object-\">.lastIndexOf</a>"}
+                                         ]]
                       [{:html "'Change'", :latex "`Change'"}
                        :cmds '[cons conj rest pop]]
                       ]
@@ -443,10 +442,9 @@
               :subsection {:latex "Transients (\\href{https://clojure.org/reference/transients}{clojure.org/reference/transients})"
                            :html "Transients (<a href=\"https://clojure.org/reference/transients\">clojure.org/reference/transients</a>)"}
               :table [["Create" :cmds '[transient persistent!]]
-                      ["Change" :cmds-with-frenchspacing
-                       '[conj! pop! assoc! dissoc! disj!
-                         {:latex "\\textmd{\\textsf{Note: always use return value for later changes, never original!}}",
-                          :html "Note: always use return value for later changes, never original!"}]]]
+                      ["Change" :cmds '[conj! pop! assoc! dissoc! disj!
+                                        {:latex "\\textmd{\\textsf{Note: always use return value for later changes, never original!}}",
+                                         :html "Note: always use return value for later changes, never original!"}]]]
               :subsection "Misc"
               :table [["Compare" :cmds '[= identical? not= not compare
                                          clojure.data/diff]]
@@ -1573,7 +1571,7 @@
 
 
 % A few shortcuts
-\\newcommand{\\cmd}[1] {\\frenchspacing\\texttt{\\textbf{{#1}}}}
+\\newcommand{\\cmd}[1] {\\texttt{\\textbf{{#1}}}}
 \\newcommand{\\cmdline}[1] {
 	\\begin{tabularx}{\\hsize}{X}
 			\\texttt{\\textbf{{#1}}}
@@ -2051,7 +2049,6 @@ characters (\") with &quot;"
                       :latex
                       (case k
                         :cmds "\\cmd{"
-                        :cmds-with-frenchspacing "\\cmd{\\frenchspacing "
                         :cmds-one-line "\\cmdline{")
                       :html "<code>"
                       :verify-only ""))
@@ -2063,7 +2060,7 @@ characters (\") with &quot;"
 
 
 (defn output-table-row [fmt row row-num nrows]
-  (verify (not= nil (#{:cmds :cmds-with-frenchspacing :str} (second row))))
+  (verify (not= nil (#{:cmds :str} (second row))))
 
   (let [[row-title k cmd-desc] row]
     (iprintf "%s" (case (:fmt fmt)
