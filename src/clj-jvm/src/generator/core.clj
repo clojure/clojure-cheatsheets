@@ -288,10 +288,10 @@
                            :html "Lists (conj, pop, &amp; peek at beginning)"}
               :table [["Create" :cmds '["()" list list*]]
                       ["Examine" :cmds '[first nth peek
-                                         {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html\\#indexOf-java.lang.Object-}{.indexOf}"
-                                          :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html#indexOf-java.lang.Object-\">.indexOf</a>"}
-                                         {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html\\#lastIndexOf-java.lang.Object-}{.lastIndexOf}"
-                                          :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html#lastIndexOf-java.lang.Object-\">.lastIndexOf</a>"}
+                                         {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/util/List.html\\#indexOf-java.lang.Object-}{.indexOf}"
+                                          :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/util/List.html#indexOf-java.lang.Object-\">.indexOf</a>"}
+                                         {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/util/List.html\\#lastIndexOf-java.lang.Object-}{.lastIndexOf}"
+                                          :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/util/List.html#lastIndexOf-java.lang.Object-\">.lastIndexOf</a>"}
                                          ]]
                       [{:html "'Change'", :latex "`Change'"}
                        :cmds '[cons conj rest pop]]
@@ -311,10 +311,10 @@
                                          {:latex " \\cmd{my-vec idx)}",
                                           :html " my-vec idx)</code>"}
                                          get peek
-                                         {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html\\#indexOf-java.lang.Object-}{.indexOf}"
-                                          :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html#indexOf-java.lang.Object-\">.indexOf</a>"}
-                                         {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html\\#lastIndexOf-java.lang.Object-}{.lastIndexOf}"
-                                          :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html#lastIndexOf-java.lang.Object-\">.lastIndexOf</a>"}
+                                         {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/util/List.html\\#indexOf-java.lang.Object-}{.indexOf}"
+                                          :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/util/List.html#indexOf-java.lang.Object-\">.indexOf</a>"}
+                                         {:latex "\\href{https://docs.oracle.com/javase/8/docs/api/java/util/List.html\\#lastIndexOf-java.lang.Object-}{.lastIndexOf}"
+                                          :html "<a href=\"https://docs.oracle.com/javase/8/docs/api/java/util/List.html#lastIndexOf-java.lang.Object-\">.lastIndexOf</a>"}
                                          ]]
                       [{:html "'Change'", :latex "`Change'"}
                        :cmds '[assoc assoc-in pop subvec replace conj rseq
