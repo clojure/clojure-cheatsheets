@@ -117,8 +117,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.6 - 1.9, sheet v44)"
-              :html "Clojure Cheat Sheet (Clojure 1.6 - 1.9, sheet v44)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.6 - 1.9, sheet v45)"
+              :html "Clojure Cheat Sheet (Clojure 1.6 - 1.9, sheet v45)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -965,6 +965,15 @@
                         :html "<code>#foo</code>"}
                        :cmds [{:latex "\\href{https://clojure.org/reference/reader\\#tagged\\_literals}{tagged literal} e.g. \\cmd{\\#inst} \\cmd{\\#uuid}"
                                :html "<a href=\"https://clojure.org/reference/reader#tagged_literals\">tagged literal</a> e.g. <code>#inst</code> <code>#uuid</code>"}]]
+                      [{:latex "\\cmd{\\#:}",
+                        :html "<code>#:</code>"}
+                       :cmds [{:latex "\\href{https://clojure.org/reference/reader\\#map\\_namespace\\_syntax}{map namespace syntax} e.g. \\cmd{\\#:foo\\{:a 1 :b 2\\}} is equal to \\{:foo/a 1 :foo/b 2\\}"
+                               :html "<a href=\"https://clojure.org/reference/reader#map_namespace_syntax\">map namespace syntax</a> e.g. <code>#:foo{:a 1}</code> is equal to <code>{:foo/a 1}</code>"}]]
+                      [{:latex "\\cmd{\\#\\#}",
+                        :html "<code>##</code>"}
+                       :cmds '["(1.9) symbolic values:"
+                               {:latex "\\cmd{\\#\\#Inf \\#\\#-Inf \\#\\#NaN}",
+                                :html "<code>##Inf ##-Inf ##NaN<code>"}]]
                       [{:latex "\\cmd{\\$}",
                         :html "<code>$</code>"}
                        :cmds '[{:latex "\\cmd{JavaContainerClass\\$InnerClass}",
@@ -1602,7 +1611,7 @@
 
 
 (def latex-a4-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=6.2pt]{scrreprt}\n"
+     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=6.1pt]{scrreprt}\n"
           latex-header-except-documentclass))
 
 ;; US letter is a little shorter, so formatting gets completely messed

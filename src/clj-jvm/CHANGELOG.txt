@@ -1,4 +1,14 @@
 ---------------------------------------------------------------------
+August 28, 2018 - Clojure 1.6 - 1.9, sheet v45
+
+Added #: and ## to Special Characters section.
+
+Corrected link to Java .lastIndexOf method to be in class
+java.util.List, which is the interface that Clojure's lists and
+vectors implement, not interface java.util.Vector as the link was
+before.
+
+---------------------------------------------------------------------
 March 19, 2018 - Clojure 1.6 - 1.9, sheet v44
 
 Corrected link to Spec guide page on clojure.org
