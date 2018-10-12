@@ -19,7 +19,24 @@
             [clojure.test.check.generators :as tcgen]
             [clojure.core.reducers]
             [cemerick.url :as c.u]
-            [grimoire.util :as g.u]))
+            [grimoire.util :as g.u]
+
+            clojure.core.protocols
+            clojure.core.server
+            clojure.core.specs.alpha
+            clojure.edn
+            clojure.inspector
+            clojure.instant
+            clojure.java.browse-ui
+            clojure.main
+            clojure.spec.gen.alpha
+            clojure.stacktrace
+            clojure.template
+            clojure.test.junit
+            clojure.test.tap
+            clojure.test
+            clojure.uuid
+            ))
 
 ;; Andy Fingerhut
 ;; andy_fingerhut@alum.wustl.edu
@@ -1318,95 +1335,85 @@
          symbol-list)))
 
 
+;; The list below was created by starting with the list of all
+;; namespaces in a Clojure 1.10.0-RC1 run, with no dependencies other
+;; than the spec ones that Clojure needs to run, using these commands:
+
+;; $ clj -Sdeps '{:deps {org.clojure/clojure {:mvn/version "1.10.0-RC1"}}}'
+;; Clojure 1.10.0-RC1
+;; user=> (pprint (->> (all-ns) (map str) sort))
+
+;; That list was then augmented by grep'ing all .clj files in the
+;; Clojure 1.10.0-RC1 source code for 'ns' forms.  Not all namespaces
+;; included in Clojure are loaded by default using the commands above.
+
+(def all-clojure-built-in-namespaces
+  '[clojure.core
+    clojure.core.protocols
+    clojure.core.reducers
+    clojure.core.server
+    clojure.core.specs.alpha
+    clojure.data
+    clojure.edn
+    clojure.inspector
+    clojure.instant
+    clojure.java.browse
+    clojure.java.browse-ui
+    clojure.java.io
+    clojure.java.javadoc
+    clojure.java.shell
+    clojure.main
+    ;; clojure.parallel - deprecated, so leave out
+    clojure.pprint
+    clojure.repl
+    clojure.set
+    clojure.stacktrace
+    clojure.string
+    clojure.template
+    clojure.test
+    clojure.test.junit
+    clojure.test.tap
+    clojure.uuid
+    clojure.walk
+    clojure.xml
+    clojure.zip
+
+    ;; These are not built into Clojure itself, but _are_ depended on
+    ;; by Clojure
+    clojure.spec.alpha
+    clojure.spec.gen.alpha
+    ])
+
+(defn ns-info-common-case [ns-sym]
+  (let [s (str ns-sym)
+        clojure-url (str "https://clojure.github.com/clojure/"
+                         s "-api.html#" s "/")
+        ;; There is no documentation for clojure.core.reducers
+        ;; namespace on ClojureDocs.org as of Oct 2018, so just use
+        ;; the same clojure-url as above for now.
+        clojuredocs-url
+        (if (= ns-sym 'clojure.core.reducers)
+          clojure-url
+          (str "https://clojuredocs.org/clojure_core/" s "/"))]
+    {:namespace-str (if (= ns-sym 'clojure.core) "" s)
+     :symbol-list (keys (ns-publics ns-sym))
+     :clojure-base-url clojure-url
+     :clojuredocs-base-url clojuredocs-url
+     :grimoire-base-url (str grimoire-base-url s "/")}))
+
 (defn symbol-url-pairs-for-whole-namespaces [link-target-site]
   (apply concat
     (map
      #(sym-to-url-list link-target-site %)
-     [{:namespace-str "",
-       :symbol-list '(def if do let quote var fn loop recur throw try
-                          monitor-enter monitor-exit),
-       :clojure-base-url "https://clojure.org/reference/special_forms#",
-       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.core/"
-       :grimoire-base-url    (str grimoire-base-url "clojure.core/")}
-      {:namespace-str "",
-       :symbol-list (keys (ns-publics 'clojure.core)),
-       :clojure-base-url "https://clojure.github.com/clojure/clojure.core-api.html#clojure.core/",
-       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.core/"
-       :grimoire-base-url (str grimoire-base-url "clojure.core/")}
-      {:namespace-str "clojure.data"
-       :symbol-list (keys (ns-publics 'clojure.data)),
-       :clojure-base-url "https://clojure.github.com/clojure/clojure.data-api.html#clojure.data/",
-       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.data/"
-       :grimoire-base-url (str grimoire-base-url "clojure.data/")}
-      {:namespace-str "clojure.java.io"
-       :symbol-list (keys (ns-publics 'clojure.java.io)),
-       :clojure-base-url "https://clojure.github.com/clojure/clojure.java.io-api.html#clojure.java.io/",
-       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.java.io/"
-       :grimoire-base-url (str grimoire-base-url "clojure.java.io/")}
-      {:namespace-str "clojure.java.browse"
-       :symbol-list (keys (ns-publics 'clojure.java.browse)),
-       :clojure-base-url "https://clojure.github.com/clojure/clojure.java.browse-api.html#clojure.java.browse/",
-       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.java.browse/"
-       :grimoire-base-url (str grimoire-base-url "clojure.java.browse/")}
-      {:namespace-str "clojure.java.javadoc"
-       :symbol-list (keys (ns-publics 'clojure.java.javadoc)),
-       :clojure-base-url "https://clojure.github.com/clojure/clojure.java.javadoc-api.html#clojure.java.javadoc/",
-       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.java.javadoc/"
-       :grimoire-base-url (str grimoire-base-url "clojure.java.javadoc/")}
-      {:namespace-str "clojure.java.shell"
-       :symbol-list (keys (ns-publics 'clojure.java.shell)),
-       :clojure-base-url "https://clojure.github.com/clojure/clojure.java.shell-api.html#clojure.java.shell/",
-       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.java.shell/"
-       :grimoire-base-url (str grimoire-base-url "clojure.java.shell/")}
-      {:namespace-str "clojure.pprint"
-       :symbol-list (keys (ns-publics 'clojure.pprint)),
-       :clojure-base-url "https://clojure.github.com/clojure/clojure.pprint-api.html#clojure.pprint/",
-       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.pprint/"
-       :grimoire-base-url (str grimoire-base-url "clojure.pprint/")}
-      {:namespace-str "clojure.repl"
-       :symbol-list (keys (ns-publics 'clojure.repl)),
-       :clojure-base-url "https://clojure.github.com/clojure/clojure.repl-api.html#clojure.repl/",
-       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.repl/"
-       :grimoire-base-url (str grimoire-base-url "clojure.repl/")}
-      {:namespace-str "clojure.set"
-       :symbol-list (keys (ns-publics 'clojure.set)),
-       :clojure-base-url "https://clojure.github.com/clojure/clojure.set-api.html#clojure.set/",
-       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.set/"
-       :grimoire-base-url (str grimoire-base-url "clojure.set/")}
-      {:namespace-str "clojure.string"
-       :symbol-list (keys (ns-publics 'clojure.string)),
-       :clojure-base-url "https://clojure.github.com/clojure/clojure.string-api.html#clojure.string/",
-       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.string/"
-       :grimoire-base-url (str grimoire-base-url "clojure.string/")}
-      {:namespace-str "clojure.walk"
-       :symbol-list (keys (ns-publics 'clojure.walk)),
-       :clojure-base-url "https://clojure.github.com/clojure/clojure.walk-api.html#clojure.walk/",
-       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.walk/"
-       :grimoire-base-url (str grimoire-base-url "clojure.walk/")}
-      {:namespace-str "clojure.xml"
-       :symbol-list (keys (ns-publics 'clojure.xml)),
-       :clojure-base-url "https://clojure.github.com/clojure/clojure.xml-api.html#clojure.xml/",
-       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.xml/"
-       :grimoire-base-url (str grimoire-base-url "clojure.xml/")}
-      {:namespace-str "clojure.zip"
-       :symbol-list (keys (ns-publics 'clojure.zip)),
-       :clojure-base-url "https://clojure.github.com/clojure/clojure.zip-api.html#clojure.zip/",
-       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.zip/"
-       :grimoire-base-url (str grimoire-base-url "clojure.zip/")}
-      {:namespace-str "clojure.core.reducers"
-       :symbol-list (keys (ns-publics 'clojure.core.reducers)),
-       :clojure-base-url "https://clojure.github.com/clojure/clojure.core-api.html#clojure.core.reducers/",
-       ;; There is no documentation for clojure.core.reducers
-       ;; namespace on ClojureDocs.org as of March 2013, so just use
-       ;; the same URL as above for now.
-       :clojuredocs-base-url "https://clojure.github.com/clojure/clojure.core-api.html#clojure.core.reducers/"
-       :grimoire-base-url (str grimoire-base-url "clojure.core.reducers/")}
-      {:namespace-str "clojure.spec.alpha"
-       :symbol-list (keys (ns-publics 'clojure.spec.alpha)),
-       :clojure-base-url "https://clojure.github.com/clojure/clojure.spec.alpha-api.html#clojure.spec.alpha/",
-       :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.spec/"
-       :grimoire-base-url (str grimoire-base-url "clojure.spec.alpha/")}
-      ])))
+     (concat
+      [{:namespace-str "",
+        :symbol-list '(def if do let quote var fn loop recur throw try
+                        monitor-enter monitor-exit),
+        :clojure-base-url "https://clojure.org/reference/special_forms#",
+        :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.core/"
+        :grimoire-base-url    (str grimoire-base-url "clojure.core/")}]
+
+      (map ns-info-common-case all-clojure-built-in-namespaces)))))
 
 
 (defn symbol-url-pairs-specified-by-hand [link-target-site]
@@ -2295,7 +2302,8 @@ characters (\") with &quot;"
         ;; table that we never looked up.
         (let [never-used (set/difference
                           (set (keys symbol-name-to-url))
-                          @symbols-looked-up)]
+                          @symbols-looked-up)
+              all-ns-names-sorted (->> (all-ns) (map str) sort)]
           (iprintf *err* "\n\n%d symbols successfully looked up.\n\n"
                    (count @symbols-looked-up))
           (iprintf *err* "\n\nSorted list of %d symbols in lookup table that were never used:\n\n"
@@ -2305,7 +2313,11 @@ characters (\") with &quot;"
           (iprintf *err* "%s\n" (str/join "<br>"
                                           (map #(format "<a href=\"%s\">%s</a>\n"
                                                         (symbol-name-to-url %) %)
-                                               (sort (seq never-used))))))
+                                               (sort (seq never-used)))))
+          (iprintf *err* "\n\nSorted list of %d namespace names currently existing:\n\n"
+                   (count all-ns-names-sorted))
+          (doseq [s all-ns-names-sorted]
+            (iprintf *err* "%s\n" s)))
         (.close *out*)
         (.close *err*))
       (doseq [x [ {:filename "cheatsheet-embeddable.html",
