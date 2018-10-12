@@ -335,7 +335,7 @@
                                          ]]
                       [{:html "'Change'", :latex "`Change'"}
                        :cmds '[assoc assoc-in pop subvec replace conj rseq
-                               update-in "(1.7)" update]]
+                               update update-in]]
                       ["Ops" :cmds '[reduce-kv]]]
               :subsection "Sets"
               :table [["Create unsorted"
@@ -420,8 +420,7 @@
                                ]]
                       [{:html "'Change'", :latex "`Change'"}
                        :cmds '[assoc assoc-in dissoc merge
-                               merge-with select-keys update-in
-                               "(1.7)" update
+                               merge-with select-keys update update-in
                                {:latex "\\textmd{\\textsf{(clojure.set/)}}",
                                 :html "(clojure.set/)"}
                                clojure.set/rename-keys
@@ -482,7 +481,7 @@
               :subsection "Seq in, Seq out"
               :table [["Get shorter" :cmds '[distinct filter remove
                                              take-nth for
-                                             "(1.7)" dedupe random-sample]]
+                                             dedupe random-sample]]
                       ["Get longer" :cmds '[cons conj concat lazy-cat mapcat
                                             cycle interleave interpose]]
                       ["Tail-items" :cmds '[rest nthrest next fnext nnext
@@ -507,8 +506,7 @@
                                                 mapv filterv]]
                       ["Pass to fn" :cmds '[apply]]
                       ["Search" :cmds '[some filter]]
-                      ["Force evaluation" :cmds '[doseq dorun doall
-                                                  "(1.7)" run!]]
+                      ["Force evaluation" :cmds '[doseq dorun doall run!]]
                       ["Check for forced" :cmds '[realized?]]]
               ]
              [:box "blue"
@@ -519,15 +517,13 @@
                                take-while take-nth drop drop-while
                                replace partition-by partition-all
                                keep keep-indexed map-indexed distinct
-                               interpose
-                               "(1.7)" cat dedupe random-sample
+                               interpose cat dedupe random-sample
                                "(1.9)" halt-when]]
                       ["Create your own"
-                       :cmds '["(1.7)" completing ensure-reduced unreduced
+                       :cmds '[completing ensure-reduced unreduced
                                {:latex "\\textmd{\\textsf{See also section Concurrency/Volatiles}}",
                                 :html "See also section Concurrency/Volatiles"}]]
-                      ["Use" :cmds '[into sequence
-                                     "(1.7)" transduce eduction]]
+                      ["Use" :cmds '[into sequence transduce eduction]]
                       ["Early termination" :cmds '[reduced reduced? deref]]]
               ]
              [:box "green"
@@ -964,16 +960,14 @@
                                ]]
                       [{:latex "\\cmd{\\#?}",
                         :html "<code>#?</code>"}
-                       :cmds ["(1.7)"
-                              {:latex "\\href{https://clojure.org/reference/reader\\#\\_reader\\_conditionals}{Reader conditional}:"
+                       :cmds [{:latex "\\href{https://clojure.org/reference/reader\\#\\_reader\\_conditionals}{Reader conditional}:"
                                :html "<a href=\"https://clojure.org/reference/reader#_reader_conditionals\">Reader conditional</a>:"}
                               {:latex "\\#?(:clj x :cljs y) reads as x on JVM, y in ClojureScript, nothing elsewhere.  Other keys: :cljr :default",
                                :html "<code>#?(:clj x :cljs y)</code> reads as <code>x</code> on JVM, <code>y</code> in ClojureScript, nothing elsewhere.  Other keys: <code>:cljr :default</code>"}
                               ]]
                       [{:latex "\\cmd{\\#?@}",
                         :html "<code>#?@</code>"}
-                       :cmds ["(1.7)"
-                              {:latex "\\href{https://clojure.org/reference/reader\\#\\_reader\\_conditionals}{Splicing reader conditional}:"
+                       :cmds [{:latex "\\href{https://clojure.org/reference/reader\\#\\_reader\\_conditionals}{Splicing reader conditional}:"
                                :html "<a href=\"https://clojure.org/reference/reader#_reader_conditionals\">Splicing reader conditional</a>:"}
                               {:latex "[1 \\#?@(:clj [x y] :cljs [w z]) 3] reads as [1 x y 3] on JVM, [1 w z 3] in ClojureScript, [1 3] elsewhere.",
                                :html "<code>[1 #?@(:clj [x y] :cljs [w z]) 3]</code> reads as <code>[1 x y 3]</code> on JVM, <code>[1 w z 3]</code> in ClojureScript, <code>[1 3]</code> elsewhere."}
@@ -1150,8 +1144,7 @@
                                          [:common-suffix -thread-bindings
                                           get push pop]
                                          thread-bound?]]
-                      ["Volatiles" :cmds '["(1.7)" volatile! vreset! vswap!
-                                           volatile?]]
+                      ["Volatiles" :cmds '[volatile! vreset! vswap! volatile?]]
                       ["Misc" :cmds '[locking pcalls pvalues pmap seque
                                       promise deliver]]]
               :subsection {:latex "Refs and Transactions (\\href{https://clojure.org/reference/refs}{clojure.org/reference/refs})"
