@@ -134,8 +134,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.6 - 1.9, sheet v45)"
-              :html "Clojure Cheat Sheet (Clojure 1.6 - 1.9, sheet v45)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.6 - 1.9, sheet v46)"
+              :html "Clojure Cheat Sheet (Clojure 1.6 - 1.9, sheet v46)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -1187,9 +1187,12 @@
                                       float double bigdec bigint num cast
                                       biginteger]]
                       ["Exceptions" :cmds '[throw try catch finally
-                                            clojure.repl/pst
-                                            ex-info ex-data
-                                            "(1.9)" StackTraceElement->vec]]]
+                                            clojure.repl/pst ex-info ex-data
+                                            "(1.9)" StackTraceElement->vec
+                                            "(1.10)" ex-cause ex-message
+                                            {:latex "\\textmd{\\textsf{(clojure.main/)}}",
+                                             :html "(clojure.main/)"}
+                                            clojure.main/ex-str]]]
               :subsection "Arrays"
               :table [["Create" :cmds '[make-array
                                         [:common-suffix -array object

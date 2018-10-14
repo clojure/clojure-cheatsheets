@@ -1,4 +1,33 @@
 ---------------------------------------------------------------------
+October 12, 2018 - Clojure 1.7 - 1.10, sheet v46
+
+Made 'minimum version' Clojure 1.7, removing all (1.7) tags marking
+things as new in 1.7.  Tags for things new in (1.8) (1.9) are still
+present, as are tags (1.10) for things new in Clojure 1.10.0.
+
+New things for Clojure 1.10 that have _not_ been added to the sheet at
+this time:
+
+    PrintWriter-on read+string
+    add-tap remove-tap tap>
+
+    clojure.core.protocols/Datafiable clojure.core.protocols/Navigable
+    clojure.core.protocols/datafy clojure.core.protocols/nav
+
+    clojure.core.server/io-prepl clojure.core.server/prepl
+    clojure.core.server/remote-prepl
+
+    clojure.core.specs.alpha/even-number-of-forms?
+    clojure.spec.gen.alpha/shuffle
+
+New things for Clojure 1.10 that have been added to the sheet in this
+version:
+
+Added to Java Interoperation / Exceptions section:
+
+    ex-cause ex-message clojure.main/ex-str
+
+---------------------------------------------------------------------
 August 28, 2018 - Clojure 1.6 - 1.9, sheet v45
 
 Added #: and ## to Special Characters section.
