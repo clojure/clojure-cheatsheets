@@ -17,7 +17,7 @@ TOOLTIPS=no-tooltips
 #TOOLTIPS=tiptip
 
 CLOJUREDOCS_SNAPSHOT=""
-#CLOJUREDOCS_SNAPSHOT="${HOME}/.clojuredocs-snapshot.txt"
+#CLOJUREDOCS_SNAPSHOT="$clojuredocs-snapshot.edn"
 
 # Optionally produce PDF files by running LaTeX.  See README.markdown
 # for notes on what parts of LaTeX are enough for this to work.
@@ -71,7 +71,7 @@ do
 	case "${CDOCS_SUMMARY}" in
 	no-cdocs-summary) CLOJUREDOCS_SNAPSHOT=""
 	                  ;;
-	cdocs-summary) CLOJUREDOCS_SNAPSHOT="${HOME}/.clojuredocs-snapshot.txt"
+	cdocs-summary) CLOJUREDOCS_SNAPSHOT="clojuredocs-snapshot.edn"
 	                  ;;
 	esac
 	TARGET="cheatsheet-${TOOLTIPS}-${CDOCS_SUMMARY}.html"
