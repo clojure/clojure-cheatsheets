@@ -53,8 +53,8 @@ sudo port install texlive-latex-recommended texlive-fonts-recommended
 
 Edit `run.sh` to specify the values of `LINK_TARGET` and `PRODUCE_PDF`
 variables to your liking.  If you want to produce PDF files, you must
-have a suitable LaTeX installation on your computer.  See "LaTeX
-installation notes" below for what is needed.
+have a suitable LaTeX installation on your system (see Installation
+above).
 
 Run this command:
 
