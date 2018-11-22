@@ -12,12 +12,42 @@ documentation on either [clojure.github.com][clojure github] or
 [clojure github]: http://clojure.github.com
 [clojuredocs]: http://clojuredocs.org
 
-The cheat sheet generated is currently specific to Clojure versions
-1.3 through 1.5.1, with new symbols added in Clojure 1.4 and 1.5
-marked with "(1.4)" or "(1.5)".  At some point it will likely be
-easier to simply change this program as desired for later versions of
-Clojure, rather than try to have the same program able to generate
-cheatsheets for too many Clojure versions.
+
+# Installation
+
+## For Ubuntu 18.04 Linux
+
+Starting from a minimal Ubuntu 18.04 Linux installation, here is what
+you need to install in order to run the cheatsheet generator.
+
++ Some version of the JDK, e.g. OpenJDK 11 can be installed via the
+  command: `sudo apt-get install default-jdk`
++ Leiningen.  The `lein` bash script available from
+  https://leiningen.org is enough here.
+
+The above is sufficient if you are not generating the PDF versions of
+the cheatsheet.  If you want to generate the PDF versions, you also
+need to install these LaTeX packages:
+
++ `sudo apt-get install texlive-latex-base texlive-latex-extra`
+
+
+## Mac OS X
+
+As above, you must also install some version of the JDK and Leiningen.
+
+On a Mac with MacPorts 2.0.3, the following two packages, plus what
+they depend upon, are sufficient for generating PDF files:
+
+* `texlive-latex-recommended` (needed for scrreprt.cls)
+* `texlive-fonts-recommended` (needed for the lmodern font)
+
+This command will install these packages:
+
+```bash
+sudo port install texlive-latex-recommended texlive-fonts-recommended
+```
+
 
 # Generating cheat sheet files
 
@@ -28,7 +58,9 @@ installation notes" below for what is needed.
 
 Run this command:
 
-    ./run.sh
+```bash
+./run.sh
+```
 
 Output files are:
 
@@ -96,26 +128,9 @@ Things still missing:
 
 # LaTeX installation notes
 
-On a Mac with MacPorts 2.0.3, the following two packages, plus what
-they depend upon, are sufficient:
-
-* texlive-latex-recommended (needed for scrreprt.cls)
-* texlive-fonts-recommended (needed for the lmodern font)
-
-This command will install these packages:
-
-    % sudo port install texlive-latex-recommended texlive-fonts-recommended
-
-
-On an Ubuntu 64-bit 10.4 LTS system, I got good results after
-installing the following packages:
-
-* texlive-latex-base
-* texlive-latex-extra
-
 
 ## License
 
-Copyright (C) 2012-2013 Andy Fingerhut
+Copyright (C) 2012-2018 Andy Fingerhut
 
 Distributed under the Eclipse Public License, the same as Clojure.
