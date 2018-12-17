@@ -1,4 +1,21 @@
 ---------------------------------------------------------------------
+December 17, 2018 - Clojure 1.7 - 1.10, sheet v47
+
+Additional new things in Clojure 1.10, not mentioned in v46 comments
+below, that have _not_ been added to the sheet at this time:
+
+    clojure.datafy/datafy
+    clojure.datafy/nav
+    clojure.main/renumbering-read
+
+Additional new things for Clojure 1.10 that have been added to the
+sheet in this version:
+
+Added to Namespace / From symbol section:
+
+    requiring-resolve
+
+---------------------------------------------------------------------
 October 12, 2018 - Clojure 1.7 - 1.10, sheet v46
 
 Made 'minimum version' Clojure 1.7, removing all (1.7) tags marking

@@ -134,8 +134,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.6 - 1.9, sheet v46)"
-              :html "Clojure Cheat Sheet (Clojure 1.6 - 1.9, sheet v46)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.7 - 1.10, sheet v47)"
+              :html "Clojure Cheat Sheet (Clojure 1.7 - 1.10, sheet v47)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -1120,7 +1120,7 @@
                                           name aliases map interns publics
                                           refers imports]]]
                       ["From symbol" :cmds '[resolve ns-resolve namespace
-                                             the-ns]]
+                                             the-ns "(1.10)" requiring-resolve]]
                       ["Remove" :cmds '[ns-unalias ns-unmap remove-ns]]]
               ]
              [:box "green"
@@ -1192,7 +1192,8 @@
                                             "(1.10)" ex-cause ex-message
                                             {:latex "\\textmd{\\textsf{(clojure.main/)}}",
                                              :html "(clojure.main/)"}
-                                            clojure.main/ex-str]]]
+                                            clojure.main/ex-str
+                                            clojure.main/ex-triage]]]
               :subsection "Arrays"
               :table [["Create" :cmds '[make-array
                                         [:common-suffix -array object
@@ -1340,7 +1341,7 @@
 ;; user=> (pprint (->> (all-ns) (map str) sort))
 
 ;; That list was then augmented by grep'ing all .clj files in the
-;; Clojure 1.10.0-RC1 source code for 'ns' forms.  Not all namespaces
+;; Clojure 1.10.0-RC2 source code for 'ns' forms.  Not all namespaces
 ;; included in Clojure are loaded by default using the commands above.
 
 (def all-clojure-built-in-namespaces
@@ -1350,6 +1351,7 @@
     clojure.core.server
     clojure.core.specs.alpha
     clojure.data
+    clojure.datafy
     clojure.edn
     clojure.inspector
     clojure.instant
@@ -1361,6 +1363,7 @@
     clojure.main
     ;; clojure.parallel - deprecated, so leave out
     clojure.pprint
+    clojure.reflect
     clojure.repl
     clojure.set
     clojure.stacktrace
