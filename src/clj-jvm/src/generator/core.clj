@@ -134,8 +134,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.7 - 1.10, sheet v47)"
-              :html "Clojure Cheat Sheet (Clojure 1.7 - 1.10, sheet v47)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.7 - 1.10, sheet v48)"
+              :html "Clojure Cheat Sheet (Clojure 1.7 - 1.10, sheet v48)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -651,11 +651,17 @@
                       ["to string" :cmds '[format with-out-str pr-str
                                            prn-str print-str println-str]]
                       ["from *in*" :cmds '[read-line
+                                           {:latex "\\textmd{\\textsf{(clojure.edn/)}}",
+                                            :html "(clojure.edn/)"}
+                                           clojure.edn/read
                                            {:latex "\\textmd{\\textsf{(clojure.tools.reader.edn/)}}",
                                             :html "(clojure.tools.reader.edn/)"}
                                            clojure.tools.reader.edn/read
                                            ]]
                       ["from reader" :cmds '[line-seq
+                                             {:latex "\\textmd{\\textsf{(clojure.edn/)}}",
+                                              :html "(clojure.edn/)"}
+                                             clojure.edn/read
                                              {:latex "\\textmd{\\textsf{(clojure.tools.reader.edn/)}}",
                                               :html "(clojure.tools.reader.edn/)"}
                                              clojure.tools.reader.edn/read
@@ -667,6 +673,9 @@
                                              ]]
                       ["from string" :cmds '[
                                              with-in-str
+                                             {:latex "\\textmd{\\textsf{(clojure.edn/)}}",
+                                              :html "(clojure.edn/)"}
+                                             clojure.edn/read-string
                                              {:latex "\\textmd{\\textsf{(clojure.tools.reader.edn/)}}",
                                               :html "(clojure.tools.reader.edn/)"}
                                              clojure.tools.reader.edn/read-string
@@ -1867,6 +1876,7 @@ document.write('<style type=\"text/css\">%s<\\/style>')
    "clojure.repl/"
    "clojure.set/"
    "clojure.string/"
+   "clojure.edn/"
    "clojure.tools.reader.edn/"
    "clojure.data.avl/"
    "clojure.core.async/"

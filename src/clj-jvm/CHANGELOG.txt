@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------
+June 14, 2019 - Clojure 1.7 - 1.10, sheet v48
+
+Added these two functions, which were somehow left out before:
+
+    clojure.edn/read
+    clojure.edn/read-string
+
+---------------------------------------------------------------------
 December 17, 2018 - Clojure 1.7 - 1.10, sheet v47
 
 Additional new things in Clojure 1.10, not mentioned in v46 comments
