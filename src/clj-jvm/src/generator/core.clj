@@ -2267,7 +2267,7 @@ characters (\") with &quot;"
 ;; from text with no links, there should be no difference in the
 ;; appearance of the output files compared to the choices above.
 
-(defn -main [& args]
+(defn parse-args [args]
   (let [supported-link-targets #{"nolinks" "links-to-clojure" "links-to-clojuredocs" "links-to-grimoire"}
         supported-tooltips #{"no-tooltips" "use-title-attribute" "tiptip"}
         link-target-site (if (< (count args) 1)
@@ -2286,22 +2286,38 @@ characters (\") with &quot;"
                        (die "Unrecognized argument: %s\nSupported args are: %s\n"
                             arg
                             (str/join " " (seq supported-tooltips))))))
-        clojuredocs-snapshot (if (< (count args) 3)
-                               {}
-                               (let [snapshot-fname (nth args 2)]
-                                 (simplify-snapshot-time
-                                  (read-safely snapshot-fname))))
-        _ (if (not= clojuredocs-snapshot {})
-            (iprintf *err* "Read info for %d symbols from file '%s' with time %s\n"
-                     (count (get clojuredocs-snapshot :snapshot-info))
-                     (nth args 2)
-                     (:snapshot-time clojuredocs-snapshot))
-            (iprintf *err* "No clojuredocs snapshot file specified.\n"))
-        symbol-name-to-url (hash-from-pairs (symbol-url-pairs link-target-site))]
-    (let [opts {:symbol-name-to-url symbol-name-to-url
-                :tooltips tooltips
-                :clojuredocs-snapshot clojuredocs-snapshot
-                :expand-common-prefixes-or-suffixes true}]
+        clojuredocs-snapshot-filename (if (< (count args) 3)
+                                        nil
+                                        (nth args 2))]
+    {:link-target-site link-target-site
+     :tooltips tooltips
+     :clojuredocs-snapshot-filename clojuredocs-snapshot-filename}))
+
+
+(defn read-clojuredocs-snapshot [fname]
+  (let [clojuredocs-snapshot (if fname
+                               (simplify-snapshot-time
+                                (read-safely fname))
+                               {})]
+    (when (not= clojuredocs-snapshot {})
+      (iprintf *err* "Read info for %d symbols from file '%s' with time %s\n"
+               (count (get clojuredocs-snapshot :snapshot-info))
+               fname
+               (:snapshot-time clojuredocs-snapshot))
+      (iprintf *err* "No clojuredocs snapshot file specified.\n"))
+    clojuredocs-snapshot))
+
+
+(defn -main [& args]
+  (let [opts (parse-args args)
+        clojuredocs-snapshot (read-clojuredocs-snapshot
+                              (:clojuredocs-snapshot-filename opts))]
+    (let [symbol-name-to-url (hash-from-pairs (symbol-url-pairs
+                                               (:link-target-site opts)))
+          opts (merge opts
+                      {:clojuredocs-snapshot clojuredocs-snapshot
+                       :symbol-name-to-url symbol-name-to-url
+                       :expand-common-prefixes-or-suffixes true})]
       (binding [*out* (io/writer "cheatsheet-full.html")
                 *err* (io/writer "warnings.log")]
         (output-cheatsheet (merge opts {:fmt :html, :colors :color,
