@@ -1302,10 +1302,7 @@
 
 (defn read-safely [x & opts]
   (with-open [r (java.io.PushbackReader. (apply io/reader x opts))]
-    (binding [*read-eval* false]
-      ;; TBD: Change read to clojure.tools.reader.edn after it is
-      ;; updated to work with java.io.PushbackReader instances.
-      (read r))))
+    (clojure.edn/read r)))
 
 
 (defn clojuredocs-url-fixup [s]
@@ -1352,6 +1349,8 @@
 ;; That list was then augmented by grep'ing all .clj files in the
 ;; Clojure 1.10.0-RC2 source code for 'ns' forms.  Not all namespaces
 ;; included in Clojure are loaded by default using the commands above.
+
+;; See also +common-namespaces-to-remove-from-shown-symbols+
 
 (def all-clojure-built-in-namespaces
   '[clojure.core
@@ -1858,11 +1857,6 @@ document.write('<style type=\"text/css\">%s<\\/style>')
       (str/replace "&" "\\&")))
 
 
-(defn has-prefix? [s pre]
-  (and (>= (count s) (count pre))
-       (= (subs s 0 (count pre)) pre)))
-
-
 ;; Only remove the namespaces that are very commonly used in the
 ;; cheatsheet.  For the ones that only have one or a few symbol there,
 ;; it seems best to leave the namespace in there explicitly.
@@ -1892,7 +1886,7 @@ document.write('<style type=\"text/css\">%s<\\/style>')
    ])
 
 (defn remove-common-ns-prefix [s]
-  (if-let [pre (first (filter #(has-prefix? s %)
+  (if-let [pre (first (filter #(str/starts-with? s %)
                               +common-namespaces-to-remove-from-shown-symbols+))]
     (subs s (count pre))
     s))
@@ -2235,10 +2229,6 @@ characters (\") with &quot;"
                   :verify-only "")))
 
 
-(defn hash-from-pairs [pairs]
-  (zipmap (map first pairs) (map second pairs)))
-
-
 (defn simplify-snapshot-time [clojuredocs-snapshot]
   (if-let [snap-time (:snapshot-time clojuredocs-snapshot)]
     (merge clojuredocs-snapshot
@@ -2336,8 +2326,7 @@ characters (\") with &quot;"
   (let [opts (parse-args args)
         clojuredocs-snapshot (read-clojuredocs-snapshot
                               (:clojuredocs-snapshot-filename opts))
-        symbol-name-to-url (hash-from-pairs (symbol-url-pairs
-                                             (:link-target-site opts)))
+        symbol-name-to-url (into {} (symbol-url-pairs (:link-target-site opts)))
         opts (merge opts
                     {:clojuredocs-snapshot clojuredocs-snapshot
                      :symbol-name-to-url symbol-name-to-url
