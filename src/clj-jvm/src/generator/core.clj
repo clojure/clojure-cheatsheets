@@ -2298,13 +2298,11 @@ characters (\") with &quot;"
     clojuredocs-snapshot))
 
 
-;; Assumption: Before calling, *err* has been dynamically bound 
 (defn print-warnings [wrtr symbol-name-to-url symbols-looked-up]
   ;; Print out a list of all symbols in our symbol-name-to-url
   ;; table that we never looked up.
-  (let [never-used (set/difference
-                    (set (keys symbol-name-to-url))
-                    symbols-looked-up)
+  (let [never-used (set/difference (set (keys symbol-name-to-url))
+                                   symbols-looked-up)
         all-ns-names-sorted (->> (all-ns) (map str) sort)]
     (iprintf wrtr "\n\n%d symbols successfully looked up.\n\n"
              (count symbols-looked-up))
