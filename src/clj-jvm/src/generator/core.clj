@@ -134,8 +134,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.7 - 1.10, sheet v48)"
-              :html "Clojure Cheat Sheet (Clojure 1.7 - 1.10, sheet v48)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.7 - 1.10, sheet v49)"
+              :html "Clojure Cheat Sheet (Clojure 1.7 - 1.10, sheet v49)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -727,6 +727,7 @@
                       ["Data readers" :cmds '[*data-readers*
                                               default-data-readers
                                               *default-data-reader-fn*]]
+                      ["tap" :cmds '["(1.10)" tap> add-tap remove-tap]]
                       ]
               ]
              ]
@@ -843,6 +844,14 @@
                       ["Prefer" :cmds '[prefer-method prefers]]
                       ["Relation" :cmds '[derive underive isa? parents ancestors
                                           descendants make-hierarchy]]]
+              ]
+             [:box "magenta"
+              :section {:latex "Datafy (\\href{https://corfield.org/blog/2018/12/03/datafy-nav}{article})"
+                        :html "Datafy (<a href=\"https://corfield.org/blog/2018/12/03/datafy-nav\">article</a>)"}
+              :table [["Datafy" :cmds '[{:latex "\\textmd{\\textsf{(clojure.datafy/)}}",
+                                         :html "(clojure.datafy/)"}
+                                        clojure.datafy/datafy
+                                        clojure.datafy/nav]]]
               ]
              [:box "green"
               :section "Macros"
@@ -1197,12 +1206,15 @@
                                       biginteger]]
                       ["Exceptions" :cmds '[throw try catch finally
                                             clojure.repl/pst ex-info ex-data
+                                            Throwable->map
                                             "(1.9)" StackTraceElement->vec
                                             "(1.10)" ex-cause ex-message
                                             {:latex "\\textmd{\\textsf{(clojure.main/)}}",
                                              :html "(clojure.main/)"}
+                                            clojure.main/ex-triage
                                             clojure.main/ex-str
-                                            clojure.main/ex-triage]]]
+                                            clojure.main/err->msg
+                                            clojure.main/report-error]]]
               :subsection "Arrays"
               :table [["Create" :cmds '[make-array
                                         [:common-suffix -array object
@@ -1468,6 +1480,30 @@
          []
          :links-to-grimoire
          [])
+
+   ;; ClojureDocs.org does not have new vars from Clojure 1.10 yet as
+   ;; of 2019-Jun-20.  Until it does, point at the clojure.org
+   ;; official API docs.
+   (map (fn make-symbol-url-pair-to-clojure-org-api
+          [[namespace-str symbol-str]]
+          [(str (if (= "clojure.core" namespace-str) "" (str namespace-str "/"))
+                symbol-str)
+           (format "https://clojure.github.io/clojure/%s-api.html#%s/%s"
+                   namespace-str namespace-str symbol-str)])
+        [
+         [ "clojure.core" "tap>" ]
+         [ "clojure.core" "add-tap" ]
+         [ "clojure.core" "remove-tap" ]
+         [ "clojure.core" "requiring-resolve" ]
+         [ "clojure.datafy" "datafy" ]
+         [ "clojure.datafy" "nav" ]
+         [ "clojure.core" "ex-cause" ]
+         [ "clojure.core" "ex-message" ]
+         [ "clojure.main" "ex-triage" ]
+         [ "clojure.main" "ex-str" ]
+         [ "clojure.main" "err->msg" ]
+         [ "clojure.main" "report-error" ]
+         ])
 
    ;; These symbols do not have API docs anywhere that I can find,
    ;; yet.  Point at the github page for tools.reader for now.
@@ -1862,27 +1898,29 @@ document.write('<style type=\"text/css\">%s<\\/style>')
 ;; it seems best to leave the namespace in there explicitly.
 
 (def +common-namespaces-to-remove-from-shown-symbols+
-  ["clojure.java.browse/"
+  ["clojure.core.async/"
+   "clojure.core.rrb-vector/"
+   "clojure.data.avl/"
+   "clojure.data.int-map/"
+   "clojure.data.priority-map/"
+   "clojure.datafy/"
+   "clojure.edn/"
+   "clojure.java.browse/"
    "clojure.java.io/"
    "clojure.java.javadoc/"
    "clojure.java.shell/"
+   "clojure.main/"
    "clojure.pprint/"
    "clojure.repl/"
    "clojure.set/"
+   "clojure.spec.alpha/"
    "clojure.string/"
-   "clojure.edn/"
    "clojure.tools.reader.edn/"
-   "clojure.data.avl/"
-   "clojure.core.async/"
-   "clojure.core.rrb-vector/"
-   "clojure.data.int-map/"
    "clojure.walk/"
    "clojure.zip/"
-   "clojure.data.priority-map/"
-   "flatland.ordered.set/"
    "flatland.ordered.map/"
+   "flatland.ordered.set/"
    "flatland.useful.map/"
-   "clojure.spec.alpha/"
    ])
 
 (defn remove-common-ns-prefix [s]

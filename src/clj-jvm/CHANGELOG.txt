@@ -1,4 +1,22 @@
 ---------------------------------------------------------------------
+June 20, 2019 - Clojure 1.7 - 1.10, sheet v49
+
+Added new section Datafy with these functions:
+
+    clojure.datafy/datafy
+    clojure.datafy/nav
+
+Added new section IO / tap with these functions:
+
+    tap> add-tap remove-tap
+
+Added these functions to section Java Interoperation / Exceptions:
+
+    clojure.core/Throwable->map
+    clojure.main/err->msg
+    clojure.main/report-error
+
+---------------------------------------------------------------------
 June 14, 2019 - Clojure 1.7 - 1.10, sheet v48
 
 Added these two functions, which were somehow left out before:
