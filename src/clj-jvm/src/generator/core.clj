@@ -2308,59 +2308,63 @@ characters (\") with &quot;"
     clojuredocs-snapshot))
 
 
+;; Assumption: Before calling, *err* has been dynamically bound 
+(defn print-warnings [wrtr symbol-name-to-url symbols-looked-up]
+  ;; Print out a list of all symbols in our symbol-name-to-url
+  ;; table that we never looked up.
+  (let [never-used (set/difference
+                    (set (keys symbol-name-to-url))
+                    symbols-looked-up)
+        all-ns-names-sorted (->> (all-ns) (map str) sort)]
+    (iprintf wrtr "\n\n%d symbols successfully looked up.\n\n"
+             (count symbols-looked-up))
+    (iprintf wrtr "\n\nSorted list of %d symbols in lookup table that were never used:\n\n"
+             (count never-used))
+    (iprintf wrtr "%s\n" (str/join "\n" (sort (seq never-used))))
+    (iprintf wrtr "\n\nSorted list of links to documentation for symbols that were never used:\n\n\n")
+    (iprintf wrtr "%s\n" (str/join "<br>"
+                                    (map #(format "<a href=\"%s\">%s</a>\n"
+                                                  (symbol-name-to-url %) %)
+                                         (sort (seq never-used)))))
+    (iprintf wrtr "\n\nSorted list of %d namespace names currently existing:\n\n"
+             (count all-ns-names-sorted))
+    (doseq [s all-ns-names-sorted]
+      (iprintf wrtr "%s\n" s))))
+
+
 (defn -main [& args]
   (let [opts (parse-args args)
         clojuredocs-snapshot (read-clojuredocs-snapshot
-                              (:clojuredocs-snapshot-filename opts))]
-    (let [symbol-name-to-url (hash-from-pairs (symbol-url-pairs
-                                               (:link-target-site opts)))
-          opts (merge opts
-                      {:clojuredocs-snapshot clojuredocs-snapshot
-                       :symbol-name-to-url symbol-name-to-url
-                       :expand-common-prefixes-or-suffixes true})]
-      (binding [*out* (io/writer "cheatsheet-full.html")
-                *err* (io/writer "warnings.log")]
-        (output-cheatsheet (merge opts {:fmt :html, :colors :color,
-                                        :warn-about-unknown-symbols true})
+                              (:clojuredocs-snapshot-filename opts))
+        symbol-name-to-url (hash-from-pairs (symbol-url-pairs
+                                             (:link-target-site opts)))
+        opts (merge opts
+                    {:clojuredocs-snapshot clojuredocs-snapshot
+                     :symbol-name-to-url symbol-name-to-url
+                     :expand-common-prefixes-or-suffixes true})]
+    (binding [*out* (io/writer "cheatsheet-full.html")
+              *err* (io/writer "warnings.log")]
+      (output-cheatsheet (merge opts {:fmt :html, :colors :color,
+                                      :warn-about-unknown-symbols true})
+                         cheatsheet-structure)
+      (print-warnings *err* symbol-name-to-url @symbols-looked-up)
+      (.close *out*)
+      (.close *err*))
+    (doseq [x [{:filename "cheatsheet-embeddable.html",
+                 :format {:fmt :embeddable-html}}
+               {:filename "cheatsheet-a4-color.tex",
+                :format {:fmt :latex, :paper :a4, :colors :color}}
+               {:filename "cheatsheet-a4-grey.tex",
+                :format {:fmt :latex, :paper :a4, :colors :grey}}
+               {:filename "cheatsheet-a4-bw.tex",
+                :format {:fmt :latex, :paper :a4, :colors :bw}}
+               {:filename "cheatsheet-usletter-color.tex",
+                :format {:fmt :latex, :paper :usletter, :colors :color}}
+               {:filename "cheatsheet-usletter-grey.tex",
+                :format {:fmt :latex, :paper :usletter, :colors :grey}}
+               {:filename "cheatsheet-usletter-bw.tex",
+                :format {:fmt :latex, :paper :usletter, :colors :bw}}]]
+      (binding [*out* (io/writer (:filename x))]
+        (output-cheatsheet (merge opts (:format x))
                            cheatsheet-structure)
-        ;; Print out a list of all symbols in our symbol-name-to-url
-        ;; table that we never looked up.
-        (let [never-used (set/difference
-                          (set (keys symbol-name-to-url))
-                          @symbols-looked-up)
-              all-ns-names-sorted (->> (all-ns) (map str) sort)]
-          (iprintf *err* "\n\n%d symbols successfully looked up.\n\n"
-                   (count @symbols-looked-up))
-          (iprintf *err* "\n\nSorted list of %d symbols in lookup table that were never used:\n\n"
-                   (count never-used))
-          (iprintf *err* "%s\n" (str/join "\n" (sort (seq never-used))))
-          (iprintf *err* "\n\nSorted list of links to documentation for symbols that were never used:\n\n\n")
-          (iprintf *err* "%s\n" (str/join "<br>"
-                                          (map #(format "<a href=\"%s\">%s</a>\n"
-                                                        (symbol-name-to-url %) %)
-                                               (sort (seq never-used)))))
-          (iprintf *err* "\n\nSorted list of %d namespace names currently existing:\n\n"
-                   (count all-ns-names-sorted))
-          (doseq [s all-ns-names-sorted]
-            (iprintf *err* "%s\n" s)))
-        (.close *out*)
-        (.close *err*))
-      (doseq [x [ {:filename "cheatsheet-embeddable.html",
-                   :format {:fmt :embeddable-html}}
-                  {:filename "cheatsheet-a4-color.tex",
-                   :format {:fmt :latex, :paper :a4, :colors :color}}
-                  {:filename "cheatsheet-a4-grey.tex",
-                   :format {:fmt :latex, :paper :a4, :colors :grey}}
-                  {:filename "cheatsheet-a4-bw.tex",
-                   :format {:fmt :latex, :paper :a4, :colors :bw}}
-                  {:filename "cheatsheet-usletter-color.tex",
-                   :format {:fmt :latex, :paper :usletter, :colors :color}}
-                  {:filename "cheatsheet-usletter-grey.tex",
-                   :format {:fmt :latex, :paper :usletter, :colors :grey}}
-                  {:filename "cheatsheet-usletter-bw.tex",
-                   :format {:fmt :latex, :paper :usletter, :colors :bw}}
-                  ]]
-        (binding [*out* (io/writer (:filename x))]
-          (output-cheatsheet (merge opts (:format x))
-                             cheatsheet-structure)
-          (.close *out*))))))
+        (.close *out*)))))
