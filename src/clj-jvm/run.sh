@@ -9,8 +9,8 @@ set -x
 
 #LINK_TARGET=nolinks
 #LINK_TARGET=links-to-clojure
-#LINK_TARGET=links-to-clojuredocs
-LINK_TARGET=links-to-grimoire
+LINK_TARGET=links-to-clojuredocs
+#LINK_TARGET=links-to-grimoire
 
 TOOLTIPS=no-tooltips
 #TOOLTIPS=use-title-attribute
@@ -22,8 +22,8 @@ CLOJUREDOCS_SNAPSHOT=""
 # Optionally produce PDF files by running LaTeX.  See README.markdown
 # for notes on what parts of LaTeX are enough for this to work.
 
-PRODUCE_PDF="no"
-#PRODUCE_PDF="yes"
+#PRODUCE_PDF="no"
+PRODUCE_PDF="yes"
 
 ######################################################################
 # Make embeddable version for clojure.org/cheatsheet
