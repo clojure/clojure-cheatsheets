@@ -1962,17 +1962,34 @@ characters (\") with &quot;"
           (with-out-str (#'clojure.repl/print-doc (meta v))))))))
 
 
+(defn count-examples [sym-info]
+  (count (:examples sym-info)))
+
+(defn count-comments [sym-info]
+  (count (:comments sym-info)))
+
+(defn see-also-names [sym-info]
+  (map :name (:see-alsos sym-info)))
+
+(defn example-line-to-count [example-line-string]
+  ;; Do not count example lines containing nothing but <pre> or
+  ;; </pre>, since clojuredocs.org doesn't show those as separate
+  ;; lines.
+  (not (re-find #"(?i)^\s*<\s*/?\s*pre\s*>\s*$" example-line-string)))
+
+(defn count-example-lines [sym-info]
+  (->> (:examples sym-info)
+       (map :body)
+       (mapcat str/split-lines)
+       (filter example-line-to-count)
+       count))
+
 (defn clojuredocs-content-summary [snap-time sym-info]
-  (let [num-examples (count (:examples sym-info))
-        ;; remove lines containing nothing but <pre> or </pre> before
-        ;; counting them, since clojuredocs.org doesn't show those as
-        ;; separate lines.
-        total-example-lines (count
-                             (remove #(re-find #"(?i)^\s*<\s*/?\s*pre\s*>\s*$" %)
-                                     (mapcat str/split-lines
-                                             (map :body (:examples sym-info)))))
-        num-see-alsos (count (:see-alsos sym-info))
-        num-comments (count (:comments sym-info))
+  (let [num-examples (count-examples sym-info)
+        total-example-lines (count-example-lines sym-info)
+        see-also-name-strings (see-also-names sym-info)
+        num-see-alsos (count see-also-name-strings)
+        num-comments (count-comments sym-info)
         see-also-style :list-see-alsos]
     (str (case num-examples
            0 "0 examples"
@@ -1994,8 +2011,7 @@ characters (\") with &quot;"
                   (> num-see-alsos 0))
            (str/join "\n"
                      (wrap-line (str "\nSee also: "
-                                     (str/join ", " (map :name
-                                                         (:see-alsos sym-info))))
+                                     (str/join ", " see-also-name-strings))
                                 72))
            ""))))
 
