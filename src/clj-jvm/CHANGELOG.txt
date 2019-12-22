@@ -1,4 +1,13 @@
 ---------------------------------------------------------------------
+December 22, 2019 - Clojure 1.7 - 1.10, sheet v50
+
+For those variants of the cheatsheet that included summary data about
+the number of ClojureDocs examples and notes there are, and what the
+see-also symbols are, they are now generated from a version of the
+ClojureDocs.org site data from late 2018, instead of late 2014 as it
+has been for 5 years now.
+
+---------------------------------------------------------------------
 June 20, 2019 - Clojure 1.7 - 1.10, sheet v49
 
 Added new section Datafy with these functions:

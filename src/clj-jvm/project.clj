@@ -6,6 +6,7 @@
   :dependencies [[org.clojure/clojure "1.10.1"]
                  ;;[org.clojure/clojure "1.9.0"]
                  ;;[org.codehaus.jsr166-mirror/jsr166y "1.7.0"]
+                 [org.clojure/data.json "0.2.3"]
                  [org.clojure/core.async "0.4.500"]
                  [org.clojure/data.priority-map "0.0.10"]
                  [org.clojure/data.avl "0.1.0"]

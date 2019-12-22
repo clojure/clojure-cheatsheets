@@ -1,5 +1,6 @@
 (ns generator.core
   (:require [clojure.string :as str]
+            [clojure.data.json :as json]
             [clojure.set :as set]
             [clojure.java.javadoc]
             [clojure.java.io :as io]
@@ -1312,7 +1313,7 @@
   (System/exit 1))
 
 
-(defn read-safely [x & opts]
+(defn read-edn-safely [x & opts]
   (with-open [r (java.io.PushbackReader. (apply io/reader x opts))]
     (clojure.edn/read r)))
 
@@ -2349,17 +2350,72 @@ characters (\") with &quot;"
      :clojuredocs-snapshot-filename clojuredocs-snapshot-filename}))
 
 
+(let [formatter (java.time.format.DateTimeFormatter/ofPattern
+                 "EEE MMM dd HH:mm:ss zzz yyyy")]
+  (defn epoch-millis->utc-time-date-string
+    "Given a Unix time, i.e. number of milliseconds since Jan 1 1970,
+    and return a string describing the time and date in UTC in the
+    format:
+
+        Tue Nov 20 23:55:16 UTC 2018"
+    [epoch-millis]
+    (let [d (java.util.Date. epoch-millis)
+          inst (.toInstant d)
+          zoned-time (.atZone inst java.time.ZoneOffset/UTC)]
+    (.format zoned-time formatter))))
+
+
+(defn add-see-also-names
+  "Given a sequence of maps describing 'see-alsos' in the data format
+  found in a clojuredocs-export.json file, return a sequence of maps
+  with all of the same information, plus a key :name whose value is a
+  string that is the namespace/name of the symbol to see-also.  Omit
+  the namespace and slash if it is in the namespace clojure.core."
+  [see-alsos]
+  (map (fn [sa]
+         (assoc sa :name (let [to-var (:to-var sa)
+                               ns (:ns to-var)
+                               name (:name to-var)]
+                           (if (= ns "clojure.core")
+                             name
+                             (str ns "/" name)))))
+       see-alsos))
+
+
+(defn read-clojuredocs-export-json [fname]
+  (let [d (json/read-json (io/reader fname))]
+    (assoc d :snapshot-time (epoch-millis->utc-time-date-string
+                             (:created-at d))
+           :snapshot-info (into {} (for [sym-info (:vars d)]
+                                     (let [{:keys [ns name]} sym-info]
+                                       [(str ns "/" name)
+                                        (update sym-info :see-alsos
+                                                add-see-also-names)]))))))
+
+
 (defn read-clojuredocs-snapshot [fname]
-  (let [clojuredocs-snapshot (if fname
-                               (simplify-snapshot-time
-                                (read-safely fname))
-                               {})]
-    (when (not= clojuredocs-snapshot {})
+  (let [clojuredocs-snapshot (cond
+                               (nil? fname)
+                               {}
+
+                               (str/ends-with? fname ".edn")
+                               (simplify-snapshot-time (read-edn-safely fname))
+
+                               (str/ends-with? fname ".json")
+                               (read-clojuredocs-export-json fname)
+
+                               :else
+                               (throw
+                                (ex-info
+                                 (format "File name '%s' has unknown format"
+                                         fname)
+                                 {:filename fname})))]
+    (if (nil? fname)
+      (iprintf *err* "No clojuredocs snapshot file specified.\n")
       (iprintf *err* "Read info for %d symbols from file '%s' with time %s\n"
                (count (get clojuredocs-snapshot :snapshot-info))
                fname
-               (:snapshot-time clojuredocs-snapshot))
-      (iprintf *err* "No clojuredocs snapshot file specified.\n"))
+               (:snapshot-time clojuredocs-snapshot)))
     clojuredocs-snapshot))
 
 

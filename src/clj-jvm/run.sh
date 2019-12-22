@@ -71,7 +71,7 @@ do
 	case "${CDOCS_SUMMARY}" in
 	no-cdocs-summary) CLOJUREDOCS_SNAPSHOT=""
 	                  ;;
-	cdocs-summary) CLOJUREDOCS_SNAPSHOT="clojuredocs-snapshot.edn"
+	cdocs-summary) CLOJUREDOCS_SNAPSHOT="clojuredocs-export.json"
 	                  ;;
 	esac
 	TARGET="cheatsheet-${TOOLTIPS}-${CDOCS_SUMMARY}.html"
