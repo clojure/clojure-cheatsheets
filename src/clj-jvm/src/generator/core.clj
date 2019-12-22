@@ -2283,14 +2283,25 @@ characters (\") with &quot;"
                   :verify-only "")))
 
 
+(defn simplify-time-str
+  "Take as input a string containing time and date in a format like
+  this:
+
+      Tue Nov 20 23:55:16 UTC 2018
+
+  and return a string with only this subset of the information:
+
+      Tue Nov 20 2018"
+  [time-str]
+  (if-let [[_ day-month-date year]
+           (re-find #"^(\S+ \S+ \d+)\s+.*\s+(\d+)$" time-str)]
+    (str day-month-date " " year)
+    time-str))
+
+
 (defn simplify-snapshot-time [clojuredocs-snapshot]
   (if-let [snap-time (:snapshot-time clojuredocs-snapshot)]
-    (merge clojuredocs-snapshot
-           {:snapshot-time (if-let [[_ day-month-date year]
-                                    (re-find #"^(\S+ \S+ \d+)\s+.*\s+(\d+)$"
-                                             snap-time)]
-                             (str day-month-date " " year)
-                             snap-time)})
+    (assoc clojuredocs-snapshot :snapshot-time (simplify-time-str snap-time))
     clojuredocs-snapshot))
 
 
