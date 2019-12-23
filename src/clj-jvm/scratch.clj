@@ -43,16 +43,7 @@ utc-zoneoffset
 (java.time.ZoneOffset/of "-8")
 
 
-(let [formatter (java.time.format.DateTimeFormatter/ofPattern
-                 "EEE MMM dd HH:mm:ss zzz yyyy")]
-  (defn epoch-millis->utc-time-date-string [epoch-millis]
-    (let [d (java.util.Date. epoch-millis)
-          inst (.toInstant d)
-          zoned-time (.atZone inst java.time.ZoneOffset/UTC)]
-    (.format zoned-time formatter))))
-
-
-(def snap-time (epoch-millis->utc-time-date-string (:created-at d5)))
+(def snap-time (g/epoch-millis->utc-time-date-string (:created-at d5)))
 snap-time
 (def snap-time2 (g/simplify-time-str snap-time))
 snap-time2
@@ -64,10 +55,10 @@ snap-time2
 
 (def d5b (g/read-clojuredocs-export-json fname5))
 
-
-
-1542758116890
-(epoch-millis->utc-time-date-string 1289040035000)
+(g/epoch-millis->utc-time-date-string 1542758116890)
+;; "Tue Nov 20 23:55:16 Z 2018"
+(g/epoch-millis->utc-time-date-string 1577062122059)
+;; "Mon Dec 23 00:48:42 Z 2019"
 
 (re-find #"^(\S+ \S+ \d+)\s+.*\s+(\d+)$" s1)
 

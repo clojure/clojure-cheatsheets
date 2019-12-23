@@ -135,8 +135,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.7 - 1.10, sheet v50)"
-              :html "Clojure Cheat Sheet (Clojure 1.7 - 1.10, sheet v50)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.7 - 1.10, sheet v51)"
+              :html "Clojure Cheat Sheet (Clojure 1.7 - 1.10, sheet v51)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -2384,8 +2384,9 @@ characters (\") with &quot;"
 
 (defn read-clojuredocs-export-json [fname]
   (let [d (json/read-json (io/reader fname))]
-    (assoc d :snapshot-time (epoch-millis->utc-time-date-string
-                             (:created-at d))
+    (assoc d :snapshot-time (-> (:created-at d)
+                                epoch-millis->utc-time-date-string
+                                simplify-time-str)
            :snapshot-info (into {} (for [sym-info (:vars d)]
                                      (let [{:keys [ns name]} sym-info]
                                        [(str ns "/" name)
