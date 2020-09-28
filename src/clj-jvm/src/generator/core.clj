@@ -1,4 +1,5 @@
 (ns generator.core
+  (:import (java.net URLEncoder))
   (:require [clojure.string :as str]
             [clojure.data.json :as json]
             [clojure.set :as set]
@@ -19,7 +20,6 @@
             [clojure.spec.gen.alpha :as gen]
             [clojure.test.check.generators :as tcgen]
             [clojure.core.reducers]
-            [cemerick.url :as c.u]
             [grimoire.util :as g.u]
 
             clojure.core.protocols
@@ -135,8 +135,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.7 - 1.10, sheet v51)"
-              :html "Clojure Cheat Sheet (Clojure 1.7 - 1.10, sheet v51)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.7 - 1.10, sheet v52)"
+              :html "Clojure Cheat Sheet (Clojure 1.7 - 1.10, sheet v52)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -1317,12 +1317,21 @@
   (with-open [r (java.io.PushbackReader. (apply io/reader x opts))]
     (clojure.edn/read r)))
 
+;; Function url-enccode was copied from
+;; https://github.com/cemerick/url/blob/master/src/cemerick/url.cljx.
+;; The README says that this code is copyright Chas Emerick,
+;; distributed under the Eclipse Public License version 1.0, as the
+;; clojure-cheatsheet repository code is.
+
+(defn url-encode
+  [string]
+  (some-> string str (URLEncoder/encode "UTF-8") (.replace "+" "%20")))
 
 (defn clojuredocs-url-fixup [s]
   (let [s (str/replace s "?" "_q")
         s (str/replace s "/" "_fs")
         s (str/replace s "." "_dot")]
-    (c.u/url-encode s)))
+    (url-encode s)))
 
 (defn grimoire-url-fixup [s]
   (-> s g.u/munge (str "/")))
