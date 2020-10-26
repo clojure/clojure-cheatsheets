@@ -51,6 +51,14 @@ sudo port install texlive-latex-recommended texlive-fonts-recommended
 
 # Generating cheat sheet files
 
+## Getting an updated copy of the contents of the ClojureDocs web site
+
+```bash
+curl -O https://clojuredocs.org/clojuredocs-export.json
+```
+
+## Running the cheatsheet generator
+
 Edit `run.sh` to specify the values of `LINK_TARGET` and `PRODUCE_PDF`
 variables to your liking.  If you want to produce PDF files, you must
 have a suitable LaTeX installation on your system (see Installation
@@ -131,6 +139,6 @@ Things still missing:
 
 ## License
 
-Copyright (C) 2012-2018 Andy Fingerhut
+Copyright (C) 2012-2020 Andy Fingerhut
 
 Distributed under the Eclipse Public License, the same as Clojure.

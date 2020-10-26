@@ -7,7 +7,7 @@ several variants of the HTML cheatsheet for Clojure on the JVM.
 
 ## License
 
-Copyright (C) 2012-2016 Michael Fogus, Andy Fingerhut
+Copyright (C) 2012-2020 Michael Fogus, Andy Fingerhut
 
 Distributed under the Eclipse Public License, the same as Clojure,
 except for the following parts.

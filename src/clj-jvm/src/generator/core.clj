@@ -20,7 +20,6 @@
             [clojure.spec.gen.alpha :as gen]
             [clojure.test.check.generators :as tcgen]
             [clojure.core.reducers]
-            [grimoire.util :as g.u]
 
             clojure.core.protocols
             clojure.core.server
@@ -1333,8 +1332,46 @@
         s (str/replace s "." "_dot")]
     (url-encode s)))
 
+;; grimoire-munge-map was named munge-map in the grimoire.util namespace
+
+(def ^:private
+  grimoire-munge-map
+  "A subset of URL encoding for... shitty reasons"
+  {
+   "." "_DOT_"
+   "/" "_SLASH_"
+   "+" "%2B"
+   "?" "%3F"
+   "!" "%21"
+   "&" "%26"
+   "#" "%23"
+   ":" "%3A"
+   "<" "%3C"
+   "=" "%3D"
+   ">" "%3E"
+   })
+
+;; grimoire-munge was named munge in the grimoire.util namespace
+;; It has been copied here to eliminate one dependency.  Since the
+;; Grimoire conj.io web site is no longer in service, this code
+;; can be safely removed with no loss of useful functionality,
+;; but I am being a bit lazy by leaving it in.  The lib-grimoire
+;; library was released under the same Eclipse Public License that this
+;; code is.
+
+(defn grimoire-munge
+  "This is the munge function as used by the current version of Grimoire. Should only be applied to
+  symbols. Namespaces, packages, groups and soforth need not be name munged.
+
+  Note that this is _NOT_ a full isomorphism, since it lacks an escape."
+  [s]
+  (as-> s s
+    (reduce (fn [s [c r]]
+              (str/replace s c r))
+            s grimoire-munge-map)))
+
 (defn grimoire-url-fixup [s]
-  (-> s g.u/munge (str "/")))
+  (-> s grimoire-munge (str "/")))
 
 (def grimoire-base-url
   (str "https://conj.io/store/v0/org.clojure/clojure/latest/clj/"))

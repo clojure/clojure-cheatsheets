@@ -15,6 +15,5 @@
                  [org.flatland/ordered "1.5.9"]
                  [org.flatland/useful "0.11.6"]
                  [org.clojure/core.rrb-vector "0.1.2"]
-                 [org.clojure-grimoire/lib-grimoire "0.10.10"]
                  [org.clojure/test.check "1.1.0"]]
   :main generator.core)
