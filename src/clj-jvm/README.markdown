@@ -1,7 +1,7 @@
 # Clojure/Java cheat sheet generator
 
-The program `src/generator/core.clj` and accompanying shell script
-`run.sh` can generate HTML and LaTeX versions of the Clojure/Java
+The program `src/generator/generator.clj` and accompanying shell script
+`./scripts/run.sh` can generate HTML and LaTeX versions of the Clojure/Java
 cheat sheet.  A suitable LaTeX installation on your computer can then
 be used to generate PDF files as well.  They are all generated with
 structure and symbols specified in the value of `cheatsheet-structure`
@@ -59,7 +59,7 @@ curl -O https://clojuredocs.org/clojuredocs-export.json
 
 ## Running the cheatsheet generator
 
-Edit `run.sh` to specify the values of `LINK_TARGET` and `PRODUCE_PDF`
+Edit `./scripts/run.sh` to specify the values of `LINK_TARGET` and `PRODUCE_PDF`
 variables to your liking.  If you want to produce PDF files, you must
 have a suitable LaTeX installation on your system (see Installation
 above).
@@ -67,7 +67,7 @@ above).
 Run this command:
 
 ```bash
-./run.sh
+./scripts/run.sh
 ```
 
 Output files are:
@@ -125,7 +125,7 @@ Output files are:
     Clojure source file if future modifications to the cheat sheet
     warrant further modification of these.
 
-If you enable it in `run.sh`, corresponding PDF files will also be
+If you enable it in `./scripts/run.sh`, corresponding PDF files will also be
 generated for each of the LaTeX files.
 
 
@@ -134,10 +134,7 @@ Things still missing:
 * No footer with version number, date, and attributions at the bottom.
 
 
-# LaTeX installation notes
-
-
-## License
+# License
 
 Copyright (C) 2012-2020 Andy Fingerhut
 

@@ -1,6 +1,7 @@
-(ns generator.core
+(ns generator.generator
   (:import (java.net URLEncoder))
-  (:require [clojure.string :as str]
+  (:require [generator.clojure-metadata-checks :as checks :refer [iprintf]]
+            [clojure.string :as str]
             [clojure.data.json :as json]
             [clojure.set :as set]
             [clojure.java.javadoc]
@@ -1291,22 +1292,6 @@
       ])
 
 
-
-(def ^:dynamic *auto-flush* true)
-
-
-(defn printf-to-writer [w fmt-str & args]
-  (binding [*out* w]
-    (apply clojure.core/printf fmt-str args)
-    (when *auto-flush* (flush))))
-
-
-(defn iprintf [fmt-str-or-writer & args]
-  (if (instance? CharSequence fmt-str-or-writer)
-    (apply printf-to-writer *out* fmt-str-or-writer args)
-    (apply printf-to-writer fmt-str-or-writer args)))
-
-
 (defn die [fmt-str & args]
   (apply iprintf *err* fmt-str args)
   (System/exit 1))
@@ -1397,59 +1382,6 @@
          symbol-list)))
 
 
-;; The list below was created by starting with the list of all
-;; namespaces in a Clojure 1.10.0-RC1 run, with no dependencies other
-;; than the spec ones that Clojure needs to run, using these commands:
-
-;; $ clj -Sdeps '{:deps {org.clojure/clojure {:mvn/version "1.10.0-RC1"}}}'
-;; Clojure 1.10.0-RC1
-;; user=> (pprint (->> (all-ns) (map str) sort))
-
-;; That list was then augmented by grep'ing all .clj files in the
-;; Clojure 1.10.0-RC2 source code for 'ns' forms.  Not all namespaces
-;; included in Clojure are loaded by default using the commands above.
-
-;; See also +common-namespaces-to-remove-from-shown-symbols+
-
-(def all-clojure-built-in-namespaces
-  '[clojure.core
-    clojure.core.protocols
-    clojure.core.reducers
-    clojure.core.server
-    clojure.core.specs.alpha
-    clojure.data
-    clojure.datafy
-    clojure.edn
-    clojure.inspector
-    clojure.instant
-    clojure.java.browse
-    clojure.java.browse-ui
-    clojure.java.io
-    clojure.java.javadoc
-    clojure.java.shell
-    clojure.main
-    ;; clojure.parallel - deprecated, so leave out
-    clojure.pprint
-    clojure.reflect
-    clojure.repl
-    clojure.set
-    clojure.stacktrace
-    clojure.string
-    clojure.template
-    clojure.test
-    clojure.test.junit
-    clojure.test.tap
-    clojure.uuid
-    clojure.walk
-    clojure.xml
-    clojure.zip
-
-    ;; These are not built into Clojure itself, but _are_ depended on
-    ;; by Clojure
-    clojure.spec.alpha
-    clojure.spec.gen.alpha
-    ])
-
 (defn ns-info-common-case [ns-sym]
   (let [s (str ns-sym)
         clojure-url (str "https://clojure.github.com/clojure/"
@@ -1479,7 +1411,7 @@
         :clojuredocs-base-url "https://clojuredocs.org/clojure_core/clojure.core/"
         :grimoire-base-url    (str grimoire-base-url "clojure.core/")}]
 
-      (map ns-info-common-case all-clojure-built-in-namespaces)))))
+      (map ns-info-common-case checks/all-clojure-built-in-namespaces)))))
 
 
 (defn symbol-url-pairs-specified-by-hand [link-target-site]
