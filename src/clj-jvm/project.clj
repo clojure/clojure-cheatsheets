@@ -9,7 +9,7 @@
                  [org.clojure/data.priority-map "1.1.0"]
                  [org.clojure/data.avl "0.1.0"]
                  [org.clojure/data.int-map "1.0.0"]
-                 [org.clojure/tools.reader "1.3.3"]
+                 [org.clojure/tools.reader "1.3.6"]
                  [org.flatland/ordered "1.5.9"]
                  [org.flatland/useful "0.11.6"]
                  [org.clojure/core.rrb-vector "0.1.2"]
