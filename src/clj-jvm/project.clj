@@ -13,5 +13,5 @@
                  [org.flatland/ordered "1.15.10"]
                  [org.flatland/useful "0.11.6"]
                  [org.clojure/core.rrb-vector "0.1.2"]
-                 [org.clojure/test.check "1.1.0"]]
+                 [org.clojure/test.check "1.1.1"]]
   :main generator.generator)
