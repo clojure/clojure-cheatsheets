@@ -15,10 +15,10 @@ documentation on either [clojure.github.com][clojure github] or
 
 # Installation
 
-## For Ubuntu 18.04 Linux
+## For Ubuntu 18.04 or 20.04 Linux
 
-Starting from a minimal Ubuntu 18.04 Linux installation, here is what
-you need to install in order to run the cheatsheet generator.
+Starting from a minimal Ubuntu 18.04 or 20.04 Linux installation, here
+is what you need to install in order to run the cheatsheet generator.
 
 + Some version of the JDK, e.g. OpenJDK 11 can be installed via the
   command: `sudo apt-get install default-jdk`
