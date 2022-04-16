@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Clojure Cheat Sheet (Clojure 1.8 - 1.11, sheet v53)</title>
+  <title>Clojure Cheat Sheet (Clojure 1.8 - 1.11, sheet v54)</title>
 
   <link rel="stylesheet" href="cheatsheet_files/style.css" type="text/css" />
   <style type="text/css">
@@ -1429,20 +1429,7 @@ See also: map, vec, reduce, pmap</pre>">mapv</a> <a href="https://clojuredocs.or
   (pred item) returns logical true. pred must be free of side-effects.
 
 1 example with 12 lines on Sun Jan 23 2022
-See also: filter, mapv</pre>">filterv</a> (clojure.core.rrb-vector/) <a href="https://github.com/clojure/core.rrb-vector" class="tooltip" title="<pre>clojure.core.rrb-vector/vector
-([] [x1] [x1 x2] [x1 x2 x3] [x1 x2 x3 x4] [x1 x2 x3 x4 &amp; xn])
-  Creates a new vector containing the args.</pre>">vector</a> <a href="https://github.com/clojure/core.rrb-vector" class="tooltip" title="<pre>clojure.core.rrb-vector/vec
-([coll])
-  Returns a vector containing the contents of coll.
-
-  If coll is a vector, returns an RRB vector using the internal tree
-  of coll.</pre>">vec</a> <a href="https://github.com/clojure/core.rrb-vector" class="tooltip" title="<pre>clojure.core.rrb-vector/vector-of
-([t] [t x1] [t x1 x2] [t x1 x2 x3] [t x1 x2 x3 x4] [t x1 x2 x3 x4 &amp; xn])
-  Creates a new vector capable of storing homogenous items of type t,
-  which should be one of :object, :int, :long, :float, :double, :byte,
-  :short, :char, :boolean. Primitives are stored unboxed.
-
-  Optionally takes one or more elements to populate the vector.</pre>">vector-of</a></code></td>
+See also: filter, mapv</pre>">filterv</a></code></td>
               </tr>
               <tr class="even">
                 <td>Examine</td>
@@ -2340,7 +2327,30 @@ constantly, while</pre>">repeatedly</a> <a href="https://clojuredocs.org/clojure
 side-effects
 
 4 examples totaling 42 lines on Sun Jan 23 2022
-See also: cycle, repeatedly, repeat, take, nth</pre>">iterate</a></code></td>
+See also: cycle, repeatedly, repeat, take, nth</pre>">iterate</a> (1.11) <a href="https://clojuredocs.org/clojure_core/clojure.core/iteration" class="tooltip" title="<pre>clojure.core/iteration
+([step &amp; {:keys [somef vf kf initk], :or {vf identity, kf identity, somef some?,
+initk nil}}])
+  Creates a seqable/reducible via repeated calls to step,
+  a function of some (continuation token) 'k'. The first call to step
+  will be passed initk, returning 'ret'. Iff (somef ret) is true,
+  (vf ret) will be included in the iteration, else iteration will
+  terminate and vf/kf will not be called. If (kf ret) is non-nil it
+  will be passed to the next step call, else iteration will terminate.
+
+  This can be used e.g. to consume APIs that return paginated or batched data.
+
+   step - (possibly impure) fn of 'k' -&gt; 'ret'
+
+   :somef - fn of 'ret' -&gt; logical true/false, default 'some?'
+   :vf - fn of 'ret' -&gt; 'v', a value produced by the iteration, default
+'identity'
+   :kf - fn of 'ret' -&gt; 'next-k' or nil (signaling 'do not continue'), default
+'identity'
+   :initk - the first value passed to step, default 'nil'
+
+  It is presumed that step with non-initk is unreproducible/non-idempotent.
+  If step with initk is unreproducible it is on the consumer to not consume
+twice.</pre>">iteration</a></code></td>
               </tr>
               <tr class="odd">
                 <td>From constant</td>

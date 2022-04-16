@@ -1,4 +1,18 @@
 ---------------------------------------------------------------------
+April 15, 2022 - Clojure 1.8 - 1.11, sheet v54
+
+New things for Clojure 1.11 that have been added to the sheet in this
+version:
+
+Added to Sequences / Creating a Lazy Seq / From producer fn section:
+
+    iteration
+
+Unless the subtle bugs in the core.rrb-vector library are fixed, it
+seems best not to point people towards it in the cheatsheet.  Removed
+all mentions of it in this version.
+
+---------------------------------------------------------------------
 April 15, 2022 - Clojure 1.8 - 1.11, sheet v53
 
 Made 'minimum version' Clojure 1.8, removing all (1.8) tags marking

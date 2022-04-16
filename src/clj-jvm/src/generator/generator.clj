@@ -9,7 +9,6 @@
             [clojure.data.priority-map]
             [clojure.data.avl]
             [clojure.core.async]
-            [clojure.core.rrb-vector]
             [clojure.data.int-map]
             [clojure.tools.reader.edn]
             [flatland.ordered.set]
@@ -135,8 +134,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.8 - 1.11, sheet v53)"
-              :html "Clojure Cheat Sheet (Clojure 1.8 - 1.11, sheet v53)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.8 - 1.11, sheet v54)"
+              :html "Clojure Cheat Sheet (Clojure 1.8 - 1.11, sheet v54)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -320,12 +319,7 @@
               :subsection {:latex "Vectors (conj, pop, \\& peek at end)"
                            :html "Vectors (conj, pop, &amp; peek at end)"}
               :table [["Create" :cmds '["[]" vector vec vector-of
-                                        mapv filterv
-                                        {:latex "\\textmd{\\textsf{(clojure.core.rrb-vector/)}}",
-                                         :html "(clojure.core.rrb-vector/)"}
-                                        clojure.core.rrb-vector/vector
-                                        clojure.core.rrb-vector/vec
-                                        clojure.core.rrb-vector/vector-of]]
+                                        mapv filterv]]
                       ["Examine" :cmds '[{:latex "\\cmd{(my-vec idx)} $\\to$ \\cmd{(}",
                                           :html "<code>(my-vec idx)</code> &rarr; <code>("}
                                          nth
@@ -480,7 +474,8 @@
               :subsection "Creating a Lazy Seq"
               :table [["From collection" :cmds '[seq vals keys rseq
                                                  subseq rsubseq sequence]]
-                      ["From producer fn" :cmds '[lazy-seq repeatedly iterate]]
+                      ["From producer fn" :cmds '[lazy-seq repeatedly iterate
+                                                  "(1.11)" iteration]]
                       ["From constant" :cmds '[repeat range]]
                       ["From other" :cmds '[file-seq line-seq resultset-seq
                                             re-seq tree-seq xml-seq
@@ -1517,12 +1512,6 @@
           "clojure.core.async/<!" ])
 
    (map (fn [sym-str]
-          [sym-str "https://github.com/clojure/core.rrb-vector" ])
-        [ "clojure.core.rrb-vector/vector"
-          "clojure.core.rrb-vector/vec"
-          "clojure.core.rrb-vector/vector-of" ])
-
-   (map (fn [sym-str]
           [sym-str "https://github.com/clojure/data.int-map" ])
         [ "clojure.data.int-map/int-set"
           "clojure.data.int-map/dense-int-set"
@@ -1886,7 +1875,6 @@ document.write('<style type=\"text/css\">%s<\\/style>')
 
 (def +common-namespaces-to-remove-from-shown-symbols+
   ["clojure.core.async/"
-   "clojure.core.rrb-vector/"
    "clojure.data.avl/"
    "clojure.data.int-map/"
    "clojure.data.priority-map/"
