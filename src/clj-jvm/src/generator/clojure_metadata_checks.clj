@@ -126,7 +126,7 @@
 (comment
 
 (clojure-version)
-(require 'generator.clojure-metadata-checks)
+(require '[generator.clojure-metadata-checks :as mc])
 (use 'clojure.pprint)
 (use 'clojure.repl)
 (in-ns 'generator.clojure-metadata-checks)
