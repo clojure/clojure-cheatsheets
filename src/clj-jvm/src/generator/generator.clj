@@ -135,8 +135,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.7 - 1.10, sheet v52)"
-              :html "Clojure Cheat Sheet (Clojure 1.7 - 1.10, sheet v52)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.8 - 1.11, sheet v53)"
+              :html "Clojure Cheat Sheet (Clojure 1.8 - 1.11, sheet v53)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -170,7 +170,8 @@
                                           "4.2M"
                                           ]]
                       ["Arithmetic" :cmds '[+ - * / quot rem mod inc dec
-                                            max min +' -' *' inc' dec']]
+                                            max min +' -' *' inc' dec'
+                                            "(1.11)" abs]]
                       ["Compare" :cmds '[== < > <= >= compare]]
                       ["Bitwise" :cmds '[[:common-prefix bit- and or xor not
                                           flip set shift-right shift-left
@@ -187,7 +188,8 @@
                                       rational? integer? ratio? decimal?
                                       float?
                                       "(1.9)" double? int? nat-int?
-                                      neg-int? pos-int?]]
+                                      neg-int? pos-int?
+                                      "(1.11)" NaN? infinite?]]
                       ["Random" :cmds '[rand rand-int]]
                       ["BigDecimal" :cmds '[with-precision]]
                       ;; TBD: Why do these not exist in Clojure?
@@ -216,10 +218,13 @@
                                      clojure.string/replace
                                      clojure.string/replace-first
                                      clojure.string/reverse
-                                     "(1.8)" 
                                      clojure.string/index-of
                                      clojure.string/last-index-of
-                                     ]]
+                                     "(1.11)"
+                                     {:latex "\\textmd{\\textsf{(clojure.core/)}}",
+                                      :html "(clojure.core/)"}
+                                     parse-boolean parse-double
+                                     parse-long parse-uuid]]
                       [
 ;;                       "Regex"
                        {:latex "\\href{http://www.regular-expressions.info}{Regex}"
@@ -251,7 +256,6 @@
                                       {:latex "\\textmd{\\textsf{(clojure.string/)}}",
                                        :html "(clojure.string/)"}
                                       clojure.string/blank?
-                                      "(1.8)"
                                       clojure.string/starts-with?
                                       clojure.string/ends-with?
                                       clojure.string/includes?
@@ -300,8 +304,7 @@
                       ["Capabilities" :cmds '[sequential? associative? sorted?
                                               counted? reversible?]]
                       ["Type tests" :cmds '[coll? list? vector? set? map?
-                                            seq? record?
-                                            "(1.8)" map-entry?]]]
+                                            seq? record? map-entry?]]]
               :subsection {:latex "Lists (conj, pop, \\& peek at beginning)"
                            :html "Lists (conj, pop, &amp; peek at beginning)"}
               :table [["Create" :cmds '["()" list list*]]
@@ -426,6 +429,10 @@
                                 :html "(clojure.set/)"}
                                clojure.set/rename-keys
                                clojure.set/map-invert
+                               "(1.11)"
+                               {:latex "\\textmd{\\textsf{(clojure.core/)}}",
+                                :html "(clojure.core/)"}
+                               update-keys update-vals
                                {:latex "\\textmd{\\textsf{GitHub:}}",
                                 :html "GitHub:"}
                                {:latex "\\href{https://github.com/weavejester/medley}{Medley}"
@@ -1272,7 +1279,8 @@
                                       *warn-on-reflection* compile
                                       loaded-libs test]]
                       ["Misc" :cmds '[eval force hash name *clojure-version*
-                                      clojure-version *command-line-args*]]
+                                      clojure-version *command-line-args*
+                                      "(1.11)" random-uuid]]
                       [{:latex "\\begin{tabular}[t]{@{}l@{}} Browser \\\\ / Shell \\end{tabular}"
                         :html "Browser / Shell"}
                        :cmds '[{:latex "\\textmd{\\textsf{(clojure.java.browse/)}}",

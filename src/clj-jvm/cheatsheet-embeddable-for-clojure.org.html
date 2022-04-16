@@ -101,7 +101,13 @@ supplied, uses the root cause of the
   See also: inc">inc'</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/dec%27" title="clojure.core/dec'
 ([x])
   Returns a number one less than num. Supports arbitrary precision.
-  See also: dec">dec'</a></code></td>
+  See also: dec">dec'</a> (1.11) <a href="https://clojuredocs.org/clojure_core/clojure.core/abs" title="clojure.core/abs
+([a])
+  Returns the absolute value of a.
+  If a is Long/MIN_VALUE =&gt; Long/MIN_VALUE
+  If a is a double and zero =&gt; +0.0
+  If a is a double and ##Inf or ##-Inf =&gt; ##Inf
+  If a is a double and ##NaN =&gt; ##NaN">abs</a></code></td>
               </tr>
               <tr class="odd">
                 <td>Compare</td>
@@ -216,7 +222,11 @@ supplied, uses the root cause of the
 ([x])
   Return true if x is a negative fixed precision integer">neg-int?</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/pos-int_q" title="clojure.core/pos-int?
 ([x])
-  Return true if x is a positive fixed precision integer">pos-int?</a></code></td>
+  Return true if x is a positive fixed precision integer">pos-int?</a> (1.11) <a href="https://clojuredocs.org/clojure_core/clojure.core/NaN_q" title="clojure.core/NaN?
+([num])
+  Returns true if num is NaN, else false">NaN?</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/infinite_q" title="clojure.core/infinite?
+([num])
+  Returns true if num is negative or positive infinity, else false">infinite?</a></code></td>
               </tr>
               <tr class="odd">
                 <td>Random</td>
@@ -290,7 +300,8 @@ format
   Returns the number of items in the collection. (count nil) returns
   0.  Also works on strings, arrays, and Java Collections and Maps">count</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/get" title="clojure.core/get
 ([map key] [map key not-found])
-  Returns the value mapped to key, not-found or nil if key not present.">get</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/subs" title="clojure.core/subs
+  Returns the value mapped to key, not-found or nil if key not present
+  in associative collection, set, string, array, or ILookup instance.">get</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/subs" title="clojure.core/subs
 ([s start] [s start end])
   Returns the substring of s beginning at start inclusive, and ending
   at end (defaults to length of string), exclusive.">subs</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/compare" title="clojure.core/compare
@@ -311,9 +322,10 @@ format
    If (cmap ch) is non-nil, append (str (cmap ch)) instead.">escape</a> <a href="https://clojuredocs.org/clojure_core/clojure.string/split" title="clojure.string/split
 ([s re] [s re limit])
   Splits string on a regular expression.  Optional argument limit is
-  the maximum number of splits. Not lazy. Returns vector of the splits.">split</a> <a href="https://clojuredocs.org/clojure_core/clojure.string/split-lines" title="clojure.string/split-lines
+  the maximum number of parts. Not lazy. Returns vector of the parts.
+  Trailing empty strings are not returned - pass limit of -1 to return all.">split</a> <a href="https://clojuredocs.org/clojure_core/clojure.string/split-lines" title="clojure.string/split-lines
 ([s])
-  Splits s on \n or \r\n.">split-lines</a> <a href="https://clojuredocs.org/clojure_core/clojure.string/replace" title="clojure.string/replace
+  Splits s on \n or \r\n. Trailing empty lines are not returned.">split-lines</a> <a href="https://clojuredocs.org/clojure_core/clojure.string/replace" title="clojure.string/replace
 ([s match replacement])
   Replaces all instance of match with replacement in s.
 
@@ -365,13 +377,30 @@ format
 
 [ documentation truncated.  Click link for the rest. ]">replace-first</a> <a href="https://clojuredocs.org/clojure_core/clojure.string/reverse" title="clojure.string/reverse
 ([s])
-  Returns s with its characters reversed.">reverse</a> (1.8) <a href="https://clojuredocs.org/clojure_core/clojure.string/index-of" title="clojure.string/index-of
+  Returns s with its characters reversed.">reverse</a> <a href="https://clojuredocs.org/clojure_core/clojure.string/index-of" title="clojure.string/index-of
 ([s value] [s value from-index])
   Return index of value (string or char) in s, optionally searching
   forward from from-index. Return nil if value not found.">index-of</a> <a href="https://clojuredocs.org/clojure_core/clojure.string/last-index-of" title="clojure.string/last-index-of
 ([s value] [s value from-index])
   Return last index of value (string or char) in s, optionally
-  searching backward from from-index. Return nil if value not found.">last-index-of</a></code></td>
+  searching backward from from-index. Return nil if value not found.">last-index-of</a> (1.11) (clojure.core/) <a href="https://clojuredocs.org/clojure_core/clojure.core/parse-boolean" title="clojure.core/parse-boolean
+([s])
+  Parse strings &quot;true&quot; or &quot;false&quot; and return a boolean, or nil if invalid">parse-boolean</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/parse-double" title="clojure.core/parse-double
+([s])
+  Parse string with floating point components and return a Double value,
+  or nil if parse fails.
+
+  Grammar:
+https://docs.oracle.com/javase/8/docs/api/java/lang/Double.html#valueOf-java.lang.String-">parse-double</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/parse-long" title="clojure.core/parse-long
+([s])
+  Parse string of decimal digits with optional leading -/+ and return a
+  Long value, or nil if parse fails">parse-long</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/parse-uuid" title="clojure.core/parse-uuid
+([s])
+  Parse a string representing a UUID and return a java.util.UUID instance,
+  or nil if parse fails.
+
+  Grammar:
+https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html#toString--">parse-uuid</a></code></td>
               </tr>
               <tr class="odd">
                 <td><a href="http://www.regular-expressions.info">Regex</a></td>
@@ -484,7 +513,7 @@ format
 ([x])
   Return true if x is a String">string?</a> (clojure.string/) <a href="https://clojuredocs.org/clojure_core/clojure.string/blank_q" title="clojure.string/blank?
 ([s])
-  True if s is nil, empty, or contains only whitespace.">blank?</a> (1.8) <a href="https://clojuredocs.org/clojure_core/clojure.string/starts-with_q" title="clojure.string/starts-with?
+  True if s is nil, empty, or contains only whitespace.">blank?</a> <a href="https://clojuredocs.org/clojure_core/clojure.string/starts-with_q" title="clojure.string/starts-with?
 ([s substr])
   True if s starts with substr.">starts-with?</a> <a href="https://clojuredocs.org/clojure_core/clojure.string/ends-with_q" title="clojure.string/ends-with?
 ([s substr])
@@ -559,10 +588,12 @@ format
 ([] [to] [to from] [to xform from])
   Returns a new coll consisting of to-coll with all of the items of
   from-coll conjoined. A transducer may be supplied.">into</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/conj" title="clojure.core/conj
-([coll x] [coll x &amp; xs])
+([] [coll] [coll x] [coll x &amp; xs])
   conj[oin]. Returns a new collection with the xs
-    'added'. (conj nil item) returns (item).  The 'addition' may
-    happen at different 'places' depending on the concrete type.">conj</a> (clojure.walk/) <a href="https://clojuredocs.org/clojure_core/clojure.walk/walk" title="clojure.walk/walk
+    'added'. (conj nil item) returns (item).
+    (conj coll) returns coll. (conj) returns [].
+    The 'addition' may happen at different 'places' depending
+    on the concrete type.">conj</a> (clojure.walk/) <a href="https://clojuredocs.org/clojure_core/clojure.walk/walk" title="clojure.walk/walk
 ([inner outer form])
   Traverses form, an arbitrary data structure.  inner and outer are
   functions.  Applies inner to each element of form, building up a
@@ -645,7 +676,7 @@ format
 ([x])
   Return true if x implements ISeq">seq?</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/record_q" title="clojure.core/record?
 ([x])
-  Returns true if x is a record">record?</a> (1.8) <a href="https://clojuredocs.org/clojure_core/clojure.core/map-entry_q" title="clojure.core/map-entry?
+  Returns true if x is a record">record?</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/map-entry_q" title="clojure.core/map-entry?
 ([x])
   Return true if x is a map entry">map-entry?</a></code></td>
               </tr>
@@ -684,10 +715,12 @@ format
 ([x seq])
   Returns a new seq where x is the first element and seq is
     the rest.">cons</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/conj" title="clojure.core/conj
-([coll x] [coll x &amp; xs])
+([] [coll] [coll x] [coll x &amp; xs])
   conj[oin]. Returns a new collection with the xs
-    'added'. (conj nil item) returns (item).  The 'addition' may
-    happen at different 'places' depending on the concrete type.">conj</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/rest" title="clojure.core/rest
+    'added'. (conj nil item) returns (item).
+    (conj coll) returns coll. (conj) returns [].
+    The 'addition' may happen at different 'places' depending
+    on the concrete type.">conj</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/rest" title="clojure.core/rest
 ([coll])
   Returns a possibly empty seq of the items after the first. Calls seq on its
   argument.">rest</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/pop" title="clojure.core/pop
@@ -749,7 +782,8 @@ format
   also works for strings, Java arrays, regex Matchers and Lists, and,
   in O(n) time, for sequences.">nth</a>  my-vec idx)</code> <a href="https://clojuredocs.org/clojure_core/clojure.core/get" title="clojure.core/get
 ([map key] [map key not-found])
-  Returns the value mapped to key, not-found or nil if key not present.">get</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/peek" title="clojure.core/peek
+  Returns the value mapped to key, not-found or nil if key not present
+  in associative collection, set, string, array, or ILookup instance.">get</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/peek" title="clojure.core/peek
 ([coll])
   For a list or queue, same as first, for a vector, same as, but much
   more efficient than, last. If the collection is empty, returns nil.">peek</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html#indexOf-java.lang.Object-">.indexOf</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html#lastIndexOf-java.lang.Object-">.lastIndexOf</a></code></td>
@@ -782,10 +816,12 @@ format
   vector/seq with any elements = a key in smap replaced with the
   corresponding val in smap.  Returns a transducer when no collection
   is provided.">replace</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/conj" title="clojure.core/conj
-([coll x] [coll x &amp; xs])
+([] [coll] [coll x] [coll x &amp; xs])
   conj[oin]. Returns a new collection with the xs
-    'added'. (conj nil item) returns (item).  The 'addition' may
-    happen at different 'places' depending on the concrete type.">conj</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/rseq" title="clojure.core/rseq
+    'added'. (conj nil item) returns (item).
+    (conj coll) returns coll. (conj) returns [].
+    The 'addition' may happen at different 'places' depending
+    on the concrete type.">conj</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/rseq" title="clojure.core/rseq
 ([rev])
   Returns, in constant time, a seq of the items in rev (which
   can be a vector or sorted-map), in reverse order. If rev is empty returns nil">rseq</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/update" title="clojure.core/update
@@ -864,7 +900,8 @@ used only if elements are densely
                 <td>Examine</td>
                 <td><code><code>(my-set item)</code> &rarr; <code>( <a href="https://clojuredocs.org/clojure_core/clojure.core/get" title="clojure.core/get
 ([map key] [map key not-found])
-  Returns the value mapped to key, not-found or nil if key not present.">get</a>  my-set item)</code> <a href="https://clojuredocs.org/clojure_core/clojure.core/contains_q" title="clojure.core/contains?
+  Returns the value mapped to key, not-found or nil if key not present
+  in associative collection, set, string, array, or ILookup instance.">get</a>  my-set item)</code> <a href="https://clojuredocs.org/clojure_core/clojure.core/contains_q" title="clojure.core/contains?
 ([coll key])
   Returns true if key is present in the given collection, otherwise
   returns false.  Note that for numerically indexed collections like
@@ -875,10 +912,12 @@ used only if elements are densely
               <tr class="even">
                 <td>'Change'</td>
                 <td><code><a href="https://clojuredocs.org/clojure_core/clojure.core/conj" title="clojure.core/conj
-([coll x] [coll x &amp; xs])
+([] [coll] [coll x] [coll x &amp; xs])
   conj[oin]. Returns a new collection with the xs
-    'added'. (conj nil item) returns (item).  The 'addition' may
-    happen at different 'places' depending on the concrete type.">conj</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/disj" title="clojure.core/disj
+    'added'. (conj nil item) returns (item).
+    (conj coll) returns coll. (conj) returns [].
+    The 'addition' may happen at different 'places' depending
+    on the concrete type.">conj</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/disj" title="clojure.core/disj
 ([set] [set key] [set key &amp; ks])
   disj[oin]. Returns a new set of the same (hashed/sorted) type, that
   does not contain key(s).">disj</a></code></td>
@@ -990,9 +1029,11 @@ default-comparator.">ordering-map</a> (clojure.data.int-map/) <a href="https://g
                 <td>Examine</td>
                 <td><code><code>(my-map k)</code> &rarr; <code>( <a href="https://clojuredocs.org/clojure_core/clojure.core/get" title="clojure.core/get
 ([map key] [map key not-found])
-  Returns the value mapped to key, not-found or nil if key not present.">get</a>  my-map k)</code> also <code>(:key my-map)</code> &rarr; <code>( <a href="https://clojuredocs.org/clojure_core/clojure.core/get" title="clojure.core/get
+  Returns the value mapped to key, not-found or nil if key not present
+  in associative collection, set, string, array, or ILookup instance.">get</a>  my-map k)</code> also <code>(:key my-map)</code> &rarr; <code>( <a href="https://clojuredocs.org/clojure_core/clojure.core/get" title="clojure.core/get
 ([map key] [map key not-found])
-  Returns the value mapped to key, not-found or nil if key not present.">get</a>  my-map :key)</code> <a href="https://clojuredocs.org/clojure_core/clojure.core/get-in" title="clojure.core/get-in
+  Returns the value mapped to key, not-found or nil if key not present
+  in associative collection, set, string, array, or ILookup instance.">get</a>  my-map :key)</code> <a href="https://clojuredocs.org/clojure_core/clojure.core/get-in" title="clojure.core/get-in
 ([m ks] [m ks not-found])
   Returns the value in a nested associative structure,
   where ks is a sequence of keys. Returns nil if the key
@@ -1050,7 +1091,20 @@ default-comparator.">ordering-map</a> (clojure.data.int-map/) <a href="https://g
 ([map kmap])
   Returns the map with the keys in kmap renamed to the vals in kmap">rename-keys</a> <a href="https://clojuredocs.org/clojure_core/clojure.set/map-invert" title="clojure.set/map-invert
 ([m])
-  Returns the map with the vals mapped to the keys.">map-invert</a> GitHub: <a href="https://github.com/weavejester/medley">Medley</a></code></td>
+  Returns the map with the vals mapped to the keys.">map-invert</a> (1.11) (clojure.core/) <a href="https://clojuredocs.org/clojure_core/clojure.core/update-keys" title="clojure.core/update-keys
+([m f])
+  m f =&gt; {(f k) v ...}
+
+  Given a map m and a function f of 1-argument, returns a new map whose
+  keys are the result of applying f to the keys of m, mapped to the
+  corresponding values of m.
+  f must return a unique key for each key of m, else the behavior is undefined.">update-keys</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/update-vals" title="clojure.core/update-vals
+([m f])
+  m f =&gt; {k (f v) ...}
+
+  Given a map m and a function f of 1-argument, returns a new map where the keys
+of m
+  are mapped to result of applying f to the corresponding values of m.">update-vals</a> GitHub: <a href="https://github.com/weavejester/medley">Medley</a></code></td>
               </tr>
               <tr class="odd">
                 <td>Ops</td>
@@ -1105,10 +1159,12 @@ default-comparator.">ordering-map</a> (clojure.data.int-map/) <a href="https://g
               <tr class="odd">
                 <td>'Change'</td>
                 <td><code><a href="https://clojuredocs.org/clojure_core/clojure.core/conj" title="clojure.core/conj
-([coll x] [coll x &amp; xs])
+([] [coll] [coll x] [coll x &amp; xs])
   conj[oin]. Returns a new collection with the xs
-    'added'. (conj nil item) returns (item).  The 'addition' may
-    happen at different 'places' depending on the concrete type.">conj</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/pop" title="clojure.core/pop
+    'added'. (conj nil item) returns (item).
+    (conj coll) returns coll. (conj) returns [].
+    The 'addition' may happen at different 'places' depending
+    on the concrete type.">conj</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/pop" title="clojure.core/pop
 ([coll])
   For a list or queue, returns a new list/queue without the first
   item, for a vector, returns a new vector without the last item. If
@@ -1399,10 +1455,12 @@ Macro
 ([x seq])
   Returns a new seq where x is the first element and seq is
     the rest.">cons</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/conj" title="clojure.core/conj
-([coll x] [coll x &amp; xs])
+([] [coll] [coll x] [coll x &amp; xs])
   conj[oin]. Returns a new collection with the xs
-    'added'. (conj nil item) returns (item).  The 'addition' may
-    happen at different 'places' depending on the concrete type.">conj</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/concat" title="clojure.core/concat
+    'added'. (conj nil item) returns (item).
+    (conj coll) returns coll. (conj) returns [].
+    The 'addition' may happen at different 'places' depending
+    on the concrete type.">conj</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/concat" title="clojure.core/concat
 ([] [x] [x y] [x y &amp; zs])
   Returns a lazy seq representing the concatenation of the elements in the
 supplied colls.">concat</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/lazy-cat" title="clojure.core/lazy-cat
@@ -1492,10 +1550,12 @@ Macro
               <tr class="odd">
                 <td>'Change'</td>
                 <td><code><a href="https://clojuredocs.org/clojure_core/clojure.core/conj" title="clojure.core/conj
-([coll x] [coll x &amp; xs])
+([] [coll] [coll x] [coll x &amp; xs])
   conj[oin]. Returns a new collection with the xs
-    'added'. (conj nil item) returns (item).  The 'addition' may
-    happen at different 'places' depending on the concrete type.">conj</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/concat" title="clojure.core/concat
+    'added'. (conj nil item) returns (item).
+    (conj coll) returns coll. (conj) returns [].
+    The 'addition' may happen at different 'places' depending
+    on the concrete type.">conj</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/concat" title="clojure.core/concat
 ([] [x] [x y] [x y &amp; zs])
   Returns a lazy seq representing the concatenation of the elements in the
 supplied colls.">concat</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/distinct" title="clojure.core/distinct
@@ -2846,12 +2906,14 @@ calls to tap&gt;,
   (fn name? ([params*] exprs*) +)
 ([&amp; sigs])
 Special Form
-  params =&gt; positional-params* , or positional-params* &amp; next-param
+  params =&gt; positional-params*, or positional-params* &amp; rest-param
   positional-param =&gt; binding-form
-  next-param =&gt; binding-form
-  name =&gt; symbol
+  rest-param =&gt; binding-form
+  binding-form =&gt; name, or destructuring-form
 
-  Defines a function
+  Defines a function.
+
+  See https://clojure.org/reference/special_forms#fn for more information
 
   Please see http://clojure.org/special_forms#fn
 Spec
@@ -3098,6 +3160,7 @@ Macro
                 <td><code><code>(</code> <a href="https://clojuredocs.org/clojure_core/clojure.core/reify" title="clojure.core/reify
 ([&amp; opts+specs])
 Macro
+  reify creates an object implementing a protocol or interface.
   reify is a macro with the following structure:
 
  (reify options* specs*)
@@ -3118,8 +3181,6 @@ Macro
   interface declarations.  Note also that recur calls to the method
   head should *not* pass the target object, it will be supplied
   automatically and can not be substituted.
-
-  The return type can be indicated by a type hint on the method name,
 
 [ documentation truncated.  Click link for the rest. ]">reify</a> <code>Slicey (slice [at] ...))</code></code></td>
               </tr>
@@ -4104,10 +4165,15 @@ Special Form
 ([bindings &amp; body])
 Special Form
   binding =&gt; binding-form init-expr
+  binding-form =&gt; name, or destructuring-form
+  destructuring-form =&gt; map-destructure-form, or seq-destructure-form
 
   Evaluates the exprs in a lexical context in which the symbols in
   the binding-forms are bound to their respective init-exprs or parts
   therein.
+
+  See https://clojure.org/reference/special_forms#binding-forms for
+  more information about destructuring.
 
   Please see http://clojure.org/special_forms#let
 Spec
@@ -4136,12 +4202,14 @@ itself (not its value) is returned. The reader macro #'x expands to (var x).
   (fn name? ([params*] exprs*) +)
 ([&amp; sigs])
 Special Form
-  params =&gt; positional-params* , or positional-params* &amp; next-param
+  params =&gt; positional-params*, or positional-params* &amp; rest-param
   positional-param =&gt; binding-form
-  next-param =&gt; binding-form
-  name =&gt; symbol
+  rest-param =&gt; binding-form
+  binding-form =&gt; name, or destructuring-form
 
-  Defines a function
+  Defines a function.
+
+  See https://clojure.org/reference/special_forms#fn for more information
 
   Please see http://clojure.org/special_forms#fn
 Spec
@@ -4208,10 +4276,15 @@ Special Form
 ([bindings &amp; body])
 Special Form
   binding =&gt; binding-form init-expr
+  binding-form =&gt; name, or destructuring-form
+  destructuring-form =&gt; map-destructure-form, or seq-destructure-form
 
   Evaluates the exprs in a lexical context in which the symbols in
   the binding-forms are bound to their respective init-exprs or parts
   therein.
+
+  See https://clojure.org/reference/special_forms#binding-forms for
+  more information about destructuring.
 
   Please see http://clojure.org/special_forms#let
 Spec
@@ -4221,12 +4294,14 @@ Spec
   (fn name? ([params*] exprs*) +)
 ([&amp; sigs])
 Special Form
-  params =&gt; positional-params* , or positional-params* &amp; next-param
+  params =&gt; positional-params*, or positional-params* &amp; rest-param
   positional-param =&gt; binding-form
-  next-param =&gt; binding-form
-  name =&gt; symbol
+  rest-param =&gt; binding-form
+  binding-form =&gt; name, or destructuring-form
 
-  Defines a function
+  Defines a function.
+
+  See https://clojure.org/reference/special_forms#fn for more information
 
   Please see http://clojure.org/special_forms#fn
 Spec
@@ -5785,7 +5860,11 @@ Macro
   which has the keys :tag, :attrs, and :content. and accessor fns tag,
   attrs, and content. Other parsers can be supplied by passing
   startparse, a fn taking a source and a ContentHandler and returning
-  a parser">clojure.xml/parse</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/xml-seq" title="clojure.core/xml-seq
+  a parser.
+
+  Prior to 1.11, used startparse-sax by default. As of 1.11, uses
+  startparse-sax-safe, which disables XXE (XML External Entity)
+  processing. Pass startparse-sax to revert to prior behavior.">clojure.xml/parse</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/xml-seq" title="clojure.core/xml-seq
 ([root])
   A tree seq on the xml elements as per xml/parse">xml-seq</a></code></td>
               </tr>
@@ -5873,7 +5952,12 @@ returns x">force</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/
 ([])
   Returns clojure version as a printable string.">clojure-version</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/*command-line-args*" title="clojure.core/*command-line-args*
   A sequence of the supplied command line arguments, or nil if
-  none were supplied">*command-line-args*</a></code></td>
+  none were supplied">*command-line-args*</a> (1.11) <a href="https://clojuredocs.org/clojure_core/clojure.core/random-uuid" title="clojure.core/random-uuid
+([])
+  Returns a pseudo-randomly generated java.util.UUID instance (i.e. type 4).
+
+  See:
+https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html#randomUUID--">random-uuid</a></code></td>
               </tr>
               <tr class="odd">
                 <td>Browser / Shell</td>

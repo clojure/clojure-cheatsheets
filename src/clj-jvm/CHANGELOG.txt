@@ -1,4 +1,46 @@
 ---------------------------------------------------------------------
+April 15, 2022 - Clojure 1.8 - 1.11, sheet v53
+
+Made 'minimum version' Clojure 1.8, removing all (1.8) tags marking
+things as new in 1.8.  Tags for things new in (1.9) (1.10) are still
+present, as are tags (1.11) for things new in Clojure 1.11.0.
+
+New things for Clojure 1.11 that have _not_ been added to the sheet at
+this time:
+
+    clojure.test/run-test
+    clojure.test/run-test-var
+    clojure.xml/disable-external-entities
+    clojure.xml/sax-parser
+    clojure.xml/startparse-sax-safe
+    seq-to-map-for-destructuring
+    iteration (I plan to add iteration soon, after getting
+    recommendations on where to add it.)
+
+New things for Clojure 1.11 that have been added to the sheet in this
+version:
+
+Added to Primitives / Numbers / Arithmetic section:
+
+    abs
+
+Added to Primitives / Numbers / Test section:
+
+    NaN? infinite?
+
+Added to Primitives / Strings / Use section:
+
+    parse-boolean parse-double parse-long parse-uuid
+
+Added to Collections / Maps / 'Change' section:
+
+    update-keys update-vals
+
+Added to Other / Misc section:
+
+    random-uuid
+
+---------------------------------------------------------------------
 September 28, 2020 - Clojure 1.7 - 1.10, sheet v52
 
 Updated the version of Clojure used to generate the cheatsheet from
