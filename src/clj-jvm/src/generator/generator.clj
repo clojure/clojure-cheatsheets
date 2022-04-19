@@ -29,6 +29,7 @@
             clojure.instant
             clojure.java.browse-ui
             clojure.main
+            clojure.math
             clojure.spec.gen.alpha
             clojure.stacktrace
             clojure.template
@@ -134,8 +135,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.8 - 1.11, sheet v54)"
-              :html "Clojure Cheat Sheet (Clojure 1.8 - 1.11, sheet v54)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.8 - 1.11, sheet v55)"
+              :html "Clojure Cheat Sheet (Clojure 1.8 - 1.11, sheet v55)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -170,7 +171,22 @@
                                           ]]
                       ["Arithmetic" :cmds '[+ - * / quot rem mod inc dec
                                             max min +' -' *' inc' dec'
-                                            "(1.11)" abs]]
+                                            "(1.11)" abs
+                                            "(clojure.math/)"
+                                            clojure.math/floor-div
+                                            clojure.math/floor-mod
+                                            clojure.math/ceil clojure.math/floor
+                                            clojure.math/rint clojure.math/round
+                                            clojure.math/pow clojure.math/sqrt
+                                            clojure.math/cbrt
+                                            clojure.math/E clojure.math/exp
+                                            clojure.math/expm1 clojure.math/log
+                                            clojure.math/log10 clojure.math/log1p
+                                            clojure.math/PI clojure.math/sin
+                                            clojure.math/cos clojure.math/tan
+                                            clojure.math/asin clojure.math/acos
+                                            clojure.math/atan clojure.math/atan2
+                                            ]]
                       ["Compare" :cmds '[== < > <= >= compare]]
                       ["Bitwise" :cmds '[[:common-prefix bit- and or xor not
                                           flip set shift-right shift-left
@@ -189,7 +205,9 @@
                                       "(1.9)" double? int? nat-int?
                                       neg-int? pos-int?
                                       "(1.11)" NaN? infinite?]]
-                      ["Random" :cmds '[rand rand-int]]
+                      ["Random" :cmds '[rand rand-int
+                                        "(1.11)" "(clojure.math/)"
+                                        clojure.math/random]]
                       ["BigDecimal" :cmds '[with-precision]]
                       ;; TBD: Why do these not exist in Clojure?
                       ;; There are -int versions, but not long
@@ -1463,30 +1481,6 @@
          :links-to-grimoire
          [])
 
-   ;; ClojureDocs.org does not have new vars from Clojure 1.10 yet as
-   ;; of 2019-Jun-20.  Until it does, point at the clojure.org
-   ;; official API docs.
-   (map (fn make-symbol-url-pair-to-clojure-org-api
-          [[namespace-str symbol-str]]
-          [(str (if (= "clojure.core" namespace-str) "" (str namespace-str "/"))
-                symbol-str)
-           (format "https://clojure.github.io/clojure/%s-api.html#%s/%s"
-                   namespace-str namespace-str symbol-str)])
-        [
-         [ "clojure.core" "tap>" ]
-         [ "clojure.core" "add-tap" ]
-         [ "clojure.core" "remove-tap" ]
-         [ "clojure.core" "requiring-resolve" ]
-         [ "clojure.datafy" "datafy" ]
-         [ "clojure.datafy" "nav" ]
-         [ "clojure.core" "ex-cause" ]
-         [ "clojure.core" "ex-message" ]
-         [ "clojure.main" "ex-triage" ]
-         [ "clojure.main" "ex-str" ]
-         [ "clojure.main" "err->msg" ]
-         [ "clojure.main" "report-error" ]
-         ])
-
    ;; These symbols do not have API docs anywhere that I can find,
    ;; yet.  Point at the github page for tools.reader for now.
    (map (fn [sym-str]
@@ -1518,12 +1512,12 @@
           "clojure.data.int-map/int-map" ])
 
    (map (fn [sym-str]
-          [sym-str "https://github.com/amalloy/ordered" ])
+          [sym-str "https://github.com/clj-commons/ordered" ])
         [ "flatland.ordered.set/ordered-set"
           "flatland.ordered.map/ordered-map" ])
 
    [[ "flatland.useful.map/ordering-map"
-      "https://github.com/amalloy/useful/blob/master/src/flatland/useful/map.clj#L243-L245" ]]
+      "https://github.com/clj-commons/useful/blob/master/src/flatland/useful/map.clj#L243-L245" ]]
    ))
 
 
@@ -1885,6 +1879,7 @@ document.write('<style type=\"text/css\">%s<\\/style>')
    "clojure.java.javadoc/"
    "clojure.java.shell/"
    "clojure.main/"
+   "clojure.math/"
    "clojure.pprint/"
    "clojure.repl/"
    "clojure.set/"

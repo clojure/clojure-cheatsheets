@@ -107,7 +107,141 @@ supplied, uses the root cause of the
   If a is Long/MIN_VALUE =&gt; Long/MIN_VALUE
   If a is a double and zero =&gt; +0.0
   If a is a double and ##Inf or ##-Inf =&gt; ##Inf
-  If a is a double and ##NaN =&gt; ##NaN">abs</a></code></td>
+  If a is a double and ##NaN =&gt; ##NaN">abs</a> (clojure.math/) <a href="https://clojuredocs.org/clojure_core/clojure.math/floor-div" title="clojure.math/floor-div
+([x y])
+  Integer division that rounds to negative infinity (as opposed to zero).
+  The special case (floorDiv Long/MIN_VALUE -1) overflows and returns
+Long/MIN_VALUE.
+  See:
+https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#floorDiv-long-long-">floor-div</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/floor-mod" title="clojure.math/floor-mod
+([x y])
+  Integer modulus x - (floorDiv(x, y) * y). Sign matches y and is in the
+  range -|y| &lt; r &lt; |y|.
+  See:
+https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#floorMod-long-long-">floor-mod</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/ceil" title="clojure.math/ceil
+([a])
+  Returns the smallest double greater than or equal to a, and equal to a
+  mathematical integer.
+  If a is ##NaN or ##Inf or ##-Inf or already equal to an integer =&gt; a
+  See:
+https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#ceil-double-">ceil</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/floor" title="clojure.math/floor
+([a])
+  Returns the largest double less than or equal to a, and equal to a
+  mathematical integer.
+  If a is ##NaN or ##Inf or ##-Inf or already equal to an integer =&gt; a
+  If a is less than zero but greater than -1.0 =&gt; -0.0
+  See:
+https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#floor-double-">floor</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/rint" title="clojure.math/rint
+([a])
+  Returns the double closest to a and equal to a mathematical integer.
+  If two values are equally close, return the even one.
+  If a is ##NaN or ##Inf or ##-Inf or zero =&gt; a
+  See:
+https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#rint-double-">rint</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/round" title="clojure.math/round
+([a])
+  Returns the closest long to a. If equally close to two values, return the one
+  closer to ##Inf.
+  If a is ##NaN =&gt; 0
+  If a is ##-Inf or &lt; Long/MIN_VALUE =&gt; Long/MIN_VALUE
+  If a is ##Inf or &gt; Long/MAX_VALUE =&gt; Long/MAX_VALUE
+  See:
+https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#round-double-">round</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/pow" title="clojure.math/pow
+([a b])
+  Returns the value of a raised to the power of b.
+  For more details on special cases, see:
+  https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#pow-double-double-">pow</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/sqrt" title="clojure.math/sqrt
+([a])
+  Returns the positive square root of a.
+  If a is ##NaN or negative =&gt; ##NaN
+  If a is ##Inf =&gt; ##Inf
+  If a is zero =&gt; a
+  See:
+https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#sqrt-double-">sqrt</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/cbrt" title="clojure.math/cbrt
+([a])
+  Returns the cube root of a.
+  If a is ##NaN =&gt; ##NaN
+  If a is ##Inf or ##-Inf =&gt; a
+  If a is zero =&gt; zero with sign matching a
+  See:
+https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#cbrt-double-">cbrt</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/E" title="clojure.math/E
+  Constant for e, the base for natural logarithms.
+  See: https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#E">E</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/exp" title="clojure.math/exp
+([a])
+  Returns Euler's number e raised to the power of a.
+  If a is ##NaN =&gt; ##NaN
+  If a is ##Inf =&gt; ##Inf
+  If a is ##-Inf =&gt; +0.0
+  See: https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#exp-double-">exp</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/expm1" title="clojure.math/expm1
+([x])
+  Returns e^x - 1. Near 0, expm1(x)+1 is more accurate to e^x than exp(x).
+  If x is ##NaN =&gt; ##NaN
+  If x is ##Inf =&gt; #Inf
+  If x is ##-Inf =&gt; -1.0
+  If x is zero =&gt; x
+  See:
+https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#expm1-double-">expm1</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/log" title="clojure.math/log
+([a])
+  Returns the natural logarithm (base e) of a.
+  If a is ##NaN or negative =&gt; ##NaN
+  If a is ##Inf =&gt; ##Inf
+  If a is zero =&gt; ##-Inf
+  See: https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#log-double-">log</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/log10" title="clojure.math/log10
+([a])
+  Returns the logarithm (base 10) of a.
+  If a is ##NaN or negative =&gt; ##NaN
+  If a is ##Inf =&gt; ##Inf
+  If a is zero =&gt; ##-Inf
+  See:
+https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#log10-double-">log10</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/log1p" title="clojure.math/log1p
+([x])
+  Returns ln(1+x). For small values of x, log1p(x) is more accurate than
+  log(1.0+x).
+  If x is ##NaN or &lt; -1 =&gt; ##NaN
+  If x is ##Inf =&gt; ##Inf
+  If x is -1 =&gt; ##-Inf
+  If x is 0 =&gt; 0 with sign matching x
+  See:
+https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#log1p-double-">log1p</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/PI" title="clojure.math/PI
+  Constant for pi, the ratio of the circumference of a circle to its diameter.
+  See: https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#PI">PI</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/sin" title="clojure.math/sin
+([a])
+  Returns the sine of an angle.
+  If a is ##NaN, ##-Inf, ##Inf =&gt; ##NaN
+  If a is zero =&gt; zero with the same sign as a
+  See: https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#sin-double-">sin</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/cos" title="clojure.math/cos
+([a])
+  Returns the cosine of an angle.
+  If a is ##NaN, ##-Inf, ##Inf =&gt; ##NaN
+  See: https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#cos-double-">cos</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/tan" title="clojure.math/tan
+([a])
+  Returns the tangent of an angle.
+  If a is ##NaN, ##-Inf, ##Inf =&gt; ##NaN
+  If a is zero =&gt; zero with the same sign as a
+  See: https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#tan-double-">tan</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/asin" title="clojure.math/asin
+([a])
+  Returns the arc sine of an angle, in the range -pi/2 to pi/2.
+  If a is ##NaN or |a|&gt;1 =&gt; ##NaN
+  If a is zero =&gt; zero with the same sign as a
+  See:
+https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#asin-double-">asin</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/acos" title="clojure.math/acos
+([a])
+  Returns the arc cosine of a, in the range 0.0 to pi.
+  If a is ##NaN or |a|&gt;1 =&gt; ##NaN
+  See:
+https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#acos-double-">acos</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/atan" title="clojure.math/atan
+([a])
+  Returns the arc tangent of a, in the range of -pi/2 to pi/2.
+  If a is ##NaN =&gt; ##NaN
+  If a is zero =&gt; zero with the same sign as a
+  See:
+https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#atan-double-">atan</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/atan2" title="clojure.math/atan2
+([y x])
+  Returns the angle theta from the conversion of rectangular coordinates (x, y)
+to polar coordinates (r, theta).
+  Computes the phase theta by computing an arc tangent of y/x in the range of
+-pi to pi.
+  For more details on special cases, see:
+  https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#atan2-double-double-">atan2</a></code></td>
               </tr>
               <tr class="odd">
                 <td>Compare</td>
@@ -235,7 +369,11 @@ supplied, uses the root cause of the
   Returns a random floating point number between 0 (inclusive) and
   n (default 1) (exclusive).">rand</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/rand-int" title="clojure.core/rand-int
 ([n])
-  Returns a random integer between 0 (inclusive) and n (exclusive).">rand-int</a></code></td>
+  Returns a random integer between 0 (inclusive) and n (exclusive).">rand-int</a> (1.11) (clojure.math/) <a href="https://clojuredocs.org/clojure_core/clojure.math/random" title="clojure.math/random
+([])
+  Returns a positive double between 0.0 and 1.0, chosen pseudorandomly with
+  approximately random distribution.
+  See: https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#random--">random</a></code></td>
               </tr>
               <tr class="even">
                 <td>BigDecimal</td>
@@ -862,7 +1000,7 @@ https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html#toString--">parse-
 ([&amp; keys])
   Returns a new sorted set with supplied keys.">sorted-set</a> <a href="https://github.com/clojure/data.avl" title="clojure.data.avl/sorted-set-by
 ([comparator &amp; keys])
-  Returns a new sorted set with supplied keys, using the supplied comparator.">sorted-set-by</a> (flatland.ordered.set/) <a href="https://github.com/amalloy/ordered" title="flatland.ordered.set/ordered-set
+  Returns a new sorted set with supplied keys, using the supplied comparator.">sorted-set-by</a> (flatland.ordered.set/) <a href="https://github.com/clj-commons/ordered" title="flatland.ordered.set/ordered-set
 ([] [&amp; xs])
   Return a set with the given items, whose items are sorted in the
 order that they are added. conj'ing an item that was already in the
@@ -993,7 +1131,7 @@ used only if elements are densely
 ([comparator &amp; keyvals])
   keyval =&gt; key val
   Returns a new sorted map with supplied mappings, using the supplied
-  comparator.">sorted-map-by</a> (flatland.ordered.map/) <a href="https://github.com/amalloy/ordered" title="flatland.ordered.map/ordered-map
+  comparator.">sorted-map-by</a> (flatland.ordered.map/) <a href="https://github.com/clj-commons/ordered" title="flatland.ordered.map/ordered-map
 ([] [coll] [k v &amp; more])
   Return a map with the given keys and values, whose entries are
 sorted in the order that keys are added. assoc'ing a key that is
@@ -1003,7 +1141,7 @@ assoc'ed for the first time. Supports transient.">ordered-map</a> (clojure.data.
 ([&amp; keyvals])
   Usage: (priority-map key val key val ...)
   Returns a new priority map with optional supplied mappings.
-  (priority-map) returns an empty priority map.">priority-map</a> (flatland.useful.map/) <a href="https://github.com/amalloy/useful/blob/master/src/flatland/useful/map.clj#L243-L245" title="flatland.useful.map/ordering-map
+  (priority-map) returns an empty priority map.">priority-map</a> (flatland.useful.map/) <a href="https://github.com/clj-commons/useful/blob/master/src/flatland/useful/map.clj#L243-L245" title="flatland.useful.map/ordering-map
 ([key-order] [key-order default-comparator])
   Create an empty map with a custom comparator that puts the given keys first,
 in the order
@@ -2883,18 +3021,18 @@ else return the value of silently.">delete-file</a> <a href="https://clojuredocs
               </tr>
               <tr class="even">
                 <td>tap</td>
-                <td><code>(1.10) <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/tap>" title="clojure.core/tap&gt;
+                <td><code>(1.10) <a href="https://clojuredocs.org/clojure_core/clojure.core/tap%3E" title="clojure.core/tap&gt;
 ([x])
   sends x to any taps. Will not block. Returns true if there was room in the
 queue,
-  false if not (dropped).">tap&gt;</a> <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/add-tap" title="clojure.core/add-tap
+  false if not (dropped).">tap&gt;</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/add-tap" title="clojure.core/add-tap
 ([f])
   adds f, a fn of one argument, to the tap set. This function will be called
 with anything sent via tap&gt;.
   This function may (briefly) block (e.g. for streams), and will never impede
 calls to tap&gt;,
   but blocking indefinitely may cause tap values to be dropped.
-  Remember f in order to remove-tap">add-tap</a> <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/remove-tap" title="clojure.core/remove-tap
+  Remember f in order to remove-tap">add-tap</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/remove-tap" title="clojure.core/remove-tap
 ([f])
   Remove f from the tap set.">remove-tap</a></code></td>
               </tr>
@@ -3497,14 +3635,14 @@ from
             <tbody>
               <tr class="odd">
                 <td>Datafy</td>
-                <td><code>(clojure.datafy/) <a href="https://clojure.github.io/clojure/clojure.datafy-api.html#clojure.datafy/datafy" title="clojure.datafy/datafy
+                <td><code>(clojure.datafy/) <a href="https://clojuredocs.org/clojure_core/clojure.datafy/datafy" title="clojure.datafy/datafy
 ([x])
   Attempts to return x as data.
   datafy will return the value of clojure.core.protocols/datafy. If
   the value has been transformed and the result supports
   metadata, :clojure.datafy/obj will be set on the metadata to the
   original value of x, and :clojure.datafy/class to the name of the
-  class of x, as a symbol.">datafy</a> <a href="https://clojure.github.io/clojure/clojure.datafy-api.html#clojure.datafy/nav" title="clojure.datafy/nav
+  class of x, as a symbol.">datafy</a> <a href="https://clojuredocs.org/clojure_core/clojure.datafy/nav" title="clojure.datafy/nav
 ([coll k v])
   Returns (possibly transformed) v in the context of coll and k (a
   key/index or nil). Callers should attempt to provide the key/index
@@ -4719,7 +4857,7 @@ Spec
 ([x])
   If passed a namespace, returns it. Else, when passed a symbol,
   returns the namespace named by it, throwing an exception if not
-  found.">the-ns</a> (1.10) <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/requiring-resolve" title="clojure.core/requiring-resolve
+  found.">the-ns</a> (1.10) <a href="https://clojuredocs.org/clojure_core/clojure.core/requiring-resolve" title="clojure.core/requiring-resolve
 ([sym])
   Resolves namespace-qualified sym per 'resolve'. If initial resolve
 fails, attempts to require sym's namespace and retries.">requiring-resolve</a></code></td>
@@ -5525,13 +5663,13 @@ supplied, uses the root cause of the
     :trace - root cause stack elements">Throwable-&gt;map</a> (1.9) <a href="https://clojuredocs.org/clojure_core/clojure.core/StackTraceElement-%3Evec" title="clojure.core/StackTraceElement-&gt;vec
 ([o])
   Constructs a data representation for a StackTraceElement: [class method file
-line]">StackTraceElement-&gt;vec</a> (1.10) <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/ex-cause" title="clojure.core/ex-cause
+line]">StackTraceElement-&gt;vec</a> (1.10) <a href="https://clojuredocs.org/clojure_core/clojure.core/ex-cause" title="clojure.core/ex-cause
 ([ex])
   Returns the cause of ex if ex is a Throwable.
-  Otherwise returns nil.">ex-cause</a> <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/ex-message" title="clojure.core/ex-message
+  Otherwise returns nil.">ex-cause</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/ex-message" title="clojure.core/ex-message
 ([ex])
   Returns the message attached to ex if ex is a Throwable.
-  Otherwise returns nil.">ex-message</a> (clojure.main/) <a href="https://clojure.github.io/clojure/clojure.main-api.html#clojure.main/ex-triage" title="clojure.main/ex-triage
+  Otherwise returns nil.">ex-message</a> (clojure.main/) <a href="https://clojuredocs.org/clojure_core/clojure.main/ex-triage" title="clojure.main/ex-triage
 ([datafied-throwable])
   Returns an analysis of the phase, error, cause, and location of an error that
 occurred
@@ -5549,14 +5687,14 @@ than phase
     :clojure.error/symbol - symbol being expanded/compiled/invoked
     :clojure.error/class - cause exception class symbol
     :clojure.error/cause - cause exception message
-    :clojure.error/spec - explain-data for spec error">ex-triage</a> <a href="https://clojure.github.io/clojure/clojure.main-api.html#clojure.main/ex-str" title="clojure.main/ex-str
+    :clojure.error/spec - explain-data for spec error">ex-triage</a> <a href="https://clojuredocs.org/clojure_core/clojure.main/ex-str" title="clojure.main/ex-str
 ([{:clojure.error/keys [phase source path line column symbol class cause spec],
 :as triage-data}])
   Returns a string from exception data, as produced by ex-triage.
   The first line summarizes the exception phase and location.
-  The subsequent lines describe the cause.">ex-str</a> <a href="https://clojure.github.io/clojure/clojure.main-api.html#clojure.main/err->msg" title="clojure.main/err-&gt;msg
+  The subsequent lines describe the cause.">ex-str</a> <a href="https://clojuredocs.org/clojure_core/clojure.main/err-%3Emsg" title="clojure.main/err-&gt;msg
 ([e])
-  Helper to return an error message string from an exception.">err-&gt;msg</a> <a href="https://clojure.github.io/clojure/clojure.main-api.html#clojure.main/report-error" title="clojure.main/report-error
+  Helper to return an error message string from an exception.">err-&gt;msg</a> <a href="https://clojuredocs.org/clojure_core/clojure.main/report-error" title="clojure.main/report-error
 ([t &amp; {:keys [target], :or {target &quot;file&quot;}, :as opts}])
   Create and output an exception report for a Throwable to target.
 

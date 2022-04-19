@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Clojure Cheat Sheet (Clojure 1.8 - 1.11, sheet v54)</title>
+  <title>Clojure Cheat Sheet (Clojure 1.8 - 1.11, sheet v55)</title>
 
   <link rel="stylesheet" href="cheatsheet_files/style.css" type="text/css" />
   <style type="text/css">
@@ -176,7 +176,7 @@ tr.even {
               </tr>
               <tr class="even">
                 <td>Arithmetic</td>
-                <td><code><a href="https://clojuredocs.org/clojure_core/clojure.core/%2B">+</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/-">-</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/*">*</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/_fs">/</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/quot">quot</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/rem">rem</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/mod">mod</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/inc">inc</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/dec">dec</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/max">max</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/min">min</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/%2B%27">+'</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/-%27">-'</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/*%27">*'</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/inc%27">inc'</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/dec%27">dec'</a> (1.11) <a href="https://clojuredocs.org/clojure_core/clojure.core/abs">abs</a></code></td>
+                <td><code><a href="https://clojuredocs.org/clojure_core/clojure.core/%2B">+</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/-">-</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/*">*</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/_fs">/</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/quot">quot</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/rem">rem</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/mod">mod</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/inc">inc</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/dec">dec</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/max">max</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/min">min</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/%2B%27">+'</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/-%27">-'</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/*%27">*'</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/inc%27">inc'</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/dec%27">dec'</a> (1.11) <a href="https://clojuredocs.org/clojure_core/clojure.core/abs">abs</a> (clojure.math/) <a href="https://clojuredocs.org/clojure_core/clojure.math/floor-div">floor-div</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/floor-mod">floor-mod</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/ceil">ceil</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/floor">floor</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/rint">rint</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/round">round</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/pow">pow</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/sqrt">sqrt</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/cbrt">cbrt</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/E">E</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/exp">exp</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/expm1">expm1</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/log">log</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/log10">log10</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/log1p">log1p</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/PI">PI</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/sin">sin</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/cos">cos</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/tan">tan</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/asin">asin</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/acos">acos</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/atan">atan</a> <a href="https://clojuredocs.org/clojure_core/clojure.math/atan2">atan2</a></code></td>
               </tr>
               <tr class="odd">
                 <td>Compare</td>
@@ -196,7 +196,7 @@ tr.even {
               </tr>
               <tr class="odd">
                 <td>Random</td>
-                <td><code><a href="https://clojuredocs.org/clojure_core/clojure.core/rand">rand</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/rand-int">rand-int</a></code></td>
+                <td><code><a href="https://clojuredocs.org/clojure_core/clojure.core/rand">rand</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/rand-int">rand-int</a> (1.11) (clojure.math/) <a href="https://clojuredocs.org/clojure_core/clojure.math/random">random</a></code></td>
               </tr>
               <tr class="even">
                 <td>BigDecimal</td>
@@ -329,7 +329,7 @@ tr.even {
               </tr>
               <tr class="even">
                 <td>Create sorted</td>
-                <td><code><a href="https://clojuredocs.org/clojure_core/clojure.core/sorted-set">sorted-set</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/sorted-set-by">sorted-set-by</a> (clojure.data.avl/) <a href="https://github.com/clojure/data.avl">sorted-set</a> <a href="https://github.com/clojure/data.avl">sorted-set-by</a> (flatland.ordered.set/) <a href="https://github.com/amalloy/ordered">ordered-set</a> (clojure.data.int-map/) <a href="https://github.com/clojure/data.int-map">int-set</a> <a href="https://github.com/clojure/data.int-map">dense-int-set</a></code></td>
+                <td><code><a href="https://clojuredocs.org/clojure_core/clojure.core/sorted-set">sorted-set</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/sorted-set-by">sorted-set-by</a> (clojure.data.avl/) <a href="https://github.com/clojure/data.avl">sorted-set</a> <a href="https://github.com/clojure/data.avl">sorted-set-by</a> (flatland.ordered.set/) <a href="https://github.com/clj-commons/ordered">ordered-set</a> (clojure.data.int-map/) <a href="https://github.com/clojure/data.int-map">int-set</a> <a href="https://github.com/clojure/data.int-map">dense-int-set</a></code></td>
               </tr>
               <tr class="odd">
                 <td>Examine</td>
@@ -362,7 +362,7 @@ tr.even {
               </tr>
               <tr class="even">
                 <td>Create sorted</td>
-                <td><code><a href="https://clojuredocs.org/clojure_core/clojure.core/sorted-map">sorted-map</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/sorted-map-by">sorted-map-by</a> (clojure.data.avl/) <a href="https://github.com/clojure/data.avl">sorted-map</a> <a href="https://github.com/clojure/data.avl">sorted-map-by</a> (flatland.ordered.map/) <a href="https://github.com/amalloy/ordered">ordered-map</a> (clojure.data.priority-map/) <a href="https://github.com/clojure/data.priority-map">priority-map</a> (flatland.useful.map/) <a href="https://github.com/amalloy/useful/blob/master/src/flatland/useful/map.clj#L243-L245">ordering-map</a> (clojure.data.int-map/) <a href="https://github.com/clojure/data.int-map">int-map</a></code></td>
+                <td><code><a href="https://clojuredocs.org/clojure_core/clojure.core/sorted-map">sorted-map</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/sorted-map-by">sorted-map-by</a> (clojure.data.avl/) <a href="https://github.com/clojure/data.avl">sorted-map</a> <a href="https://github.com/clojure/data.avl">sorted-map-by</a> (flatland.ordered.map/) <a href="https://github.com/clj-commons/ordered">ordered-map</a> (clojure.data.priority-map/) <a href="https://github.com/clojure/data.priority-map">priority-map</a> (flatland.useful.map/) <a href="https://github.com/clj-commons/useful/blob/master/src/flatland/useful/map.clj#L243-L245">ordering-map</a> (clojure.data.int-map/) <a href="https://github.com/clojure/data.int-map">int-map</a></code></td>
               </tr>
               <tr class="odd">
                 <td>Examine</td>
@@ -674,7 +674,7 @@ tr.even {
               </tr>
               <tr class="even">
                 <td>tap</td>
-                <td><code>(1.10) <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/tap>">tap&gt;</a> <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/add-tap">add-tap</a> <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/remove-tap">remove-tap</a></code></td>
+                <td><code>(1.10) <a href="https://clojuredocs.org/clojure_core/clojure.core/tap%3E">tap&gt;</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/add-tap">add-tap</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/remove-tap">remove-tap</a></code></td>
               </tr>
             </tbody>
           </table>
@@ -811,7 +811,7 @@ tr.even {
             <tbody>
               <tr class="odd">
                 <td>Datafy</td>
-                <td><code>(clojure.datafy/) <a href="https://clojure.github.io/clojure/clojure.datafy-api.html#clojure.datafy/datafy">datafy</a> <a href="https://clojure.github.io/clojure/clojure.datafy-api.html#clojure.datafy/nav">nav</a></code></td>
+                <td><code>(clojure.datafy/) <a href="https://clojuredocs.org/clojure_core/clojure.datafy/datafy">datafy</a> <a href="https://clojuredocs.org/clojure_core/clojure.datafy/nav">nav</a></code></td>
               </tr>
             </tbody>
           </table>
@@ -1091,7 +1091,7 @@ tr.even {
               </tr>
               <tr class="even">
                 <td>From symbol</td>
-                <td><code><a href="https://clojuredocs.org/clojure_core/clojure.core/resolve">resolve</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/ns-resolve">ns-resolve</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/namespace">namespace</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/the-ns">the-ns</a> (1.10) <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/requiring-resolve">requiring-resolve</a></code></td>
+                <td><code><a href="https://clojuredocs.org/clojure_core/clojure.core/resolve">resolve</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/ns-resolve">ns-resolve</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/namespace">namespace</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/the-ns">the-ns</a> (1.10) <a href="https://clojuredocs.org/clojure_core/clojure.core/requiring-resolve">requiring-resolve</a></code></td>
               </tr>
               <tr class="odd">
                 <td>Remove</td>
@@ -1230,7 +1230,7 @@ tr.even {
               </tr>
               <tr class="odd">
                 <td>Exceptions</td>
-                <td><code><a href="https://clojuredocs.org/clojure_core/clojure.core/throw">throw</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/try">try</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/catch">catch</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/finally">finally</a> <a href="https://clojuredocs.org/clojure_core/clojure.repl/pst">pst</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/ex-info">ex-info</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/ex-data">ex-data</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/Throwable-%3Emap">Throwable-&gt;map</a> (1.9) <a href="https://clojuredocs.org/clojure_core/clojure.core/StackTraceElement-%3Evec">StackTraceElement-&gt;vec</a> (1.10) <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/ex-cause">ex-cause</a> <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/ex-message">ex-message</a> (clojure.main/) <a href="https://clojure.github.io/clojure/clojure.main-api.html#clojure.main/ex-triage">ex-triage</a> <a href="https://clojure.github.io/clojure/clojure.main-api.html#clojure.main/ex-str">ex-str</a> <a href="https://clojure.github.io/clojure/clojure.main-api.html#clojure.main/err->msg">err-&gt;msg</a> <a href="https://clojure.github.io/clojure/clojure.main-api.html#clojure.main/report-error">report-error</a></code></td>
+                <td><code><a href="https://clojuredocs.org/clojure_core/clojure.core/throw">throw</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/try">try</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/catch">catch</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/finally">finally</a> <a href="https://clojuredocs.org/clojure_core/clojure.repl/pst">pst</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/ex-info">ex-info</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/ex-data">ex-data</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/Throwable-%3Emap">Throwable-&gt;map</a> (1.9) <a href="https://clojuredocs.org/clojure_core/clojure.core/StackTraceElement-%3Evec">StackTraceElement-&gt;vec</a> (1.10) <a href="https://clojuredocs.org/clojure_core/clojure.core/ex-cause">ex-cause</a> <a href="https://clojuredocs.org/clojure_core/clojure.core/ex-message">ex-message</a> (clojure.main/) <a href="https://clojuredocs.org/clojure_core/clojure.main/ex-triage">ex-triage</a> <a href="https://clojuredocs.org/clojure_core/clojure.main/ex-str">ex-str</a> <a href="https://clojuredocs.org/clojure_core/clojure.main/err-%3Emsg">err-&gt;msg</a> <a href="https://clojuredocs.org/clojure_core/clojure.main/report-error">report-error</a></code></td>
               </tr>
             </tbody>
           </table>

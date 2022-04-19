@@ -1,4 +1,46 @@
 ---------------------------------------------------------------------
+April 19, 2022 - Clojure 1.8 - 1.11, sheet v55
+
+I forgot about the new clojure.math namespace added to Clojure 1.11,
+and so neglected to document which of the new Vars added to that
+namespace were added to the cheatsheet, versus which were not.  Here
+is a complete list of them, without their "clojure.math/" namespace
+qualifier:
+
+New things in clojure.math namespace of Clojure 1.11 that have _not_
+been added to the sheet at this time:
+
+    IEEE-remainder add-exact copy-sign cosh decrement-exact
+    get-exponent hypot increment-exact multiply-exact negate-exact
+    next-after next-down next-up scalb signum sinh subtract-exact tanh
+    to-degrees to-radians ulp
+
+New things in clojure.math namespace of Clojure 1.11 that have been
+added to the sheet in this version:
+
+Added to Primitives / Numbers / Arithmetic section:
+
+    floor-div floor-mod
+    ceil floor rint round
+    pow sqrt cbrt
+    E exp expm1 log log10 log1p
+    PI sin cos tan asin acos atan atan2
+
+Added to Primitives / Numbers / Random section:
+
+    random
+
+Changed links to a couple of Github repos in organization
+https://github.com/amalloy to point to to their new home in
+https://github.com/clj-commons
+
+Updated links to new Vars in Clojure 1.10 to point at ClojureDocs.org
+web site.  When I created the first version of the cheatsheet with
+these then-new Clojure 1.10 Vars, they did not exist yet on
+ClojureDocs.org, so I made their occurrences on the cheatsheet link to
+their official API docs instead.
+
+---------------------------------------------------------------------
 April 15, 2022 - Clojure 1.8 - 1.11, sheet v54
 
 New things for Clojure 1.11 that have been added to the sheet in this

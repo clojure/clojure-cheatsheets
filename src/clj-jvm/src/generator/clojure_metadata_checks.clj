@@ -37,6 +37,7 @@
     clojure.java.javadoc
     clojure.java.shell
     clojure.main
+    clojure.math
     ;; clojure.parallel - deprecated, so leave out
     clojure.pprint
     clojure.reflect
