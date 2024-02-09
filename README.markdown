@@ -2,7 +2,7 @@
 
 Clojure cheatsheets in HTML, PDF, and TeX formats.
 
-See [http://jafingerhut.github.com](http://jafingerhut.github.com) for
+See [https://jafingerhut.github.io](https://jafingerhut.github.io) for
 several variants of the HTML cheatsheet for Clojure on the JVM.
 
 ## License
